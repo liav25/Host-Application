@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="350dp"
+    android:layout_height="477dp"
+    android:layout_gravity="center"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical"
+    android:padding="5dp"
+    tools:context=".PopActivity">
+
+    <Button
+        android:id="@+id/closePopUpButton"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/sharp_close_24px"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <EditText
+        android:id="@+id/mealTitleAdd"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_margin="20dp"
+        android:background="@color/TextWhite"
+        android:hint="Meal Title"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/mealDateAdd"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_margin="20dp"
+        android:background="@color/TextWhite"
+        android:hint="Meal date"
+        android:clickable="true"
+        android:focusable="false"
+
+         />
+
+    <EditText
+        android:id="@+id/mealDescriptionAdd"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_margin="20dp"
+        android:background="@color/TextWhite"
+        android:hint="test"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/addNewMeal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/TextYellow"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="Share Meal!"
+        android:textColor="@color/TextWhite"
+
+        />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+</LinearLayout>

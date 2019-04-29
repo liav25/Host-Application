@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Hoster</string>
+    <string name="action_settings">Settings</string>
+    <string name="JoinMealButton">Join Meal</string>
+    <string name="this_is_card_title">This is card title</string>
+    <string name="meal_title">meal Title</string>
+    <string name="meal_description">meal description</string>
+    <string name="meal_date" />
+</resources>
