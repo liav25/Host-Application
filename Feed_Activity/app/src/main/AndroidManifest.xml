@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.feed_activity">
-
+    <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyAv2EBzk4PxBVHnj2c3o8hq7n4KdqTRjZs" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label=""
+        android:label="Hoster"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Meal_Card"></activity>
         <activity
-            android:name=".MainActivity"
-            android:label=""
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:name=".Splash"
+            android:label="@string/title_activity_splash"
+            android:theme="@style/AppTheme.NoActionBar">
+
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,8 +24,29 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".Login"
+            android:label="@string/title_activity_login"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity
+            android:name=".Profile"
+            android:label="@string/title_activity_profile"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Meal_Card" />
+        <activity
+            android:name=".MainActivity"
+            android:label=""
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity
+            android:name=".MealActivity"
+            android:label="Meal Page"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".PopActivity"
-            android:theme="@style/AppTheme.PopMe"></activity>
+            android:theme="@style/AppTheme.PopMe" />
+
     </application>
+
 
 </manifest>

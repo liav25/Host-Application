@@ -47,8 +47,8 @@ public class Meal {
         this.tags = new HashSet<>();
         this.tags.addAll(tags);
 
-        this.restrictions = new HashMap<>();
-        this.restrictions.putAll(restrictions);
+        this.restrictions = new HashMap<>(restrictions);
+
 
         this.maxGuests = maxGuests; // the +1 is because the host is already included
 
@@ -122,7 +122,7 @@ public class Meal {
     /**
      * @return - set of guests
      */
-    public Set<Integer> getGuests() {
+    public HashSet<Integer> getGuests() {
         return guests;
     }
 
@@ -265,7 +265,15 @@ public class Meal {
         return tags.contains(tag);
     }
 
-    /** @return  true if meal is not full yet*/
-    public Boolean isFull() { return guests.size() < maxGuests;}
+
+    public Boolean isFull() { return curNumberOfGuests() >= maxGuests; }
+
+
+    public Boolean isRestricted(String restr){
+        if (this.restrictions.containsKey(restr)){
+            return this.restrictions.get(restr); // true or false depends on map
+        }
+        return false;  // not in map hence fits restrictions
+    }
 
 }

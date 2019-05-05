@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:numberpicker="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="350dp"
-    android:layout_height="477dp"
-    android:layout_gravity="center"
-    android:background="@color/colorPrimaryDark"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/BackgroundPink"
     android:orientation="vertical"
     android:padding="5dp"
     tools:context=".PopActivity">
@@ -23,49 +23,107 @@
     <EditText
         android:id="@+id/mealTitleAdd"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_margin="20dp"
-        android:background="@color/TextWhite"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:ems="10"
         android:hint="Meal Title"
-        android:inputType="text" />
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/mealDateAdd"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_margin="20dp"
-        android:background="@color/TextWhite"
-        android:hint="Meal date"
-        android:clickable="true"
-        android:focusable="false"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:ems="10"
+        android:hint="Choose meal date "
+        android:inputType="date" />
 
-         />
+    <AutoCompleteTextView
+        android:id="@+id/location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:ems="10"
+        android:hint="Choose meal location " />
+
+    <TextView
+        android:id="@+id/ChooseRests"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Food restrictions:" />
+
+    <CheckBox
+        android:id="@+id/Kosher"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kosher" />
+
+    <CheckBox
+        android:id="@+id/Halal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Halal" />
+
+    <CheckBox
+        android:id="@+id/vegan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Vegan" />
+
+    <CheckBox
+        android:id="@+id/Vegetarian"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Vegetarian" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Maximal Number of Guests:" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        tools:context="com.travijuu.numberpicker.sample.MainActivity">
+
+        <com.travijuu.numberpicker.library.NumberPicker
+            android:id="@+id/number_picker"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            numberpicker:min="1"
+            numberpicker:value="-5"
+            numberpicker:unit="1"
+            numberpicker:focusable="false"
+             />
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/mealDescriptionAdd"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:layout_margin="20dp"
+        android:layout_height="133dp"
+        android:layout_margin="10dp"
         android:background="@color/TextWhite"
-        android:hint="test"
-        android:inputType="text" />
+        android:gravity="top"
+        android:hint="Please describe the meal \n you're hosting"
+        android:inputType="text"
+        android:padding="20dp" />
+
 
     <Button
         android:id="@+id/addNewMeal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:background="@color/TextYellow"
         android:clickable="true"
         android:focusable="true"
         android:text="Share Meal!"
-        android:textColor="@color/TextWhite"
-
-        />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:textColor="@color/TextWhite" />
 
 </LinearLayout>

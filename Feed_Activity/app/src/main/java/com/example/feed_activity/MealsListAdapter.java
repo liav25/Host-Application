@@ -1,7 +1,9 @@
 package com.example.feed_activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,12 +53,16 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
 
         String title = getItem(position).getTitle();
         String date = getItem(position).getTime();
         String description = getItem(position).getDescription();
         String host = Server.getInstance().getUser(getItem(position).getHostId()).getUsername();
+
+        if (getItem(position).getHostId() == MainActivity.userId) {
+            host = "You";
+        }
 
         //create the view result for showing animation
         final View result;
@@ -76,6 +82,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
             result = convertView;
 
             convertView.setTag(holder);
+
         } else {
             holder = (ViewHolder) convertView.getTag();
             result = convertView;
@@ -87,30 +94,58 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         holder.host.setText(host);
 
         if (getItem(position).isMember(MainActivity.userId)){
-            holder.joinBU.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    holder.joinBU.setText("Leave");
-                    Server.getInstance().removeUserToMeal(MainActivity.userId, getItem(position).getID());
-                    holder.joinBU.setBackgroundColor(Color.GRAY);
-                }
-            });
-        } else if (getItem(position).isFull()){ // meal is full
-            holder.joinBU.setText("full");
+            holder.joinBU.setText("Leave");
             holder.joinBU.setBackgroundColor(Color.GRAY);
-        } else { // not in meal and meal not full
-            holder.joinBU.setText("join");
+        } else if (getItem(position).isFull()){ // meal is full
+            holder.joinBU.setText("Full");
+            holder.joinBU.setBackgroundColor(Color.GRAY);
+        } else {
+            holder.joinBU.setText("Join Meal");
             holder.joinBU.setTextColor(Color.WHITE);
-            holder.joinBU.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Server.getInstance().addUserToMeal(MainActivity.userId, getItem(position).getID());
-                }
-            });
+            holder.joinBU.setBackgroundResource(R.color.colorAccent);
         }
 
+        holder.joinBU.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (getItem(position).isMember(MainActivity.userId)){
 
-        return convertView;
+                    Server.getInstance().removeUserToMeal(MainActivity.userId, getItem(position).getID());
+
+                }  else if (!getItem(position).isFull()) { // not in meal and meal not full
+
+                    MainActivity.sev.addUserToMeal(MainActivity.userId, getItem(position).getID());
+                }
+                MainActivity.adapter.notifyDataSetChanged();
+            }
+        });
+
+        holder.title.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, MealActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("mealId", getItem(position).getID()); //Your id
+                intent.putExtras(b); //Put your id to your next Intent
+
+                mContext.startActivity(intent);
+            }
+        });
+
+
+        holder.host.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Bundle b = new Bundle();
+                b.putInt("userId", getItem(position).getHostId()); //Your id
+                Intent profileIntent = new Intent(mContext, Profile.class);
+                profileIntent.putExtras(b); //Put your id to your next Intent
+                mContext.startActivity(profileIntent);
+
+            }
+        });
+        return result;
     }
 }
 

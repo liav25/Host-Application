@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="413dp"
+        android:layout_height="350dp"
+        android:layout_marginBottom="468dp"
+        android:src="@drawable/meal" />
+    <!--TODO: define @string/mealPhoto-->
+    <!--TBD: Should we show a photo if we don't support uploads yet?-->
+    <!--android:contentDescription="" -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="70dp">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="207dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="160dp"
+            android:gravity="center_vertical"
+            android:text="Italian Dinner"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="125dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="160dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/TextYellow"
+            android:text="@string/JoinMealButton"
+            android:textColor="@color/TextWhite" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="305dp">
+
+        <TextView
+            android:id="@+id/mealPageDateTime"
+            android:layout_width="192dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="8dp"
+            android:ems="10"
+            android:gravity="center"
+            android:text="11/1/2011 , 20:00"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+        <!--TODO: android:text="@string/meal_date"-->
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="38dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:foregroundGravity="center_vertical"
+            app:srcCompat="@drawable/location_pink_profile" />
+
+        <TextView
+            android:id="@+id/mealFoodRestrictions2"
+            android:layout_width="110dp"
+            android:layout_height="54dp"
+
+            android:gravity="center"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp"
+            android:text="Nachla'aot"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="350dp">
+
+        <TextView
+            android:id="@+id/MealHostName"
+            android:layout_width="182dp"
+            android:layout_height="65dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center_vertical"
+            android:padding="20dp"
+            android:text="Host:"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="400dp">
+
+        <TextView
+            android:id="@+id/mealFoodRestrictions6"
+            android:layout_width="411dp"
+            android:layout_height="65dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center_vertical"
+            android:padding="20dp"
+            android:text="Hosting: Liav, Tom, Debbie "
+            android:textSize="18sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="450dp">
+
+        <TextView
+            android:id="@+id/mealFoodRestrictions"
+            android:layout_width="411dp"
+            android:layout_height="65dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center_vertical"
+            android:padding="20dp"
+            android:text="Food Restrictions: Vegan, Kosher"
+            android:textSize="18sp"
+            app:layout_constraintVertical_bias="0.649" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="500dp">
+
+        <TextView
+            android:id="@+id/mealFoodRestrictions7"
+            android:layout_width="407dp"
+            android:layout_height="71dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center_vertical"
+            android:padding="20dp"
+            android:text="Free text description will come here "
+            android:textSize="18sp" />
+    </LinearLayout>
+</RelativeLayout>

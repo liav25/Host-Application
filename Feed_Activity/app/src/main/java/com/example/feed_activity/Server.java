@@ -1,6 +1,7 @@
 package com.example.feed_activity;
 
 import android.location.Location;
+import android.media.Image;
 
 import java.nio.file.Files;
 import java.time.LocalDate;
@@ -45,8 +46,7 @@ public class Server {
         standardRestrictions.add("Kosher");
         standardRestrictions.add("Vegan");
         standardRestrictions.add("Vegetarian");
-        standardRestrictions.add("Allergenic");
-        standardRestrictions.add("Non-Dairy");
+
     }
 
     /**
@@ -65,8 +65,8 @@ public class Server {
      * @param langs - languages he's speaking
      * @param fieldsOfInterest - his fields of interest
      */
-    public int addUser(String username, String pass, Files image, String university,
-                        Set<String> langs, Set<String> fieldsOfInterest)
+    public int addUser(String username, String pass, Image image, String university,
+                       Set<String> langs, Set<String> fieldsOfInterest)
     {
 
         User newUser = new User(username, pass, image, university, langs,
@@ -114,7 +114,13 @@ public class Server {
      */
     public void removeMeal(int id)
     {
-        meals.remove(id);
+        for (Meal meal : this.meals) {
+            if (meal.getID() == id) {
+                meals.remove(meal);
+                return;
+            }
+        }
+
     }
 
     /**
@@ -132,8 +138,6 @@ public class Server {
                 results.add(meal.getID());
             }
         }
-
-        users.get(userId).updateFeed(results);
     }
 
     /**
@@ -144,8 +148,8 @@ public class Server {
      */
     public Boolean isUserInMeal(int userId, int mealId)
     {
-        if (this.meals.contains(mealId)) {
-            return this.meals.get(mealId).isMember(userId);
+        if (this.getMeal(mealId) != null) {
+            return this.getMeal(mealId).isMember(userId);
         }
         return false;
     }
@@ -157,8 +161,8 @@ public class Server {
      * @return true upon success, false otherwise
      */
     public Boolean addUserToMeal(int userId, int mealId){
-        if (meals.contains(mealId) && users.containsKey(userId)){
-            return meals.get(mealId).addGuest(userId);
+        if (this.getMeal(mealId) != null && users.containsKey(userId)){
+            return this.getMeal(mealId).addGuest(userId);
         }
         return false; // failed to add
     }
@@ -170,8 +174,12 @@ public class Server {
      * @return true upon success, false otherwise
      */
     public Boolean removeUserToMeal(int userId, int mealId){
-        if (meals.contains(mealId) && users.containsKey(userId)){
-            return meals.get(mealId).removeGuest(userId);
+        if (this.getMeal(mealId)!= null && users.containsKey(userId)){
+            if (this.getMeal(mealId).getHostId() == userId) {
+                meals.remove(this.getMeal(mealId));
+                return true;
+            }
+            return this.getMeal(mealId).removeGuest(userId);
         }
         return false; // failed to add
     }
@@ -197,12 +205,25 @@ public class Server {
 
     public Meal getMeal(int mId)
     {
-        return this.meals.get(mId);
+
+        for (Meal meal : meals){
+            if (meal.getID() == mId) {
+                return meal;
+            }
+        }
+        return null;
     }
 
     public ArrayList<Meal> getMeals() {
         return meals;
     }
 
+
+    public Boolean isRestricted(int mealId, String restriction){
+        if (getMeal(mealId) != null){
+            return getMeal(mealId).isRestricted(restriction);
+        }
+        return false;
+    }
 
 }

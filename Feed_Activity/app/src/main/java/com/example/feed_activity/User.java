@@ -1,5 +1,7 @@
 package com.example.feed_activity;
 
+import android.media.Image;
+
 import java.nio.file.*;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,13 +13,13 @@ import java.util.Set;
 public class User {
     final private String username;
     private String pass;
-    private Files image;
+    private Image image;
     private final int userId;
     private Set<Integer> eventsAttending;
     private String university;
     private Set<String> langs;
     private Set<String> fieldsOfInterest;
-    private final Feed feed;
+
 
     /**
      * A constructor for this class
@@ -28,7 +30,7 @@ public class User {
      * @param langs - languages speaking
      * @param fieldsOfInterest - Fields of interest for user
      */
-    public User(String username, String pass, Files image, String university,
+    public User(String username, String pass, Image image, String university,
                 Set<String> langs, Set<String> fieldsOfInterest, int userId)
     {
         this.username = username;
@@ -45,13 +47,12 @@ public class User {
 
         this.userId = userId;
 
-        this.feed = new Feed(userId, new HashSet<Integer>()); // currently no restrictions
     }
 
     /**
      * @return image of this user
      */
-    public Files getImage() {
+    public Image getImage() {
         return image;
     }
 
@@ -126,7 +127,7 @@ public class User {
     /**
      * @param image - new image
      */
-    public void setImage(Files image) {
+    public void setImage(Image image) {
         this.image = image;
     }
 
@@ -160,18 +161,5 @@ public class User {
         return userId;
     }
 
-    /**
-     * @return feed for this user
-     */
-    public Feed getFeed() {
-        return feed;
-    }
-
-    /**
-     * @param newResults - new feed results to update
-     */
-    public void updateFeed(HashSet<Integer> newResults) {
-        this.feed.update(newResults);
-    }
 
 }
