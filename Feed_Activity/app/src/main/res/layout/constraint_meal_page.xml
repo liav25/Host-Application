@@ -23,7 +23,7 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="413dp"
+        android:layout_width="match_parent"
         android:layout_height="350dp"
 
         android:layout_alignParentTop="true"
@@ -148,8 +148,8 @@
 
         <TextView
             android:id="@+id/mealFoodRestrictions6"
-            android:layout_width="411dp"
-            android:layout_height="65dp"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginLeft="30dp"
             android:layout_marginEnd="8dp"
@@ -169,8 +169,8 @@
 
         <TextView
             android:id="@+id/mealFoodRestrictions"
-            android:layout_width="411dp"
-            android:layout_height="65dp"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginLeft="30dp"
             android:layout_marginBottom="8dp"
@@ -188,8 +188,8 @@
 
         <TextView
             android:id="@+id/mealFoodRestrictions7"
-            android:layout_width="407dp"
-            android:layout_height="71dp"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginLeft="30dp"
             android:layout_marginEnd="8dp"

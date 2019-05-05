@@ -48,9 +48,9 @@ public class MealActivity extends AppCompatActivity {
         final int hostId = MainActivity.sev.getMeal(mealId).getHostId();
 
         if (hostId == MainActivity.userId){
-            host.setText(" You");
+            host.setText("Host: You");
         } else {
-            host.setText(" " + MainActivity.sev.getUser(hostId).getUsername());
+            host.setText("Host: " + MainActivity.sev.getUser(hostId).getUsername());
         }
 
 
@@ -143,7 +143,7 @@ public class MealActivity extends AppCompatActivity {
         for (int guestId : MainActivity.sev.getMeal(mealId).getGuests()) {
             if (guestId != MainActivity.sev.getMeal(mealId).getHostId() && guestId != MainActivity.userId) {
                 // last condition becaause we replaced it with "you"
-                guestsString = guestsString + " " + MainActivity.sev.getUser(guestId).getUsername();
+                guestsString = guestsString + " " + MainActivity.sev.getUser(guestId).getUsername() + ",";
             }
 
         }
