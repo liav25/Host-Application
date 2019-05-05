@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
         meals = sev.getMeals();
 
-        cardlist = (ListView)findViewById(R.id.mealCardList);
+        cardlist = findViewById(R.id.mealCardList);
 
         adapter = new MealsListAdapter(this,  R.layout.feed_card
                 , meals);
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         cardlist.setNestedScrollingEnabled(true);
 
-        sev.addMeal(MainActivity.userId, "Hi tom", new HashSet<String>(),
+        sev.addMeal(MainActivity.userId, "change for you", new HashSet<String>(),
                 new HashMap<String, Boolean>(), "this is tom", 1,"here",  "123");
 
 
