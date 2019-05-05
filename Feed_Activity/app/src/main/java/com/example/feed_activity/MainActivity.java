@@ -37,10 +37,10 @@ public class MainActivity extends AppCompatActivity {
     static Server sev = Server.getInstance();
     ArrayList<Meal> meals;
 
-    static int userId = sev.addUser("mami", "mami", null,"hebrwe",
+    static int userId = sev.addUser("Shontal Kapara", "123456", null,"University Of Life",
             new HashSet<String>(), new HashSet<String>());
 
-    int another = sev.addUser("kapara", "mami", null,"hebrwe",
+    int another = sev.addUser("Tomi Salzberg", "123456", null,"Hebrew University",
             new HashSet<String>(), new HashSet<String>());
 
 
