@@ -25,6 +25,7 @@ import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -37,11 +38,9 @@ public class MainActivity extends AppCompatActivity {
     static Server sev = Server.getInstance();
     ArrayList<Meal> meals;
 
-    static int userId = sev.addUser("mami", "mami", null,"hebrwe",
-            new HashSet<String>(), new HashSet<String>());
+    static int userId = sev.addUser("Esti Levi", "password", null,"Hebrew University",
+            new HashSet<String>(Arrays.asList("Hebrew", "French")), new HashSet<String>());
 
-    int another = sev.addUser("kapara", "mami", null,"hebrwe",
-            new HashSet<String>(), new HashSet<String>());
 
 
     private ListView cardlist;
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getWindow().setStatusBarColor(this.getResources().getColor(R.color.colorAccent));
 
-
+        init();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -78,19 +77,6 @@ public class MainActivity extends AppCompatActivity {
 
         cardlist.setNestedScrollingEnabled(true);
 
-        sev.addMeal(MainActivity.userId, "change11 for you", new HashSet<String>(),
-                new HashMap<String, Boolean>(), "this is tom", 1,"here",  "123");
-
-
-        sev.addMeal(another, "Hi tom", new HashSet<String>(),
-                new HashMap<String, Boolean>(), "this is tom", 6,"here",  "123");
-
-
-        sev.addMeal(another, "Hi t1111om", new HashSet<String>(),
-                new HashMap<String, Boolean>(), "this is tom", 6,"here",  "123");
-
-        sev.addMeal(MainActivity.userId, "Hi tomisalz", new HashSet<String>(),
-                new HashMap<String, Boolean>(), "this is tomas", 6,"here",  "123");
 
         addMealBut = findViewById(R.id.addMealButton);
         fromBottom = AnimationUtils.loadAnimation(this, R.anim.frombottom);
@@ -154,7 +140,113 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void init(){
+        sev.addUser("Daniel Carmi", "password", null,"Open University",
+                new HashSet<String>(Arrays.asList("Hebrew", "English", "Arabic")), new HashSet<String>());
+        sev.addUser("Yaron Israeli", "password", null,"Hebrew University",
+                new HashSet<String>(Arrays.asList("Hebrew", "Arabic")), new HashSet<String>());
+        sev.addUser("Tal Weizman", "password", null,"Hadassah Academic College",
+                new HashSet<String>(Arrays.asList("Hebrew", "English", "Russian")), new HashSet<String>());
+        sev.addUser("Noor Ahmed", "password", null,"Bezalel Academy",
+                new HashSet<String>(Arrays.asList("Arabic", "Hebrew", "English")), new HashSet<String>());
+        sev.addUser("Steven Smith", "password", null,"Hebrew University",
+                new HashSet<String>(Arrays.asList("English", "Spanish", "French")), new HashSet<String>());
+        sev.addUser("Gali Hacohen", "password", null,"Bezalel Academy",
+                new HashSet<String>(Arrays.asList("Hebrew", "English", "German")), new HashSet<String>());
+        sev.addUser("Alina Jacobi", "password", null,"Open University",
+                new HashSet<String>(Arrays.asList("Hebrew", "English", "Russian")), new HashSet<String>());
+        sev.addUser("Dana Yitzhak", "password", null,"Hebrew University",
+                new HashSet<String>(Arrays.asList("Hebrew", "English")), new HashSet<String>());
+        sev.addUser("Tamar Nir", "password", null,"Hebrew University",
+                new HashSet<String>(Arrays.asList("Hebrew", "English")), new HashSet<String>());
 
+        sev.addMeal(1, "Italian Dairy Meal", new HashSet<String>(),
+                new HashMap<String, Boolean>(){{put("Halal", true); put("Kosher", true);
+                    put("Vegan", false); put("Vegetarian", true);}}, "A fun Italian meal in the center of Jerusalem", 5,
+                "Nahlaot",  "05/06/2019  18:30 PM");
+        sev.addMeal(2, "Kosher Barbecue", new HashSet<String>(),
+                new HashMap<String, Boolean>(){{put("Halal", false); put("Kosher", true);
+                    put("Vegan", false); put("Vegetarian", false);}}, "Outdoor barbecue with friendly people in the French Hill", 8,
+                "French Hill",  "20/06/2019  19:30 PM");
+
+
+        sev.addMeal(3, "Shabbat Meal in Rehavia", new HashSet<String>(),
+                new HashMap<String, Boolean>(){{put("Halal", false); put("Kosher", true);
+                    put("Vegan", false); put("Vegetarian", true);}}, "Kosher, shomer shabbat meal on Friday night. Traditional style meal.", 6,
+                "Rehavia",  "10/05/2019  19:00 PM");
+
+        sev.addMeal(4, "Vegan Brunch", new HashSet<String>(),
+                new HashMap<String, Boolean>(){{put("Halal", true); put("Kosher", true);
+                    put("Vegan", true); put("Vegetarian", true);}}, "A cool and casual spring brunch! Everything will be vegan and delicious.", 4,
+                "City Center",  "11/05/2019  10:30 AM");
+
+
+        sev.addMeal(5, "Lunch near Givat Ram Campus", new HashSet<String>(),
+                new HashMap<String, Boolean>(){{put("Halal", true); put("Kosher", false);
+                    put("Vegan", false); put("Vegetarian", false);}}, "Lunch near campus for people who want a nice meal during the school day. Halal friendly.", 3,
+                "Neve Sha'anan",  "08/05/2019  13:00 PM");
+
+
+
+
+        sev.addMeal(6, "Fancy Dinner with French Cuisine", new HashSet<String>(),
+                new HashMap<String, Boolean>(){{put("Halal", false); put("Kosher", false);
+                    put("Vegan", false); put("Vegetarian", false);}}, "We want to host a French cuisine dinner. It's going to be classy, so dress nicely!", 4,
+                "Rehavia",  "09/05/2019  19:30 PM");
+
+
+
+        sev.addMeal(7, "Business Lunch", new HashSet<String>(),
+                new HashMap<String, Boolean>(){{put("Halal", false); put("Kosher", false);
+                    put("Vegan", false); put("Vegetarian", true);}}, "Looking to make connections with people in the art world. Lunch will be vegetarian.", 5,
+                "Talbiya",  "11/05/2019  12:30 PM");
+
+
+
+
+        sev.addMeal(6, "Chill Dinner", new HashSet<String>(),
+                new HashMap<String, Boolean>(){{put("Halal", false); put("Kosher", false);
+                    put("Vegan", false); put("Vegetarian", false);}}, "New in town and looking for English-speaking friends. Join me for a casual dinner with good conversation.", 5,
+                "Nahlaot",  "24/05/2019  18:45 PM");
+
+
+
+        sev.addMeal(8, "Hot dogs and beer with the game", new HashSet<String>(),
+                new HashMap<String, Boolean>(){{put("Halal", false); put("Kosher", false);
+                    put("Vegan", false); put("Vegetarian", false);}}, "If you're looking for somewhere to watch the game, join me! We're gonna have a casual non-vegetarian meal.", 7,
+                "City Center",  "16/05/2019  19:00 PM");
+
+
+
+        sev.addMeal(9, "Puzzles and Pizza", new HashSet<String>(),
+                new HashMap<String, Boolean>(){{put("Halal", false); put("Kosher", true);
+                    put("Vegan", false); put("Vegetarian", true);}}, "Hosting a dinner for people who like games and puzzles! We're going to have pizza and have a good time.", 10,
+                "German Colony",  "15/06/2019  19:30 PM");
+
+
+
+
+        sev.addMeal(4, "Game of Thrones viewing dinner", new HashSet<String>(),
+                new HashMap<String, Boolean>(){{put("Halal", true); put("Kosher", true);
+                    put("Vegan", false); put("Vegetarian", false);}}, "No spoilers! For people who don't want to get up at 4 a.m. to watch a TV show, we're going to screen the episode the next day. Not vegetarian-friendly! What does a dragon eat?", 7,
+                "Talbiya",  "07/05/2019  20:00 PM");
+
+
+
+
+        sev.addMeal(7, "Netflix and Grill", new HashSet<String>(),
+                new HashMap<String, Boolean>(){{put("Halal", false); put("Kosher", true);
+                    put("Vegan", false); put("Vegetarian", false);}}, "Barbecue and episodes of Friends in the background. Perfect for people who don't want a lot of conversation.", 5,
+                "Nahlaot",  "30/05/2019  18:00 PM");
+
+
+
+
+        sev.addMeal(2, "Shabbat Dinner", new HashSet<String>(),
+                new HashMap<String, Boolean>(){{put("Halal", false); put("Kosher", true);
+                    put("Vegan", false); put("Vegetarian", false);}}, "Traditional Shabbat dinner with home-made food like Grandma makes. Shomer-Shabbat friendly, so leave your phone at home.", 6,
+                "French Hill",  "24/05/2019  19:30 PM");
+    }
 
 
 

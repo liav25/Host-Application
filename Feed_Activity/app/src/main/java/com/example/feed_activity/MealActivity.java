@@ -44,9 +44,9 @@ public class MealActivity extends AppCompatActivity {
         final int hostId = MainActivity.sev.getMeal(mealId).getHostId();
 
         if (hostId == MainActivity.userId){
-            host.setText(" You");
+            host.setText("Host: You");
         } else {
-            host.setText(" " + MainActivity.sev.getUser(hostId).getUsername());
+            host.setText("Host: " + MainActivity.sev.getUser(hostId).getUsername());
         }
 
 
