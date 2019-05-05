@@ -85,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
                 new HashMap<String, Boolean>(), "this is tom", 6,"here",  "123");
 
 
-        sev.addMeal(another, "Hi tom", new HashSet<String>(),
                 new HashMap<String, Boolean>(), "this is tom", 6,"here",  "123");
 
         sev.addMeal(MainActivity.userId, "Hi tomisalz", new HashSet<String>(),
