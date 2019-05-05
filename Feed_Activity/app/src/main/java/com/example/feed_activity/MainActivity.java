@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(this.getResources().getColor(R.color.colorAccent));
 
 
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
         cardlist.setNestedScrollingEnabled(true);
 
-        sev.addMeal(MainActivity.userId, "change for you", new HashSet<String>(),
+        sev.addMeal(MainActivity.userId, "change11 for you", new HashSet<String>(),
                 new HashMap<String, Boolean>(), "this is tom", 1,"here",  "123");
 
 
