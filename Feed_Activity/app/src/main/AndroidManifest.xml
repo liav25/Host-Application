@@ -41,7 +41,9 @@
         <activity
             android:name=".MealActivity"
             android:label="Meal Page"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
         <activity
             android:name=".PopActivity"
             android:theme="@style/AppTheme.PopMe" />
