@@ -25,6 +25,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:src="@drawable/spice" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -58,10 +59,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="how do you want us to call you?"
-                android:inputType="textPassword"
-                app:layout_constraintBottom_toTopOf="@+id/divider9"
-                app:layout_constraintTop_toBottomOf="@+id/textView3"
+                android:hint="Username"
+                android:inputType="text"
                 app:layout_constraintVertical_bias="0.6"
                 tools:layout_editor_absoluteX="16dp" />
 
@@ -99,10 +98,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="insert password"
+                android:hint="Password"
                 android:inputType="textPassword"
-                app:layout_constraintBottom_toTopOf="@+id/divider9"
-                app:layout_constraintTop_toBottomOf="@+id/textView3"
                 app:layout_constraintVertical_bias="0.6"
                 tools:layout_editor_absoluteX="16dp" />
 
