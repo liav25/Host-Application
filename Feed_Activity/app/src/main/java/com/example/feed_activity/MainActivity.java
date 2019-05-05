@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(this.getResources().getColor(R.color.colorAccent));
 
 
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

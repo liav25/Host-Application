@@ -27,6 +27,13 @@ public class MealActivity extends AppCompatActivity {
         setContentView(R.layout.constraint_meal_page);
 
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.meal_toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setBackgroundColor(getResources().getColor(R.color.TextYellow));
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         Bundle b = getIntent().getExtras();
         final int mealId = b.getInt("mealId");
 
@@ -173,6 +180,13 @@ public class MealActivity extends AppCompatActivity {
 
         return restri;
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
 
 
 }
