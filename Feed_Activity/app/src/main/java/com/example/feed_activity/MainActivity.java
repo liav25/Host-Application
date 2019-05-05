@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         cardlist.setNestedScrollingEnabled(true);
 
-        sev.addMeal(MainActivity.userId, "change for you", new HashSet<String>(),
+        sev.addMeal(MainActivity.userId, "change11 for you", new HashSet<String>(),
                 new HashMap<String, Boolean>(), "this is tom", 1,"here",  "123");
 
 
