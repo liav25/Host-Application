@@ -139,7 +139,7 @@ public class MealActivity extends AppCompatActivity {
         for (int guestId : MainActivity.sev.getMeal(mealId).getGuests()) {
             if (guestId != MainActivity.sev.getMeal(mealId).getHostId() && guestId != MainActivity.userId) {
                 // last condition becaause we replaced it with "you"
-                guestsString = guestsString + " " + MainActivity.sev.getUser(guestId).getUsername();
+                guestsString = guestsString + " " + MainActivity.sev.getUser(guestId).getUsername() + ",";
             }
 
         }
