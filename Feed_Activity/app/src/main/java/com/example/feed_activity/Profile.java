@@ -23,7 +23,7 @@ public class Profile extends AppCompatActivity {
 
         setContentView(R.layout.activity_profile);
         Bundle b = getIntent().getExtras();
-        final int uId = b.getInt("userId");
+        final String uId = b.getString("userId");
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.profile_toolbar);
@@ -48,7 +48,7 @@ public class Profile extends AppCompatActivity {
 
     }
 
-    private String getLangsString(int uId){
+    private String getLangsString(String uId){
         HashSet<String> langs = new HashSet<String>(Server.getInstance().getUser(uId).getLangs());
         String lang = "";
 

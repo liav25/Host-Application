@@ -60,7 +60,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         String description = getItem(position).getDescription();
         String host = Server.getInstance().getUser(getItem(position).getHostId()).getUsername();
 
-        if (getItem(position).getHostId() == MainActivity.userId) {
+        if (getItem(position).getHostId().equals(MainActivity.user.getUid())) {
             host = "You";
         }
 
@@ -93,7 +93,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         holder.description.setText(description);
         holder.host.setText(host);
 
-        if (getItem(position).isMember(MainActivity.userId)){
+        if (getItem(position).isMember(MainActivity.user.getUid())){
             holder.joinBU.setText("Leave");
             holder.joinBU.setBackgroundColor(Color.GRAY);
         } else if (getItem(position).isFull()){ // meal is full
@@ -108,13 +108,13 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         holder.joinBU.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (getItem(position).isMember(MainActivity.userId)){
+                if (getItem(position).isMember(MainActivity.user.getUid())){
 
-                    Server.getInstance().removeUserToMeal(MainActivity.userId, getItem(position).getID());
+                    Server.getInstance().removeUserToMeal(MainActivity.user.getUid(), getItem(position).getID());
 
                 }  else if (!getItem(position).isFull()) { // not in meal and meal not full
 
-                    MainActivity.sev.addUserToMeal(MainActivity.userId, getItem(position).getID());
+                    MainActivity.sev.addUserToMeal(MainActivity.user.getUid(), getItem(position).getID());
                 }
                 MainActivity.adapter.notifyDataSetChanged();
             }
@@ -138,7 +138,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
             public void onClick(View v) {
 
                 Bundle b = new Bundle();
-                b.putInt("userId", getItem(position).getHostId()); //Your id
+                b.putString("userId", getItem(position).getHostId()); //Your id
                 Intent profileIntent = new Intent(mContext, Profile.class);
                 profileIntent.putExtras(b); //Put your id to your next Intent
                 mContext.startActivity(profileIntent);
