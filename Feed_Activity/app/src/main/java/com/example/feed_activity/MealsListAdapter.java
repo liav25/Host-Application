@@ -79,6 +79,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
             holder.description = (TextView) convertView.findViewById(R.id.card_description);
             holder.host = (TextView) convertView.findViewById(R.id.author);
             holder.joinBU  = (Button)  convertView.findViewById(R.id.JoinButton);
+
             result = convertView;
 
             convertView.setTag(holder);

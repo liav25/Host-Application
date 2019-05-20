@@ -14,7 +14,7 @@ public class Meal {
 
     final private int hostId;
     private final int ID;
-    private HashSet<Integer> guests;
+    private ArrayList<Integer> guests;
     private String title;
     private String description;
     private int maxGuests;
@@ -52,7 +52,7 @@ public class Meal {
 
         this.maxGuests = maxGuests; // the +1 is because the host is already included
 
-        this.guests = new HashSet<Integer>(); // initialize empty set of guests, then add host
+        this.guests = new ArrayList<>(); // initialize empty set of guests, then add host
         this.guests.add(hostId);
 
         this.location = loc;
@@ -122,7 +122,7 @@ public class Meal {
     /**
      * @return - set of guests
      */
-    public HashSet<Integer> getGuests() {
+    public ArrayList<Integer> getGuests() {
         return guests;
     }
 
@@ -274,6 +274,20 @@ public class Meal {
             return this.restrictions.get(restr); // true or false depends on map
         }
         return false;  // not in map hence fits restrictions
+    }
+
+
+    /**
+     * this function get all the guests that signed to the meal
+     * and return the list of their photos.
+     * @return guests photos list
+     */
+    public ArrayList<Integer> getGuestsPictures(){
+        ArrayList<Integer> guestsPhotos = new ArrayList<>();
+        for(int guest: guests){
+            guestsPhotos.add(guest);
+        }
+        return guestsPhotos;
     }
 
 }
