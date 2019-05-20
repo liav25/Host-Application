@@ -1,12 +1,16 @@
 package com.example.feed_activity;
 
+import android.app.Activity;
 import android.location.Location;
 import android.media.Image;
 import android.net.Uri;
 import static java.lang.Math.toIntExact;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -25,6 +29,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -41,6 +47,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.Executor;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.DoubleFunction;
 
 import static com.firebase.ui.auth.AuthUI.TAG;
 import static com.firebase.ui.auth.AuthUI.getApplicationContext;
@@ -132,33 +144,24 @@ public class Server {
                           ArrayList<String> langs)
     {
         signUp(email, pass);
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        if (user != null){
-
-            /* update display name, and image*/
-            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                    .setDisplayName(disName).setPhotoUri(image)
-                    .build();
-
-            user.updateProfile(profileUpdates)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Log.d("AuthUI", "User profile updated.");
-                            }
-                        }
-                    });
-
-            String userId = user.getUid();
-
-            DocumentReference busRef = db.collection(USERS_DATA_STRING).document(userId);
-            User userObj = new User(disName, image, university, langs, userId);
-            busRef.set(userObj);
+        MainActivity.user = FirebaseAuth.getInstance().getCurrentUser();
 
 
-        }
+
+        /* update display name, and image*/
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(disName).setPhotoUri(image)
+                .build();
+
+
+        String userId = MainActivity.user.getUid();
+
+        DocumentReference busRef = db.collection(USERS_DATA_STRING).document(userId);
+        User userObj = new User(disName, image, university, langs, userId);
+        busRef.set(userObj);
+
+
+
 
     }
 
@@ -187,20 +190,36 @@ public class Server {
         return res[0];
     }
 
-    public User getUser(String userId){
-        if (UserExists(userId)) {
-            DocumentReference docRef = db.collection(USERS_DATA_STRING).document(String.valueOf(userId));
-            final User[] user = new User[1];
-            /* gets object from server  */
-            docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    user[0] = documentSnapshot.toObject(User.class);
+    public User getUser(final String userId){
+
+        DocumentReference docRef = db.collection(USERS_DATA_STRING).document(userId);
+        final User[] user = new User[1];
+        /* gets object from server  */
+        System.out.println("**************** 1 " + userId);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful())
+                {
+                    DocumentSnapshot document = task.getResult();
+                    if(document != null && document.exists())
+                    {
+                        System.out.println("**************** 2 " + userId);
+                        user[0] = document.toObject(User.class);
+
+                    }
+                    else
+                    {
+                        System.out.println("**************** 3 " + userId);
+                        System.out.println("no user found");
+                    }
                 }
-            });
-            return user[0];
-        }
-        return null;
+            }
+        });
+
+
+        return user[0];
+
     }
 
     /**
@@ -214,40 +233,41 @@ public class Server {
      * @param loc - location for this meal
      * @param time - time and date of meal
      */
-    public int addMeal(String hostId, String title, ArrayList<String> tags,
-                        HashMap<String, Boolean> restrictions, String descr,
-                        int maxGuests, String loc, String time)
+    public int addMeal(final String hostId, final String title, final ArrayList<String> tags,
+                       final HashMap<String, Boolean> restrictions, final String descr,
+                       final int maxGuests, final String loc, final String time)
     {
 
 
         final int[] counter = new int[1];
+
         final DatabaseReference ref = mDb.getReference().child("Meals_Count");
-        ref.addValueEventListener(new ValueEventListener() {
+
+        ref.runTransaction(new Transaction.Handler() {
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                Log.w("AuthUI", "loadPost:onCancelled", databaseError.toException());
-                // ...
+            public Transaction.Result doTransaction(MutableData mutableData) {
+                Integer currentValue = mutableData.getValue(Integer.class);
+
+                if (currentValue == null) {
+                    mutableData.setValue(0);
+                    counter[0] = 0;
+                } else {
+                    counter[0] = currentValue;
+                    mutableData.setValue(currentValue + 1);
+
+                }
+                DocumentReference docRef = db.collection(MEALS_STRING).document(String.valueOf(counter[0]));
+                Meal newMeal = new Meal(counter[0],  hostId,  title,tags,
+                        restrictions, descr, maxGuests,  loc,  time);
+                docRef.set(newMeal);
+                return Transaction.success(mutableData);
             }
 
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                int count = Ints.checkedCast((long) dataSnapshot.getValue());
-                counter[0] = count;
-                System.out.println("here " + count);
-                ref.setValue(count++);
+            public void onComplete(DatabaseError databaseError, boolean committed, DataSnapshot dataSnapshot) {
+                System.out.println("Transaction completed");
             }
-
         });
-
-
-
-
-
-        DocumentReference docRef = db.collection(MEALS_STRING).document(String.valueOf(counter[0]));
-        Meal newMeal = new Meal(counter[0],  hostId,  title,tags,
-                restrictions, descr, maxGuests,  loc,  time);
-        docRef.set(newMeal);
 
         return counter[0];
     }
@@ -373,42 +393,66 @@ public class Server {
     }
 
 
-
-
     public Meal getMeal(int mId)
     {
-        if (MealExists(mId)) {
-            DocumentReference docRef = db.collection(MEALS_STRING).document(String.valueOf(mId));
-            final Meal[] meal = new Meal[1];
-            /* gets object from server  */
-            docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    meal[0] = documentSnapshot.toObject(Meal.class);
-                }
-            });
-            return meal[0];
-        }
-        return null;
+
+        DocumentReference docRef = db.collection(MEALS_STRING).document(String.valueOf(mId));
+        final Meal[] meal  = new Meal[1];
+        final AtomicBoolean done = new AtomicBoolean(false);
+
+        docRef.get().
+                addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+
+                            if (document.exists()) {
+                                meal[0] = document.toObject(Meal.class);
+
+                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+
+                            } else {
+                                Log.d(TAG, "No such document");
+                            }
+                        } else {
+                            Log.d(TAG, "get failed with ", task.getException());
+                        }
+                        done.set(true);
+                    }
+
+
+
+
+                });
+
+
+        return meal[0];
     }
 
-    public ArrayList<Meal> getMeals() {
+    public ArrayList<Meal> getMeals(final ArrayList<Meal> meals, final MealsListAdapter adapt) {
         final ArrayList<Meal> res = new ArrayList<>();
+
         db.collection(MEALS_STRING)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 res.add(document.toObject(Meal.class));
+                                meals.add(document.toObject(Meal.class));
                                 Log.d("getMeals", document.getId() + " => " + document.getData());
+
                             }
+                            adapt.notifyDataSetChanged();
                         } else {
                             Log.d("getMeals", "Error getting documents: ", task.getException());
                         }
                     }
                 });
+
 
         return res;
     }

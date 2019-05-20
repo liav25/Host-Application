@@ -58,9 +58,9 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         String title = getItem(position).getTitle();
         String date = getItem(position).getTime();
         String description = getItem(position).getDescription();
-        String host = Server.getInstance().getUser(getItem(position).getHostId()).getUsername();
+        String host = getItem(position).getHostId();
 
-        if (getItem(position).getHostId().equals(MainActivity.user.getUid())) {
+        if (getItem(position).getHostId().equals(MainActivity.user.getUid())) { // todo - find another way to get your user id
             host = "You";
         }
 
@@ -93,7 +93,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         holder.description.setText(description);
         holder.host.setText(host);
 
-        if (getItem(position).isMember(MainActivity.user.getUid())){
+        if (getItem(position).isMember(MainActivity.user.getUid())){ // todo - find another way to get your user id
             holder.joinBU.setText("Leave");
             holder.joinBU.setBackgroundColor(Color.GRAY);
         } else if (getItem(position).isFull()){ // meal is full

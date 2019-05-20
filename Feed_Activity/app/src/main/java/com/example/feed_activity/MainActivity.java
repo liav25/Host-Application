@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.NestedScrollingChildHelper;
@@ -25,6 +26,10 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -41,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     Animation fromBottom;
 
     static Server sev = Server.getInstance();
-    ArrayList<Meal> meals;
+    public static ArrayList<Meal> meals;
     public static FirebaseUser user;
 
     private ListView cardlist;
@@ -53,26 +58,28 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        getWindow().setStatusBarColor(this.getResources().getColor(R.color.colorAccent));
 
-        init();
-        user = FirebaseAuth.getInstance().getCurrentUser();
+        getWindow().setStatusBarColor(this.getResources().getColor(R.color.colorAccent));
+        setContentView(R.layout.activity_main);
+
+
+        meals = new ArrayList<>();
+        adapter = new MealsListAdapter(this,  R.layout.feed_card
+                , meals);
+
+        sev.getMeals(meals, adapter);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        if(getSupportActionBar()!=null){
+        if(getSupportActionBar()!= null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         }
-        //getSupportActionBar().setBackgroundDrawable(getDrawable(getResources().getDrawable(R.drawable.header)));
 
 
-        meals = sev.getMeals();
 
         cardlist = findViewById(R.id.mealCardList);
 
-        adapter = new MealsListAdapter(this,  R.layout.feed_card
-                , meals);
+
 
         cardlist.setAdapter(adapter);
 
@@ -141,16 +148,18 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+
+
     private void init(){
-        sev.addUser("Daniel Carmi", "email1@gmail.com", "password", null,"Open University",
+        sev.addUser("Daniel Carmi", "email901@gmail.com", "password", null,"Open University",
                 new ArrayList<String>(Arrays.asList("Hebrew", "English", "Arabic")));
-        sev.addUser("Yaron Israeli","email2@gmail.com", "password", null,"Hebrew University",
-                new ArrayList<String>(Arrays.asList("Hebrew", "Arabic")));
-//
-        sev.addMeal("Befbwd13FffLtCDgUurqTPH7c0y1", "Italian Dairy Meal", new ArrayList<String>(),
-                new HashMap<String, Boolean>(){{put("Halal", true); put("Kosher", true);
-                    put("Vegan", false); put("Vegetarian", true);}}, "A fun Italian meal in the center of Jerusalem", 5,
-                "Nahlaot",  "05/06/2019  18:30 PM");
+
+//        user = FirebaseAuth.getInstance().getCurrentUser();
+//        sev.addMeal("WiAPbzpIkPdLYTfeMFUxKQoZXqk2", "Italian Dairy Meal", new ArrayList<String>(),
+//                new HashMap<String, Boolean>(){{put("Halal", true); put("Kosher", true);
+//                    put("Vegan", false); put("Vegetarian", true);}}, "A fun Italian meal in the center of Jerusalem", 5,
+//                "Nahlaot",  "05/06/2019  18:30 PM");
 //        sev.addMeal(2, "Kosher Barbecue", new HashSet<String>(),
 //                new HashMap<String, Boolean>(){{put("Halal", false); put("Kosher", true);
 //                    put("Vegan", false); put("Vegetarian", false);}}, "Outdoor barbecue with friendly people in the French Hill", 8,
