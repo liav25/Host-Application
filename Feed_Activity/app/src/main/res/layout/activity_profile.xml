@@ -29,11 +29,12 @@
 
             <ImageView
 
+                android:id="@+id/profilepic"
                 android:layout_width="166dp"
                 android:layout_height="198dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="35dp"
-                android:src="@drawable/profile_picture"/>
+                android:src="@drawable/profile_picture" />
             <TextView
                 android:id="@+id/name_of_profile"
                 android:layout_width="wrap_content"

@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                 new HashSet<String>(Arrays.asList("Hebrew", "English", "Arabic")), new HashSet<String>());
         sev.addUser("Yaron Israeli", "password", null,"Hebrew University",
                 new HashSet<String>(Arrays.asList("Hebrew", "Arabic")), new HashSet<String>());
-        sev.addUser("Tal Weizman", "password", null,"Hadassah Academic College",
+        sev.addUser("Liav Abcdefgh", "password", null,"Hadassah Academic College",
                 new HashSet<String>(Arrays.asList("Hebrew", "English", "Russian")), new HashSet<String>());
         sev.addUser("Noor Ahmed", "password", null,"Bezalel Academy",
                 new HashSet<String>(Arrays.asList("Arabic", "Hebrew", "English")), new HashSet<String>());
