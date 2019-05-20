@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init(){
-        sev.addUser("Deborah Carmi", "password", null,"Open University",
+        sev.addUser("Degbbborah Carmi", "password", null,"Open University",
                 new HashSet<String>(Arrays.asList("Hebrew", "English", "Arabic")), new HashSet<String>());
         sev.addUser("Elisheva", "password", null,"Hebrew University",
                 new HashSet<String>(Arrays.asList("Hebrew", "Arabic")), new HashSet<String>());
