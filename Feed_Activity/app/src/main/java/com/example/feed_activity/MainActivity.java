@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     static Server sev = Server.getInstance();
     ArrayList<Meal> meals;
 
-    static int userId = sev.addUser("Esti Levi", "password", null,"Hebrew University",
+    static int userId = sev.addUser("Almog Argaman", "password", null,"Hebrew University",
             new HashSet<String>(Arrays.asList("Hebrew", "French")), new HashSet<String>());
 
 
