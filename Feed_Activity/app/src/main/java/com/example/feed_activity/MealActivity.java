@@ -31,9 +31,9 @@ public class MealActivity extends AppCompatActivity {
     private TextView restrictions;
     private RecyclerView guestsRecycle;
     private TextView loc;
-    private ArrayList<String> guests;
+//    private ArrayList<String> guests;
 
-    private ArrayList<Integer> guests_pics;
+//    private ArrayList<Integer> guests_pics;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -120,7 +120,7 @@ public class MealActivity extends AppCompatActivity {
 
             Boolean flag = meal.getHostId().equals(MainActivity.userId);
 
-            Server.getInstance().removeUserToMeal(MainActivity.userId, mealId);
+            Server.getInstance().removeUserToMeal(MainActivity.userId, String.valueOf(mealId), meal.getHostId());
             if (flag) {
                 finish();
                 MainActivity.adapter.notifyDataSetChanged();
@@ -129,7 +129,7 @@ public class MealActivity extends AppCompatActivity {
 
 
         }  else if (!meal.isFull()) { // not in meal and meal not full
-            MainActivity.sev.addUserToMeal(MainActivity.userId, mealId);
+            MainActivity.sev.addUserToMeal(MainActivity.userId, String.valueOf(mealId));
         }
 
         MainActivity.adapter.notifyDataSetChanged();

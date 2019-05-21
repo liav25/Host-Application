@@ -39,6 +39,21 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         TextView date;
         TextView host;
         Button joinBU;
+
+
+        private void setButCol(Meal meal){
+            if (meal.isMember(MainActivity.userId)){
+                joinBU.setText("Leave");
+                joinBU.setBackgroundColor(Color.GRAY);
+            } else if (meal.isFull()){ // meal is full
+                joinBU.setText("Full");
+                joinBU.setBackgroundColor(Color.GRAY);
+            } else {
+                joinBU.setText("Join Meal");
+                joinBU.setTextColor(Color.WHITE);
+                joinBU.setBackgroundResource(R.color.colorAccent);
+            }
+        }
     }
 
     /**
@@ -94,30 +109,24 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         holder.description.setText(description);
         holder.host.setText(host);
 
-        if (getItem(position).isMember(MainActivity.userId)){ // todo - find another way to get your user id
-            holder.joinBU.setText("Leave");
-            holder.joinBU.setBackgroundColor(Color.GRAY);
-        } else if (getItem(position).isFull()){ // meal is full
-            holder.joinBU.setText("Full");
-            holder.joinBU.setBackgroundColor(Color.GRAY);
-        } else {
-            holder.joinBU.setText("Join Meal");
-            holder.joinBU.setTextColor(Color.WHITE);
-            holder.joinBU.setBackgroundResource(R.color.colorAccent);
-        }
+        holder.setButCol(getItem(position));
 
         holder.joinBU.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (getItem(position).isMember(MainActivity.userId)){
 
-                    Server.getInstance().removeUserToMeal(MainActivity.userId, getItem(position).getID());
-
+                    Server.getInstance().removeUserToMeal(MainActivity.userId, getItem(position).getID(),
+                            getItem(position).getHostId());
+                    getItem(position).removeGuest(MainActivity.userId);
                 }  else if (!getItem(position).isFull()) { // not in meal and meal not full
 
                     MainActivity.sev.addUserToMeal(MainActivity.userId, getItem(position).getID());
+                    getItem(position).addGuest(MainActivity.userId);
                 }
-                MainActivity.adapter.notifyDataSetChanged();
+                holder.setButCol(getItem(position));
+
+                Server.getInstance().getMeals(MainActivity.meals, MainActivity.adapter);
             }
         });
 
@@ -127,7 +136,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
                 Intent intent = new Intent(mContext, MealActivity.class);
                 Bundle b = new Bundle();
                 b.putSerializable("meal", getItem(position));
-                b.putInt("mealId", getItem(position).getID()); //Your id
+                b.putString("mealId", getItem(position).getID()); //Your id
                 intent.putExtras(b); //Put your id to your next Intent
 
                 mContext.startActivity(intent);
@@ -149,5 +158,8 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         });
         return result;
     }
+
+
+
 }
 

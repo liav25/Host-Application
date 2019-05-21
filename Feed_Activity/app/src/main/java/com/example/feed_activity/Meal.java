@@ -15,7 +15,7 @@ import java.util.*;
 public class Meal implements Serializable {
 
     final private String hostId;
-    private final int ID;
+    private String ID;
 
     private ArrayList<String> guests;
     private String title;
@@ -38,7 +38,7 @@ public class Meal implements Serializable {
      * @param loc - Location for event
      * @param time - time of event
      */
-    public Meal(int id, String hostId, String title, ArrayList<String> tags,
+    public Meal(String id, String hostId, String title, ArrayList<String> tags,
                 HashMap<String, Boolean> restrictions, String descr,
                 int maxGuests, String loc, String time)
     {
@@ -66,7 +66,7 @@ public class Meal implements Serializable {
 
     public Meal()
     {
-        this.ID = 0;
+        this.ID = ""+0;
         this.hostId = "host";
         this.title = "title";
         this.description = "descr";
@@ -94,7 +94,7 @@ public class Meal implements Serializable {
     /**
      * @return this meal's ID
      */
-    public int getID(){
+    public String getID(){
         return ID;
     }
 
@@ -128,6 +128,14 @@ public class Meal implements Serializable {
      */
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    /**
+     * sets new id for this meal
+     * @param id - new id
+     */
+    public void setId(String id) {
+        this.ID = id;
     }
 
     /**

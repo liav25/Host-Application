@@ -23,14 +23,14 @@ public class User {
 
     /**
      * A constructor for this class
-     * @param username - username of user i.e. screen name
-     * @param image - image for user
+     *
+     * @param username   - username of user i.e. screen name
+     * @param image      - image for user
      * @param university - university studying in
-     * @param langs - languages speaking
+     * @param langs      - languages speaking
      */
     public User(String username, Uri image, String university,
-                ArrayList<String> langs, String userId)
-    {
+                ArrayList<String> langs, String userId) {
         this.username = username;
 
         this.image = image;
@@ -55,10 +55,8 @@ public class User {
      * @return - set of languages this user claims to speak
      */
     public ArrayList<String> getLangs() {
-
         return langs;
     }
-
 
 
     /**
@@ -74,8 +72,6 @@ public class User {
     public String getUsername() {
         return username;
     }
-
-
 
 
     /**
@@ -94,9 +90,9 @@ public class User {
     }
 
 
-
     /**
      * Sets a new university for user
+     *
      * @param university - new university
      */
     public void setUniversity(String university) {

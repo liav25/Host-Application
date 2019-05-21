@@ -251,7 +251,7 @@ public class Server {
 
                 }
                 DocumentReference docRef = db.collection(MEALS_STRING).document(String.valueOf(counter[0]));
-                Meal newMeal = new Meal(counter[0],  hostId,  title,tags,
+                Meal newMeal = new Meal(String.valueOf(counter[0]),  hostId,  title,tags,
                         restrictions, descr, maxGuests,  loc,  time);
                 docRef.set(newMeal);
                 return Transaction.success(mutableData);
@@ -349,9 +349,9 @@ public class Server {
      * @param mealId meal's ID
      * @return true upon success, false otherwise
      */
-    public Boolean addUserToMeal(String userId, int mealId){
+    public Boolean addUserToMeal(String userId, String mealId){
 
-        DocumentReference busRef = db.collection(MEALS_STRING).document(String.valueOf(mealId));
+        DocumentReference busRef = db.collection(MEALS_STRING).document(mealId);
         busRef.update("guests", FieldValue.arrayUnion(userId));
         return true;
     }
@@ -362,11 +362,42 @@ public class Server {
      * @param mealId meal's ID
      * @return true upon success, false otherwise
      */
-    public Boolean removeUserToMeal(String userId, int mealId){
+    public Boolean removeUserToMeal(String userId, String mealId, String hostId){
+        DocumentReference busRef = db.collection(MEALS_STRING).document(mealId);
 
+        if (userId.equals(hostId)){
+            busRef.delete()
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                            getMeals(MainActivity.meals, MainActivity.adapter);
 
-        DocumentReference busRef = db.collection(MEALS_STRING).document(String.valueOf(mealId));
-        busRef.update("guests", FieldValue.arrayRemove(userId));
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(TAG, "Error deleting document", e);
+                        }
+                    });
+        } else {
+            busRef.update("guests", FieldValue.arrayRemove(userId)).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                    getMeals(MainActivity.meals, MainActivity.adapter);
+
+                }
+            })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(TAG, "Error deleting document", e);
+                        }
+                    });;
+        }
+
 
         return true;
 
@@ -423,6 +454,7 @@ public class Server {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            MainActivity.meals.clear();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 meals.add(document.toObject(Meal.class));
                                 Log.d("getMeals", document.getId() + " => " + document.getData());

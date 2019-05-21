@@ -129,7 +129,7 @@ public class PopActivity extends AppCompatActivity {
                 int id = MainActivity.sev.addMeal(MainActivity.userId, title, new ArrayList<String>(),
                         foodRests, description, maxGuests, loc, date);
                 // todo - find another way to get your user id
-                MainActivity.meals.add(new Meal(id, MainActivity.userId, title,new ArrayList<String>(),
+                MainActivity.meals.add(new Meal(String.valueOf(id), MainActivity.userId, title,new ArrayList<String>(),
                         foodRests, description, maxGuests, loc, date ));
                 MainActivity.adapter.notifyDataSetChanged();
                 finish();
