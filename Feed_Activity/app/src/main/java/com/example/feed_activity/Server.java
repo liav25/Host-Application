@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -151,7 +152,12 @@ public class Server {
 
         DocumentReference busRef = db.collection(USERS_DATA_STRING).document(userId);
         User userObj = new User(disName, image, university, langs, userId);
-        busRef.set(userObj);
+        busRef.set(userObj).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                System.out.println("User addition : success!");
+            }
+        });
 
     }
 
@@ -180,10 +186,11 @@ public class Server {
         return res[0];
     }
 
-    public User getUser(final String userId){
+    public void getUser(final String userId, final User[] user, final TextView name,
+                        final TextView uni, final TextView langs){
 
         DocumentReference docRef = db.collection(USERS_DATA_STRING).document(userId);
-        final User[] user = new User[1];
+
         /* gets object from server  */
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -193,7 +200,11 @@ public class Server {
                     DocumentSnapshot document = task.getResult();
                     if(document != null && document.exists())
                     {
-                        user[0] = document.toObject(User.class);
+                        User got =  document.toObject(User.class);
+                        user[0] = got;
+                        name.setText(got.getUsername());
+                        uni.setText(got.getUniversity());
+                        langs.setText(Profile.getLangsString(got.getLangs()));
 
                     }
                     else
@@ -203,9 +214,6 @@ public class Server {
                 }
             }
         });
-
-
-        return user[0];
 
     }
 
@@ -373,7 +381,7 @@ public class Server {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             Log.w(TAG, "Error deleting document", e);
-                            
+
                         }
                     });
         } else {
