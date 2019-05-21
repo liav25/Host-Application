@@ -1,6 +1,7 @@
 package com.example.feed_activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.location.Location;
 import android.media.Image;
 import android.net.Uri;
@@ -119,7 +120,7 @@ public class Server {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("AuthUI", "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            MainActivity.user = mAuth.getCurrentUser();
 
                         } else {
                             // If sign in fails, display a message to the user.
@@ -135,24 +136,13 @@ public class Server {
     /**
      * Creates a new user and adds it to DB
      * @param disName - display name
-     * @param pass - his password
      * @param image - his image
      * @param university - his university
      * @param langs - languages he's speaking
      */
-    public void addUser(String disName, String email, String pass, Uri image, String university,
+    public void addUser(String disName, Uri image, String university,
                           ArrayList<String> langs)
     {
-        signUp(email, pass);
-        MainActivity.user = FirebaseAuth.getInstance().getCurrentUser();
-
-
-
-        /* update display name, and image*/
-        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                .setDisplayName(disName).setPhotoUri(image)
-                .build();
-
 
         String userId = MainActivity.userId;
 
