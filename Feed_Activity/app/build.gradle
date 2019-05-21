@@ -33,8 +33,26 @@ dependencies {
 //    compile 'com.google.android.gms:play-services-maps:11.0.2'
 //    compile 'com.google.android.gms:play-services-location:11.0.2'
 //    compile 'com.google.android.gms:play-services-places:11.0.2'
+
     implementation 'com.github.travijuu:numberpicker:1.0.7'
 
+    // FirebaseUI for Firebase Realtime Database
+    implementation 'com.firebaseui:firebase-ui-database:4.3.2'
+
+    // FirebaseUI for Cloud Firestore
+    implementation 'com.firebaseui:firebase-ui-firestore:4.3.2'
+
+    // FirebaseUI for Firebase Auth
+    implementation 'com.firebaseui:firebase-ui-auth:4.3.2'
+
+    // FirebaseUI for Firebase Auth (GitHub provider)
+    implementation 'com.firebaseui:firebase-ui-auth-github:4.3.2'
+
+    // FirebaseUI for Cloud Storage
+    implementation 'com.firebaseui:firebase-ui-storage:4.3.2'
+
+
+    implementation 'com.google.firebase:firebase-firestore:17.1.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
@@ -44,6 +62,11 @@ dependencies {
 
     //imageloader
     implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.4.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.4.0'
 
     //circle image
     implementation 'de.hdodenhof:circleimageview:2.1.0'
@@ -57,4 +80,8 @@ dependencies {
 
 
 }
+
 apply plugin: 'com.google.gms.google-services'
+
+
+

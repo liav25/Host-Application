@@ -42,7 +42,9 @@ public class MainActivity extends AppCompatActivity {
 
     static Server sev = Server.getInstance();
     ArrayList<Meal> meals;
+
     public static FirebaseUser user;
+
 
     private ListView cardlist;
     NestedScrollView nestedScrollView;
@@ -142,12 +144,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init(){
+
         sev.addUser("Daniel Carmi", "email1@gmail.com", "password", null,"Open University",
                 new ArrayList<String>(Arrays.asList("Hebrew", "English", "Arabic")));
         sev.addUser("Yaron Israeli","email2@gmail.com", "password", null,"Hebrew University",
                 new ArrayList<String>(Arrays.asList("Hebrew", "Arabic")));
 //
         sev.addMeal("Befbwd13FffLtCDgUurqTPH7c0y1", "Italian Dairy Meal", new ArrayList<String>(),
+
                 new HashMap<String, Boolean>(){{put("Halal", true); put("Kosher", true);
                     put("Vegan", false); put("Vegetarian", true);}}, "A fun Italian meal in the center of Jerusalem", 5,
                 "Nahlaot",  "05/06/2019  18:30 PM");

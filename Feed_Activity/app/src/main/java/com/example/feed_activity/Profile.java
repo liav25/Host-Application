@@ -1,6 +1,8 @@
 package com.example.feed_activity;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -16,11 +18,12 @@ public class Profile extends AppCompatActivity {
     TextView langs;
     TextView loc;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        getWindow().setStatusBarColor(this.getResources().getColor(R.color.TextYellow));
         setContentView(R.layout.activity_profile);
         Bundle b = getIntent().getExtras();
         final String uId = b.getString("userId");

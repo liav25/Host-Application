@@ -2,37 +2,51 @@ package com.example.feed_activity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
+
+
 public class MealActivity extends AppCompatActivity {
+    public static DataAdapter guestsAdapter;
+
     private Button joinmeal;
     private TextView title;
     private TextView host;
     private TextView desc;
     private TextView time;
     private TextView restrictions;
-    private TextView guests;
+    private RecyclerView guestsRecycle;
     private TextView loc;
+    private ArrayList<Integer> guests;
 
 
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.constraint_meal_page);
+        getWindow().setStatusBarColor(this.getResources().getColor(R.color.TextYellow));
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.meal_toolbar);
-        setSupportActionBar(toolbar);
         toolbar.setBackgroundColor(getResources().getColor(R.color.TextYellow));
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -72,9 +86,16 @@ public class MealActivity extends AppCompatActivity {
         time = (TextView)findViewById(R.id.mealPageDateTime);
         time.setText( MainActivity.sev.getMeal(mealId).getTime());
 
-        guests = (TextView)findViewById(R.id.mealFoodRestrictions6);
-        guests.setText(setGuestsString(mealId));
+        guests = MainActivity.sev.getMeal(mealId).getGuestsPictures();
 
+        guestsAdapter = new DataAdapter(this, guests);
+
+        guestsRecycle = (RecyclerView)findViewById(R.id.mealFoodRestrictions6);
+        guestsRecycle.setLayoutManager(new LinearLayoutManager(this,
+                LinearLayoutManager.HORIZONTAL,false));
+        guestsRecycle.addItemDecoration(new OverlapDecoration());
+        guestsRecycle.setHasFixedSize(true);
+        guestsRecycle.setAdapter(guestsAdapter);
 
         loc = (TextView)findViewById(R.id.mealFoodRestrictions2);
         loc.setText(MainActivity.sev.getMeal(mealId).getLocation());
@@ -114,7 +135,6 @@ public class MealActivity extends AppCompatActivity {
 
         MainActivity.adapter.notifyDataSetChanged();
         setColorOfButton(mealId);
-        guests.setText(setGuestsString(mealId));
     }
 
     private void setColorOfButton(int mealId){
@@ -191,6 +211,21 @@ public class MealActivity extends AppCompatActivity {
         return true;
     }
 
+    public class OverlapDecoration extends RecyclerView.ItemDecoration {
+
+        private final static int vertOverlap = -40;
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+            final int itemPosition = parent.getChildAdapterPosition(view);
 
 
+            outRect.set(0, 0, vertOverlap, 0);
+
+
+        }
+    }
 }
+
+
+

@@ -29,7 +29,7 @@
         <LinearLayout
             android:id="@+id/layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="175dp"
             android:orientation="vertical">
 
 
@@ -88,9 +88,9 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
-                    android:text="Host"
                     android:clickable="true"
                     android:focusable="true"
+                    android:text="Host"
                     android:textColor="#42A5F5"
                     android:textSize="15dp"
                     android:textStyle="bold" />
@@ -108,11 +108,29 @@
                     android:background="@drawable/rounded_button"
                     android:clickable="true"
                     android:focusable="true"
-                    android:text="Join Meal"
-                    android:textColor="@color/TextWhite"
+                    android:text="Join Meal!"
                     android:textAppearance="@android:style/TextAppearance.Material.Button"
+                    android:textColor="@color/TextWhite"
                     tools:padding="10dp"
                     tools:textColor="@color/TextWhite" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="227dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_toStartOf="@+id/JoinButton"
+                    android:layout_toLeftOf="@+id/JoinButton"
+                    android:layout_toEndOf="@+id/author"
+                    android:layout_toRightOf="@+id/author"
+                    android:orientation="horizontal" />
 
 
             </RelativeLayout>
