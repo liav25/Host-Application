@@ -126,9 +126,11 @@ public class PopActivity extends AppCompatActivity {
                 loc = getInfoFromTextbox(R.id.location);
                 setFoodRests();
                 maxGuests = numberPicker.getValue();
-                MainActivity.sev.addMeal(MainActivity.user.getUid(), title, new ArrayList<String>(),
+                int id = MainActivity.sev.addMeal(MainActivity.userId, title, new ArrayList<String>(),
                         foodRests, description, maxGuests, loc, date);
                 // todo - find another way to get your user id
+                MainActivity.meals.add(new Meal(id, MainActivity.userId, title,new ArrayList<String>(),
+                        foodRests, description, maxGuests, loc, date ));
                 MainActivity.adapter.notifyDataSetChanged();
                 finish();
             }

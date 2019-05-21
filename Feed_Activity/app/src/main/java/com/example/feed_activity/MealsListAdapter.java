@@ -60,7 +60,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         String description = getItem(position).getDescription();
         String host = getItem(position).getHostId();
 
-        if (getItem(position).getHostId().equals(MainActivity.user.getUid())) { // todo - find another way to get your user id
+        if (getItem(position).getHostId().equals(MainActivity.userId)) { // todo - find another way to get your user id
             host = "You";
         }
 
@@ -93,7 +93,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         holder.description.setText(description);
         holder.host.setText(host);
 
-        if (getItem(position).isMember(MainActivity.user.getUid())){ // todo - find another way to get your user id
+        if (getItem(position).isMember(MainActivity.userId)){ // todo - find another way to get your user id
             holder.joinBU.setText("Leave");
             holder.joinBU.setBackgroundColor(Color.GRAY);
         } else if (getItem(position).isFull()){ // meal is full
@@ -108,13 +108,13 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         holder.joinBU.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (getItem(position).isMember(MainActivity.user.getUid())){
+                if (getItem(position).isMember(MainActivity.userId)){
 
-                    Server.getInstance().removeUserToMeal(MainActivity.user.getUid(), getItem(position).getID());
+                    Server.getInstance().removeUserToMeal(MainActivity.userId, getItem(position).getID());
 
                 }  else if (!getItem(position).isFull()) { // not in meal and meal not full
 
-                    MainActivity.sev.addUserToMeal(MainActivity.user.getUid(), getItem(position).getID());
+                    MainActivity.sev.addUserToMeal(MainActivity.userId, getItem(position).getID());
                 }
                 MainActivity.adapter.notifyDataSetChanged();
             }

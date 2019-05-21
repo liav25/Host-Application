@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     static Server sev = Server.getInstance();
     public static ArrayList<Meal> meals;
     public static FirebaseUser user;
+    public static String userId;
 
     private ListView cardlist;
     NestedScrollView nestedScrollView;

@@ -195,7 +195,6 @@ public class Server {
         DocumentReference docRef = db.collection(USERS_DATA_STRING).document(userId);
         final User[] user = new User[1];
         /* gets object from server  */
-        System.out.println("**************** 1 " + userId);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -204,13 +203,11 @@ public class Server {
                     DocumentSnapshot document = task.getResult();
                     if(document != null && document.exists())
                     {
-                        System.out.println("**************** 2 " + userId);
                         user[0] = document.toObject(User.class);
 
                     }
                     else
                     {
-                        System.out.println("**************** 3 " + userId);
                         System.out.println("no user found");
                     }
                 }
@@ -358,12 +355,8 @@ public class Server {
     public Boolean addUserToMeal(String userId, int mealId){
 
         DocumentReference busRef = db.collection(MEALS_STRING).document(String.valueOf(mealId));
-        if (MealExists(mealId) ) { // todo - validate that user also exists
-            busRef.update("guests", FieldValue.arrayUnion(userId));
-            return true;
-        }
-
-        return false; // failed to add
+        busRef.update("guests", FieldValue.arrayUnion(userId));
+        return true;
     }
 
     /**
@@ -430,8 +423,7 @@ public class Server {
         return meal[0];
     }
 
-    public ArrayList<Meal> getMeals(final ArrayList<Meal> meals, final MealsListAdapter adapt) {
-        final ArrayList<Meal> res = new ArrayList<>();
+    public void getMeals(final ArrayList<Meal> meals, final MealsListAdapter adapt) {
 
         db.collection(MEALS_STRING)
                 .get()
@@ -441,11 +433,10 @@ public class Server {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                res.add(document.toObject(Meal.class));
                                 meals.add(document.toObject(Meal.class));
                                 Log.d("getMeals", document.getId() + " => " + document.getData());
-
                             }
+
                             adapt.notifyDataSetChanged();
                         } else {
                             Log.d("getMeals", "Error getting documents: ", task.getException());
@@ -453,8 +444,6 @@ public class Server {
                     }
                 });
 
-
-        return res;
     }
 
 
