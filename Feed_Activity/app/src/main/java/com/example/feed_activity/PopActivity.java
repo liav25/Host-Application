@@ -26,14 +26,13 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
-import com.google.android.gms.location.places.ui.PlaceSelectionListener;
+
 
 import java.io.File;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -127,9 +126,11 @@ public class PopActivity extends AppCompatActivity {
                 loc = getInfoFromTextbox(R.id.location);
                 setFoodRests();
                 maxGuests = numberPicker.getValue();
-                MainActivity.sev.addMeal(MainActivity.userId, title, new HashSet<String>(),
+                int id = MainActivity.sev.addMeal(MainActivity.userId, title, new ArrayList<String>(),
                         foodRests, description, maxGuests, loc, date);
-
+                // todo - find another way to get your user id
+                MainActivity.meals.add(new Meal(id, MainActivity.userId, title,new ArrayList<String>(),
+                        foodRests, description, maxGuests, loc, date ));
                 MainActivity.adapter.notifyDataSetChanged();
                 finish();
             }

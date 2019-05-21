@@ -1,6 +1,7 @@
 package com.example.feed_activity;
 
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -12,16 +13,17 @@ import java.util.*;
  */
 public class Meal {
 
-    final private int hostId;
+    final private String hostId;
     private final int ID;
-    private ArrayList<Integer> guests;
+
+    private ArrayList<String> guests;
     private String title;
     private String description;
     private int maxGuests;
     private String time;
     private String location;
     private HashMap<String, Boolean> restrictions;
-    private HashSet<String> tags;
+    private ArrayList<String> tags;
 
     /**
      * constructor
@@ -35,7 +37,7 @@ public class Meal {
      * @param loc - Location for event
      * @param time - time of event
      */
-    public Meal(int id, int hostId, String title, HashSet<String> tags,
+    public Meal(int id, String hostId, String title, ArrayList<String> tags,
                 HashMap<String, Boolean> restrictions, String descr,
                 int maxGuests, String loc, String time)
     {
@@ -44,7 +46,7 @@ public class Meal {
         this.title = title;
         this.description = descr;
 
-        this.tags = new HashSet<>();
+        this.tags = new ArrayList<>();
         this.tags.addAll(tags);
 
         this.restrictions = new HashMap<>(restrictions);
@@ -52,16 +54,39 @@ public class Meal {
 
         this.maxGuests = maxGuests; // the +1 is because the host is already included
 
-        this.guests = new ArrayList<>(); // initialize empty set of guests, then add host
+
+        this.guests = new ArrayList<String>(); // initialize empty set of guests, then add host
+
         this.guests.add(hostId);
 
         this.location = loc;
         this.time = time;
     }
+
+    public Meal()
+    {
+        this.ID = 0;
+        this.hostId = "host";
+        this.title = "title";
+        this.description = "descr";
+
+        this.tags = new ArrayList<>();
+
+        this.restrictions = new HashMap<>();
+
+
+        this.maxGuests = 10; // the +1 is because the host is already included
+
+        this.guests = new ArrayList<String>(); // initialize empty set of guests, then add host
+
+        this.location = "location";
+        this.time = "time";
+    }
+
     /**
      * @return this meal's host user ID
      */
-    public int getHostId() {
+    public String getHostId() {
         return hostId;
     }
 
@@ -122,7 +147,8 @@ public class Meal {
     /**
      * @return - set of guests
      */
-    public ArrayList<Integer> getGuests() {
+
+    public ArrayList<String> getGuests() {
         return guests;
     }
 
@@ -182,7 +208,7 @@ public class Meal {
     /**
      * @return - tags tagged by host for this meal
      */
-    public Set<String> getTags() {
+    public ArrayList<String> getTags() {
         return tags;
     }
 
@@ -190,7 +216,7 @@ public class Meal {
      * sets new tags for this event ( a whole new tag list)
      * @param tags - new tags
      */
-    public void setTags(HashSet<String> tags) {
+    public void setTags(ArrayList<String> tags) {
         this.tags = tags;
     }
 
@@ -199,7 +225,7 @@ public class Meal {
      * @param guestId - ID of guest
      * @return - true upon success, false otherwise
      */
-    public Boolean addGuest(int guestId){
+    public Boolean addGuest(String guestId){
         if (curNumberOfGuests() < maxGuests){
             this.guests.add(guestId);
             return true;
@@ -213,7 +239,7 @@ public class Meal {
      * @param guestId - ID of guest
      * @return - true upon success, false otherwise
      */
-    public Boolean removeGuest(int guestId)
+    public Boolean removeGuest(String guestId)
     {
         if (this.guests.contains(guestId))
         {
@@ -227,7 +253,7 @@ public class Meal {
      * @param userId - user Id to check
      * @return true if user is in this meal, false otherwise
      */
-    public Boolean isMember(int userId)
+    public Boolean isMember(String userId)
     {
         return this.guests.contains(userId);
     }
@@ -282,9 +308,9 @@ public class Meal {
      * and return the list of their photos.
      * @return guests photos list
      */
-    public ArrayList<Integer> getGuestsPictures(){
-        ArrayList<Integer> guestsPhotos = new ArrayList<>();
-        for(int guest: guests){
+    public ArrayList<String> getGuestsPictures(){
+        ArrayList<String> guestsPhotos = new ArrayList<>();
+        for(String guest: guests){
             guestsPhotos.add(guest);
         }
         return guestsPhotos;
