@@ -3,12 +3,11 @@ package com.example.feed_activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Register extends AppCompatActivity {
+public class edit_profile extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_edit_profile);
     }
-
 }
