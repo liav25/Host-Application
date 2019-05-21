@@ -57,6 +57,7 @@ import java.util.function.DoubleFunction;
 
 import static com.firebase.ui.auth.AuthUI.TAG;
 import static com.firebase.ui.auth.AuthUI.getApplicationContext;
+import static java.lang.Math.ulp;
 
 
 /**
@@ -121,6 +122,8 @@ public class Server {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("AuthUI", "createUserWithEmail:success");
                             MainActivity.user = mAuth.getCurrentUser();
+                            MainActivity.userId = MainActivity.user.getUid();
+                            addUser("", null, "", new ArrayList<String>());
 
                         } else {
                             // If sign in fails, display a message to the user.

@@ -79,12 +79,6 @@ public class MainActivity extends AppCompatActivity {
         addMealBut.setAnimation(fromBottom);
         Bundle bun = new Bundle();
 
-        boolean justRegistered = bun.getBoolean("justRegistered");
-
-        if (justRegistered){
-            Server.getInstance().addUser("", null, "", new ArrayList<String>());
-        }
-
 
         addMealBut.setOnClickListener(new View.OnClickListener() {
 

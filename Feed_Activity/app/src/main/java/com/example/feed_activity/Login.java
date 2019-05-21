@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,10 +29,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Login extends AppCompatActivity {
-
+    EditText email;
+    EditText pass;
     Button login;
-    FirebaseAuth mAuth;
-    public static Meal[] meal;
+    public static FirebaseAuth mAuth;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -40,43 +41,41 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         getWindow().setStatusBarColor(this.getResources().getColor(R.color.TextYellow));
         login = (Button) findViewById(R.id.loginButton);
-        meal = new Meal[1];
+
+        email = findViewById(R.id.userNameInputField);
+        pass = findViewById(R.id.editText3);
+        final String em = email.getText().toString();
+        final String pas = email.getText().toString();
+
+        mAuth = FirebaseAuth.getInstance();
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent feed_intent = new Intent(getApplicationContext(), MainActivity.class);
+                if(em.length() > 1 && pas.length() >= 6) {
+                    signIn(em, pas);
+                }
 
-                stam();
 
-                startActivity(feed_intent);
             }
         });
     }
 
 
-    private void stam(){
-        mAuth = FirebaseAuth.getInstance();
-        final AtomicBoolean boo = new AtomicBoolean(false);
-        final Meal[] mea = new Meal[1];
-        mea[0] = Server.getInstance().getMeal(3);
-
-
-
-
-        start();
-    }
-
-    private void start(){
-        mAuth.signInWithEmailAndPassword( "email2@gmail.com", "password")
+    public void signIn(String email, String password){
+        mAuth.signInWithEmailAndPassword( email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             MainActivity.userId = mAuth.getUid();
-                            Log.d("win", "signInWithEmail:success");
+                            MainActivity.user = mAuth.getCurrentUser();
+                            Intent feed_intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(feed_intent);
 
+                            Log.d("win", "signInWithEmail:success");
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("fail", "signInWithEmail:failure", task.getException());
