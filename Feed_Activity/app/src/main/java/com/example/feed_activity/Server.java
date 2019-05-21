@@ -238,15 +238,16 @@ public class Server {
                 if (currentValue == null) {
                     mutableData.setValue(0);
                     counter[0] = 0;
+                    System.out.println("asfaafsfafsafasfasfas");
                 } else {
                     counter[0] = currentValue;
                     mutableData.setValue(currentValue + 1);
-
+                    DocumentReference docRef = db.collection(MEALS_STRING).document(String.valueOf(counter[0]));
+                    Meal newMeal = new Meal(String.valueOf(counter[0]),  hostId,  title,tags,
+                            restrictions, descr, maxGuests,  loc,  time);
+                    docRef.set(newMeal);
                 }
-                DocumentReference docRef = db.collection(MEALS_STRING).document(String.valueOf(counter[0]));
-                Meal newMeal = new Meal(String.valueOf(counter[0]),  hostId,  title,tags,
-                        restrictions, descr, maxGuests,  loc,  time);
-                docRef.set(newMeal);
+
                 return Transaction.success(mutableData);
             }
 
@@ -372,6 +373,7 @@ public class Server {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             Log.w(TAG, "Error deleting document", e);
+                            
                         }
                     });
         } else {

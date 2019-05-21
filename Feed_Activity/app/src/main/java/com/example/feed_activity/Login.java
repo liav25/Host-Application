@@ -31,6 +31,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class Login extends AppCompatActivity {
     EditText email;
     EditText pass;
+    final static int MIN_PASS_CHAR = 6;
+    final static int MIN_EMAIL_CHAR = 1;
     Button login;
     public static FirebaseAuth mAuth;
 
@@ -44,15 +46,16 @@ public class Login extends AppCompatActivity {
 
         email = findViewById(R.id.userNameInputField);
         pass = findViewById(R.id.editText3);
-        final String em = email.getText().toString();
-        final String pas = email.getText().toString();
+
 
         mAuth = FirebaseAuth.getInstance();
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(em.length() > 1 && pas.length() >= 6) {
+                final String em = email.getText().toString();
+                final String pas = pass.getText().toString();
+                if(em.length() > MIN_EMAIL_CHAR && pas.length() >= MIN_PASS_CHAR) {
                     signIn(em, pas);
                 }
 
@@ -62,7 +65,7 @@ public class Login extends AppCompatActivity {
     }
 
 
-    public void signIn(String email, String password){
+    public void signIn(final String email, final String password){
         mAuth.signInWithEmailAndPassword( email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -79,8 +82,9 @@ public class Login extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("fail", "signInWithEmail:failure", task.getException());
-                            Toast.makeText(Login.this, "Authentication failed.",
+                            Toast.makeText(Login.this, "Wrong email or password",
                                     Toast.LENGTH_SHORT).show();
+                            System.out.println(email +" " + password);
 
                         }
 

@@ -26,7 +26,6 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register2);
         FirebaseAuth mAtuh = FirebaseAuth.getInstance();
         loginbut = findViewById(R.id.loginButtonInSignup);
-        mAtuh.signOut();
 
         loginbut.setOnClickListener(new View.OnClickListener() {
             @Override
