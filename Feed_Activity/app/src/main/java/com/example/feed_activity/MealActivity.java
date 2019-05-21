@@ -52,18 +52,18 @@ public class MealActivity extends AppCompatActivity {
 
         Bundle b = getIntent().getExtras();
         final int mealId = b.getInt("mealId");
-
+        final Meal meal = (Meal) b.getSerializable("meal");
         title = (TextView)findViewById(R.id.textView4);
-        title.setText(MainActivity.sev.getMeal(mealId).getTitle());
+        title.setText(meal.getTitle());
 
         host = (TextView)findViewById(R.id.MealHostName);
-        final String hostId = MainActivity.sev.getMeal(mealId).getHostId();
+        final String hostId = meal.getHostId();
 
-        if (hostId.equals(MainActivity.user.getUid())){
+        if (hostId.equals(MainActivity.userId)){
             host.setText("Host: You");
         } else {
-
-            host.setText("Host: " + MainActivity.sev.getUser(hostId).getUsername());
+            // todo - get usernames
+            //host.setText("Host: " + MainActivity.sev.getUser(hostId).getUsername());
         }
 
 
@@ -80,47 +80,47 @@ public class MealActivity extends AppCompatActivity {
         });
 
         desc = (TextView)findViewById(R.id.mealFoodRestrictions7);
-        desc.setText( MainActivity.sev.getMeal(mealId).getDescription());
+        desc.setText(meal.getDescription());
 
         time = (TextView)findViewById(R.id.mealPageDateTime);
-        time.setText( MainActivity.sev.getMeal(mealId).getTime());
+        time.setText(meal.getTime());
 
-        guests = MainActivity.sev.getMeal(mealId).getGuestsPictures();
-
-        guestsAdapter = new DataAdapter(this, guests_pics);
-
-        guestsRecycle = (RecyclerView)findViewById(R.id.mealFoodRestrictions6);
-        guestsRecycle.setLayoutManager(new LinearLayoutManager(this,
-                LinearLayoutManager.HORIZONTAL,false));
-        guestsRecycle.addItemDecoration(new OverlapDecoration());
-        guestsRecycle.setHasFixedSize(true);
-        guestsRecycle.setAdapter(guestsAdapter);
+//        guests = MainActivity.sev.getMeal(mealId).getGuestsPictures(); // todo
+//
+//        guestsAdapter = new DataAdapter(this, guests_pics);
+//
+//        guestsRecycle = (RecyclerView)findViewById(R.id.mealFoodRestrictions6);
+//        guestsRecycle.setLayoutManager(new LinearLayoutManager(this,
+//                LinearLayoutManager.HORIZONTAL,false));
+//        guestsRecycle.addItemDecoration(new OverlapDecoration());
+//        guestsRecycle.setHasFixedSize(true);
+//        guestsRecycle.setAdapter(guestsAdapter);
 
         loc = (TextView)findViewById(R.id.mealFoodRestrictions2);
-        loc.setText(MainActivity.sev.getMeal(mealId).getLocation());
+        loc.setText(meal.getLocation());
 
         joinmeal = (Button)findViewById(R.id.button);
 
-        setColorOfButton(mealId);
+        setColorOfButton(meal);
 
         restrictions = (TextView)findViewById(R.id.mealFoodRestrictions);
-        restrictions.setText(getRestrictionString(mealId));
+        restrictions.setText(getRestrictionString(meal));
 
         joinmeal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickBut(mealId);
+                onClickBut(mealId, meal);
             }
         });
 
     }
 
-    private void onClickBut(int mealId){
-        if (MainActivity.sev.isUserInMeal(MainActivity.user.getUid(), mealId)){
+    private void onClickBut(int mealId, Meal meal){
+        if (meal.isMember(MainActivity.userId)){
 
-            Boolean flag = Server.getInstance().getMeal(mealId).getHostId().equals(MainActivity.user.getUid());
+            Boolean flag = meal.getHostId().equals(MainActivity.userId);
 
-            Server.getInstance().removeUserToMeal(MainActivity.user.getUid(), MainActivity.sev.getMeal(mealId).getID());
+            Server.getInstance().removeUserToMeal(MainActivity.userId, mealId);
             if (flag) {
                 finish();
                 MainActivity.adapter.notifyDataSetChanged();
@@ -128,19 +128,19 @@ public class MealActivity extends AppCompatActivity {
             }
 
 
-        }  else if (!MainActivity.sev.getMeal(mealId).isFull()) { // not in meal and meal not full
-            MainActivity.sev.addUserToMeal(MainActivity.user.getUid(), mealId);
+        }  else if (!meal.isFull()) { // not in meal and meal not full
+            MainActivity.sev.addUserToMeal(MainActivity.userId, mealId);
         }
 
         MainActivity.adapter.notifyDataSetChanged();
-        setColorOfButton(mealId);
+        setColorOfButton(meal);
     }
 
-    private void setColorOfButton(int mealId){
-        if (MainActivity.sev.isUserInMeal(MainActivity.user.getUid(), mealId)){
+    private void setColorOfButton(Meal meal){
+        if (meal.isMember(MainActivity.userId)){
             joinmeal.setText("Leave");
             joinmeal.setBackgroundColor(Color.GRAY);
-        } else if (MainActivity.sev.getMeal(mealId).isFull()){ // meal is full
+        } else if (meal.isFull()){ // meal is full
             joinmeal.setText("Full");
             joinmeal.setBackgroundColor(Color.GRAY);
         } else {
@@ -176,23 +176,23 @@ public class MealActivity extends AppCompatActivity {
     }
 
 
-    private String getRestrictionString(int mealId){
+    private String getRestrictionString(Meal meal){
         String restri = "Restrictions:";
 
-        if (Server.getInstance().isRestricted(mealId,"Kosher")) {
+        if (meal.isRestricted("Kosher")) {
             restri += " Kosher,";
         }
 
-        if (Server.getInstance().isRestricted(mealId,"Halal")) {
+        if (meal.isRestricted("Halal")) {
             restri += " Halal,";
         }
 
-        if (Server.getInstance().isRestricted(mealId,"Vegan")) {
+        if (meal.isRestricted("Vegan")) {
             restri += " Vegan,";
         }
 
 
-        if (Server.getInstance().isRestricted(mealId,"Vegetarian")) {
+        if (meal.isRestricted("Vegetarian")) {
             restri += " Vegetarian,";
         }
 

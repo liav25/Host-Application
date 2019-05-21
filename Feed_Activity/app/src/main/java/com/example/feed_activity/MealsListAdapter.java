@@ -126,6 +126,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, MealActivity.class);
                 Bundle b = new Bundle();
+                b.putSerializable("meal", getItem(position));
                 b.putInt("mealId", getItem(position).getID()); //Your id
                 intent.putExtras(b); //Put your id to your next Intent
 

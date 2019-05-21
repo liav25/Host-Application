@@ -366,12 +366,9 @@ public class Server {
 
 
         DocumentReference busRef = db.collection(MEALS_STRING).document(String.valueOf(mealId));
-        if (MealExists(mealId) ) { // todo - validate that user also exists
-            busRef.update("guests", FieldValue.arrayRemove(userId));
-            return true;
-        }
+        busRef.update("guests", FieldValue.arrayRemove(userId));
 
-        return false; // failed to add
+        return true;
 
     }
 

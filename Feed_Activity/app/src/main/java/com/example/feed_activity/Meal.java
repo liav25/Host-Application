@@ -5,13 +5,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.*;
 
 /**
  * A class representing a meal event
  */
-public class Meal {
+public class Meal implements Serializable {
 
     final private String hostId;
     private final int ID;

@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Bundle b = new Bundle();
-                b.putString("userId", user.getUid()); //Your id
+                b.putString("userId", userId); //Your id
                 Intent profileIntent = new Intent(getApplicationContext(), Profile.class);
                 profileIntent.putExtras(b); //Put your id to your next Intent
                 startActivity(profileIntent);
