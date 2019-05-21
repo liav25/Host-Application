@@ -7,20 +7,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-
-import javax.xml.validation.TypeInfoProvider;
 
 
 
@@ -44,6 +35,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         private void setButCol(Meal meal){
             if (meal.isMember(MainActivity.userId)){
                 joinBU.setText("Leave");
+
                 joinBU.setBackgroundColor(Color.GRAY);
             } else if (meal.isFull()){ // meal is full
                 joinBU.setText("Full");
@@ -51,7 +43,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
             } else {
                 joinBU.setText("Join Meal");
                 joinBU.setTextColor(Color.WHITE);
-                joinBU.setBackgroundResource(R.color.colorAccent);
+                joinBU.setBackgroundResource(R.drawable.rounded_button);
             }
         }
     }
