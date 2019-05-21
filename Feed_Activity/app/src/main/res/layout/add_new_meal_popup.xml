@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:ems="10"
-        android:hint="Meal Title"
+        android:hint="Meal Name"
         android:inputType="textPersonName" />
 
     <EditText
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:ems="10"
-        android:hint="Choose meal date "
+        android:hint="Select date "
         android:inputType="date" />
 
     <AutoCompleteTextView
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:ems="10"
-        android:hint="Choose meal location " />
+        android:hint="Enter location " />
 
     <TextView
         android:id="@+id/ChooseRests"
@@ -52,35 +52,50 @@
         android:layout_height="wrap_content"
         android:text="Food restrictions:" />
 
-    <CheckBox
-        android:id="@+id/Kosher"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Kosher" />
+        android:orientation="horizontal"
+        android:paddingLeft="20dp">
 
-    <CheckBox
-        android:id="@+id/Halal"
+        <CheckBox
+            android:id="@+id/Vegetarian"
+            android:layout_width="117dp"
+            android:layout_height="wrap_content"
+            android:text="Vegetarian" />
+
+        <CheckBox
+            android:id="@+id/Halal"
+            android:layout_width="117dp"
+            android:layout_height="wrap_content"
+            android:text="Halal" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Halal" />
+        android:orientation="horizontal"
+        android:paddingLeft="20dp">
 
-    <CheckBox
-        android:id="@+id/vegan"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Vegan" />
+        <CheckBox
+            android:id="@+id/vegan"
+            android:layout_width="117dp"
+            android:layout_height="wrap_content"
+            android:text="Vegan" />
 
-    <CheckBox
-        android:id="@+id/Vegetarian"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Vegetarian" />
-
+        <CheckBox
+            android:id="@+id/Kosher"
+            android:layout_width="117dp"
+            android:layout_height="wrap_content"
+            android:text="Kosher" />
+    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Maximal Number of Guests:" />
+        android:text="Max number of guests:" />
 
 
     <LinearLayout
@@ -98,7 +113,47 @@
             numberpicker:value="-5"
             numberpicker:unit="1"
             numberpicker:focusable="false"
-             />
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="What should your guests bring?" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="58dp">
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/beer" />
+
+        <CheckBox
+            android:id="@+id/checkBox4"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/soda" />
+
+        <CheckBox
+            android:id="@+id/checkBox3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/cupcake" />
+
+        <CheckBox
+            android:id="@+id/checkBox2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/bouquet" />
 
     </LinearLayout>
 
@@ -109,7 +164,7 @@
         android:layout_margin="10dp"
         android:background="@color/TextWhite"
         android:gravity="top"
-        android:hint="Please describe the meal \n you're hosting"
+        android:hint="Describe your meal"
         android:inputType="text"
         android:padding="20dp" />
 
@@ -123,7 +178,7 @@
         android:background="@color/TextYellow"
         android:clickable="true"
         android:focusable="true"
-        android:text="Share Meal!"
+        android:text="Create Meal!"
         android:textColor="@color/TextWhite" />
 
 </LinearLayout>
