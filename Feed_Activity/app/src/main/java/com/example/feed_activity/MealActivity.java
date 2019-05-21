@@ -51,7 +51,7 @@ public class MealActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         Bundle b = getIntent().getExtras();
-        final int mealId = b.getInt("mealId");
+        final String mealId = b.getString("mealId");
         final Meal meal = (Meal) b.getSerializable("meal");
         title = (TextView)findViewById(R.id.textView4);
         title.setText(meal.getTitle());
@@ -115,12 +115,13 @@ public class MealActivity extends AppCompatActivity {
 
     }
 
-    private void onClickBut(int mealId, Meal meal){
+    private void onClickBut(String mealId, Meal meal){
         if (meal.isMember(MainActivity.userId)){
 
             Boolean flag = meal.getHostId().equals(MainActivity.userId);
 
-            Server.getInstance().removeUserToMeal(MainActivity.userId, String.valueOf(mealId), meal.getHostId());
+            Server.getInstance().removeUserToMeal(MainActivity.userId, mealId, meal.getHostId());
+            meal.removeGuest(MainActivity.userId);
             if (flag) {
                 finish();
                 MainActivity.adapter.notifyDataSetChanged();
@@ -130,6 +131,7 @@ public class MealActivity extends AppCompatActivity {
 
         }  else if (!meal.isFull()) { // not in meal and meal not full
             MainActivity.sev.addUserToMeal(MainActivity.userId, String.valueOf(mealId));
+            meal.addGuest(MainActivity.userId);
         }
 
         MainActivity.adapter.notifyDataSetChanged();
