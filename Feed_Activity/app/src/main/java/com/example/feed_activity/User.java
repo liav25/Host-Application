@@ -14,9 +14,9 @@ import java.util.Set;
  * A class representing a user
  */
 public class User {
-    final private String username;
+    private String username;
     private Uri image;
-    private final String userId;
+    private String userId;
     private String university;
     private ArrayList<String> langs;
 
@@ -40,6 +40,14 @@ public class User {
         this.langs.addAll(langs);
 
         this.userId = userId;
+
+    }
+
+    public User(){
+        this.username = "Profile";
+        this.image = null;
+        this.university = "University";
+        this.langs = new ArrayList<String>();
 
     }
 
@@ -84,7 +92,7 @@ public class User {
     /**
      * @param langs - new languages
      */
-    public void setLangs(Set<String> langs) {
+    public void setLangs(ArrayList<String> langs) {
         this.langs.clear();
         this.langs.addAll(langs);
     }
@@ -106,5 +114,12 @@ public class User {
         return userId;
     }
 
+    /**
+     * @return userId for this user
+     */
+    public void setUserId(String uid) {
+        this.userId = uid;
+    }
 
+    public void setUsername(String us){this.username = us;}
 }
