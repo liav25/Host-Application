@@ -14,7 +14,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
+
 
 public class MealActivity extends AppCompatActivity {
     public static DataAdapter guestsAdapter;
@@ -53,11 +58,12 @@ public class MealActivity extends AppCompatActivity {
         title.setText(MainActivity.sev.getMeal(mealId).getTitle());
 
         host = (TextView)findViewById(R.id.MealHostName);
-        final int hostId = MainActivity.sev.getMeal(mealId).getHostId();
+        final String hostId = MainActivity.sev.getMeal(mealId).getHostId();
 
-        if (hostId == MainActivity.userId){
+        if (hostId.equals(MainActivity.user.getUid())){
             host.setText("Host: You");
         } else {
+
             host.setText("Host: " + MainActivity.sev.getUser(hostId).getUsername());
         }
 
@@ -67,7 +73,7 @@ public class MealActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Bundle b = new Bundle();
-                b.putInt("userId", hostId); //Your id
+                b.putString("userId", hostId); //Your id
                 Intent profileIntent = new Intent(getApplicationContext(), Profile.class);
                 profileIntent.putExtras(b); //Put your id to your next Intent
                 startActivity(profileIntent);
@@ -111,11 +117,11 @@ public class MealActivity extends AppCompatActivity {
     }
 
     private void onClickBut(int mealId){
-        if (MainActivity.sev.isUserInMeal(MainActivity.userId, mealId)){
+        if (MainActivity.sev.isUserInMeal(MainActivity.user.getUid(), mealId)){
 
-            Boolean flag = Server.getInstance().getMeal(mealId).getHostId() == MainActivity.userId;
+            Boolean flag = Server.getInstance().getMeal(mealId).getHostId().equals(MainActivity.user.getUid());
 
-            Server.getInstance().removeUserToMeal(MainActivity.userId, MainActivity.sev.getMeal(mealId).getID());
+            Server.getInstance().removeUserToMeal(MainActivity.user.getUid(), MainActivity.sev.getMeal(mealId).getID());
             if (flag) {
                 finish();
                 MainActivity.adapter.notifyDataSetChanged();
@@ -124,7 +130,7 @@ public class MealActivity extends AppCompatActivity {
 
 
         }  else if (!MainActivity.sev.getMeal(mealId).isFull()) { // not in meal and meal not full
-            MainActivity.sev.addUserToMeal(MainActivity.userId, mealId);
+            MainActivity.sev.addUserToMeal(MainActivity.user.getUid(), mealId);
         }
 
         MainActivity.adapter.notifyDataSetChanged();
@@ -132,7 +138,7 @@ public class MealActivity extends AppCompatActivity {
     }
 
     private void setColorOfButton(int mealId){
-        if (MainActivity.sev.isUserInMeal(MainActivity.userId, mealId)){
+        if (MainActivity.sev.isUserInMeal(MainActivity.user.getUid(), mealId)){
             joinmeal.setText("Leave");
             joinmeal.setBackgroundColor(Color.GRAY);
         } else if (MainActivity.sev.getMeal(mealId).isFull()){ // meal is full
@@ -148,14 +154,14 @@ public class MealActivity extends AppCompatActivity {
         String guestsString = "Guests:";
 
 
-        if (MainActivity.sev.isUserInMeal(MainActivity.userId, mealId) &&
-                (MainActivity.userId != MainActivity.sev.getMeal(mealId).getHostId())){
+        if (MainActivity.sev.isUserInMeal(MainActivity.user.getUid(), mealId) &&
+                (!MainActivity.user.getUid().equals(MainActivity.sev.getMeal(mealId).getHostId()))){
             // Our user is not the admin of the meal, but in the meal
             guestsString = guestsString + " You,";
         }
 
-        for (int guestId : MainActivity.sev.getMeal(mealId).getGuests()) {
-            if (guestId != MainActivity.sev.getMeal(mealId).getHostId() && guestId != MainActivity.userId) {
+        for (String guestId : MainActivity.sev.getMeal(mealId).getGuests()) {
+            if (!guestId.equals(MainActivity.sev.getMeal(mealId).getHostId()) && !guestId.equals(MainActivity.user.getUid())) {
                 // last condition becaause we replaced it with "you"
                 guestsString = guestsString + " " + MainActivity.sev.getUser(guestId).getUsername() + ",";
             }

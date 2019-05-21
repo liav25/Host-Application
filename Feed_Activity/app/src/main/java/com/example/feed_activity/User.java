@@ -1,8 +1,11 @@
 package com.example.feed_activity;
 
 import android.media.Image;
+import android.net.Uri;
 
 import java.nio.file.*;
+import java.sql.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,38 +15,29 @@ import java.util.Set;
  */
 public class User {
     final private String username;
-    private String pass;
-    private Image image;
-    private final int userId;
-    private Set<Integer> eventsAttending;
+    private Uri image;
+    private final String userId;
     private String university;
-    private Set<String> langs;
-    private Set<String> fieldsOfInterest;
+    private ArrayList<String> langs;
 
 
     /**
      * A constructor for this class
      * @param username - username of user i.e. screen name
-     * @param pass - password of user
      * @param image - image for user
      * @param university - university studying in
      * @param langs - languages speaking
-     * @param fieldsOfInterest - Fields of interest for user
      */
-    public User(String username, String pass, Image image, String university,
-                Set<String> langs, Set<String> fieldsOfInterest, int userId)
+    public User(String username, Uri image, String university,
+                ArrayList<String> langs, String userId)
     {
         this.username = username;
-        this.pass = pass;
 
         this.image = image;
         this.university = university;
 
-        this.langs = langs;
-
-        this.fieldsOfInterest = fieldsOfInterest;
-
-        this.eventsAttending = new HashSet<Integer>();
+        this.langs = new ArrayList<String>();
+        this.langs.addAll(langs);
 
         this.userId = userId;
 
@@ -52,37 +46,20 @@ public class User {
     /**
      * @return image of this user
      */
-    public Image getImage() {
+    public Uri getImage() {
         return image;
     }
 
-    /**
-     * @return events set in which this user attends
-     */
-    public Set<Integer> getEventsAttending() {
-        return eventsAttending;
-    }
-
-    /**
-     * @return set of interest this user tagged himself
-     */
-    public Set<String> getFieldsOfInterest() {
-        return fieldsOfInterest;
-    }
 
     /**
      * @return - set of languages this user claims to speak
      */
-    public Set<String> getLangs() {
+    public ArrayList<String> getLangs() {
+
         return langs;
     }
 
-    /**
-     * @return password of this user
-     */
-    public String getPass() {
-        return pass;
-    }
+
 
     /**
      * @return univesity of this user
@@ -98,36 +75,13 @@ public class User {
         return username;
     }
 
-    /**
-     * Asks to join an event
-     * @param eventId - id of event
-     */
-    public void joinEvent(int eventId)
-    {
-        this.eventsAttending.add(eventId);
-    }
 
-    /**
-     * Asks to leave an event
-     * @param eventId - id of event
-     */
-    public void leaveEvent(int eventId)
-    {
-        this.eventsAttending.add(eventId);
-    }
 
-    /**
-     * Sets a new set of interest for this user
-     * @param fieldsOfInterest - new set of interests
-     */
-    public void setFieldsOfInterest(Set<String> fieldsOfInterest) {
-        this.fieldsOfInterest = fieldsOfInterest;
-    }
 
     /**
      * @param image - new image
      */
-    public void setImage(Image image) {
+    public void setImage(Uri image) {
         this.image = image;
     }
 
@@ -135,16 +89,11 @@ public class User {
      * @param langs - new languages
      */
     public void setLangs(Set<String> langs) {
-        this.langs = langs;
+        this.langs.clear();
+        this.langs.addAll(langs);
     }
 
-    /**
-     * @param pass - new password
-     */
-    public void setPass(String pass) {
-        //TODO - validation!!!!!!!!!!!
-        this.pass = pass;
-    }
+
 
     /**
      * Sets a new university for user
@@ -157,7 +106,7 @@ public class User {
     /**
      * @return userId for this user
      */
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
