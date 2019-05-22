@@ -188,20 +188,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingLeft="32dp">
+        android:paddingLeft="10dp">
 
         <TextView
             android:id="@+id/beer_text"
-            android:layout_width="93dp"
+            android:layout_width="118dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="sans-serif"
-            android:text="Drinks"
+            android:text="Alcoholic Drinks"
             android:textColor="#000000" />
 
         <TextView
             android:id="@+id/coke_text"
-            android:layout_width="107dp"
+            android:layout_width="103dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="sans-serif"
