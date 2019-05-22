@@ -13,8 +13,8 @@
 
     <Button
         android:id="@+id/closePopUpButton"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginLeft="10dp"
         android:background="@drawable/sharp_close_24px"
         android:clickable="true"
@@ -121,40 +121,110 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:text="What should your guests bring?" />
+        android:text="What should guests bring?" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="58dp">
 
         <CheckBox
-            android:id="@+id/checkBox"
+            android:id="@+id/checkBox_beer"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/icon_beer"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:drawableLeft="@drawable/beer" />
+            android:paddingRight="18dp"
+            numberpicker:srcCompat="@drawable/beer" />
 
         <CheckBox
-            android:id="@+id/checkBox4"
+            android:id="@+id/checkBox_soda"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/icon_coke"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:drawableLeft="@drawable/soda" />
+            android:paddingRight="18dp"
+            numberpicker:srcCompat="@drawable/coke" />
 
         <CheckBox
-            android:id="@+id/checkBox3"
+            android:id="@+id/checkBox_cupcake"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/icon_cupcake"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:drawableLeft="@drawable/cupcake" />
+            android:paddingRight="18dp"
+            numberpicker:srcCompat="@drawable/cupcake" />
 
         <CheckBox
-            android:id="@+id/checkBox2"
+            android:id="@+id/checkBox_bouquet"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/icon_bouquet"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:drawableLeft="@drawable/bouquet" />
+            numberpicker:srcCompat="@drawable/bouquet" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="32dp">
+
+        <TextView
+            android:id="@+id/beer_text"
+            android:layout_width="93dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:text="Drinks"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/coke_text"
+            android:layout_width="107dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:text="Soft Drinks"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/cupcake_text"
+            android:layout_width="67dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:text="Dessert"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/bouquet_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:text="Surprise Me!"
+            android:textColor="#000000" />
     </LinearLayout>
 
     <EditText
