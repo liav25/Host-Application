@@ -155,6 +155,7 @@
             android:id="@+id/Kosher"
             android:layout_width="117dp"
             android:layout_height="wrap_content"
+            android:button="@drawable/kosher_checkbox"
             android:text="Kosher" />
     </LinearLayout>
 
