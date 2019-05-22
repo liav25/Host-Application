@@ -24,19 +24,52 @@
         android:id="@+id/mealTitleAdd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_margin="10dp"
         android:ems="10"
         android:hint="Meal Name"
         android:inputType="textPersonName" />
 
-    <EditText
-        android:id="@+id/mealDateAdd"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:ems="10"
-        android:hint="Select date "
-        android:inputType="date" />
+        android:text="Max number of guests:"
+        android:textAlignment="textEnd"
+        android:layout_marginEnd="8dp"
+        />
+
+    <RelativeLayout
+        android:id="@+id/horiz"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/mealDateAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_marginLeft="10dp"
+            android:hint="Select date"
+            android:inputType="date" />
+
+        <com.travijuu.numberpicker.library.NumberPicker
+            android:id="@+id/number_picker"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+
+            android:layout_alignEnd="@+id/mealDateAdd"
+            android:layout_alignRight="@+id/mealDateAdd"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="-168dp"
+            android:layout_marginRight="-168dp"
+            numberpicker:focusable="false"
+            numberpicker:min="1"
+            numberpicker:unit="1"
+            numberpicker:value="-5" />
+    </RelativeLayout>
+
+
 
     <AutoCompleteTextView
         android:id="@+id/location"
@@ -92,30 +125,8 @@
             android:text="Kosher" />
     </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Max number of guests:" />
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="vertical"
-        android:gravity="center"
-        tools:context="com.travijuu.numberpicker.sample.MainActivity">
-
-        <com.travijuu.numberpicker.library.NumberPicker
-            android:id="@+id/number_picker"
-            android:layout_width="130dp"
-            android:layout_height="40dp"
-            numberpicker:min="1"
-            numberpicker:value="-5"
-            numberpicker:unit="1"
-            numberpicker:focusable="false"
-            />
-
-    </LinearLayout>
 
     <TextView
         android:id="@+id/textView"
@@ -229,8 +240,8 @@
 
     <EditText
         android:id="@+id/mealDescriptionAdd"
-        android:layout_width="match_parent"
-        android:layout_height="133dp"
+        android:layout_width="378dp"
+        android:layout_height="221dp"
         android:layout_margin="10dp"
         android:background="@color/TextWhite"
         android:gravity="top"
