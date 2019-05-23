@@ -114,7 +114,7 @@ public class Server {
     }
 
 
-    public void signUp(String email, String pass){
+    public void signUp(String email, String pass, final Activity act){
         mAuth.createUserWithEmailAndPassword(email, pass)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -125,7 +125,9 @@ public class Server {
                             MainActivity.user = mAuth.getCurrentUser();
                             MainActivity.userId = MainActivity.user.getUid();
                             addUser("", null, "", new ArrayList<String>());
-
+                            Intent main = new Intent(act.getApplicationContext(), MainActivity.class);
+                            act.startActivity(main);
+                            act.finish();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("AuthUI", "createUserWithEmail:failure", task.getException());
