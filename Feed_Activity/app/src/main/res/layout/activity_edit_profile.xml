@@ -82,7 +82,7 @@
                 app:srcCompat="@drawable/close_red" />
 
             <ImageButton
-                android:id="@+id/approve"
+                android:id="@+id/accept"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
