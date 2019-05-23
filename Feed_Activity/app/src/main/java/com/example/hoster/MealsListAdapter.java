@@ -113,7 +113,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
                     getItem(position).removeGuest(MainActivity.userId);
                 }  else if (!getItem(position).isFull()) { // not in meal and meal not full
 
-                    MainActivity.sev.addUserToMeal(MainActivity.userId, getItem(position).getID());
+                    MainActivity.sev.addUserToMeal(getContext(), MainActivity.userId, getItem(position).getID());
                     getItem(position).addGuest(MainActivity.userId);
                 }
                 holder.setButCol(getItem(position));

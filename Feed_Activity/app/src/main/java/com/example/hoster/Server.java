@@ -1,10 +1,20 @@
 package com.example.hoster;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
+import android.media.RingtoneManager;
 import android.net.Uri;
 
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,12 +39,14 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static com.firebase.ui.auth.AuthUI.TAG;
+import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 import static java.lang.Math.ulp;
 
 
@@ -46,7 +58,8 @@ public class Server {
     private static Server instance = new Server();
 
     private Set<String> standardRestrictions;
-
+    private AlarmManager alarmMgr;
+    private PendingIntent alarmIntent;
 
     private FirebaseFirestore db;
     private FirebaseDatabase mDb;
@@ -273,7 +286,6 @@ public class Server {
                 if (currentValue == null) {
                     mutableData.setValue(0);
                     counter[0] = 0;
-                    System.out.println("asfaafsfafsafasfasfas");
                 } else {
                     counter[0] = currentValue;
                     mutableData.setValue(currentValue + 1);
@@ -378,19 +390,14 @@ public class Server {
      * @param mealId meal's ID
      * @return true upon success, false otherwise
      */
-    public Boolean addUserToMeal(String userId, String mealId){
+    public Boolean addUserToMeal(Context context, String userId, String mealId){
 
         DocumentReference busRef = db.collection(MEALS_STRING).document(mealId);
         busRef.update("guests", FieldValue.arrayUnion(userId));
         return true;
     }
 
-    //TODO - tom please check this it was a try
-//    public Boolean setUserName(String newName){
-//        DocumentReference busRef = db.collection(USERS_DATA_STRING).document(userId);
-//        busRef.update("name", FieldValue.arrayUnion(userId));
-//        return true;
-//    }
+
 
     /**
      * removes a user from a meal
@@ -513,5 +520,10 @@ public class Server {
         }
         return false;
     }
+
+
+
+
+
 
 }

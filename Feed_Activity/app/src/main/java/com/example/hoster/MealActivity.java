@@ -123,7 +123,7 @@ public class MealActivity extends AppCompatActivity {
 
 
         }  else if (!meal.isFull()) { // not in meal and meal not full
-            MainActivity.sev.addUserToMeal(MainActivity.userId, String.valueOf(mealId));
+            MainActivity.sev.addUserToMeal(getApplicationContext(), MainActivity.userId, String.valueOf(mealId));
             meal.addGuest(MainActivity.userId);
         }
 
