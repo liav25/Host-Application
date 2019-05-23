@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getWindow().setStatusBarColor(this.getResources().getColor(R.color.colorAccent));
+        getWindow().setStatusBarColor(this.getResources().getColor(R.color.AccentRed));
         setContentView(R.layout.activity_main);
 
 
@@ -85,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent newIntent = new Intent(getApplicationContext(), PopActivity.class);
-
                 startActivity(newIntent);
             }
         });

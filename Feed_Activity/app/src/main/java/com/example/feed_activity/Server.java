@@ -358,6 +358,13 @@ public class Server {
         return true;
     }
 
+    //TODO - tom please check this it was a try
+//    public Boolean setUserName(String newName){
+//        DocumentReference busRef = db.collection(USERS_DATA_STRING).document(userId);
+//        busRef.update("name", FieldValue.arrayUnion(userId));
+//        return true;
+//    }
+
     /**
      * removes a user from a meal
      * @param userId   user's ID

@@ -3,16 +3,12 @@ package com.example.feed_activity;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.icu.util.Calendar;
-import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -23,26 +19,13 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
-import com.google.android.gms.common.api.Status;
+import com.travijuu.numberpicker.library.NumberPicker;
 
-
-import java.io.File;
-import java.sql.Time;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Locale;
-import java.util.logging.SimpleFormatter;
-
-import static android.content.ContentValues.TAG;
-import static java.security.AccessController.getContext;
-import com.travijuu.numberpicker.library.NumberPicker;
 
 public class PopActivity extends AppCompatActivity {
     Button createMeal;
@@ -64,8 +47,10 @@ public class PopActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
-        setContentView(R.layout.add_new_meal_popup);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        
 
+        setContentView(R.layout.add_new_meal_popup);
         foodRests = new HashMap<String, Boolean>();
 
         mSimpleDateFormat = new SimpleDateFormat("dd/MM/yyyy h:mm a", Locale.getDefault());
@@ -74,14 +59,17 @@ public class PopActivity extends AppCompatActivity {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
+
         int width = dm.widthPixels;
         int height = dm.heightPixels;
         getWindow().setLayout((int) (width), (int) (height ));
         WindowManager.LayoutParams params = getWindow().getAttributes();
-        params.gravity = Gravity.CENTER;
+        params.gravity = Gravity.TOP;
+
 //        params.x = 0;
 //        params.y = -20;
         getWindow().setAttributes(params);
+
 
 
 

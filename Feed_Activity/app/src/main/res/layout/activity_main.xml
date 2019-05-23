@@ -1,81 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/app_background"
     tools:context=".MainActivity">
-    <LinearLayout
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@color/AccentRed"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            >
+
+        </android.support.v7.widget.Toolbar>
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@color/AccentRed"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_picture"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="top"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/shadow"
+            android:elevation="3dp"
+            android:src="@drawable/profile_picture"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <RelativeLayout
-                android:id="@+id/relative"
-                android:layout_width="match_parent"
+        </de.hdodenhof.circleimageview.CircleImageView>
 
-                android:layout_height="match_parent"
-                android:gravity="center">
+        <Button
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profile_picture"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/shadow"
-                    android:elevation="3dp"
-                    android:src="@drawable/profile_picture"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                </de.hdodenhof.circleimageview.CircleImageView>
-
-
-                <Button
-
-                    android:id="@+id/addMealButton"
-                    android:layout_width="67dp"
-                    android:layout_height="68dp"
-
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="17dp"
-                    android:layout_marginEnd="18dp"
-                    android:background="@drawable/add_meal_emo"
-                    android:clickable="true"
-                    android:elevation="3dp"
-                    android:focusable="true" />
-            </RelativeLayout>
-        </android.support.v7.widget.Toolbar>
-
-
-
-
-
-
-
-
-        <ListView
-            android:id="@+id/mealCardList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
+            android:id="@+id/addMealButton"
+            android:layout_width="206dp"
+            android:layout_height="80dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="12dp"
-            />
-    </LinearLayout >
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="201dp"
+            android:layout_marginEnd="18dp"
+            android:background="@drawable/addmealnew"
+            android:clickable="true"
+            android:elevation="3dp"
+            android:focusable="true" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ListView
+                android:id="@+id/mealCardList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="90dp"
+
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
 
 
 
 
-</RelativeLayout>
+</LinearLayout>
