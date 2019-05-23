@@ -7,10 +7,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FCFCFC"
+
     android:orientation="vertical"
     android:padding="5dp"
     tools:context=".PopActivity">
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="8dp"></LinearLayout>
     <Button
         android:id="@+id/closePopUpButton"
         android:layout_width="35dp"
@@ -42,16 +45,15 @@
 
         <TextView
             android:id="@+id/maxNumberGuests"
+            android:textStyle="bold"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_gravity="left"
-
-
-            android:layout_marginRight="11dp"
+            android:layout_marginRight="30dp"
             android:gravity="end"
-            android:text="Max number of guests:"
-            />
+            android:text="How many guests?" />
 
         <EditText
             android:id="@+id/mealDateAdd"
@@ -69,7 +71,7 @@
             android:drawablePadding="5dp"
             android:ems="10"
             android:gravity="center_vertical"
-            android:hint="Date"
+            android:hint="When?"
             android:inputType="date"
             android:paddingLeft="10dp" />
 
@@ -82,8 +84,8 @@
             android:layout_alignBottom="@id/maxNumberGuests"
             android:layout_alignParentTop="true"
             android:layout_marginTop="18dp"
-            android:layout_marginEnd="-169dp"
-            android:layout_marginRight="-169dp"
+            android:layout_marginEnd="-174dp"
+            android:layout_marginRight="-174dp"
             android:layout_marginBottom="-42dp"
             numberpicker:focusable="false"
             numberpicker:min="1"
@@ -102,13 +104,15 @@
         android:drawableLeft="@drawable/location_icon"
         android:drawablePadding="10dp"
         android:ems="10"
-        android:hint="Location"
+        android:hint="Where?"
 
 
         android:paddingLeft="5dp" />
 
     <TextView
+        android:paddingLeft="10dp"
         android:paddingBottom="10dp"
+        android:textStyle="bold"
         android:id="@+id/ChooseRests"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -183,6 +187,9 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="30dp"
+        android:paddingLeft="10dp"
+        android:textStyle="bold"
+
         android:text="What should your guests bring?" />
 
     <LinearLayout
@@ -222,11 +229,14 @@
     <EditText
         android:id="@+id/mealDescriptionAdd"
         android:layout_width="377dp"
-        android:layout_height="170dp"
+        android:layout_height="120dp"
+
         android:layout_margin="10dp"
-        android:background="@color/TextWhite"
+        android:background="@drawable/squared_edit_text"
         android:gravity="top"
         android:hint="Describe your meal"
+
+
         android:inputType="text"
         android:padding="20dp" />
 
@@ -239,10 +249,12 @@
         android:layout_marginRight="10dp"
         android:background="@drawable/rounded_button_orange"
         android:clickable="true"
+        android:textStyle="bold"
         android:focusable="true"
         android:textSize="25dp"
         android:fontFamily="@string/common_signin_button_text"
-        android:text="Create Meal!"
+        android:text="Create Meal !"
+        android:backgroundTint="@color/colorAccent"
         android:textColor="@color/TextWhite" />
 
 </LinearLayout>
