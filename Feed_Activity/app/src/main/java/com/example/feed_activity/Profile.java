@@ -1,10 +1,9 @@
 package com.example.feed_activity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 public class Profile extends AppCompatActivity {
     private TextView name;
@@ -55,6 +53,15 @@ public class Profile extends AppCompatActivity {
             pen.setEnabled(true);
         }
 
+        pen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle b = new Bundle();
+                Intent editProfileIntent = new Intent(getApplicationContext(), edit_profile.class);
+                editProfileIntent.putExtras(b); //Put your id to your next Intent
+                startActivity(editProfileIntent);
+            }
+        });
     }
 
     public static String getLangsString(ArrayList<String> langs){
