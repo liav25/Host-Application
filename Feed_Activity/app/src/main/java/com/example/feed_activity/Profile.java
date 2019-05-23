@@ -8,16 +8,18 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Profile extends AppCompatActivity {
-    TextView name;
-    TextView uni;
-    TextView langs;
-    TextView loc;
+    private TextView name;
+    private TextView uni;
+    private TextView langs;
+    private TextView loc;
+    private ImageButton pen;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -33,7 +35,7 @@ public class Profile extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.profile_toolbar);
         setSupportActionBar(toolbar);
         toolbar.setBackgroundColor(getResources().getColor(R.color.TextYellow));
-
+        pen = findViewById(R.id.pencil);
         name = (TextView)findViewById(R.id.name_of_profile);
 
         uni = (TextView)findViewById(R.id.uni_name);
@@ -45,7 +47,13 @@ public class Profile extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
+        if(!uId.equals(MainActivity.userId)){
+            pen.setEnabled(false);
+            pen.setVisibility(View.INVISIBLE);
+        } else {
+            pen.setVisibility(View.VISIBLE);
+            pen.setEnabled(true);
+        }
 
     }
 
