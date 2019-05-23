@@ -60,7 +60,7 @@ public class Register extends AppCompatActivity {
                 if (password.length() >= Login.MIN_PASS_CHAR &&
                             emailAddress.length() > Login.MIN_EMAIL_CHAR) {
                     MainActivity.sev.signUp(emailAddress, password, Register.this);
-                   
+
                 } else {
                     Toast.makeText(Register.this, "Invalid email or password",
                             Toast.LENGTH_SHORT).show();
