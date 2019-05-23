@@ -1,4 +1,4 @@
-package com.example.feed_activity;
+package com.example.hoster;
 
 import android.content.Intent;
 import android.os.Build;

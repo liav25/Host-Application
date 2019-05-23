@@ -1,12 +1,6 @@
-package com.example.feed_activity;
-
-import android.location.Location;
-import android.net.Uri;
-import android.os.Bundle;
-import android.widget.TextView;
+package com.example.hoster;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.*;
 
 /**

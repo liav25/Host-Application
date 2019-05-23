@@ -1,4 +1,4 @@
-package com.example.feed_activity;
+package com.example.hoster;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,8 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.HashSet;
 
 public class Register extends AppCompatActivity {
 

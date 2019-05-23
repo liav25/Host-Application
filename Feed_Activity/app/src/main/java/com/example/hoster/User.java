@@ -1,14 +1,8 @@
-package com.example.feed_activity;
+package com.example.hoster;
 
-import android.media.Image;
 import android.net.Uri;
 
-import java.nio.file.*;
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * A class representing a user

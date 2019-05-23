@@ -1,4 +1,4 @@
-package com.example.feed_activity;
+package com.example.hoster;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

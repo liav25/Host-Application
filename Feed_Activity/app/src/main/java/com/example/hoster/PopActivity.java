@@ -1,4 +1,4 @@
-package com.example.feed_activity;
+package com.example.hoster;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
