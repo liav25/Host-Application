@@ -22,6 +22,7 @@ import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -543,5 +544,24 @@ public class Server {
     }
 
 
+    public void getUsername(String uId, final TextView toShow) {
+        DocumentReference docRef = db.collection(USERS_DATA_STRING).document(uId);
 
+        /* gets object from server  */
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null && document.exists()) {
+                        User got = document.toObject(User.class);
+                        toShow.setText(got.getUsername());
+
+                    } else {
+                        System.out.println("no such user found");
+                    }
+                }
+            }
+        });
+    }
 }

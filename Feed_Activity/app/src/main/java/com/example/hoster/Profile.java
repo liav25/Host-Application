@@ -67,8 +67,6 @@ public class Profile extends AppCompatActivity {
                 startActivityForResult(i, 1);
 
 
-
-
             }
         });
 
@@ -122,7 +120,9 @@ public class Profile extends AppCompatActivity {
 
 
     private void chooseImage() {
-        Intent intent = new Intent();
+        Intent intent = new Intent(
+                Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("profile_image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent,

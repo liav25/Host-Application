@@ -67,9 +67,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         String description = getItem(position).getDescription();
         String host = getItem(position).getHostId();
 
-        if (getItem(position).getHostId().equals(MainActivity.userId)) { // todo - find another way to get your user id
-            host = "You";
-        }
+
 
         //create the view result for showing animation
         final View result;
@@ -100,6 +98,12 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         holder.date.setText(date);
         holder.description.setText(description);
         holder.host.setText(host);
+
+        if (getItem(position).getHostId().equals(MainActivity.userId)) { // todo - find another way to get your user id
+            holder.host.setText("You");
+        } else {
+            Server.getInstance().getUsername(getItem(position).getHostId(), holder.host);
+        }
 
         holder.setButCol(getItem(position));
 

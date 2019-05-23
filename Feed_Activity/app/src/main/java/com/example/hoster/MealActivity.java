@@ -55,8 +55,7 @@ public class MealActivity extends AppCompatActivity {
         if (hostId.equals(MainActivity.userId)){
             host.setText("Host: You");
         } else {
-            // todo - get usernames
-            //host.setText("Host: " + MainActivity.sev.getUser(hostId).getUsername());
+            Server.getInstance().getUsername(hostId, host);
         }
 
 
