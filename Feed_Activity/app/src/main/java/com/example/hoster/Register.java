@@ -1,4 +1,4 @@
-package com.example.feed_activity;
+package com.example.hoster;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,10 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.HashSet;
 
 public class Register extends AppCompatActivity {
 
@@ -55,13 +54,11 @@ public class Register extends AppCompatActivity {
 
                 emailAddress = getInfoFromTextbox(R.id.insertEmailSU);
 
-                MainActivity.sev.signUp(emailAddress, password);
 
-<<<<<<< HEAD
                 if (password.length() >= Login.MIN_PASS_CHAR &&
                             emailAddress.length() > Login.MIN_EMAIL_CHAR) {
                     MainActivity.sev.signUp(emailAddress, password, Register.this);
-
+                   
                 } else {
                     Toast.makeText(Register.this, "Invalid email or password",
                             Toast.LENGTH_SHORT).show();
@@ -69,11 +66,6 @@ public class Register extends AppCompatActivity {
 
 
 
-=======
-                Intent main = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(main);
-                finish();
->>>>>>> parent of 663714c... including validations of mail & password
             }
 
         });

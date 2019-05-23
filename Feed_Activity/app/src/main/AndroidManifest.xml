@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.feed_activity">
+    package="com.example.hoster">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -16,15 +16,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".Register"></activity>
-        <activity android:name=".edit_profile" />
+        <activity android:name="com.example.hoster.Register"></activity>
+        <activity android:name="com.example.hoster.edit_profile" />
 
 
-        <activity android:name=".edit_profile"></activity>
 
 
         <activity
-            android:name=".Splash"
+            android:name="com.example.hoster.Splash"
             android:label="@string/title_activity_splash"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -34,23 +33,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Login"
+            android:name="com.example.hoster.Login"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Profile"
+            android:name="com.example.hoster.Profile"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.hoster.MainActivity"
             android:label=""
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".MealActivity"
+            android:name="com.example.hoster.MealActivity"
             android:label="Meal Page"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".PopActivity"
+            android:name="com.example.hoster.PopActivity"
             android:theme="@style/AppTheme.PopMe" />
     </application>
 

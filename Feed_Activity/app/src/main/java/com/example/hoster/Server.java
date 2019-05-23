@@ -1,40 +1,25 @@
-package com.example.feed_activity;
+package com.example.hoster;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.location.Location;
-import android.media.Image;
 import android.net.Uri;
-import static java.lang.Math.toIntExact;
 
-import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.api.Context;
-import com.google.common.primitives.Ints;
-import com.google.firebase.FirebaseError;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
@@ -42,22 +27,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.nio.file.Files;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.Callable;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.CyclicBarrier;
-import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.function.DoubleFunction;
 
 import static com.firebase.ui.auth.AuthUI.TAG;
-import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 import static java.lang.Math.ulp;
 
 
@@ -114,7 +90,7 @@ public class Server {
     }
 
 
-    public void signUp(String email, String pass){
+    public void signUp(String email, String pass, final Activity act){
         mAuth.createUserWithEmailAndPassword(email, pass)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -125,7 +101,9 @@ public class Server {
                             MainActivity.user = mAuth.getCurrentUser();
                             MainActivity.userId = MainActivity.user.getUid();
                             addUser("", null, "", new ArrayList<String>());
-
+                            Intent main = new Intent(act.getApplicationContext(), MainActivity.class);
+                            act.startActivity(main);
+                            act.finish();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("AuthUI", "createUserWithEmail:failure", task.getException());
