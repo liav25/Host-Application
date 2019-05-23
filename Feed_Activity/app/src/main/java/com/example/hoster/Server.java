@@ -1,18 +1,24 @@
 package com.example.hoster;
 
 import android.app.Activity;
+
 import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+
+import android.app.ProgressDialog;
+
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.RingtoneManager;
 import android.net.Uri;
 
+
 import android.os.SystemClock;
+
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -37,17 +43,24 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static com.firebase.ui.auth.AuthUI.TAG;
+
 import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 import static java.lang.Math.ulp;
+
 
 
 /**
@@ -55,19 +68,24 @@ import static java.lang.Math.ulp;
  */
 public class Server {
 
+
     private static Server instance = new Server();
 
     private Set<String> standardRestrictions;
+
     private AlarmManager alarmMgr;
     private PendingIntent alarmIntent;
+
+
+    private FirebaseStorage storage;
+    StorageReference storageReference;
 
     private FirebaseFirestore db;
     private FirebaseDatabase mDb;
     private FirebaseAuth mAuth;
     private static final String MEALS_STRING = "Meals Info";
     private static final String MEALS_Count_STRING = "Meals Count";
-    private static final String USERS_DATA_STRING = "Users Info";
-
+    private static final String USERS_DATA_STRING = "User info";
 
 
     /**
@@ -79,6 +97,9 @@ public class Server {
 
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
+
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
 
     }
 
@@ -134,7 +155,7 @@ public class Server {
     /**
      * Creates a new user and adds it to DB
      * @param disName - display name
-     * @param image - his image
+     * @param image - his profile_image
      * @param university - his university
      * @param langs - languages he's speaking
      */
@@ -142,7 +163,7 @@ public class Server {
                           ArrayList<String> langs)
     {
 
-        String userId = MainActivity.userId;
+        final String userId = MainActivity.userId;
 
         DocumentReference busRef = db.collection(USERS_DATA_STRING).document(userId);
         User userObj = new User(disName, image, university, langs, userId);
@@ -520,9 +541,6 @@ public class Server {
         }
         return false;
     }
-
-
-
 
 
 
