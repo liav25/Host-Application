@@ -37,14 +37,16 @@
             tools:layout_editor_absoluteX="361dp"
             tools:layout_editor_absoluteY="0dp" />
 
-            <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:clickable="true"
+            android:focusable="true"
+            android:id="@+id/profilepic"
+            android:layout_width="166dp"
+            android:layout_height="198dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="35dp"
+            android:src="@drawable/profile_picture" />
 
-                android:id="@+id/profilepic"
-                android:layout_width="166dp"
-                android:layout_height="198dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="35dp"
-                android:src="@drawable/profile_picture" />
             <TextView
                 android:id="@+id/name_of_profile"
                 android:layout_width="wrap_content"

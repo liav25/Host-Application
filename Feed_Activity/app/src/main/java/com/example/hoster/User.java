@@ -19,7 +19,7 @@ public class User {
      * A constructor for this class
      *
      * @param username   - username of user i.e. screen name
-     * @param image      - image for user
+     * @param image      - profile_image for user
      * @param university - university studying in
      * @param langs      - languages speaking
      */
@@ -46,7 +46,7 @@ public class User {
     }
 
     /**
-     * @return image of this user
+     * @return profile_image of this user
      */
     public Uri getImage() {
         return image;
@@ -77,7 +77,7 @@ public class User {
 
 
     /**
-     * @param image - new image
+     * @param image - new profile_image
      */
     public void setImage(Uri image) {
         this.image = image;

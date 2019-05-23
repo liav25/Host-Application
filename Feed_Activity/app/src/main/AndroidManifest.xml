@@ -3,6 +3,7 @@
     package="com.example.hoster">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <meta-data
         android:name="com.google.android.geo.API_KEY"
