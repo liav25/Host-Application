@@ -16,15 +16,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name="com.example.hoster.Register"></activity>
-        <activity android:name="com.example.hoster.edit_profile" />
-
-
-
-
+        <activity android:name=".Register" />
+        <activity android:name=".edit_profile" />
         <activity
-            android:name="com.example.hoster.Splash"
+            android:name=".Splash"
             android:label="@string/title_activity_splash"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -34,23 +29,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.hoster.Login"
+            android:name=".Login"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.example.hoster.Profile"
+            android:name=".Profile"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.example.hoster.MainActivity"
+            android:name=".MainActivity"
             android:label=""
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.example.hoster.MealActivity"
+            android:name=".MealActivity"
             android:label="Meal Page"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.example.hoster.PopActivity"
+            android:name=".PopActivity"
             android:theme="@style/AppTheme.PopMe" />
     </application>
 

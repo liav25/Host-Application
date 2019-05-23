@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class edit_profile extends AppCompatActivity {
     private TextView name;
@@ -30,9 +31,7 @@ public class edit_profile extends AppCompatActivity {
 
         setContentView(R.layout.activity_edit_profile);
 
-        Bundle b = getIntent().getExtras();
-
-        final String uId = b.getString("userId");
+        final String uId = MainActivity.userId;
 
         final User[] user = new User[1]; // server will insert our user here
 
@@ -40,15 +39,15 @@ public class edit_profile extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setBackgroundColor(getResources().getColor(R.color.TextYellow));
 
-        name = (TextView)findViewById(R.id.editable_name_of_profile);
+        name = findViewById(R.id.editable_name_of_profile);
         name.setHint(MainActivity.user.getDisplayName());
-        uni = (TextView)findViewById(R.id.editable_uni_name);
+        uni = findViewById(R.id.editable_uni_name);
         uni.setHint(MainActivity.user.getEmail());
 
         // TODO - ADD location to student, currently not in object
         //
 
-        langs = (TextView)findViewById(R.id.profile_langs);
+        langs = findViewById(R.id.editable_profile_langs);
         Server.getInstance().getUser(uId, user, name, uni, langs);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -56,21 +55,29 @@ public class edit_profile extends AppCompatActivity {
 
 
         //clicks
-        accept.findViewById(R.id.accept);
-        cancel.findViewById(R.id.cancel);
+        accept = findViewById(R.id.accept);
+        cancel = findViewById(R.id.cancel);
 
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle b = new Bundle();
+                Bundle b = getIntent().getExtras();
                 Intent profileIntent = new Intent(getApplicationContext(), Profile.class);
-                profileIntent.putExtras(b); //Put your id to your next Intent
+
+                b.putString("userId", MainActivity.userId);
+                profileIntent.putExtras(b);
                 //Todo to get connection to sever and edit profile fields from there
                 String newName = name.getText().toString();
                 String newUni = uni.getText().toString();
 
-                startActivity(profileIntent);
+                String[] stringLangs = langs.getText().toString().split(",");
 
+                ArrayList<String> newLangs = new ArrayList<>(Arrays.asList(stringLangs));
+
+                Server.getInstance().editUser(user[0], newName,null, newUni, newLangs );
+
+                startActivity(profileIntent);
+                finish();
 
             }
         });
@@ -79,6 +86,8 @@ public class edit_profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Bundle b = new Bundle();
+                b.putString("userId", MainActivity.userId);
+
                 Intent profileIntent = new Intent(getApplicationContext(), Profile.class);
                 profileIntent.putExtras(b); //Put your id to your next Intent
                 startActivity(profileIntent);
@@ -89,20 +98,6 @@ public class edit_profile extends AppCompatActivity {
     }
 
 
-    public static String getLangsString(ArrayList<String> langs){
-        String lang = "";
-
-        for (String language : langs){
-            lang += " " + language + ",";
-        }
-
-        if(lang.endsWith(","))
-        {
-            lang = lang.substring(0,lang.length() - 1);
-        }
-
-        return lang;
-    }
 
     @Override
     public boolean onSupportNavigateUp() {

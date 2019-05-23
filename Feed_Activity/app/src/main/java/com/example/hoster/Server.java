@@ -150,6 +150,52 @@ public class Server {
 
     }
 
+    /**
+     * Creates a new user and adds it to DB
+     * @param disName - display name
+     * @param image - his image
+     * @param university - his university
+     * @param langs - languages he's speaking
+     */
+    public void editUser(User old, String disName, Uri image, String university,
+                        ArrayList<String> langs)
+    {
+
+        DocumentReference busRef = db.collection(USERS_DATA_STRING).document(MainActivity.userId);
+        if (!old.getUsername().equals(disName)) {
+            busRef.update("username", disName).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    System.out.println("User edit : success!");
+                }
+            });
+        }
+        if (image != null) {
+            busRef.update("image", image).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    System.out.println("User edit : success!");
+                }
+            });
+        }
+        if (university != old.getUniversity()){
+            busRef.update("university", university).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    System.out.println("User edit : success!");
+                }
+            });
+        }
+        if (langs != old.getLangs()){
+            busRef.update("langs", langs).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    System.out.println("User edit : success!");
+                }
+            });
+        }
+    }
+
     public Boolean UserExists(final String uId){
         final Boolean[] res = new Boolean[1];
 
