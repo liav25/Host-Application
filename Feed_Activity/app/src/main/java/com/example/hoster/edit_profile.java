@@ -45,6 +45,7 @@ public class edit_profile extends AppCompatActivity {
     private ProgressDialog progressDialog;
     FirebaseFirestore firestore;
     FirebaseAuth firebaseAuth;
+    String fileUrl;
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -114,7 +115,9 @@ public class edit_profile extends AppCompatActivity {
                 fileDir.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
+                        Uri downloadUrl = imageUri;
+                        fileUrl = downloadUrl.toString();
+                        //TODO = tom this is the file url, we can put it in the user
                     }
                 });
 
