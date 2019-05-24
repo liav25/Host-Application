@@ -23,6 +23,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,11 +79,11 @@ public class Server {
     private PendingIntent alarmIntent;
 
 
-    private FirebaseStorage storage;
+    FirebaseStorage storage;
     StorageReference storageReference;
 
-    private FirebaseFirestore db;
-    private FirebaseDatabase mDb;
+    FirebaseFirestore db;
+    FirebaseDatabase mDb;
     private FirebaseAuth mAuth;
     private static final String MEALS_STRING = "Meals Info";
     private static final String MEALS_Count_STRING = "Meals Count";
@@ -143,7 +144,7 @@ public class Server {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("AuthUI", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(act, "Registeration failed",
+                         Toast.makeText(act, "Registeration failed",
                                     Toast.LENGTH_SHORT).show();
                         }
 
