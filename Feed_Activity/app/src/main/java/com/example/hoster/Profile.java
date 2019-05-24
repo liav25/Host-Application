@@ -55,7 +55,6 @@ public class Profile extends AppCompatActivity {
 
 
 
-
         uni = (TextView) findViewById(R.id.uni_name);
 
         // TODO - ADD location to student, currently not in object

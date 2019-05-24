@@ -317,7 +317,7 @@ public class Server {
                             restrictions, descr, maxGuests,  loc,  time);
                     docRef.set(newMeal);
                 }
-
+                getMeals(MainActivity.meals, MainActivity.adapter);
                 return Transaction.success(mutableData);
             }
 

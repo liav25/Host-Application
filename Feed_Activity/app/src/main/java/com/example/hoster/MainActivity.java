@@ -1,9 +1,15 @@
 package com.example.hoster;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -35,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     public static String userId;
 
     private ListView cardlist;
-
+    public NotificationCompat.Builder build;
 
     public static MealsListAdapter adapter;
 
@@ -59,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
         if(getSupportActionBar()!= null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         }
-
 
 
         cardlist = findViewById(R.id.mealCardList);
@@ -132,7 +137,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 
 }
