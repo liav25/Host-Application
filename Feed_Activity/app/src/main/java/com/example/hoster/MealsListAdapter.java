@@ -32,6 +32,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         Button joinBU;
 
 
+
         private void setButCol(Meal meal){
             if (meal.isMember(MainActivity.userId)){
                 joinBU.setText("Leave");

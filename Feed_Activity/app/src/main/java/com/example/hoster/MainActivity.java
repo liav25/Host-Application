@@ -74,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
         cardlist.setAdapter(adapter);
 
 
+
+
         addMealBut = findViewById(R.id.addMealButton);
         fromBottom = AnimationUtils.loadAnimation(this, R.anim.frombottom);
         Animation fromtop = AnimationUtils.loadAnimation(this, R.anim.fromtop);

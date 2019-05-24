@@ -6,61 +6,60 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:paddingLeft="2dp"
-    android:paddingRight="2dp"
+
 >
 
     <android.support.v7.widget.CardView
         android:id="@+id/meal_card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="15dp"
-        app:contentPaddingLeft="12dp"
-        app:contentPaddingBottom="8dp"
-        app:contentPaddingTop="8dp"
-        app:contentPaddingRight="12dp"
-        app:cardElevation="2dp"
+        android:layout_width="350dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:cardCornerRadius="5dp"
+        android:layout_centerHorizontal="true"
         android:clickable="true"
         android:focusable="true"
-        app:cardBackgroundColor="@color/TextWhite"
-        card_view:cardUseCompatPadding="true">
-
+>
 
         <LinearLayout
-            android:id="@+id/layout"
             android:layout_width="match_parent"
-            android:layout_height="175dp"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/card_orange"
+>
 
+                <TextView
+                    android:textAllCaps="true"
+                    android:id="@+id/card_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:autoSizeMaxTextSize="36dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:scrollHorizontally="true"
+                    android:shadowColor="#c4c4c4c4"
+                    android:shadowRadius="2.0"
+                    android:text="@string/this_is_card_title"
+                    android:textColor="@color/TextYellow"
+                    android:textSize="30dp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/card_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:autoSizeMaxTextSize="36dp"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:scrollHorizontally="true"
-                android:shadowColor="#c4c4c4c4"
-                android:shadowRadius="2.0"
-                android:text="@string/this_is_card_title"
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textColor="@color/TextYellow"
-                android:textSize="30dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/card_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:minLines="2"
-                android:scrollHorizontally="true"
-                android:text="This is meal date bla bla bla..."
-                android:textColor="@color/TextGrey"
-                android:textSize="12sp" />
+                <TextView
+                    android:id="@+id/card_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:minLines="2"
+                    android:scrollHorizontally="true"
+                    android:text="This is meal date bla bla bla..."
+                    android:textColor="@color/TextGrey"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/card_description"
@@ -69,76 +68,136 @@
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:minLines="2"
+                android:paddingLeft="10dp"
                 android:scrollHorizontally="true"
                 android:text="This is meal description bla bla bla..."
                 android:textColor="#777777"
                 android:textSize="16sp" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/author"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginBottom="20dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:text="Host"
+                        android:textColor="#42A5F5"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
 
 
-                <TextView
-                    android:id="@+id/author"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:text="Host"
-                    android:textColor="#42A5F5"
-                    android:textSize="15dp"
-                    android:textStyle="bold" />
 
 
-                <Button
-                    android:id="@+id/JoinButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginEnd="0dp"
-                    android:layout_marginRight="0dp"
-                    android:background="@drawable/rounded_button"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:text="Join Meal!"
-                    android:textAppearance="@android:style/TextAppearance.Material.Button"
-                    android:textColor="@color/TextWhite"
-                    tools:padding="10dp"
-                    tools:textColor="@color/TextWhite" />
-
-                <!--<android.support.v7.widget.RecyclerView-->
-                    <!--android:id="@+id/recyclerView"-->
-                    <!--android:layout_width="227dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_alignParentTop="true"-->
-                    <!--android:layout_alignParentBottom="true"-->
-                    <!--android:layout_marginStart="8dp"-->
-                    <!--android:layout_marginLeft="8dp"-->
-                    <!--android:layout_marginTop="0dp"-->
-                    <!--android:layout_marginEnd="5dp"-->
-                    <!--android:layout_marginRight="5dp"-->
-                    <!--android:layout_marginBottom="0dp"-->
-                    <!--android:layout_toStartOf="@+id/JoinButton"-->
-                    <!--android:layout_toLeftOf="@+id/JoinButton"-->
-                    <!--android:layout_toEndOf="@+id/author"-->
-                    <!--android:layout_toRightOf="@+id/author"-->
-                    <!--android:orientation="horizontal" />-->
 
 
-            </RelativeLayout>
+
 
 
         </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <FrameLayout
+
+                android:id="@+id/frames"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/JoinButton"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="2dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/student1"
+                    android:layout_width="60dip"
+                    android:layout_height="60dip"
+                    android:src="@drawable/profile_picture"
+                    app:civ_border_color="#ffffff"
+                    app:civ_border_width="1dp"
+
+                    />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/student2"
+                    android:layout_width="60dip"
+                    android:layout_height="60dip"
+                    android:layout_marginLeft="35dip"
+                    android:src="@drawable/profile_picture"
+                    app:civ_border_color="#ffffff"
+                    app:civ_border_width="1dp"
+
+                    />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/student3"
+                    android:layout_width="60dip"
+                    android:layout_height="60dip"
+                    android:layout_marginLeft="70dip"
+                    android:src="@drawable/profile_picture"
+                    app:civ_border_color="#ffffff"
+                    app:civ_border_width="1dp"
+
+                    />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/student4"
+                    android:layout_width="60dip"
+                    android:layout_height="60dip"
+                    android:layout_marginLeft="105dip"
+                    android:src="@drawable/profile_picture"
+                    app:civ_border_color="#ffffff"
+                    app:civ_border_width="1dp"
+
+                    />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/student5"
+                    android:layout_width="60dip"
+                    android:layout_height="60dip"
+                    android:layout_marginLeft="140dip"
+                    android:src="@drawable/profile_picture"
+                    app:civ_border_color="#ffffff"
+
+                    app:civ_border_width="1dp" />
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/student6"
+                    android:layout_width="60dip"
+                    android:layout_height="60dip"
+                    android:layout_marginLeft="175dip"
+                    android:src="@drawable/profile_picture"
+                    app:civ_border_color="#ffffff"
+                    app:civ_border_width="1dp"
+
+                    />
+
+
+            </FrameLayout>
+
+            <Button
+                android:id="@+id/JoinButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="0dp"
+                android:background="@drawable/rounded_button"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/join_meal"
+                android:textColor="@color/TextWhite" />
+        </RelativeLayout>
+
 
 
     </android.support.v7.widget.CardView>
+
 
 </RelativeLayout>

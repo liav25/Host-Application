@@ -33,6 +33,10 @@ public class Profile extends AppCompatActivity {
     CircleImageView profile_image;
     Uri imageUri;
 
+    private  final Integer[] IMAGES = {R.drawable.nilesh, R.drawable.nilesh, R.drawable.nilesh, R.drawable.nilesh,
+            R.drawable.nilesh, R.drawable.nilesh, R.drawable.nilesh, R.drawable.nilesh};
+    private ArrayList<Integer> arrayList = new ArrayList<Integer>();
+
     private final int PICK_IMAGE_REQUEST = 1;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
