@@ -1,5 +1,6 @@
 package com.example.hoster;
 
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -15,12 +16,17 @@ import android.webkit.MimeTypeMap;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -36,6 +42,9 @@ public class edit_profile extends AppCompatActivity {
     Uri imageUri;
     StorageReference mSorageRef;
     DatabaseReference mDataBaseRef;
+    private ProgressDialog progressDialog;
+    FirebaseFirestore firestore;
+    FirebaseAuth firebaseAuth;
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -43,7 +52,9 @@ public class edit_profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mDataBaseRef = Server.getInstance().mDb.getReference();
-        mSorageRef = Server.getInstance().storage.getReference("ProfilePics");
+        mSorageRef = Server.getInstance().storage.getReference();
+        firestore = Server.getInstance().db;
+        firebaseAuth = Server.getInstance().mAuth;
 
         getWindow().setStatusBarColor(this.getResources().getColor(R.color.TextGrey));
 
@@ -96,8 +107,16 @@ public class edit_profile extends AppCompatActivity {
 
                 Server.getInstance().editUser(user[0], newName,null, newUni, newLangs );
 
-                
+                Uri path = Uri.parse("android.resource://com.example.hoster/" + R.drawable.edit_button_profile);
+                String imgPath = path.toString();
 
+                StorageReference fileDir = mSorageRef.child("ProfilePics/"+ UUID.randomUUID().toString());
+                fileDir.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                    }
+                });
 
                 startActivity(profileIntent);
                 finish();
