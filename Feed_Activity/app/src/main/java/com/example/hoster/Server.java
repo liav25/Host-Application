@@ -12,17 +12,22 @@ import android.content.Context;
 import android.app.ProgressDialog;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.RingtoneManager;
 import android.net.Uri;
 
 
 import android.os.SystemClock;
 
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,11 +50,21 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -88,7 +103,7 @@ public class Server {
     private static final String MEALS_STRING = "Meals Info";
     private static final String MEALS_Count_STRING = "Meals Count";
     private static final String USERS_DATA_STRING = "User info";
-
+    private static final String USER_PIC_PATH ="ProfilePics/";
 
     /**
      * Constructor
@@ -161,7 +176,7 @@ public class Server {
      * @param university - his university
      * @param langs - languages he's speaking
      */
-    public void addUser(String disName, Uri image, String university,
+    public void addUser(String disName, String image, String university,
                           ArrayList<String> langs)
     {
 
@@ -174,6 +189,7 @@ public class Server {
             public void onSuccess(Void aVoid) {
                 System.out.println("User addition : success!");
             }
+
         });
 
     }
@@ -181,11 +197,10 @@ public class Server {
     /**
      * Creates a new user and adds it to DB
      * @param disName - display name
-     * @param image - his image
      * @param university - his university
      * @param langs - languages he's speaking
      */
-    public void editUser(User old, String disName, Uri image, String university,
+    public void editUser(User old, String disName, String university,
                         ArrayList<String> langs)
     {
 
@@ -198,14 +213,7 @@ public class Server {
                 }
             });
         }
-        if (image != null) {
-            busRef.update("image", image).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    System.out.println("User edit : success!");
-                }
-            });
-        }
+
         if (university != old.getUniversity()){
             busRef.update("university", university).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
@@ -249,8 +257,23 @@ public class Server {
         return res[0];
     }
 
+
+    public void editProfilePic(Uri image){
+        DocumentReference busRef = db.collection(USERS_DATA_STRING).document(MainActivity.userId);
+
+        if (image != null) {
+            busRef.update("image", image.toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    System.out.println("ProfilePic edit : success!");
+                }
+            });
+        }
+    }
+
+
     public void getUser(final String userId, final User[] user, final TextView name,
-                        final TextView uni, final TextView langs){
+                        final TextView uni, final TextView langs, final ImageView img){
 
         DocumentReference docRef = db.collection(USERS_DATA_STRING).document(userId);
 
@@ -268,7 +291,9 @@ public class Server {
                         name.setText(got.getUsername());
                         uni.setText(got.getUniversity());
                         langs.setText(Profile.getLangsString(got.getLangs()));
-
+                        if (got.getImage() != null){
+                            downloadProfilePic(img, userId);
+                        }
                     }
                     else
                     {
@@ -278,6 +303,29 @@ public class Server {
             }
         });
 
+    }
+
+    public void downloadProfilePic(final ImageView img, final String userId) {
+        try {
+            StorageReference ref = storageReference.child(USER_PIC_PATH + userId);
+
+            final File localFile = File.createTempFile("Images", "bmp");
+
+            ref.getFile(localFile).addOnSuccessListener(new OnSuccessListener< FileDownloadTask.TaskSnapshot >() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    Bitmap my_image = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                    img.setImageBitmap(my_image);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d(TAG, "Error downloading Image");
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

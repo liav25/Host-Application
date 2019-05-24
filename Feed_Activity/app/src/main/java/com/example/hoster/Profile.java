@@ -60,7 +60,7 @@ public class Profile extends AppCompatActivity {
         // TODO - ADD location to student, currently not in object
 
         langs = (TextView) findViewById(R.id.profile_langs);
-        Server.getInstance().getUser(uId, user, name, uni, langs);
+        Server.getInstance().getUser(uId, user, name, uni, langs, profile_image);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);

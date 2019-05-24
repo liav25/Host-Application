@@ -19,6 +19,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -32,10 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
     Button addMealBut;
     Animation fromBottom;
-
     static Server sev = Server.getInstance();
 
-
+    public static CircleImageView profilePicture;
     public static ArrayList<Meal> meals;
     public static FirebaseUser user;
     public static String userId;
@@ -78,7 +78,9 @@ public class MainActivity extends AppCompatActivity {
         fromBottom = AnimationUtils.loadAnimation(this, R.anim.frombottom);
         Animation fromtop = AnimationUtils.loadAnimation(this, R.anim.fromtop);
         toolbar.setAnimation(fromtop);
-        CircleImageView profilePicture = findViewById(R.id.profile_picture);
+        profilePicture = findViewById(R.id.profile_picture);
+        sev.downloadProfilePic(profilePicture, userId);
+
         profilePicture.setAnimation(fromtop);
         addMealBut.setAnimation(fromBottom);
         Bundle bun = new Bundle();

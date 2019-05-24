@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class User {
     private String username;
-    private Uri image;
+    private String image;
     private String userId;
     private String university;
     private ArrayList<String> langs;
@@ -23,7 +23,7 @@ public class User {
      * @param university - university studying in
      * @param langs      - languages speaking
      */
-    public User(String username, Uri image, String university,
+    public User(String username, String image, String university,
                 ArrayList<String> langs, String userId) {
         this.username = username;
 
@@ -48,7 +48,7 @@ public class User {
     /**
      * @return profile_image of this user
      */
-    public Uri getImage() {
+    public String getImage() {
         return image;
     }
 
@@ -79,7 +79,7 @@ public class User {
     /**
      * @param image - new profile_image
      */
-    public void setImage(Uri image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

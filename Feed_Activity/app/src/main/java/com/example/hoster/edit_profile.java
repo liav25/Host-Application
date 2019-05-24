@@ -79,7 +79,7 @@ public class edit_profile extends AppCompatActivity {
         //
 
         langs = findViewById(R.id.editable_profile_langs);
-        Server.getInstance().getUser(uId, user, name, uni, langs);
+        Server.getInstance().getUser(uId, user, name, uni, langs, edit_profile_pic);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -106,20 +106,23 @@ public class edit_profile extends AppCompatActivity {
 
                 ArrayList<String> newLangs = new ArrayList<>(Arrays.asList(stringLangs));
 
-                Server.getInstance().editUser(user[0], newName,null, newUni, newLangs );
+                Server.getInstance().editUser(user[0], newName, newUni, newLangs );
 
-                Uri path = Uri.parse("android.resource://com.example.hoster/" + R.drawable.edit_button_profile);
-                String imgPath = path.toString();
 
-                StorageReference fileDir = mSorageRef.child("ProfilePics/"+ UUID.randomUUID().toString());
-                fileDir.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Uri downloadUrl = imageUri;
-                        fileUrl = downloadUrl.toString();
-                        //TODO = tom this is the file url, we can put it in the user
-                    }
-                });
+                if (imageUri != null) {
+                    StorageReference fileDir = mSorageRef.child("ProfilePics/" + MainActivity.userId);
+                    fileDir.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Uri downloadUrl = imageUri;
+                            fileUrl = downloadUrl.toString();
+                            Server.getInstance().editProfilePic(downloadUrl);
+                            Server.getInstance().downloadProfilePic(MainActivity.profilePicture,
+                                    MainActivity.userId);
+
+                        }
+                    });
+                }
 
                 startActivity(profileIntent);
                 finish();
