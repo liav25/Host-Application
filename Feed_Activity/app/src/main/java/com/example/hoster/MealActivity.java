@@ -112,7 +112,7 @@ public class MealActivity extends AppCompatActivity {
 
             Boolean flag = meal.getHostId().equals(MainActivity.userId);
 
-            Server.getInstance().removeUserToMeal(MainActivity.userId, mealId, meal.getHostId());
+            Server.getInstance().removeUserToMeal(MainActivity.userId, mealId, meal.getHostId(), this);
             meal.removeGuest(MainActivity.userId);
             if (flag) {
                 finish();

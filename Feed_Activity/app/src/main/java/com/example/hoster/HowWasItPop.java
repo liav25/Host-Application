@@ -37,6 +37,7 @@ public class HowWasItPop extends AppCompatActivity {
 
         Bundle b = getIntent().getExtras();
         final String userId = b.getString("userToRate");
+        final int mealId = b.getInt("mealIdToRate");
 
         ImageButton pepper1 = findViewById(R.id.pepper1);
         ImageButton pepper2 = findViewById(R.id.pepper2);
@@ -91,7 +92,7 @@ public class HowWasItPop extends AppCompatActivity {
                 Intent ranking = new Intent(getApplicationContext(), MainActivity.class);
                 // find out how to send the user id
 
-                Server.getInstance().setRanking(curRank[0], userId);
+                Server.getInstance().setRanking(curRank[0], userId, mealId, HowWasItPop.this);
                 startActivity(ranking);
                 finish();
             }

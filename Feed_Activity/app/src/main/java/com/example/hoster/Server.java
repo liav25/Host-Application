@@ -490,6 +490,8 @@ public class Server {
         Intent intent = new Intent(cont, HowWasItPop.class);
         Bundle b = new Bundle();
         b.putString("userToRate", meal.getHostId());
+        b.putInt("mealIdToRate", Integer.parseInt(meal.getID()));
+
         intent.putExtras(b);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(cont);
         stackBuilder.addNextIntentWithParentStack(intent);
@@ -506,6 +508,7 @@ public class Server {
 
 
         notificationManager.notify(Integer.parseInt(meal.getID()), build.build());
+
     }
 
     private void createNotificationChannel(Context cont) {
@@ -530,7 +533,7 @@ public class Server {
      * @param mealId meal's ID
      * @return true upon success, false otherwise
      */
-    public Boolean removeUserToMeal(String userId, String mealId, String hostId){
+    public Boolean removeUserToMeal(String userId, final String mealId, String hostId, final Context cont){
         DocumentReference busRef = db.collection(MEALS_STRING).document(mealId);
 
         if (userId.equals(hostId)){
@@ -539,6 +542,8 @@ public class Server {
                         @Override
                         public void onSuccess(Void aVoid) {
                             Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(cont);
+                            notificationManager.cancel(Integer.parseInt(mealId));
                             getMeals(MainActivity.meals, MainActivity.adapter);
 
                         }
@@ -668,11 +673,14 @@ public class Server {
         });
     }
 
-    public void setRanking(final int rank, final String userId){
-        DocumentReference busRef = db.collection(USERS_DATA_STRING).document(MainActivity.userId);
+    public void setRanking(final int rank, final String userId, int mealId, Context cont){
+        DocumentReference busRef = db.collection(USERS_DATA_STRING).document(userId);
 
-        busRef.update("Num_of_raters", FieldValue.increment(1));
-        busRef.update("Rating_sum", FieldValue.increment(rank));
+        busRef.update("num_of_raters", FieldValue.increment(1));
+        busRef.update("rating_sum", FieldValue.increment(rank));
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(cont);
+        notificationManager.cancel(mealId);
 
     }
 

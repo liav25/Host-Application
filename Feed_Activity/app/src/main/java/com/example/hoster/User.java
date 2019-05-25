@@ -53,28 +53,28 @@ public class User {
     /**
      * @return number of raters of this user
      */
-    public int getNum_of_raters() {
+    public int getnum_of_raters() {
         return num_of_raters;
     }
 
     /**
      * @return rating sum of this user
      */
-    public int getRating_sum() {
+    public int getrating_sum() {
         return rating_sum;
     }
 
     /**
      * @param num - number of raters to set
      */
-    public void setNum_of_raters(int num){
+    public void setnum_of_raters(int num){
         num_of_raters = num;
     }
 
     /**
      * @param sum - sum of raters to set
      */
-    public void setRating_sum(int sum){
+    public void setrating_sum(int sum){
         rating_sum = sum;
     }
 

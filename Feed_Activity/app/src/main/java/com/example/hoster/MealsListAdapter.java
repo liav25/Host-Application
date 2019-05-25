@@ -114,7 +114,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
                 if (getItem(position).isMember(MainActivity.userId)){
 
                     Server.getInstance().removeUserToMeal(MainActivity.userId, getItem(position).getID(),
-                            getItem(position).getHostId());
+                            getItem(position).getHostId(), getContext());
                     getItem(position).removeGuest(MainActivity.userId);
                 }  else if (!getItem(position).isFull()) { // not in meal and meal not full
 
