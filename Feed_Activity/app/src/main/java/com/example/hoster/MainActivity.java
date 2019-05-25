@@ -4,6 +4,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -40,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
     public static FirebaseUser user;
     public static String userId;
 
+
     private ListView cardlist;
-    public NotificationCompat.Builder build;
 
     public static MealsListAdapter adapter;
 
@@ -116,10 +117,13 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),
                     "Click ListItem Number " + position, Toast.LENGTH_LONG)
                     .show();
-        }
-    });
+            }
+        });
 
     }
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -141,6 +145,9 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+
 
 
 }

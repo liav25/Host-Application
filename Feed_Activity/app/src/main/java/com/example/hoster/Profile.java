@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -83,6 +84,7 @@ public class Profile extends AppCompatActivity {
                 Intent editProfileIntent = new Intent(getApplicationContext(), edit_profile.class);
                 editProfileIntent.putExtras(b); //Put your id to your next Intent
                 startActivity(editProfileIntent);
+                finish();
             }
         });
     }
@@ -138,6 +140,8 @@ public class Profile extends AppCompatActivity {
                         }
                     });
         }
+
+
     }
 
 

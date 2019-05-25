@@ -34,7 +34,7 @@ public class Register extends AppCompatActivity {
                 finish();
             }
         });
-
+        mAtuh.signOut();
         if (mAtuh.getCurrentUser() != null){
 
             Intent main = new Intent(getApplicationContext(), MainActivity.class);

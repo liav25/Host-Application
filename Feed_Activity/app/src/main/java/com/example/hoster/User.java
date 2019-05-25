@@ -13,7 +13,8 @@ public class User {
     private String userId;
     private String university;
     private ArrayList<String> langs;
-
+    private int num_of_raters;
+    private int rating_sum;
 
     /**
      * A constructor for this class
@@ -34,6 +35,8 @@ public class User {
         this.langs.addAll(langs);
 
         this.userId = userId;
+        this.rating_sum = 0;
+        this.num_of_raters = 0;
 
     }
 
@@ -42,8 +45,39 @@ public class User {
         this.image = null;
         this.university = "University";
         this.langs = new ArrayList<String>();
+        this.num_of_raters = 0;
+        this.rating_sum = 0;
 
     }
+
+    /**
+     * @return number of raters of this user
+     */
+    public int getNum_of_raters() {
+        return num_of_raters;
+    }
+
+    /**
+     * @return rating sum of this user
+     */
+    public int getRating_sum() {
+        return rating_sum;
+    }
+
+    /**
+     * @param num - number of raters to set
+     */
+    public void setNum_of_raters(int num){
+        num_of_raters = num;
+    }
+
+    /**
+     * @param sum - sum of raters to set
+     */
+    public void setRating_sum(int sum){
+        rating_sum = sum;
+    }
+
 
     /**
      * @return profile_image of this user

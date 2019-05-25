@@ -2,6 +2,8 @@ package com.example.hoster;
 
 import android.content.Intent;
 import android.media.Image;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,20 +19,24 @@ public class HowWasItPop extends AppCompatActivity {
     // set default to 4 if the user didn't click but submitted
     final int[] curRank = new int[4];
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_how_was_it_pop);
 
-        // set view
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
+//        // set view
+//        DisplayMetrics dm = new DisplayMetrics();
+//        getWindowManager().getDefaultDisplay().getMetrics(dm);
+//
+//        int width = dm.widthPixels;
+//        int height = dm.heightPixels;
+//
+//        // percentage on screen the popup will take
+//        getWindow().setLayout((int) (width * .8), (int) (height * .6));
 
-        int width = dm.widthPixels;
-        int height = dm.heightPixels;
-
-        // percentage on screen the popup will take
-        getWindow().setLayout((int) (width * .8), (int) (height * .6));
+        Bundle b = getIntent().getExtras();
+        final String userId = b.getString("userToRate");
 
         ImageButton pepper1 = findViewById(R.id.pepper1);
         ImageButton pepper2 = findViewById(R.id.pepper2);
@@ -84,8 +90,8 @@ public class HowWasItPop extends AppCompatActivity {
             public void onClick(View v) {
                 Intent ranking = new Intent(getApplicationContext(), MainActivity.class);
                 // find out how to send the user id
-                String userId;
-                //Server.setRanking(curRank[0], userId);
+
+                Server.getInstance().setRanking(curRank[0], userId);
                 startActivity(ranking);
                 finish();
             }

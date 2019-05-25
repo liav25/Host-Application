@@ -4,8 +4,10 @@ import android.app.Activity;
 
 import android.app.AlarmManager;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 
@@ -20,11 +22,14 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 
 
+import android.os.Build;
+import android.os.Bundle;
 import android.os.SystemClock;
 
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -92,8 +97,7 @@ public class Server {
 
     private AlarmManager alarmMgr;
     private PendingIntent alarmIntent;
-
-
+    private Context main;
     FirebaseStorage storage;
     StorageReference storageReference;
 
@@ -118,7 +122,10 @@ public class Server {
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
+
     }
+
+
 
     /*
     Sets a standard set of food restrictions
@@ -272,6 +279,8 @@ public class Server {
     }
 
 
+
+
     public void getUser(final String userId, final User[] user, final TextView name,
                         final TextView uni, final TextView langs, final ImageView img){
 
@@ -292,7 +301,10 @@ public class Server {
                         uni.setText(got.getUniversity());
                         langs.setText(Profile.getLangsString(got.getLangs()));
                         if (got.getImage() != null){
-                            downloadProfilePic(img, userId);
+                            if(!got.getImage().equals("")){
+                                downloadProfilePic(img, userId);
+                            }
+
                         }
                     }
                     else
@@ -311,7 +323,7 @@ public class Server {
 
             final File localFile = File.createTempFile("Images", "bmp");
 
-            ref.getFile(localFile).addOnSuccessListener(new OnSuccessListener< FileDownloadTask.TaskSnapshot >() {
+            ref.getFile(localFile).addOnSuccessListener(new OnSuccessListener < FileDownloadTask.TaskSnapshot >() {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                     Bitmap my_image = BitmapFactory.decodeFile(localFile.getAbsolutePath());
@@ -458,17 +470,59 @@ public class Server {
     /**
      * adds a user to a meal
      * @param userId   user's ID
-     * @param mealId meal's ID
+     * @param meal meal to add user to
      * @return true upon success, false otherwise
      */
-    public Boolean addUserToMeal(Context context, String userId, String mealId){
+    public Boolean addUserToMeal(final Context context, String userId, final Meal meal){
 
-        DocumentReference busRef = db.collection(MEALS_STRING).document(mealId);
-        busRef.update("guests", FieldValue.arrayUnion(userId));
+        DocumentReference busRef = db.collection(MEALS_STRING).document(meal.getID());
+        busRef.update("guests", FieldValue.arrayUnion(userId)).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                setNotification(meal, context); // sets notification
+            }
+        });
         return true;
     }
 
+    public void setNotification(Meal meal, Context cont){
+        createNotificationChannel(cont);
+        Intent intent = new Intent(cont, HowWasItPop.class);
+        Bundle b = new Bundle();
+        b.putString("userToRate", meal.getHostId());
+        intent.putExtras(b);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(cont);
+        stackBuilder.addNextIntentWithParentStack(intent);
+        PendingIntent resultPendingIntent =
+                stackBuilder.getPendingIntent(Integer.parseInt(meal.getID()), PendingIntent.FLAG_UPDATE_CURRENT);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        NotificationCompat.Builder build = new NotificationCompat.Builder(cont, "Hoster")
+                .setSmallIcon(R.drawable.spice)
+                .setContentTitle("Hoster")
+                .setContentText("Help us by rating your host!")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT).
+                        setContentIntent(resultPendingIntent);
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(cont);
 
+
+        notificationManager.notify(Integer.parseInt(meal.getID()), build.build());
+    }
+
+    private void createNotificationChannel(Context cont) {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Hoster";
+            String description = "Help us by rating your Host!";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("Hoster", name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = cont.getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
 
     /**
      * removes a user from a meal
@@ -614,6 +668,13 @@ public class Server {
         });
     }
 
+    public void setRanking(final int rank, final String userId){
+        DocumentReference busRef = db.collection(USERS_DATA_STRING).document(MainActivity.userId);
+
+        busRef.update("Num_of_raters", FieldValue.increment(1));
+        busRef.update("Rating_sum", FieldValue.increment(rank));
+
+    }
 
 
 }
