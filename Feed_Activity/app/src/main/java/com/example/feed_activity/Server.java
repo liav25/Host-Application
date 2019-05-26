@@ -1,18 +1,39 @@
-package com.example.feed_activity;
+package com.example.hoster;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.location.Location;
-import android.media.Image;
-import android.net.Uri;
-import static java.lang.Math.toIntExact;
 
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+
+import android.app.ProgressDialog;
+
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.media.RingtoneManager;
+import android.net.Uri;
+
+
+import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
+
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,45 +41,48 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.api.Context;
-import com.google.common.primitives.Ints;
-import com.google.firebase.FirebaseError;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
-import java.nio.file.Files;
-import java.time.LocalDate;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.Callable;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.CyclicBarrier;
-import java.util.concurrent.Executor;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.function.DoubleFunction;
 
 import static com.firebase.ui.auth.AuthUI.TAG;
+
 import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 import static java.lang.Math.ulp;
+
 
 
 /**
@@ -66,19 +90,24 @@ import static java.lang.Math.ulp;
  */
 public class Server {
 
+
     private static Server instance = new Server();
 
     private Set<String> standardRestrictions;
 
+    private AlarmManager alarmMgr;
+    private PendingIntent alarmIntent;
+    private Context main;
+    FirebaseStorage storage;
+    StorageReference storageReference;
 
-    private FirebaseFirestore db;
-    private FirebaseDatabase mDb;
-    private FirebaseAuth mAuth;
+    FirebaseFirestore db;
+    FirebaseDatabase mDb;
+    FirebaseAuth mAuth;
     private static final String MEALS_STRING = "Meals Info";
     private static final String MEALS_Count_STRING = "Meals Count";
-    private static final String USERS_DATA_STRING = "Users Info";
-
-
+    private static final String USERS_DATA_STRING = "User info";
+    private static final String USER_PIC_PATH ="ProfilePics/";
 
     /**
      * Constructor
@@ -90,7 +119,13 @@ public class Server {
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+
+
     }
+
+
 
     /*
     Sets a standard set of food restrictions
@@ -114,7 +149,7 @@ public class Server {
     }
 
 
-    public void signUp(String email, String pass){
+    public void signUp(String email, String pass, final Activity act){
         mAuth.createUserWithEmailAndPassword(email, pass)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -125,10 +160,14 @@ public class Server {
                             MainActivity.user = mAuth.getCurrentUser();
                             MainActivity.userId = MainActivity.user.getUid();
                             addUser("", null, "", new ArrayList<String>());
-
+                            Intent main = new Intent(act.getApplicationContext(), MainActivity.class);
+                            act.startActivity(main);
+                            act.finish();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("AuthUI", "createUserWithEmail:failure", task.getException());
+                         Toast.makeText(act, "Registeration failed",
+                                    Toast.LENGTH_SHORT).show();
                         }
 
 
@@ -140,15 +179,15 @@ public class Server {
     /**
      * Creates a new user and adds it to DB
      * @param disName - display name
-     * @param image - his image
+     * @param image - his profile_image
      * @param university - his university
      * @param langs - languages he's speaking
      */
-    public void addUser(String disName, Uri image, String university,
+    public void addUser(String disName, String image, String university,
                           ArrayList<String> langs)
     {
 
-        String userId = MainActivity.userId;
+        final String userId = MainActivity.userId;
 
         DocumentReference busRef = db.collection(USERS_DATA_STRING).document(userId);
         User userObj = new User(disName, image, university, langs, userId);
@@ -157,8 +196,47 @@ public class Server {
             public void onSuccess(Void aVoid) {
                 System.out.println("User addition : success!");
             }
+
         });
 
+    }
+
+    /**
+     * Creates a new user and adds it to DB
+     * @param disName - display name
+     * @param university - his university
+     * @param langs - languages he's speaking
+     */
+    public void editUser(User old, String disName, String university,
+                        ArrayList<String> langs)
+    {
+
+        DocumentReference busRef = db.collection(USERS_DATA_STRING).document(MainActivity.userId);
+        if (!old.getUsername().equals(disName)) {
+            busRef.update("username", disName).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    System.out.println("User edit : success!");
+                }
+            });
+        }
+
+        if (university != old.getUniversity()){
+            busRef.update("university", university).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    System.out.println("User edit : success!");
+                }
+            });
+        }
+        if (langs != old.getLangs()){
+            busRef.update("langs", langs).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    System.out.println("User edit : success!");
+                }
+            });
+        }
     }
 
     public Boolean UserExists(final String uId){
@@ -186,8 +264,25 @@ public class Server {
         return res[0];
     }
 
+
+    public void editProfilePic(Uri image){
+        DocumentReference busRef = db.collection(USERS_DATA_STRING).document(MainActivity.userId);
+
+        if (image != null) {
+            busRef.update("image", image.toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    System.out.println("ProfilePic edit : success!");
+                }
+            });
+        }
+    }
+
+
+
+
     public void getUser(final String userId, final User[] user, final TextView name,
-                        final TextView uni, final TextView langs){
+                        final TextView uni, final TextView langs, final ImageView img){
 
         DocumentReference docRef = db.collection(USERS_DATA_STRING).document(userId);
 
@@ -205,7 +300,12 @@ public class Server {
                         name.setText(got.getUsername());
                         uni.setText(got.getUniversity());
                         langs.setText(Profile.getLangsString(got.getLangs()));
+                        if (got.getImage() != null){
+                            if(!got.getImage().equals("")){
+                                downloadProfilePic(img, userId);
+                            }
 
+                        }
                     }
                     else
                     {
@@ -215,6 +315,29 @@ public class Server {
             }
         });
 
+    }
+
+    public void downloadProfilePic(final ImageView img, final String userId) {
+        try {
+            StorageReference ref = storageReference.child(USER_PIC_PATH + userId);
+
+            final File localFile = File.createTempFile("Images", "bmp");
+
+            ref.getFile(localFile).addOnSuccessListener(new OnSuccessListener < FileDownloadTask.TaskSnapshot >() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    Bitmap my_image = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                    img.setImageBitmap(my_image);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d(TAG, "Error downloading Image");
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -246,7 +369,6 @@ public class Server {
                 if (currentValue == null) {
                     mutableData.setValue(0);
                     counter[0] = 0;
-                    System.out.println("asfaafsfafsafasfasfas");
                 } else {
                     counter[0] = currentValue;
                     mutableData.setValue(currentValue + 1);
@@ -255,7 +377,7 @@ public class Server {
                             restrictions, descr, maxGuests,  loc,  time);
                     docRef.set(newMeal);
                 }
-
+                getMeals(MainActivity.meals, MainActivity.adapter);
                 return Transaction.success(mutableData);
             }
 
@@ -348,14 +470,61 @@ public class Server {
     /**
      * adds a user to a meal
      * @param userId   user's ID
-     * @param mealId meal's ID
+     * @param meal meal to add user to
      * @return true upon success, false otherwise
      */
-    public Boolean addUserToMeal(String userId, String mealId){
+    public Boolean addUserToMeal(final Context context, String userId, final Meal meal){
 
-        DocumentReference busRef = db.collection(MEALS_STRING).document(mealId);
-        busRef.update("guests", FieldValue.arrayUnion(userId));
+        DocumentReference busRef = db.collection(MEALS_STRING).document(meal.getID());
+        busRef.update("guests", FieldValue.arrayUnion(userId)).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                setNotification(meal, context); // sets notification
+            }
+        });
         return true;
+    }
+
+    public void setNotification(Meal meal, Context cont){
+        createNotificationChannel(cont);
+        Intent intent = new Intent(cont, HowWasItPop.class);
+        Bundle b = new Bundle();
+        b.putString("userToRate", meal.getHostId());
+        b.putInt("mealIdToRate", Integer.parseInt(meal.getID()));
+
+        intent.putExtras(b);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(cont);
+        stackBuilder.addNextIntentWithParentStack(intent);
+        PendingIntent resultPendingIntent =
+                stackBuilder.getPendingIntent(Integer.parseInt(meal.getID()), PendingIntent.FLAG_UPDATE_CURRENT);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        NotificationCompat.Builder build = new NotificationCompat.Builder(cont, "Hoster")
+                .setSmallIcon(R.drawable.spice)
+                .setContentTitle("Hoster")
+                .setContentText("Help us by rating your host!")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT).
+                        setContentIntent(resultPendingIntent);
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(cont);
+
+
+        notificationManager.notify(Integer.parseInt(meal.getID()), build.build());
+
+    }
+
+    private void createNotificationChannel(Context cont) {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Hoster";
+            String description = "Help us by rating your Host!";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("Hoster", name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = cont.getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
     /**
@@ -364,7 +533,7 @@ public class Server {
      * @param mealId meal's ID
      * @return true upon success, false otherwise
      */
-    public Boolean removeUserToMeal(String userId, String mealId, String hostId){
+    public Boolean removeUserToMeal(String userId, final String mealId, String hostId, final Context cont){
         DocumentReference busRef = db.collection(MEALS_STRING).document(mealId);
 
         if (userId.equals(hostId)){
@@ -373,6 +542,8 @@ public class Server {
                         @Override
                         public void onSuccess(Void aVoid) {
                             Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(cont);
+                            notificationManager.cancel(Integer.parseInt(mealId));
                             getMeals(MainActivity.meals, MainActivity.adapter);
 
                         }
@@ -479,5 +650,39 @@ public class Server {
         }
         return false;
     }
+
+
+    public void getUsername(String uId, final TextView toShow) {
+        DocumentReference docRef = db.collection(USERS_DATA_STRING).document(uId);
+
+        /* gets object from server  */
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null && document.exists()) {
+                        User got = document.toObject(User.class);
+                        toShow.setText(got.getUsername());
+
+                    } else {
+                        System.out.println("no such user found");
+                    }
+                }
+            }
+        });
+    }
+
+    public void setRanking(final int rank, final String userId, int mealId, Context cont){
+        DocumentReference busRef = db.collection(USERS_DATA_STRING).document(userId);
+
+        busRef.update("num_of_raters", FieldValue.increment(1));
+        busRef.update("rating_sum", FieldValue.increment(rank));
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(cont);
+        notificationManager.cancel(mealId);
+
+    }
+
 
 }
