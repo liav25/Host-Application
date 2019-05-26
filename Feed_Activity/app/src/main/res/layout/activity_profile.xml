@@ -10,7 +10,6 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/profile_toolbar"
-        android:background="@color/TextYellow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
@@ -37,22 +36,20 @@
             tools:layout_editor_absoluteX="361dp"
             tools:layout_editor_absoluteY="0dp" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:clickable="true"
-            android:focusable="true"
-            android:id="@+id/profilepic"
-            android:layout_width="166dp"
-            android:layout_height="198dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="35dp"
-            android:src="@drawable/profile_picture" />
+            <ImageView
 
+                android:id="@+id/profilepic"
+                android:layout_width="166dp"
+                android:layout_height="198dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="35dp"
+                android:src="@drawable/profile_picture" />
             <TextView
                 android:id="@+id/name_of_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text=" "
+                android:text="Ofek Israel"
                 android:textColor="@color/cardview_light_background"
                 android:textSize="22sp"
                 android:textStyle="bold" />
@@ -106,7 +103,7 @@
             android:layout_gravity="center_vertical"
             android:paddingLeft="20dp"
             android:textSize="16sp"
-            android:text=" " />
+            android:text="@string/universityProfile" />
     </LinearLayout>
 
     <LinearLayout
@@ -152,7 +149,7 @@
             android:layout_gravity="center_vertical"
             android:paddingLeft="20dp"
             android:textSize="16sp"
-            android:text=" " />
+            android:text="@string/languagesProfile" />
 
 
     </LinearLayout>
