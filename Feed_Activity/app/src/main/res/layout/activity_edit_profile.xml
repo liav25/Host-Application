@@ -28,9 +28,9 @@
             android:orientation="vertical">
 
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
 
-                android:id="@+id/profilepic"
+                android:id="@+id/edit_profilepic"
                 android:layout_width="127dp"
                 android:layout_height="144dp"
                 android:layout_marginStart="8dp"
@@ -57,8 +57,9 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:inputType="textPersonName"
-                android:text="Ofek Israel"
+                android:hint="Ofek Israel"
                 android:textAllCaps="false"
+                android:focusable="true"
                 android:textColor="@color/cardview_light_background"
                 android:textSize="22sp"
                 android:textStyle="bold|italic"
@@ -69,7 +70,7 @@
                 tools:layout_conversion_absoluteWidth="107dp" />
 
             <ImageButton
-                android:id="@+id/imageButton4"
+                android:id="@+id/cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -81,7 +82,7 @@
                 app:srcCompat="@drawable/close_red" />
 
             <ImageButton
-                android:id="@+id/imageButton6"
+                android:id="@+id/accept"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -125,7 +126,7 @@
             android:layout_height="85dp"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:text="Write a brief description of yourself"
+            android:hint="Write a brief description of yourself"
             android:textColor="#B9181817"
             android:textSize="16sp"
             android:textStyle="italic" />
@@ -152,7 +153,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
-            android:text="University"
+            android:hint="University"
             android:textColor="#B9181817"
             android:textSize="16sp"
             android:textStyle="italic" />
@@ -177,7 +178,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
-            android:text="Location"
+            android:hint="Location"
             android:textColor="#B9181817"
             android:textSize="16sp"
             android:textStyle="italic" />
@@ -204,7 +205,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
-            android:text="Language(s)"
+            android:hint="Language(s)"
             android:textColor="#B9181817"
             android:textSize="16sp"
             android:textStyle="italic" />
