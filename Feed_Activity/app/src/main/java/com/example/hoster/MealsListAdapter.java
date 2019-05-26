@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -32,7 +33,12 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         TextView date;
         TextView host;
         Button joinBU;
-        ListView profile_pics;
+        ImageView img1;
+        ImageView img2;
+        ImageView img3;
+        ImageView img4;
+        ImageView img5;
+        ImageView img6;
 
 
         private void setButCol(Meal meal){
@@ -48,6 +54,100 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
                 joinBU.setTextColor(Color.WHITE);
                 joinBU.setBackgroundResource(R.drawable.rounded_button);
             }
+        }
+
+
+
+        private void setImages(final ArrayList<String> guests, final Context mContext){
+            if (guests.size() == 6){
+                img6.setVisibility(View.VISIBLE);
+                Server.getInstance().downloadProfilePic(img6, guests.get(5));
+                img6.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onClickImage(guests.get(5), mContext);
+                    }
+                });
+            } else {
+                img6.setVisibility(View.INVISIBLE);
+            }
+
+            if (guests.size() >= 5){
+                img5.setVisibility(View.VISIBLE);
+
+                Server.getInstance().downloadProfilePic(img5, guests.get(4));
+                img5.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onClickImage(guests.get(4), mContext);
+                    }
+                });
+            }else {
+                img5.setVisibility(View.INVISIBLE);
+            }
+
+            if (guests.size() >= 4){
+                img4.setVisibility(View.VISIBLE);
+
+                Server.getInstance().downloadProfilePic(img4, guests.get(3));
+                img4.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onClickImage(guests.get(3), mContext);
+                    }
+                });
+            }else {
+                img4.setVisibility(View.INVISIBLE);
+            }
+
+            if (guests.size() >= 3){
+                img3.setVisibility(View.VISIBLE);
+
+                Server.getInstance().downloadProfilePic(img3, guests.get(2));
+                img3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onClickImage(guests.get(2), mContext);
+                    }
+                });
+            }else {
+                img3.setVisibility(View.INVISIBLE);
+            }
+
+            if (guests.size() >= 2){
+                img2.setVisibility(View.VISIBLE);
+
+                Server.getInstance().downloadProfilePic(img2, guests.get(1));
+                img2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onClickImage(guests.get(1), mContext);
+                    }
+                });
+            }else {
+                img2.setVisibility(View.INVISIBLE);
+            }
+
+            if (guests.size() >= 1){
+                Server.getInstance().downloadProfilePic(img1, guests.get(0));
+                img1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onClickImage(guests.get(0), mContext);
+                    }
+                });
+            }
+        }
+
+
+        private void onClickImage(String uId, Context mContext){
+
+            Bundle b = new Bundle();
+            b.putString("userId", uId); //Your id
+            Intent profileIntent = new Intent(mContext, Profile.class);
+            profileIntent.putExtras(b); //Put your id to your next Intent
+            mContext.startActivity(profileIntent);
+
         }
     }
 
@@ -87,8 +187,12 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
             holder.description = (TextView) convertView.findViewById(R.id.card_description);
             holder.host = (TextView) convertView.findViewById(R.id.author);
             holder.joinBU  = (Button)  convertView.findViewById(R.id.JoinButton);
-            holder.profile_pics = (ListView)convertView.findViewById(R.id.profile_pics);
-
+            holder.img1 = convertView.findViewById(R.id.student1);
+            holder.img2 = convertView.findViewById(R.id.student2);
+            holder.img3 = convertView.findViewById(R.id.student3);
+            holder.img4 = convertView.findViewById(R.id.student4);
+            holder.img5 = convertView.findViewById(R.id.student5);
+            holder.img6 = convertView.findViewById(R.id.student6);
             result = convertView;
 
             convertView.setTag(holder);
@@ -102,13 +206,8 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         holder.date.setText(date);
         holder.description.setText(description);
         holder.host.setText(host);
-        ProfilePicAdapter adapter = new ProfilePicAdapter(mContext, R.layout.profile_pic, guests);
 
-        holder.profile_pics = holder.profile_pics.findViewById(R.id.profile_pics);
-        holder.profile_pics.setAdapter(adapter);
-        holder.profile_pics.setHorizontalScrollBarEnabled(true);
-
-
+        holder.setImages(guests, mContext);
         if (getItem(position).getHostId().equals(MainActivity.userId)) {
             holder.host.setText("You");
         } else {
@@ -133,6 +232,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
                 holder.setButCol(getItem(position));
 
                 Server.getInstance().getMeals(MainActivity.meals, MainActivity.adapter);
+                holder.setImages(getItem(position).getGuests(), mContext);
             }
         });
 
@@ -164,6 +264,8 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         });
         return result;
     }
+
+
 
 
 
