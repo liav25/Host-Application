@@ -105,7 +105,6 @@ public class Server {
     FirebaseDatabase mDb;
     FirebaseAuth mAuth;
     private static final String MEALS_STRING = "Meals Info";
-    private static final String MEALS_Count_STRING = "Meals Count";
     private static final String USERS_DATA_STRING = "User info";
     private static final String USER_PIC_PATH ="ProfilePics/";
 
