@@ -39,9 +39,12 @@ public class edit_profile extends AppCompatActivity {
     private ImageButton cancel;
     private CircleImageView edit_profile_pic;
     private final int PICK_IMAGE_REQUEST = 1;
-    private Uri imageUri;
-    private StorageReference mSorageRef;
-
+    Uri imageUri;
+    StorageReference mSorageRef;
+    DatabaseReference mDataBaseRef;
+    private ProgressDialog progressDialog;
+    FirebaseFirestore firestore;
+    FirebaseAuth firebaseAuth;
     String fileUrl;
 
 
@@ -49,8 +52,10 @@ public class edit_profile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mDataBaseRef = Server.getInstance().mDb.getReference();
         mSorageRef = Server.getInstance().storage.getReference();
-
+        firestore = Server.getInstance().db;
+        firebaseAuth = Server.getInstance().mAuth;
 
         getWindow().setStatusBarColor(this.getResources().getColor(R.color.TextGrey));
 
@@ -64,19 +69,16 @@ public class edit_profile extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setBackgroundColor(getResources().getColor(R.color.TextYellow));
 
-        /* find the elements within the layout */
         name = findViewById(R.id.editable_name_of_profile);
         name.setHint(MainActivity.user.getDisplayName());
         uni = findViewById(R.id.editable_uni_name);
         uni.setHint(MainActivity.user.getEmail());
         edit_profile_pic = (CircleImageView) findViewById(R.id.edit_profilepic);
-        accept = findViewById(R.id.accept);
-        cancel = findViewById(R.id.cancel);
 
         // TODO - ADD location to student, currently not in object
+        //
+
         langs = findViewById(R.id.editable_profile_langs);
-
-
         Server.getInstance().getUser(uId, user, name, uni, langs, edit_profile_pic);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -84,7 +86,9 @@ public class edit_profile extends AppCompatActivity {
 
 
 
-
+        //clicks
+        accept = findViewById(R.id.accept);
+        cancel = findViewById(R.id.cancel);
 
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,14 +103,13 @@ public class edit_profile extends AppCompatActivity {
                 String newUni = uni.getText().toString();
 
                 String[] stringLangs = langs.getText().toString().split(",");
-                // split the languages by comma, then create a list and upload to server
 
                 ArrayList<String> newLangs = new ArrayList<>(Arrays.asList(stringLangs));
 
                 Server.getInstance().editUser(user[0], newName, newUni, newLangs );
 
 
-                if (imageUri != null) { // if image was changed, upload the new image
+                if (imageUri != null) {
                     StorageReference fileDir = mSorageRef.child("ProfilePics/" + MainActivity.userId);
                     fileDir.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
