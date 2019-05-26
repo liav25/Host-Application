@@ -6,15 +6,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/BackgroundPink"
+    android:background="#FCFCFC"
+
     android:orientation="vertical"
     android:padding="5dp"
     tools:context=".PopActivity">
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="8dp"></LinearLayout>
     <Button
         android:id="@+id/closePopUpButton"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_gravity="right"
         android:layout_marginLeft="10dp"
         android:background="@drawable/sharp_close_24px"
         android:clickable="true"
@@ -23,30 +27,92 @@
     <EditText
         android:id="@+id/mealTitleAdd"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
         android:layout_margin="10dp"
+        android:background="@drawable/rounded_border_eddittext"
+        android:drawableLeft="@drawable/restaurant_icon"
         android:ems="10"
         android:hint="Meal Name"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:drawablePadding="5dp"
+        android:paddingLeft="10dp" />
 
-    <EditText
-        android:id="@+id/mealDateAdd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:ems="10"
-        android:hint="Select date "
-        android:inputType="date" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="64dp">
+
+        <TextView
+            android:id="@+id/maxNumberGuests"
+            android:textStyle="bold"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="left"
+            android:layout_marginRight="30dp"
+            android:gravity="end"
+            android:text="How many guests?" />
+
+        <EditText
+            android:id="@+id/mealDateAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/rounded_border_eddittext"
+
+            android:drawableLeft="@drawable/date_icon"
+            android:drawablePadding="5dp"
+            android:ems="10"
+            android:gravity="center_vertical"
+            android:hint="When?"
+            android:inputType="date"
+            android:paddingLeft="10dp" />
+
+        <com.travijuu.numberpicker.library.NumberPicker
+            android:id="@+id/number_picker"
+            android:layout_width="142dp"
+            android:layout_height="43dp"
+            android:layout_alignEnd="@+id/mealDateAdd"
+            android:layout_alignRight="@+id/mealDateAdd"
+            android:layout_alignBottom="@id/maxNumberGuests"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="-174dp"
+            android:layout_marginRight="-174dp"
+            android:layout_marginBottom="-42dp"
+            numberpicker:focusable="false"
+            numberpicker:min="1"
+            numberpicker:unit="1"
+            numberpicker:value="-5" />
+    </RelativeLayout>
+
 
     <AutoCompleteTextView
         android:id="@+id/location"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
         android:layout_margin="10dp"
+        android:background="@drawable/rounded_border_eddittext"
+        android:drawableLeft="@drawable/location_icon"
+        android:drawablePadding="10dp"
         android:ems="10"
-        android:hint="Enter location " />
+        android:hint="Where?"
+
+
+        android:paddingLeft="5dp" />
 
     <TextView
+        android:paddingLeft="10dp"
+        android:paddingBottom="10dp"
+        android:textStyle="bold"
         android:id="@+id/ChooseRests"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -56,185 +122,121 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:paddingBottom="10dp"
         android:paddingLeft="20dp">
 
         <CheckBox
             android:id="@+id/Vegetarian"
-            android:layout_width="117dp"
+            android:layout_width="176dp"
             android:layout_height="wrap_content"
-            android:text="Vegetarian" />
-
+            android:button="@drawable/vegetarian_checkbox"
+            android:paddingLeft="5dp"
+            android:text="Vegetarian"
+            android:textSize="20dp" />
         <CheckBox
-            android:id="@+id/Halal"
-            android:layout_width="117dp"
-            android:layout_height="wrap_content"
-            android:text="Halal" />
+
+            android:id="@+id/vegan"
+            android:layout_width="183dp"
+            android:layout_height="match_parent"
+            android:button="@drawable/vegan_checkbox"
+            android:paddingLeft="10dp"
+            android:text="Vegan"
+            android:textSize="20dp" />
 
     </LinearLayout>
 
 
     <LinearLayout
+        android:paddingTop="5dp"
+        android:paddingBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingLeft="20dp">
 
+
         <CheckBox
-            android:id="@+id/vegan"
-            android:layout_width="117dp"
+            android:id="@+id/Halal"
+
+            android:layout_width="176dp"
             android:layout_height="wrap_content"
-            android:text="Vegan" />
+            android:button="@drawable/halal_checkbox"
+            android:includeFontPadding="true"
+            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
+            android:text="Halal"
+            android:textSize="20dp" />
 
         <CheckBox
             android:id="@+id/Kosher"
-            android:layout_width="117dp"
+            android:layout_width="181dp"
             android:layout_height="wrap_content"
-            android:text="Kosher" />
+            android:button="@drawable/kosher_checkbox"
+            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
+            android:text="Kosher"
+            android:textSize="20dp" />
+
+
     </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Max number of guests:" />
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="vertical"
-        android:gravity="center"
-        tools:context="com.travijuu.numberpicker.sample.MainActivity">
-
-        <com.travijuu.numberpicker.library.NumberPicker
-            android:id="@+id/number_picker"
-            android:layout_width="130dp"
-            android:layout_height="40dp"
-            numberpicker:min="1"
-            numberpicker:value="-5"
-            numberpicker:unit="1"
-            numberpicker:focusable="false"
-            />
-
-    </LinearLayout>
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:text="What should guests bring?" />
+        android:paddingLeft="10dp"
+        android:textStyle="bold"
+
+        android:text="What should your guests bring?" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="58dp">
 
         <CheckBox
-            android:id="@+id/checkBox_beer"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:id="@+id/icon_beer"
+            android:id="@+id/checkBox"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:paddingRight="18dp"
-            numberpicker:srcCompat="@drawable/beer" />
+            android:drawableLeft="@drawable/beer" />
 
         <CheckBox
-            android:id="@+id/checkBox_soda"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:id="@+id/icon_coke"
+            android:id="@+id/checkBox4"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:paddingRight="18dp"
-            numberpicker:srcCompat="@drawable/coke" />
+            android:drawableLeft="@drawable/soda" />
 
         <CheckBox
-            android:id="@+id/checkBox_cupcake"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:id="@+id/icon_cupcake"
+            android:id="@+id/checkBox3"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:paddingRight="18dp"
-            numberpicker:srcCompat="@drawable/cupcake" />
+            android:drawableLeft="@drawable/cupcake" />
 
         <CheckBox
-            android:id="@+id/checkBox_bouquet"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:id="@+id/icon_bouquet"
+            android:id="@+id/checkBox2"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            numberpicker:srcCompat="@drawable/bouquet" />
+            android:drawableLeft="@drawable/bouquet" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="10dp">
-
-        <TextView
-            android:id="@+id/beer_text"
-            android:layout_width="118dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="sans-serif"
-            android:text="Alcoholic Drinks"
-            android:textColor="#000000" />
-
-        <TextView
-            android:id="@+id/coke_text"
-            android:layout_width="103dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="sans-serif"
-            android:text="Soft Drinks"
-            android:textColor="#000000" />
-
-        <TextView
-            android:id="@+id/cupcake_text"
-            android:layout_width="67dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="sans-serif"
-            android:text="Dessert"
-            android:textColor="#000000" />
-
-        <TextView
-            android:id="@+id/bouquet_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="sans-serif"
-            android:text="Surprise Me!"
-            android:textColor="#000000" />
     </LinearLayout>
 
     <EditText
         android:id="@+id/mealDescriptionAdd"
-        android:layout_width="match_parent"
-        android:layout_height="133dp"
+        android:layout_width="377dp"
+        android:layout_height="120dp"
+
         android:layout_margin="10dp"
-        android:background="@color/TextWhite"
+        android:background="@drawable/squared_edit_text"
         android:gravity="top"
         android:hint="Describe your meal"
+
+
         android:inputType="text"
         android:padding="20dp" />
 
@@ -245,10 +247,14 @@
         android:layout_height="45dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@color/TextYellow"
+        android:background="@drawable/rounded_button_orange"
         android:clickable="true"
+        android:textStyle="bold"
         android:focusable="true"
-        android:text="Create Meal!"
+        android:textSize="25dp"
+        android:fontFamily="@string/common_signin_button_text"
+        android:text="Create Meal !"
+        android:backgroundTint="@color/colorAccent"
         android:textColor="@color/TextWhite" />
 
 </LinearLayout>
