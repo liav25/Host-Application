@@ -148,7 +148,12 @@ public class Server {
         return instance;
     }
 
-
+    /**
+     * Signs up a new user, with email and password, then creates an empty user in DB
+     * @param email - email
+     * @param pass - password
+     * @param act - activity to use for moving on to MainActivity
+     */
     public void signUp(String email, String pass, final Activity act){
         mAuth.createUserWithEmailAndPassword(email, pass)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -203,6 +208,7 @@ public class Server {
 
     /**
      * Creates a new user and adds it to DB
+     * @param old - old user to compare to current changes
      * @param disName - display name
      * @param university - his university
      * @param langs - languages he's speaking
@@ -239,32 +245,11 @@ public class Server {
         }
     }
 
-    public Boolean UserExists(final String uId){
-        final Boolean[] res = new Boolean[1];
 
-        DocumentReference docIdRef = db.collection(USERS_DATA_STRING).document(String.valueOf(uId));
-        docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        Log.d("exists", "Document exists!");
-                        res[0] = true;
-                    } else {
-                        Log.d("exists", "Document does not exist!");
-                        res[0] = false;
-                    }
-                } else {
-                    Log.d("exists", "Failed with: ", task.getException());
-                    res[0] = false;
-                }
-            }
-        });
-        return res[0];
-    }
-
-
+    /**
+     * Edit and change's the user's profile picture
+     * @param image - profile picture uri to update
+     */
     public void editProfilePic(Uri image){
         DocumentReference busRef = db.collection(USERS_DATA_STRING).document(MainActivity.userId);
 
@@ -279,8 +264,15 @@ public class Server {
     }
 
 
-
-
+    /**
+     * Gets the user from the DB and downloads it to a User object
+     * @param userId - user ID
+     * @param user - user reference to assign new user to
+     * @param name - view to display user name at
+     * @param uni - view to display user university at
+     * @param langs - view to display user languages at
+     * @param img - view to display user profile picture at
+     */
     public void getUser(final String userId, final User[] user, final TextView name,
                         final TextView uni, final TextView langs, final ImageView img){
 
@@ -317,6 +309,11 @@ public class Server {
 
     }
 
+    /**
+     * Downloads a user's profile picture
+     * @param img - imgview to put downloaded pictrue at
+     * @param userId  - user's ID
+     */
     public void downloadProfilePic(final ImageView img, final String userId) {
         try {
             StorageReference ref = storageReference.child(USER_PIC_PATH + userId);
@@ -441,30 +438,7 @@ public class Server {
         return false;
     }
 
-    public Boolean MealExists(final int mealId){
-        final Boolean[] res = new Boolean[1];
 
-        DocumentReference docIdRef = db.collection(MEALS_STRING).document(String.valueOf(mealId));
-        docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        Log.d("exists", "Document exists!");
-                        res[0] = true;
-                    } else {
-                        Log.d("exists", "Document does not exist!");
-                        res[0] = false;
-                    }
-                } else {
-                    Log.d("exists", "Failed with: ", task.getException());
-                    res[0] = false;
-                }
-            }
-        });
-        return res[0];
-    }
 
 
     /**
@@ -485,6 +459,12 @@ public class Server {
         return true;
     }
 
+
+    /**
+     * Sets the "rating" notification after joining a meal
+     * @param meal - meal just joined to
+     * @param cont - context to use in order to create intent
+     */
     public void setNotification(Meal meal, Context cont){
         createNotificationChannel(cont);
         Intent intent = new Intent(cont, HowWasItPop.class);
@@ -511,6 +491,10 @@ public class Server {
 
     }
 
+    /**
+     * Helper function to create notification channel
+     * @param cont - context to use
+     */
     private void createNotificationChannel(Context cont) {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
@@ -584,7 +568,12 @@ public class Server {
         return standardRestrictions;
     }
 
-
+    /**
+     * Downloads a specific meal according to its ID
+     * Does not work since its not asynchronous
+     * @param mId - meal id
+     * @return - Meal object
+     */
     public Meal getMeal(int mId)
     {
 
@@ -619,6 +608,11 @@ public class Server {
         return meal[0];
     }
 
+    /**
+     * Gets the list of meals and puts it in the desired list and adapter
+     * @param meals - list to insert meals from server to
+     * @param adapt - adapter to refresh after changing the list
+     */
     public void getMeals(final ArrayList<Meal> meals, final MealsListAdapter adapt) {
 
         db.collection(MEALS_STRING)
@@ -644,12 +638,6 @@ public class Server {
     }
 
 
-    public Boolean isRestricted(int mealId, String restriction){
-        if (getMeal(mealId) != null){
-            return getMeal(mealId).isRestricted(restriction);
-        }
-        return false;
-    }
 
 
     public void getUsername(String uId, final TextView toShow) {
@@ -673,6 +661,13 @@ public class Server {
         });
     }
 
+    /**
+     * Ranks a given user
+     * @param rank - int from 1 to 5 according to the tnaking
+     * @param userId - user id to rank
+     * @param mealId - meal that userId was the host of
+     * @param cont - Context to use in order to move intents
+     */
     public void setRanking(final int rank, final String userId, int mealId, Context cont){
         DocumentReference busRef = db.collection(USERS_DATA_STRING).document(userId);
 

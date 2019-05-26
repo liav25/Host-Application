@@ -149,5 +149,9 @@ public class User {
         this.userId = uid;
     }
 
+    /**
+     * Setter of username
+     * @param us  - username to set
+     */
     public void setUsername(String us){this.username = us;}
 }
