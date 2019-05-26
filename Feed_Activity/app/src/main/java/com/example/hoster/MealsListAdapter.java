@@ -108,7 +108,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         holder.profile_pics.setAdapter(adapter);
         holder.profile_pics.setHorizontalScrollBarEnabled(true);
 
-        
+
         if (getItem(position).getHostId().equals(MainActivity.userId)) {
             holder.host.setText("You");
         } else {
