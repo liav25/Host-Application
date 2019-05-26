@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_pic"
+        android:layout_width="60dip"
+        android:layout_height="60dip"
+        android:src="@drawable/profile_picture"
+        app:civ_border_color="#ffffff"
+        app:civ_border_width="1dp"/>
+
+
+</android.support.constraint.ConstraintLayout>

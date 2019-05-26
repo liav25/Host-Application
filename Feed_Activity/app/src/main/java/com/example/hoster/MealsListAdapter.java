@@ -4,11 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -30,7 +32,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         TextView date;
         TextView host;
         Button joinBU;
-
+        ListView profile_pics;
 
 
         private void setButCol(Meal meal){
@@ -67,7 +69,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         String date = getItem(position).getTime();
         String description = getItem(position).getDescription();
         String host = getItem(position).getHostId();
-
+        ArrayList<String> guests = getItem(position).getGuests();
 
 
         //create the view result for showing animation
@@ -85,6 +87,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
             holder.description = (TextView) convertView.findViewById(R.id.card_description);
             holder.host = (TextView) convertView.findViewById(R.id.author);
             holder.joinBU  = (Button)  convertView.findViewById(R.id.JoinButton);
+            holder.profile_pics = (ListView)convertView.findViewById(R.id.profile_pics);
 
             result = convertView;
 
@@ -99,8 +102,14 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         holder.date.setText(date);
         holder.description.setText(description);
         holder.host.setText(host);
+        ProfilePicAdapter adapter = new ProfilePicAdapter(mContext, R.layout.profile_pic, guests);
 
-        if (getItem(position).getHostId().equals(MainActivity.userId)) { // todo - find another way to get your user id
+        holder.profile_pics = holder.profile_pics.findViewById(R.id.profile_pics);
+        holder.profile_pics.setAdapter(adapter);
+        holder.profile_pics.setHorizontalScrollBarEnabled(true);
+
+        
+        if (getItem(position).getHostId().equals(MainActivity.userId)) {
             holder.host.setText("You");
         } else {
             Server.getInstance().getUsername(getItem(position).getHostId(), holder.host);

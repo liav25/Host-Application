@@ -16,9 +16,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
     private Context context;
-    private ArrayList<Integer> arrayList = new ArrayList<Integer>();
+    private ArrayList<String> arrayList;
 
-    public DataAdapter(Context context, ArrayList<Integer> imagesArray) {
+    public DataAdapter(Context context, ArrayList<String> imagesArray) {
         this.context = context;
         arrayList = imagesArray;
     }
@@ -33,7 +33,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        holder.imageView.setImageResource(arrayList.get(position));
+        Server.getInstance().downloadProfilePic(holder.imageView, arrayList.get(position));
 
         if (position == 3) {
             holder.relativeLayout.setVisibility(View.VISIBLE);
@@ -63,6 +63,14 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
                     .findViewById(R.id.profile_image);
 
 
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    
+                }
+            });
         }
+
+
     }
 }
