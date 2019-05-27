@@ -15,15 +15,16 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="20dp"
-        android:background="@color/BackgroundPink"
-        android:orientation="horizontal"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp">
+        android:layout_height="match_parent">
+        <!--android:layout_height="300dp"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginTop="50dp"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:background="@color/BackgroundPink"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:paddingLeft="15dp"-->
+        <!--android:paddingRight="15dp">-->
 
         <Button
             android:id="@+id/closeRevPopUpButton"
@@ -61,9 +62,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="60dp"
+        android:layout_marginStart="40dp"
         android:layout_marginLeft="70dp"
-        android:layout_marginTop="184dp"
+        android:layout_marginTop="120dp"
         android:layout_marginEnd="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginBottom="40dp"
@@ -78,9 +79,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="120dp"
+        android:layout_marginStart="110dp"
         android:layout_marginLeft="140dp"
-        android:layout_marginTop="184dp"
+        android:layout_marginTop="120dp"
         android:layout_marginEnd="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginBottom="40dp"
@@ -90,14 +91,14 @@
 
     <ImageButton
         android:id="@+id/pepper5"
-        android:layout_width="50dp"
+        android:layout_width="60dp"
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="280dp"
+        android:layout_marginStart="260dp"
         android:layout_marginLeft="71dp"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="120dp"
         android:layout_marginEnd="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginBottom="40dp"
@@ -112,12 +113,11 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="170dp"
+        android:layout_marginStart="165dp"
         android:layout_marginLeft="71dp"
-        android:layout_marginTop="184dp"
+        android:layout_marginTop="120dp"
         android:layout_marginEnd="40dp"
         android:layout_marginRight="40dp"
-        android:layout_marginBottom="40dp"
         android:background="@drawable/pepper3"
         android:clickable="true"
         android:focusable="true" />
@@ -129,9 +129,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="230dp"
+        android:layout_marginStart="212dp"
         android:layout_marginLeft="71dp"
-        android:layout_marginTop="190dp"
+        android:layout_marginTop="127dp"
         android:layout_marginEnd="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginBottom="40dp"
@@ -156,13 +156,16 @@
         android:id="@+id/submitRankButton"
         android:layout_width="280dp"
         android:layout_height="45dp"
-        android:layout_marginLeft="65dp"
-        android:layout_marginTop="270dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="200dp"
         android:background="@color/TextYellow"
         android:clickable="true"
         android:focusable="true"
         android:gravity="center"
         android:text="Submit your feedback"
-        android:textColor="@color/TextWhite" />
+        android:textColor="@color/TextWhite"
+        android:layout_marginStart="30dp" />
+
+    <!--// show clicking indication-->
 
 </RelativeLayout>

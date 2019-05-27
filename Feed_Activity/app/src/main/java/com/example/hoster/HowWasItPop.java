@@ -25,15 +25,15 @@ public class HowWasItPop extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_how_was_it_pop);
 
-//        // set view
-//        DisplayMetrics dm = new DisplayMetrics();
-//        getWindowManager().getDefaultDisplay().getMetrics(dm);
-//
-//        int width = dm.widthPixels;
-//        int height = dm.heightPixels;
-//
-//        // percentage on screen the popup will take
-//        getWindow().setLayout((int) (width * .8), (int) (height * .6));
+        // set view
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+        int width = dm.widthPixels;
+        int height = dm.heightPixels;
+
+        // percentage on screen the popup will take
+        getWindow().setLayout((int) (width * .85), (int) (height * .4));
 
         Bundle b = getIntent().getExtras();
         final String userId = b.getString("userToRate");
