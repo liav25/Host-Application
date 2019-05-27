@@ -100,6 +100,7 @@ public class Server {
     private Context main;
     FirebaseStorage storage;
     StorageReference storageReference;
+    HashMap<String, Bitmap> pics;
 
     FirebaseFirestore db;
     FirebaseDatabase mDb;
@@ -115,6 +116,7 @@ public class Server {
     private Server()
     {
         mDb = FirebaseDatabase.getInstance();
+        pics = new HashMap<>();
 
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
@@ -315,25 +317,31 @@ public class Server {
      * @param userId  - user's ID
      */
     public void downloadProfilePic(final ImageView img, final String userId) {
-        try {
-            StorageReference ref = storageReference.child(USER_PIC_PATH + userId);
+        if (pics.containsKey(userId)){ // already downloaded
+            img.setImageBitmap(pics.get(userId));
+        } else { // download from server
 
-            final File localFile = File.createTempFile("Images", "bmp");
+            try {
+                StorageReference ref = storageReference.child(USER_PIC_PATH + userId);
 
-            ref.getFile(localFile).addOnSuccessListener(new OnSuccessListener < FileDownloadTask.TaskSnapshot >() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Bitmap my_image = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    img.setImageBitmap(my_image);
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Log.d(TAG, "Error downloading Image");
-                }
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
+                final File localFile = File.createTempFile("Images", "bmp");
+
+                ref.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        Bitmap my_image = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                        pics.put(userId, my_image);
+                        img.setImageBitmap(my_image);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d(TAG, "Error downloading Image");
+                    }
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
