@@ -120,6 +120,8 @@ public class edit_profile extends AppCompatActivity {
                             Uri downloadUrl = imageUri;
                             fileUrl = downloadUrl.toString();
                             Server.getInstance().editProfilePic(downloadUrl);
+                            Server.getInstance().pics.remove(MainActivity.userId); // then it will be refreshed
+                            // in UI
                             Server.getInstance().downloadProfilePic(MainActivity.profilePicture,
                                     MainActivity.userId);
 
