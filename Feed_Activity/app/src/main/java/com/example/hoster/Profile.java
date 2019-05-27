@@ -62,6 +62,7 @@ public class Profile extends AppCompatActivity {
 
         langs = (TextView) findViewById(R.id.profile_langs);
         Server.getInstance().getUser(uId, user, name, uni, langs, profile_image);
+        Server.getInstance().downloadProfilePic(profile_image, uId);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
