@@ -276,39 +276,65 @@ public class Server {
      * @param img - view to display user profile picture at
      */
     public void getUser(final String userId, final User[] user, final TextView name,
-                        final TextView uni, final TextView langs, final ImageView img){
+                        final TextView uni, final TextView langs, final ImageView img
+                        , final ArrayList<String> mutual, final Profile profile_act){
 
-        DocumentReference docRef = db.collection(USERS_DATA_STRING).document(userId);
+        final DocumentReference docRef = db.collection(USERS_DATA_STRING).document(userId);
+        DocumentReference self = db.collection(USERS_DATA_STRING).document(MainActivity.userId);
+
 
         /* gets object from server  */
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        self.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful())
-                {
-                    DocumentSnapshot document = task.getResult();
-                    if(document != null && document.exists())
-                    {
-                        User got =  document.toObject(User.class);
-                        user[0] = got;
-                        name.setText(got.getUsername());
-                        uni.setText(got.getUniversity());
-                        langs.setText(Profile.getLangsString(got.getLangs()));
-                        if (got.getImage() != null){
-                            if(!got.getImage ().equals("")){
-                                downloadProfilePic(img, userId);
+                if(task.isSuccessful()) {
+                    DocumentSnapshot myProfile = task.getResult();
+                    if (myProfile != null && myProfile.exists()) {
+                        User personal_prof = myProfile.toObject(User.class); // downloads personal interactions
+                        final ArrayList<String> personal_interactions = personal_prof.getMutual();
+
+                        /* gets object from server  */
+                        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    DocumentSnapshot document = task.getResult();
+                                    if (document != null && document.exists()) {
+                                        User got = document.toObject(User.class);
+                                        user[0] = got;
+                                        name.setText(got.getUsername());
+                                        uni.setText(got.getUniversity());
+                                        langs.setText(Profile.getLangsString(got.getLangs()));
+                                        if (got.getImage() != null) {
+                                            if (!got.getImage().equals("")) {
+                                                Server.getInstance().downloadProfilePic(img, userId);
+                                            }
+
+                                        }
+                                        for (String id : got.getMutual()) {
+                                            if (personal_interactions.contains(id) &&!id.equals(userId)
+                                            && !id.equals(MainActivity.userId)) {
+                                                // we don't want to get these users
+                                                mutual.add(id);
+                                            }
+                                        }
+
+                                        if (profile_act!= null){
+                                            profile_act.setImages();
+                                        }
+
+
+                                    } else {
+                                        System.out.println("no user found");
+                                    }
+                                }
                             }
-
-                        }
-
-                    }
-                    else
-                    {
-                        System.out.println("no user found");
+                        });
                     }
                 }
             }
         });
+
 
     }
 
@@ -484,6 +510,9 @@ public class Server {
 
     }
 
+
+
+
     /**
      * Sets the "rating" notification after joining a meal
      * @param meal - meal just joined to
@@ -648,7 +677,8 @@ public class Server {
                         if (task.isSuccessful()) {
                             MainActivity.meals.clear();
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                meals.add(document.toObject(Meal.class));
+                                Meal me = document.toObject(Meal.class);
+                                meals.add(me);
                                 Log.d("getMeals", document.getId() + " => " + document.getData());
                             }
 

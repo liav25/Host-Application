@@ -81,7 +81,8 @@ public class edit_profile extends AppCompatActivity {
         langs = findViewById(R.id.editable_profile_langs);
 
 
-        Server.getInstance().getUser(uId, user, name, uni, langs, edit_profile_pic);
+        Server.getInstance().getUser(uId, user, name, uni, langs, edit_profile_pic, new ArrayList<String>(),
+                null);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
