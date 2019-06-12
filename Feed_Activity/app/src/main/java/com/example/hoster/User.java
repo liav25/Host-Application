@@ -13,6 +13,8 @@ public class User {
     private String userId;
     private String university;
     private ArrayList<String> langs;
+    private ArrayList<String> mutual;
+
     private int num_of_raters;
     private int rating_sum;
 
@@ -33,6 +35,7 @@ public class User {
 
         this.langs = new ArrayList<String>();
         this.langs.addAll(langs);
+        this.mutual = new ArrayList<String>();
 
         this.userId = userId;
         this.rating_sum = 0;
@@ -47,6 +50,7 @@ public class User {
         this.langs = new ArrayList<String>();
         this.num_of_raters = 0;
         this.rating_sum = 0;
+        this.mutual = new ArrayList<String>();
 
     }
 
@@ -154,4 +158,16 @@ public class User {
      * @param us  - username to set
      */
     public void setUsername(String us){this.username = us;}
+
+    /**
+     * setter for mutual friends list
+     * @param mutual - mutual friends list to set
+     */
+    public void setMutual(ArrayList<String> mutual) { this.mutual = mutual;}
+
+    /**
+     * @return - mutual friends list
+     */
+    public ArrayList<String> getMutual(){return this.mutual;}
+
 }

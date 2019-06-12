@@ -23,7 +23,7 @@
 
             android:id="@+id/yellow"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
+            android:layout_height="320dp"
             android:background="@color/TextYellow"
             android:orientation="vertical">
 
@@ -156,6 +156,98 @@
 
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <TextView
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mutual Connections"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp" />
+    <FrameLayout
+        android:id="@+id/mutual_profile_pics"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/JoinButton"
+        android:layout_marginStart="2dp"
+        android:layout_marginBottom="2dp"
+        android:isScrollContainer="true"
+        >
 
 
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_stud1"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:src="@drawable/profile_picture"
+            app:civ_border_color="#ffffff"
+            app:civ_border_width="1dp"
+
+            />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_stud2"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_marginLeft="65dp"
+            android:src="@drawable/profile_picture"
+            app:civ_border_color="#ffffff"
+            app:civ_border_width="1dp"
+
+            />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_stud3"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_marginLeft="130dp"
+
+            android:src="@drawable/profile_picture"
+            app:civ_border_color="#ffffff"
+            app:civ_border_width="1dp"
+
+            />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_stud4"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:src="@drawable/profile_picture"
+            app:civ_border_color="#ffffff"
+            app:civ_border_width="1dp"
+            android:layout_marginLeft="195dp"
+
+
+            />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_stud5"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:src="@drawable/profile_picture"
+            app:civ_border_color="#ffffff"
+            android:layout_marginLeft="260dp"
+
+            app:civ_border_width="1dp" />
+
+
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/see_more_mutual"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:src="@drawable/see_more_users"
+            app:civ_border_color="#ffffff"
+            app:civ_border_width="1dp"
+            android:layout_marginLeft="325dp"
+
+            />
+
+    </FrameLayout>
+    </LinearLayout>
 </LinearLayout>

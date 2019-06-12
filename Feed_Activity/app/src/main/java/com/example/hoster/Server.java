@@ -295,11 +295,12 @@ public class Server {
                         uni.setText(got.getUniversity());
                         langs.setText(Profile.getLangsString(got.getLangs()));
                         if (got.getImage() != null){
-                            if(!got.getImage().equals("")){
+                            if(!got.getImage ().equals("")){
                                 downloadProfilePic(img, userId);
                             }
 
                         }
+
                     }
                     else
                     {
@@ -320,7 +321,6 @@ public class Server {
         if (pics.containsKey(userId)){ // already downloaded
             img.setImageBitmap(pics.get(userId));
         } else { // download from server
-
             try {
                 StorageReference ref = storageReference.child(USER_PIC_PATH + userId);
 
@@ -331,7 +331,9 @@ public class Server {
                     public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                         Bitmap my_image = BitmapFactory.decodeFile(localFile.getAbsolutePath());
                         pics.put(userId, my_image);
+
                         img.setImageBitmap(my_image);
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -462,11 +464,25 @@ public class Server {
             @Override
             public void onSuccess(Void aVoid) {
                 setNotification(meal, context); // sets notification
+                setMutuals(meal.getGuests());
             }
         });
         return true;
     }
 
+    private void setMutuals(ArrayList<String> membersOfMeal){
+        DocumentReference busRef = db.collection(USERS_DATA_STRING).document(MainActivity.userId);
+        try{
+            for (String id : membersOfMeal) {
+                busRef.update("mutual", FieldValue.arrayUnion(id));
+            }
+        } catch (Exception e) {
+            ArrayList<String> arr = new ArrayList<>(membersOfMeal);
+            busRef.update("mutual", arr);
+
+        }
+
+    }
 
     /**
      * Sets the "rating" notification after joining a meal

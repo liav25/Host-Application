@@ -306,17 +306,6 @@ public class Meal implements Serializable {
     }
 
 
-    /**
-     * this function get all the guests that signed to the meal
-     * and return the list of their photos.
-     * @return guests photos list
-     */
-    public ArrayList<String> getGuestsPictures(){
-        ArrayList<String> guestsPhotos = new ArrayList<>();
-        for(String guest: guests){
-            guestsPhotos.add(guest);
-        }
-        return guestsPhotos;
-    }
+
 
 }
