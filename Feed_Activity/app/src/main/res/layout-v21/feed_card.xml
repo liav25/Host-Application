@@ -169,11 +169,11 @@
 
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/student6"
+                    android:id="@+id/see_more_in_card"
                     android:layout_width="60dip"
                     android:layout_height="60dip"
                     android:layout_marginLeft="175dip"
-                    android:src="@drawable/profile_picture"
+                    android:src="@drawable/see_more_users"
                     app:civ_border_color="#ffffff"
                     app:civ_border_width="1dp"
 

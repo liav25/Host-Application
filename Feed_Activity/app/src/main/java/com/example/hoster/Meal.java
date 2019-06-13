@@ -294,10 +294,15 @@ public class Meal implements Serializable {
         return tags.contains(tag);
     }
 
-
+    /**
+     * @return - true if meal is full. false otherwise
+     */
     public Boolean isFull() { return curNumberOfGuests() >= maxGuests; }
 
-
+    /**
+     * @param restr - food restriction
+     * @return true if meal contains restriction. false otherwise
+     */
     public Boolean isRestricted(String restr){
         if (this.restrictions.containsKey(restr)){
             return this.restrictions.get(restr); // true or false depends on map

@@ -178,13 +178,17 @@ public class Profile extends AppCompatActivity {
         if (!uId.equals(MainActivity.userId) && mutuals.size() >= 1){
             if (mutuals.size() == 6){
                 more_profiles.setVisibility(View.VISIBLE);
-//
-//            more_profiles.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    onClickImage(mutuals.get(5), Profile.this);
-//                }
-//            });
+
+            more_profiles.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle b = new Bundle();
+                    b.putStringArrayList("user_ids", mutuals); //Your id
+                    Intent more_profiles = new Intent(Profile.this, see_all_people_activity.class);
+                    more_profiles.putExtras(b); //Put your id to your next Intent
+                    Profile.this.startActivity(more_profiles);
+                }
+            });
                 // TODO - send to a different activity of array with all members of meal
             } else {
                 more_profiles.setVisibility(View.INVISIBLE);

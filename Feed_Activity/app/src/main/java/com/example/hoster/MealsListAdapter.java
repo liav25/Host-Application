@@ -59,13 +59,16 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
 
 
         private void setImages(final ArrayList<String> guests, final Context mContext){
-            if (guests.size() == 6){
+            if (guests.size() >= 6){
                 img6.setVisibility(View.VISIBLE);
-                Server.getInstance().downloadProfilePic(img6, guests.get(5));
                 img6.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        onClickImage(guests.get(5), mContext);
+                        Bundle b = new Bundle();
+                        b.putStringArrayList("user_ids", guests); //Your id
+                        Intent more_profiles = new Intent(mContext, see_all_people_activity.class);
+                        more_profiles.putExtras(b); //Put your id to your next Intent
+                        mContext.startActivity(more_profiles);
                     }
                 });
             } else {
@@ -192,7 +195,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
             holder.img3 = convertView.findViewById(R.id.student3);
             holder.img4 = convertView.findViewById(R.id.student4);
             holder.img5 = convertView.findViewById(R.id.student5);
-            holder.img6 = convertView.findViewById(R.id.student6);
+            holder.img6 = convertView.findViewById(R.id.see_more_in_card);
             result = convertView;
 
             convertView.setTag(holder);
