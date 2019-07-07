@@ -9,188 +9,177 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="@color/TextYellow"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="14dp">
-
+        android:background="@color/TextYellow">
     </android.support.v7.widget.Toolbar>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp"></LinearLayout>
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="match_parent"
-        android:layout_height="350dp"
-
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="70dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="468dp"
-        android:src="@drawable/meal" />
 
     <!--TODO: define @string/mealPhoto-->
     <!--TBD: Should we show a photo if we don't support uploads yet?-->
     <!--android:contentDescription="" -->
 
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/meal_toolbar"
-        android:layout_marginTop="0dp">
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="207dp"
-            android:layout_height="64dp"
-            android:layout_marginTop="160dp"
-            android:gravity="center_vertical"
-            android:text="Italian Dinner"
-            android:textAlignment="center"
-            android:textColor="@color/colorAccent"
-            android:textSize="22sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="125dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="160dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/TextYellow"
-            android:text="@string/JoinMealButton"
-            android:textColor="@color/TextWhite" />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="305dp">
-
-        <TextView
-            android:id="@+id/mealPageDateTime"
-            android:layout_width="192dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginRight="12dp"
-            android:layout_marginBottom="8dp"
-            android:ems="10"
-            android:gravity="center"
-            android:text="11/1/2011 , 20:00"
-            android:textAlignment="center"
-            android:textSize="18sp" />
-        <!--TODO: android:text="@string/meal_date"-->
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="38dp"
-            android:layout_height="44dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:foregroundGravity="center_vertical"
-            app:srcCompat="@drawable/location_pink_profile" />
-
-        <TextView
-            android:id="@+id/mealFoodRestrictions2"
-            android:layout_width="110dp"
-            android:layout_height="54dp"
-
-            android:gravity="center"
-            android:paddingRight="20dp"
-            android:paddingBottom="10dp"
-            android:text="Nachla'aot"
-            android:textAlignment="center"
-            android:textSize="18sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="350dp">
-
-        <TextView
-            android:id="@+id/MealHostName"
-            android:layout_width="182dp"
-            android:layout_height="65dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:gravity="center_vertical"
-            android:padding="20dp"
-            android:text="Host:"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="400dp">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/mealFoodRestrictions6"
+            android:id="@+id/cover"
             android:layout_width="match_parent"
-            android:layout_height="59dp"
-            android:orientation="horizontal">
+            android:layout_height="180sp"
+            android:background="@drawable/meal"
+            />
 
-        </android.support.v7.widget.RecyclerView>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="450dp">
-
-        <TextView
-            android:id="@+id/mealFoodRestrictions"
-            android:layout_width="360dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginBottom="8dp"
-            android:gravity="center_vertical"
-            android:padding="20dp"
-            android:text="Food Restrictions: Vegan, Kosher"
-            android:textSize="18sp"
-            app:layout_constraintVertical_bias="0.649" />
-    </LinearLayout>
+            android:layout_below="@id/cover"
+            android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="500dp">
+            <RelativeLayout
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/mealFoodRestrictions7"
-            android:layout_width="360dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:gravity="center_vertical"
-            android:padding="20dp"
-            android:text="Free text description will come here "
-            android:textSize="18sp" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="207dp"
+        android:layout_height="64dp"
+        android:fontFamily="@font/open_sans"
+        android:gravity="center"
+        android:text="Italian Dinner"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+
+                <ImageButton
+                    android:id="@+id/pencil_meal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="#00FFFFFF"
+                    app:srcCompat="@drawable/edit_pen_grey" />
+</RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/mealPageDateTime"
+                    android:layout_width="192dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="5dp"
+                    android:ems="10"
+                    android:gravity="center_horizontal"
+                    android:text="11/1/2011 , 20:00"
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+>
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="38dp"
+                        android:layout_height="44dp"
+                        app:srcCompat="@drawable/location_pink_profile" />
+
+                    <TextView
+                        android:id="@+id/mealFoodRestrictions2"
+                        android:layout_width="110dp"
+                        android:layout_height="54dp"
+                        android:gravity="center"
+                        android:paddingBottom="10dp"
+                        android:text="Nachla'aot"
+
+                        android:textAlignment="center"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+                <!--TODO: android:text="@string/meal_date"-->
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/MealHostName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Host:"
+                android:textSize="18sp"
+                android:layout_marginHorizontal="20dp"
+                android:textStyle="bold" />
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/mealFoodRestrictions6"
+                android:layout_width="match_parent"
+                android:layout_height="59dp"
+                android:orientation="horizontal"
+                android:layout_margin="10dp">
+
+            </android.support.v7.widget.RecyclerView>
+
+
+            <TextView
+                android:id="@+id/mealFoodRestrictions"
+                android:layout_width="360dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="8dp"
+                android:padding="5dp"
+                android:text="Food Restrictions: Vegan, Kosher"
+                android:textSize="18sp"
+                app:layout_constraintVertical_bias="0.649" />
+
+
+            <TextView
+                android:id="@+id/mealFoodRestrictions7"
+                android:layout_width="360dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                android:text="Free text description will come here "
+                android:textSize="18sp" />
+
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="90dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="90dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_button"
+                android:clickable="true"
+                android:drawablePadding="10dp"
+                android:focusable="true"
+                android:includeFontPadding="true"
+                android:inputType="textCapSentences"
+                android:text="Join Meal !"
+                android:textColor="@color/TextWhite"
+                android:textSize="15sp" />
+
+
+        </LinearLayout>
+    </RelativeLayout>
+
 </RelativeLayout>

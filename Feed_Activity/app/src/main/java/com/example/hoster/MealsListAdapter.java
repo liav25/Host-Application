@@ -45,10 +45,10 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
             if (meal.isMember(MainActivity.userId)){
                 joinBU.setText("Leave");
 
-                joinBU.setBackgroundColor(Color.GRAY);
+                joinBU.setBackgroundResource(R.drawable.rounded_button_gray);
             } else if (meal.isFull()){ // meal is full
                 joinBU.setText("Full");
-                joinBU.setBackgroundColor(Color.GRAY);
+                joinBU.setBackgroundResource(R.drawable.rounded_button_gray);
             } else {
                 joinBU.setText("Join Meal");
                 joinBU.setTextColor(Color.WHITE);

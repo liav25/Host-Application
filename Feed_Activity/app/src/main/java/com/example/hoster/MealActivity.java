@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class MealActivity extends AppCompatActivity {
@@ -24,6 +25,9 @@ public class MealActivity extends AppCompatActivity {
     private TextView restrictions;
     private RecyclerView guestsRecycle;
     private TextView loc;
+    private ImageButton pen;
+
+
 //    private ArrayList<String> guests;
 
 //    private ArrayList<Integer> guests_pics;
@@ -36,6 +40,8 @@ public class MealActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(this.getResources().getColor(R.color.TextYellow));
 
 
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.meal_toolbar);
         toolbar.setBackgroundColor(getResources().getColor(R.color.TextYellow));
         setSupportActionBar(toolbar);
@@ -45,6 +51,7 @@ public class MealActivity extends AppCompatActivity {
 
         Bundle b = getIntent().getExtras();
         final String mealId = b.getString("mealId");
+
         final Meal meal = (Meal) b.getSerializable("meal");
         title = (TextView)findViewById(R.id.textView4);
         title.setText(meal.getTitle());
@@ -92,6 +99,31 @@ public class MealActivity extends AppCompatActivity {
         loc.setText(meal.getLocation());
 
         joinmeal = (Button)findViewById(R.id.button);
+        pen = findViewById(R.id.pencil_meal);
+
+        try {
+            if (!hostId.equals(MainActivity.userId)) {
+                pen.setEnabled(false);
+                pen.setVisibility(View.INVISIBLE);
+            } else {
+                pen.setVisibility(View.VISIBLE);
+                pen.setEnabled(true);
+            }
+        }
+        catch (NullPointerException e){
+            System.out.println("********** User Id"+MainActivity.userId);
+        }
+
+        pen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle b = new Bundle();
+                Intent editProfileIntent = new Intent(getApplicationContext(), edit_profile.class);
+                editProfileIntent.putExtras(b); //Put your id to your next Intent
+                startActivity(editProfileIntent);
+                finish();
+            }
+        });
 
         setColorOfButton(meal);
 

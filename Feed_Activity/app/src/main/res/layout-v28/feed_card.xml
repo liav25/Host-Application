@@ -14,7 +14,8 @@
         android:layout_marginHorizontal="8dp"
         android:divider="@android:color/transparent"
         android:dividerHeight="5.0px"
-        android:layout_marginBottom="6dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
         android:elevation="6dp"
         app:cardCornerRadius="8dp"
         >
@@ -32,8 +33,8 @@
                 android:layout_height="wrap_content"
                 android:inputType="textCapSentences"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="0dp"
                 android:autoSizeMaxTextSize="36dp"
                 android:fontFamily="@font/open_sans"
                 android:maxLines="1"
@@ -41,7 +42,7 @@
                 android:text="@string/this_is_card_title"
                 android:textAllCaps="true"
                 android:textColor="@color/fui_bgEmail"
-                android:textSize="23dp"
+                android:textSize="20sp"
                 android:textStyle="bold"
  />
 
@@ -53,11 +54,11 @@
                 android:fontFamily="@font/open_sans"
                 android:maxLines="2"
                 android:minLines="1"
-                android:paddingLeft="20dp"
+                android:paddingStart="20dp"
                 android:scrollHorizontally="true"
                 android:text="This is meal date bla bla bla..."
                 android:textColor="#7c7c7c"
-                android:textSize="16dp"
+                android:textSize="10sp"
 
                 android:textStyle="bold" />
 
@@ -69,12 +70,11 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/open_sans"
                 android:maxLines="2"
-                android:minLines="2"
+                android:minLines="1"
                 android:paddingLeft="20dp"
                 android:scrollHorizontally="true"
                 android:text="This is meal description bla bla bla..."
                 android:textColor="#777777"
-
                 android:textSize="16sp" />
 
 
@@ -84,8 +84,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="8sp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:fontFamily="@font/open_sans"
@@ -101,8 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/JoinButton"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="1dp"
-                android:layout_marginBottom="-4dp">
+                android:layout_marginBottom="0dp">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/student1"
@@ -175,20 +174,21 @@
             <Button
                 android:id="@+id/JoinButton"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginStart="80dp"
+                android:layout_marginEnd="90dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/rounded_button"
                 android:clickable="true"
                 android:focusable="true"
                 android:includeFontPadding="true"
                 android:drawablePadding="10dp"
+                android:inputType="textCapSentences"
                 android:text="Join Meal !"
                 android:textColor="@color/TextWhite"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 
