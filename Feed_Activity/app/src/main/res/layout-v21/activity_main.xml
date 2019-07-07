@@ -48,22 +48,22 @@
         <ImageButton
 
             android:id="@+id/addMealButton"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_alignBottom="@+id/mealCardList"
+            android:layout_marginBottom="-10dp"
             android:layout_alignParentRight="true"
             android:layout_centerHorizontal="true"
             android:layout_marginRight="13dp"
-            android:layout_marginBottom="10dp"
             android:adjustViewBounds="true"
-            android:background="@color/transparent"
+            android:backgroundTint="@color/transparent"
             android:clickable="true"
+            android:elevation="7dp"
             android:cropToPadding="true"
-            android:elevation="4dp"
             android:focusable="true"
-            android:paddingBottom="10dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/add_meal_emo" />
+            android:scaleType="fitCenter"
+            android:outlineProvider="none"
+            android:src="@drawable/addmeal4" />
 
             <ListView
                 android:id="@+id/mealCardList"
@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="65dp"
                 android:divider="@color/transparent"
-                android:dividerHeight="20dp"
+                android:dividerHeight="5dp"
        />
 
     </RelativeLayout>
