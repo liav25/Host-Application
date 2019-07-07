@@ -2,64 +2,68 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
 
 >
 
     <android.support.v7.widget.CardView
         android:id="@+id/meal_card"
-        android:layout_width="350dp"
+        android:layout_width="380dp"
         android:layout_height="300dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        app:cardCornerRadius="5dp"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="4dp"
         android:clickable="true"
+        android:outlineAmbientShadowColor="#c1c1c1"
+        android:outlineSpotShadowColor="#c1c1c1"
         android:focusable="true"
->
+        android:paddingTop="15dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="4dp"
+        app:contentPaddingBottom="15dp"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@drawable/card_orange"
->
+            android:background="#fcfcfc"
+            android:orientation="vertical">
 
-                <TextView
-                    android:textAllCaps="true"
-                    android:id="@+id/card_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:autoSizeMaxTextSize="36dp"
-                    android:ellipsize="end"
-                    android:maxLines="2"
-                    android:scrollHorizontally="true"
-                    android:shadowColor="#c4c4c4c4"
-                    android:shadowRadius="2.0"
-                    android:text="@string/this_is_card_title"
-                    android:textColor="@color/TextYellow"
-                    android:textSize="30dp"
-                    android:textStyle="bold" />
+            <TextView
+                android:id="@+id/card_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:autoSizeMaxTextSize="36dp"
+                android:maxLines="2"
+                android:scrollHorizontally="true"
+                android:text="@string/this_is_card_title"
+                android:textAllCaps="true"
+                android:textColor="@color/TextYellow"
+                android:textSize="25dp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/card_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:ellipsize="end"
-                    android:maxLines="2"
-                    android:minLines="2"
-                    android:scrollHorizontally="true"
-                    android:text="This is meal date bla bla bla..."
-                    android:textColor="@color/TextGrey"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+            <TextView
+                android:id="@+id/card_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:minLines="2"
+                android:paddingLeft="20dp"
+                android:scrollHorizontally="true"
+                android:text="This is meal date bla bla bla..."
+                android:textColor="#7c7c7c"
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/card_description"
@@ -68,51 +72,46 @@
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:minLines="2"
-                android:paddingLeft="10dp"
+                android:paddingLeft="20dp"
                 android:scrollHorizontally="true"
                 android:text="This is meal description bla bla bla..."
                 android:textColor="#777777"
                 android:textSize="16sp" />
 
 
-                    <TextView
-                        android:id="@+id/author"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginBottom="20dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:text="Host"
-                        android:textColor="#42A5F5"
-                        android:textSize="15dp"
-                        android:textStyle="bold" />
-
-
-
-
-
-
-
+            <TextView
+                android:id="@+id/author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="Host"
+                android:textColor="#42A5F5"
+                android:textSize="15dp"
+                android:textStyle="bold" />
 
 
         </LinearLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/meal_card"
+            android:layout_alignTop="@+id/meal_card">
 
 
             <FrameLayout
-
                 android:id="@+id/frames"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/JoinButton"
-                android:layout_marginStart="2dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="1dp"
-                android:layout_marginBottom="2dp">
+                android:layout_marginBottom="5dp">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/student1"
@@ -186,15 +185,19 @@
                 android:id="@+id/JoinButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="0dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/rounded_button"
                 android:clickable="true"
                 android:focusable="true"
                 android:text="@string/join_meal"
-                android:textColor="@color/TextWhite" />
+                android:textColor="@color/TextWhite"
+                android:textSize="20sp" />
         </RelativeLayout>
-
 
 
     </android.support.v7.widget.CardView>

@@ -208,11 +208,13 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         holder.title.setText(title);
         holder.date.setText(date);
         holder.description.setText(description);
-        holder.host.setText(host);
+        //Tomi why this isnt working ?????
+        //shows only host and not arranged by + host
+        holder.host.setText("Arranged by "+host);
 
         holder.setImages(guests, mContext);
         if (getItem(position).getHostId().equals(MainActivity.userId)) {
-            holder.host.setText("You");
+            holder.host.setText("Arranged by You");
         } else {
             Server.getInstance().getUsername(getItem(position).getHostId(), holder.host);
         }
