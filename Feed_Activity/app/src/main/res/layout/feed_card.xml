@@ -2,52 +2,50 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:paddingLeft="2dp"
-    android:paddingRight="2dp"
+
     >
 
     <android.support.v7.widget.CardView
         android:id="@+id/meal_card"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="15dp"
-        app:contentPaddingLeft="12dp"
-        app:contentPaddingBottom="8dp"
-        app:contentPaddingTop="8dp"
-        app:contentPaddingRight="12dp"
-        app:cardElevation="2dp"
+        android:layout_height="270dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="3dp"
         android:clickable="true"
         android:focusable="true"
-        app:cardBackgroundColor="@color/TextWhite"
-        card_view:cardUseCompatPadding="true">
+        app:cardElevation="3dp"
 
+        app:cardMaxElevation="4dp"
+        app:cardBackgroundColor="#fafafa"
+        app:cardCornerRadius="0dp"
+        >
 
         <LinearLayout
-            android:id="@+id/layout"
             android:layout_width="match_parent"
-            android:layout_height="175dp"
-            android:orientation="vertical">
-
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
 
             <TextView
                 android:id="@+id/card_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
                 android:autoSizeMaxTextSize="36dp"
-                android:ellipsize="end"
-                android:maxLines="2"
+                android:fontFamily="@font/open_sans"
+                android:maxLines="1"
+
                 android:scrollHorizontally="true"
-                android:shadowColor="#c4c4c4c4"
-                android:shadowRadius="2.0"
                 android:text="@string/this_is_card_title"
-                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textAllCaps="true"
                 android:textColor="@color/TextYellow"
-                android:textSize="30dp"
+                android:textSize="25dp"
                 android:textStyle="bold" />
 
             <TextView
@@ -55,90 +53,151 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
+                android:fontFamily="@font/open_sans"
                 android:maxLines="2"
-                android:minLines="2"
+                android:minLines="1"
+                android:paddingLeft="20dp"
                 android:scrollHorizontally="true"
                 android:text="This is meal date bla bla bla..."
-                android:textColor="@color/TextGrey"
-                android:textSize="12sp" />
+                android:textColor="#7c7c7c"
+                android:textSize="16dp"
+
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/card_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="-10dp"
                 android:ellipsize="end"
+                android:fontFamily="@font/open_sans"
                 android:maxLines="2"
                 android:minLines="2"
+                android:paddingLeft="20dp"
                 android:scrollHorizontally="true"
                 android:text="This is meal description bla bla bla..."
                 android:textColor="#777777"
+
                 android:textSize="16sp" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
+
+            <TextView
+                android:id="@+id/author"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="8sp"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/open_sans"
+                android:text="Host"
+                android:textColor="#42A5F5"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
 
-                <TextView
-                    android:id="@+id/author"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:text="Host"
-                    android:textColor="#42A5F5"
-                    android:textSize="15dp"
-                    android:textStyle="bold" />
+            <FrameLayout
+                android:id="@+id/frames"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/JoinButton"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="-4dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/student1"
+                    android:layout_width="60dip"
+                    android:layout_height="60dip"
+                    android:src="@drawable/profile_picture"
+                    app:civ_border_color="#ffffff"
+                    app:civ_border_width="1dp"
+
+                    />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/student2"
+                    android:layout_width="60dip"
+                    android:layout_height="60dip"
+                    android:layout_marginLeft="35dip"
+                    android:src="@drawable/profile_picture"
+                    app:civ_border_color="#ffffff"
+                    app:civ_border_width="1dp"
+
+                    />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/student3"
+                    android:layout_width="60dip"
+                    android:layout_height="60dip"
+                    android:layout_marginLeft="70dip"
+                    android:src="@drawable/profile_picture"
+                    app:civ_border_color="#ffffff"
+                    app:civ_border_width="1dp"
+
+                    />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/student4"
+                    android:layout_width="60dip"
+                    android:layout_height="60dip"
+                    android:layout_marginLeft="105dip"
+                    android:src="@drawable/profile_picture"
+                    app:civ_border_color="#ffffff"
+                    app:civ_border_width="1dp"
+
+                    />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/student5"
+                    android:layout_width="60dip"
+                    android:layout_height="60dip"
+                    android:layout_marginLeft="140dip"
+                    android:src="@drawable/profile_picture"
+                    app:civ_border_color="#ffffff"
+
+                    app:civ_border_width="1dp" />
 
 
-                <Button
-                    android:id="@+id/JoinButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginEnd="0dp"
-                    android:layout_marginRight="0dp"
-                    android:background="@drawable/rounded_button"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:text="Join Meal!"
-                    android:textAppearance="@android:style/TextAppearance.Material.Button"
-                    android:textColor="@color/TextWhite"
-                    tools:padding="10dp"
-                    tools:textColor="@color/TextWhite" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/see_more_in_card"
+                    android:layout_width="60dip"
+                    android:layout_height="60dip"
+                    android:layout_marginLeft="175dip"
+                    android:src="@drawable/see_more_users"
+                    app:civ_border_color="#ffffff"
+                    app:civ_border_width="1dp"
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recyclerView"
-                    android:layout_width="227dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="0dp"
-                    android:layout_toStartOf="@+id/JoinButton"
-                    android:layout_toLeftOf="@+id/JoinButton"
-                    android:layout_toEndOf="@+id/author"
-                    android:layout_toRightOf="@+id/author"
-                    android:orientation="horizontal" />
+                    />
 
 
-            </RelativeLayout>
+            </FrameLayout>
 
+            <Button
+                android:id="@+id/JoinButton"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_button"
+                android:clickable="true"
+                android:focusable="true"
+                android:includeFontPadding="true"
+                android:drawablePadding="10dp"
+                android:text="Join Meal !"
+                android:textColor="@color/TextWhite"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
 
+
     </android.support.v7.widget.CardView>
+
 
 </RelativeLayout>

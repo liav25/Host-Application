@@ -6,13 +6,13 @@
 
     <gradient
         android:angle="90"
-        android:endColor="@color/TextYellow"
-        android:startColor="@color/TextWhite"
-        android:centerColor="@color/TextWhite"
+        android:endColor="#FD9F15"
+        android:startColor="@color/transparent"
+        android:centerColor="#FEDB86"
         android:type="linear"
         />
     <corners
-        android:radius="10dp"
+        android:radius="0dp"
         />
 
 </shape>

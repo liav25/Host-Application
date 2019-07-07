@@ -54,6 +54,9 @@
         <receiver
             android:name=".MyNotificationPublisher"
             android:process=":remote" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
