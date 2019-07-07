@@ -30,6 +30,7 @@
                 android:id="@+id/card_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:inputType="textCapSentences"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
@@ -40,8 +41,9 @@
                 android:text="@string/this_is_card_title"
                 android:textAllCaps="true"
                 android:textColor="@color/fui_bgEmail"
-                android:textSize="25dp"
-                android:textStyle="bold" />
+                android:textSize="23dp"
+                android:textStyle="bold"
+ />
 
             <TextView
                 android:id="@+id/card_date"

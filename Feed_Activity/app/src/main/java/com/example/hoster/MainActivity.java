@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getWindow().setStatusBarColor(this.getResources().getColor(R.color.AccentRed));
+        getWindow().setStatusBarColor(this.getResources().getColor(R.color.toolbarcolor));
         setContentView(R.layout.activity_main);
 
 
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        return false;  //for visible 3 dots change to true, hiding false
+        return true;  //for visible 3 dots change to true, hiding false
     }
 
     @Override
