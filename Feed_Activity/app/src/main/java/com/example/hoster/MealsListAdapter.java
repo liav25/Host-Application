@@ -15,7 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-
+import java.util.Map;
 
 
 class MealsListAdapter extends ArrayAdapter<Meal> {
@@ -39,6 +39,10 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         ImageView img4;
         ImageView img5;
         ImageView img6;
+        ImageView kosherSymbol;
+        ImageView halalSymbol;
+        ImageView veggieSymbol;
+        ImageView veganSymbol;
 
 
         private void setButCol(Meal meal){
@@ -54,6 +58,16 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
                 joinBU.setTextColor(Color.WHITE);
                 joinBU.setBackgroundResource(R.drawable.rounded_button);
             }
+        }
+
+        private void setSymbols(final Map<String, Boolean> restrictions, final Context mContxt){
+            try {
+                if (restrictions.get("Kosher")) {
+                    kosherSymbol.setVisibility(View.VISIBLE);
+                }
+                else {kosherSymbol.setVisibility(View.INVISIBLE);}
+            }
+            catch (NullPointerException e){}
         }
 
 
