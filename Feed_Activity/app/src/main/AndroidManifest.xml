@@ -17,7 +17,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".see_all_people_activity"></activity>
+        <activity
+            android:name=".edit_meal"
+            android:label="@string/title_activity_edit_meal"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".see_all_people_activity" />
         <activity android:name=".HowWasItPop" />
         <activity android:name=".Register" />
         <activity android:name=".edit_profile" />
@@ -54,6 +58,7 @@
         <receiver
             android:name=".MyNotificationPublisher"
             android:process=":remote" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

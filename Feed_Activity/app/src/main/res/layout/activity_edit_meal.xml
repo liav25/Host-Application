@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:numberpicker="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FCFCFC"
+
+    android:orientation="vertical"
+    android:padding="5dp"
+    tools:context=".edit_meal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="8dp"></LinearLayout>
+    <Button
+        android:id="@+id/closePopUpButton_edit"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_gravity="right"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/sharp_close_24px"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <EditText
+        android:id="@+id/mealTitleAdd_edit"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/rounded_border_eddittext"
+        android:drawableLeft="@drawable/restaurant_icon"
+        android:ems="10"
+        android:hint="Meal Name"
+        android:inputType="textPersonName"
+        android:drawablePadding="5dp"
+        android:paddingLeft="10dp" />
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="64dp">
+
+        <TextView
+            android:id="@+id/maxNumberGuests"
+            android:textStyle="bold"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="left"
+            android:layout_marginRight="30dp"
+            android:gravity="end"
+            android:text="How many guests?" />
+
+        <EditText
+            android:id="@+id/mealDateAdd_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/rounded_border_eddittext"
+
+            android:drawableLeft="@drawable/date_icon"
+            android:drawablePadding="5dp"
+            android:ems="10"
+            android:gravity="center_vertical"
+            android:hint="When?"
+            android:inputType="date"
+            android:paddingLeft="10dp" />
+
+        <com.travijuu.numberpicker.library.NumberPicker
+            android:id="@+id/number_picker_edit"
+            android:layout_width="142dp"
+            android:layout_height="43dp"
+            android:layout_alignEnd="@+id/mealDateAdd_edit"
+            android:layout_alignRight="@+id/mealDateAdd_edit"
+            android:layout_alignBottom="@id/maxNumberGuests"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="-174dp"
+            android:layout_marginRight="-174dp"
+            android:layout_marginBottom="-42dp"
+            numberpicker:focusable="false"
+            numberpicker:min="1"
+            numberpicker:unit="1"
+            numberpicker:value="-5" />
+    </RelativeLayout>
+
+
+    <AutoCompleteTextView
+        android:id="@+id/location_edit"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/rounded_border_eddittext"
+        android:drawableLeft="@drawable/location_icon"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="Where?"
+
+
+        android:paddingLeft="5dp" />
+
+    <TextView
+        android:paddingLeft="10dp"
+        android:paddingBottom="10dp"
+        android:textStyle="bold"
+        android:id="@+id/ChooseRests"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Food restrictions:" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp">
+
+        <CheckBox
+            android:id="@+id/Vegetarian_edit"
+            android:layout_width="176dp"
+            android:layout_height="wrap_content"
+            android:button="@drawable/vegetarian_checkbox"
+            android:paddingLeft="5dp"
+            android:text="Vegetarian"
+            android:textSize="20dp" />
+        <CheckBox
+
+            android:id="@+id/vegan_edit"
+            android:layout_width="183dp"
+            android:layout_height="match_parent"
+            android:button="@drawable/vegan_checkbox"
+            android:paddingLeft="10dp"
+            android:text="Vegan"
+            android:textSize="20dp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:paddingTop="5dp"
+        android:paddingBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp">
+
+
+        <CheckBox
+            android:id="@+id/Halal_edit"
+
+            android:layout_width="176dp"
+            android:layout_height="wrap_content"
+            android:button="@drawable/halal_checkbox"
+            android:includeFontPadding="true"
+            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
+            android:text="Halal"
+            android:textSize="20dp" />
+
+        <CheckBox
+            android:id="@+id/Kosher_edit"
+            android:layout_width="181dp"
+            android:layout_height="wrap_content"
+            android:button="@drawable/kosher_checkbox"
+            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
+            android:text="Kosher"
+            android:textSize="20dp" />
+
+
+    </LinearLayout>
+
+
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:paddingLeft="10dp"
+        android:textStyle="bold"
+
+        android:text="What should your guests bring?" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="58dp">
+
+        <CheckBox
+            android:id="@+id/beer_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/beer" />
+
+        <CheckBox
+            android:id="@+id/drink_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/soda" />
+
+        <CheckBox
+            android:id="@+id/desert_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/cupcake" />
+
+        <CheckBox
+            android:id="@+id/flower_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/bouquet" />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/mealDescriptionAdd_edit"
+        android:layout_width="377dp"
+        android:layout_height="120dp"
+
+        android:layout_margin="10dp"
+        android:background="@drawable/squared_edit_text"
+        android:gravity="top"
+        android:hint="Describe your meal"
+
+
+        android:inputType="text"
+        android:padding="20dp" />
+
+
+    <ImageButton
+        android:id="@+id/accept_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/done_green" />
+
+</LinearLayout>

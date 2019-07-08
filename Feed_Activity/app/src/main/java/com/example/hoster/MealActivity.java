@@ -60,7 +60,7 @@ public class MealActivity extends AppCompatActivity {
         final String hostId = meal.getHostId();
 
         if (hostId.equals(MainActivity.userId)){
-            host.setText("Host: You");
+            host.setText("Arrenged by You");
         } else {
             Server.getInstance().getUsername(hostId, host);
         }
@@ -117,10 +117,12 @@ public class MealActivity extends AppCompatActivity {
         pen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent editMealIntent = new Intent(getApplicationContext(), edit_meal.class);
                 Bundle b = new Bundle();
-                Intent editProfileIntent = new Intent(getApplicationContext(), edit_profile.class);
-                editProfileIntent.putExtras(b); //Put your id to your next Intent
-                startActivity(editProfileIntent);
+                b.putSerializable("meal", meal);
+                b.putSerializable("mealId", mealId);
+                editMealIntent.putExtras(b); //Put your id to your next Intent
+                startActivity(editMealIntent);
                 finish();
             }
         });
