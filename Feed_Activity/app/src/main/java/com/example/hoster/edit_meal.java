@@ -152,7 +152,7 @@ public class edit_meal extends AppCompatActivity {
                 Intent mealIntent = new Intent(getApplicationContext(), MealActivity.class);
                 mealIntent.putExtras(b); //Put your id to your next Intent
                 startActivity(mealIntent);
-                overridePendingTransition(R.anim.slide_up , R.anim.slide_out_down);
+                overridePendingTransition(R.anim.fade_in, R.anim.to_bottom);
 
             }
         });
