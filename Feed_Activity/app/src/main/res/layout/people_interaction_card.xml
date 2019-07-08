@@ -45,7 +45,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_gravity="center"
-
                 android:layout_marginBottom="5dp"
                 android:autoSizeMaxTextSize="36dp"
                 android:ellipsize="end"
@@ -54,7 +53,8 @@
                 android:shadowColor="#c4c4c4c4"
                 android:shadowRadius="2.0"
                 android:text="profile"
-                android:textColor="@color/TextYellow"
+                android:capitalize="words"
+                android:textColor="@color/AccentRed"
                 android:textSize="30dp"
                 android:textStyle="bold" />
 
