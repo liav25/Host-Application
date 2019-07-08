@@ -192,13 +192,7 @@ public class edit_meal extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle b = new Bundle();
-                b.putString("mealId", mealId);
-                b.putSerializable("meal", meal);
-                Intent mealIntent = new Intent(getApplicationContext(), MealActivity.class);
-                mealIntent.putExtras(b); //Put your id to your next Intent
-                startActivity(mealIntent);
-                overridePendingTransition(R.anim.fade_in, R.anim.to_bottom);
+                finish();
             }
         });
 

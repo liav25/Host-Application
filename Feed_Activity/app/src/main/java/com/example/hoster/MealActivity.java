@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.util.Objects;
+
 public class MealActivity extends AppCompatActivity {
     public static DataAdapter guestsAdapter;
 
@@ -238,32 +240,48 @@ public class MealActivity extends AppCompatActivity {
     }
 
     private String getNeededString(Meal meal){
-
-        TextView t = findViewById(R.id.still_needed);
-        TextView a;
-
         String nee = "you can also bring ";
-        if(meal.getNeeded().get("beer") == Meal.NEEDED){
-            nee += "beer, ";
+        try {
+            if (meal.getNeeded().get("beer").equals(Meal.NEEDED)) {
+                nee += "beer, ";
+            }
         }
-        if(meal.getNeeded().get("flowers")== Meal.NEEDED){
-            nee += "flowers, ";
+        catch (NullPointerException e){        }
+        try {
+            if (meal.getNeeded().get("drinks").equals(Meal.NEEDED)) {
+                nee += "drinks, ";
+            }
         }
-        if(meal.getNeeded().get("drinks") == Meal.NEEDED){
-            nee += "drinks, ";
+        catch (NullPointerException e){        }
+        try {
+            if (meal.getNeeded().get("dessert").equals(Meal.NEEDED)) {
+                nee += "dessert, ";
+            }
         }
+        catch (NullPointerException e){        }
+        try {
+            if (meal.getNeeded().get("flowers").equals(Meal.NEEDED)) {
+                nee += "or flowers";
+            }
+        }
+        catch (NullPointerException e){
+        }
+        System.out.println("+++++++++" + meal.getNeeded().toString());
+        if((meal.getNeeded().get("dessert")==null)&&(meal.getNeeded().get("drinks")==null)&&
+                (meal.getNeeded().get("beer")==null)&&(meal.getNeeded().get("flowers")==null)){
+            nee = "";
+        }
+        return nee+" !";
 
-        if(meal.getNeeded().get("dessert") == Meal.NEEDED){
-            nee += "or dessert!";
-        }
-        return nee;
     }
+
 
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
+
 
     public class OverlapDecoration extends RecyclerView.ItemDecoration {
 
@@ -272,7 +290,6 @@ public class MealActivity extends AppCompatActivity {
         @Override
         public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
             final int itemPosition = parent.getChildAdapterPosition(view);
-
 
             outRect.set(0, 0, vertOverlap, 0);
 

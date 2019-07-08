@@ -168,7 +168,7 @@
                 android:padding="5dp"
                 android:text="Still Needed: "
                 android:textStyle="bold"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
 
 
