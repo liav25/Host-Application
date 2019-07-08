@@ -12,14 +12,14 @@
                 android:layout_centerHorizontal="true"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginTop="160dp"
+                android:layout_marginTop="100dp"
                 android:elevation="5dp"
                 android:outlineProvider="none"
 
                 android:src="@drawable/spice" />
 
     <RelativeLayout
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="100dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
