@@ -50,6 +50,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         LinearLayout veggieLayout;
         LinearLayout veganLayout;
         LinearLayout halalLayout;
+        LinearLayout seperator;
 
 
 
@@ -69,19 +70,22 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
             }
         }
 
-        private void setSymbols(final Map<String, Boolean> restrictions, final Context mContxt){
+        private void setSymbols(final Map<String, Boolean> restrictions, final Context mContext){
+            RelativeLayout.LayoutParams kosherParams = (RelativeLayout.LayoutParams)kosherLayout.getLayoutParams();
+            RelativeLayout.LayoutParams vegParams = (RelativeLayout.LayoutParams)veggieLayout.getLayoutParams();
+            RelativeLayout.LayoutParams veganParams = (RelativeLayout.LayoutParams)veganLayout.getLayoutParams();
+            RelativeLayout.LayoutParams halalParams = (RelativeLayout.LayoutParams)halalLayout.getLayoutParams();
+            RelativeLayout.LayoutParams seperatorParams = (RelativeLayout.LayoutParams)seperator.getLayoutParams();
+            kosherParams.addRule(RelativeLayout.LEFT_OF, R.id.seperator);
+            vegParams.addRule(RelativeLayout.LEFT_OF, R.id.kosher_layout);
+            veganParams.addRule(RelativeLayout.LEFT_OF, R.id.veg_layout);
+            halalParams.addRule(RelativeLayout.LEFT_OF, R.id.vegan_layout);
+
             try {
                 if (restrictions.get("Kosher")) {
-                    kosherSymbol.setVisibility(View.VISIBLE);
-                }
+                    kosherSymbol.setVisibility(View.VISIBLE);}
                 else {
                     kosherSymbol.setVisibility(View.INVISIBLE);
-                    RelativeLayout.LayoutParams vegParams = (RelativeLayout.LayoutParams)veggieLayout.getLayoutParams();
-                    RelativeLayout.LayoutParams veganParams = (RelativeLayout.LayoutParams)veganLayout.getLayoutParams();
-                    RelativeLayout.LayoutParams halalParams = (RelativeLayout.LayoutParams)halalLayout.getLayoutParams();
-                    vegParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-                    veganParams.addRule(RelativeLayout.LEFT_OF, R.id.veg_layout);
-                    halalParams.addRule(RelativeLayout.LEFT_OF, R.id.vegan_layout);
                 }
 
                 if (restrictions.get("Halal")) {
@@ -103,7 +107,28 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
 
             catch (NullPointerException e){}
 
+            if(!restrictions.get("Vegan")){
+                halalParams.addRule(RelativeLayout.LEFT_OF, R.id.veg_layout);
+                if(!restrictions.get("Vegetarian")){
+                    halalParams.addRule(RelativeLayout.LEFT_OF, R.id.kosher_layout);
+                    if(!restrictions.get("Kosher")){
+                        halalParams.addRule(RelativeLayout.LEFT_OF, R.id.seperator);
+                    }
+                }
+            }
+            if(!restrictions.get("Vegetarian")){
+                veganParams.addRule(RelativeLayout.LEFT_OF, R.id.kosher_layout);
+                if(!restrictions.get("Kosher")){
+                    veganParams.addRule(RelativeLayout.LEFT_OF, R.id.seperator);
+                }
+            }
+            if(!restrictions.get("Kosher")){
+                vegParams.addRule(RelativeLayout.LEFT_OF, R.id.seperator);
+            }
         }
+
+
+
 
 
 
@@ -254,6 +279,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
             holder.veganLayout = (LinearLayout)convertView.findViewById(R.id.vegan_layout);
             holder.veggieLayout = (LinearLayout)convertView.findViewById(R.id.veg_layout);
             holder.halalLayout = (LinearLayout)convertView.findViewById(R.id.halal_layout);
+            holder.seperator = (LinearLayout) convertView.findViewById(R.id.seperator);
 
             result = convertView;
 

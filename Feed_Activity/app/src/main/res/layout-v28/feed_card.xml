@@ -26,6 +26,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
@@ -53,8 +54,7 @@
                 android:id="@+id/kosher_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="20sp"
+                android:layout_toLeftOf="@+id/seperator"
                 >
 
             <ImageView
@@ -107,6 +107,13 @@
                 android:src="@drawable/halal_color"/>
             </LinearLayout>
 
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/seperator"
+                android:layout_width="20sp"
+                android:layout_height="37dp"
+                android:layout_alignParentRight="true"
+                />
         </RelativeLayout>
             <TextView
                 android:id="@+id/card_date"
