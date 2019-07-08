@@ -26,6 +26,10 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/card_title"
@@ -36,6 +40,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="0dp"
                 android:autoSizeMaxTextSize="36dp"
+                android:maxLength="19"
                 android:fontFamily="@font/open_sans"
                 android:maxLines="1"
                 android:scrollHorizontally="true"
@@ -45,7 +50,37 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
  />
+            <ImageView
+                android:id="@+id/kosher_symbol"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20sp"
+                android:src="@drawable/kosher_color"/>
+            <ImageView
+                android:id="@+id/veg_symbol"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_toLeftOf="@id/kosher_symbol"
+                android:src="@drawable/vegetarian_color"/>
+            <ImageView
+                android:id="@+id/vegan_symbol"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_toLeftOf="@id/veg_symbol"
+                android:src="@drawable/vegan_color"/>
+            <ImageView
+                android:id="@+id/halal_symbol"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_toLeftOf="@id/vegan_symbol"
+                android:src="@drawable/halal_color"/>
 
+        </RelativeLayout>
             <TextView
                 android:id="@+id/card_date"
                 android:layout_width="wrap_content"
