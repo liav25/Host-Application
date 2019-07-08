@@ -77,6 +77,7 @@
                     android:id="@+id/mealPageDateTime"
                     android:layout_width="192dp"
                     android:layout_height="45dp"
+                    android:layout_alignParentTop="true"
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="5dp"
@@ -87,11 +88,11 @@
                     android:textSize="18sp" />
 
                 <LinearLayout
-                    android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
->
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginRight="20dp">
 
                     <ImageView
                         android:id="@+id/imageView"
@@ -131,7 +132,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="59dp"
                 android:orientation="horizontal"
-                android:layout_margin="10dp">
+                android:layout_marginHorizontal="10dp"
+                android:padding="5dp">
 
             </android.support.v7.widget.RecyclerView>
 
@@ -141,8 +143,7 @@
                 android:layout_width="360dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginBottom="8dp"
-                android:padding="5dp"
+                android:padding="4dp"
                 android:text="Food Restrictions: Vegan, Kosher"
                 android:textSize="18sp"
                 app:layout_constraintVertical_bias="0.649" />
@@ -154,9 +155,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:gravity="center_vertical"
-                android:padding="5dp"
+                android:padding="3dp"
                 android:text="Free text description will come here "
-                android:textSize="18sp" />
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/still_needed"
+                android:layout_width="360dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                android:text="Still Needed: "
+                android:textStyle="bold"
+                android:textSize="16sp" />
+
 
 
             <Button

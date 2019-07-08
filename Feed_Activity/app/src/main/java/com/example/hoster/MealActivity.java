@@ -23,6 +23,7 @@ public class MealActivity extends AppCompatActivity {
     private TextView desc;
     private TextView time;
     private TextView restrictions;
+    private TextView neededString;
     private RecyclerView guestsRecycle;
     private TextView loc;
     private ImageButton pen;
@@ -132,6 +133,9 @@ public class MealActivity extends AppCompatActivity {
         restrictions = (TextView)findViewById(R.id.mealFoodRestrictions);
         restrictions.setText(getRestrictionString(meal));
 
+        neededString = (TextView) findViewById(R.id.still_needed);
+        neededString.setText(getNeededString(meal));
+
         joinmeal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -231,6 +235,28 @@ public class MealActivity extends AppCompatActivity {
         }
 
         return restri;
+    }
+
+    private String getNeededString(Meal meal){
+
+        TextView t = findViewById(R.id.still_needed);
+        TextView a;
+
+        String nee = "you can also bring ";
+        if(meal.getNeeded().get("beer") == Meal.NEEDED){
+            nee += "beer, ";
+        }
+        if(meal.getNeeded().get("flowers")== Meal.NEEDED){
+            nee += "flowers, ";
+        }
+        if(meal.getNeeded().get("drinks") == Meal.NEEDED){
+            nee += "drinks, ";
+        }
+
+        if(meal.getNeeded().get("dessert") == Meal.NEEDED){
+            nee += "or dessert!";
+        }
+        return nee;
     }
 
     @Override
