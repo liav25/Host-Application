@@ -40,7 +40,6 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="0dp"
                 android:autoSizeMaxTextSize="36dp"
-                android:maxLength="19"
                 android:fontFamily="@font/open_sans"
                 android:maxLines="1"
                 android:scrollHorizontally="true"

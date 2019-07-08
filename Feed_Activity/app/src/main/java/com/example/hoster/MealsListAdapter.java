@@ -66,7 +66,23 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
                     kosherSymbol.setVisibility(View.VISIBLE);
                 }
                 else {kosherSymbol.setVisibility(View.INVISIBLE);}
+
+                if (restrictions.get("Halal")) {
+                    halalSymbol.setVisibility(View.VISIBLE);
+                }
+                else {halalSymbol.setVisibility(View.INVISIBLE);}
+
+                if (restrictions.get("Vegetarian")) {
+                    veggieSymbol.setVisibility(View.VISIBLE);
+                }
+                else {veggieSymbol.setVisibility(View.INVISIBLE);}
+
+                if (restrictions.get("Vegan")) {
+                    veganSymbol.setVisibility(View.VISIBLE);
+                }
+                else {veganSymbol.setVisibility(View.INVISIBLE);}
             }
+
             catch (NullPointerException e){}
         }
 
@@ -187,6 +203,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         String description = getItem(position).getDescription();
         String host = getItem(position).getHostId();
         ArrayList<String> guests = getItem(position).getGuests();
+        Map<String, Boolean> restrictions = getItem(position).getRestrictions();
 
 
         //create the view result for showing animation
@@ -210,6 +227,10 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
             holder.img4 = convertView.findViewById(R.id.student4);
             holder.img5 = convertView.findViewById(R.id.student5);
             holder.img6 = convertView.findViewById(R.id.see_more_in_card);
+            holder.kosherSymbol = convertView.findViewById(R.id.kosher_symbol);
+            holder.halalSymbol = convertView.findViewById(R.id.halal_symbol);
+            holder.veganSymbol = convertView.findViewById(R.id.vegan_symbol);
+            holder.veggieSymbol = convertView.findViewById(R.id.veg_symbol);
             result = convertView;
 
             convertView.setTag(holder);
@@ -227,6 +248,8 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         holder.host.setText("Arranged by "+host);
 
         holder.setImages(guests, mContext);
+        holder.setSymbols(restrictions, mContext);
+
         if (getItem(position).getHostId().equals(MainActivity.userId)) {
             holder.host.setText("Arranged by You");
         } else {
@@ -252,6 +275,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
 
                 Server.getInstance().getMeals(MainActivity.meals, MainActivity.adapter);
                 holder.setImages(getItem(position).getGuests(), mContext);
+                holder.setSymbols(getItem(position).getRestrictions(), mContext);
             }
         });
 
