@@ -10,8 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -43,6 +46,12 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         ImageView halalSymbol;
         ImageView veggieSymbol;
         ImageView veganSymbol;
+        LinearLayout kosherLayout;
+        LinearLayout veggieLayout;
+        LinearLayout veganLayout;
+        LinearLayout halalLayout;
+
+
 
 
         private void setButCol(Meal meal){
@@ -65,7 +74,15 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
                 if (restrictions.get("Kosher")) {
                     kosherSymbol.setVisibility(View.VISIBLE);
                 }
-                else {kosherSymbol.setVisibility(View.INVISIBLE);}
+                else {
+                    kosherSymbol.setVisibility(View.INVISIBLE);
+                    RelativeLayout.LayoutParams vegParams = (RelativeLayout.LayoutParams)veggieLayout.getLayoutParams();
+                    RelativeLayout.LayoutParams veganParams = (RelativeLayout.LayoutParams)veganLayout.getLayoutParams();
+                    RelativeLayout.LayoutParams halalParams = (RelativeLayout.LayoutParams)halalLayout.getLayoutParams();
+                    vegParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                    veganParams.addRule(RelativeLayout.LEFT_OF, R.id.veg_layout);
+                    halalParams.addRule(RelativeLayout.LEFT_OF, R.id.vegan_layout);
+                }
 
                 if (restrictions.get("Halal")) {
                     halalSymbol.setVisibility(View.VISIBLE);
@@ -83,7 +100,9 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
                 else {veganSymbol.setVisibility(View.INVISIBLE);}
             }
 
+
             catch (NullPointerException e){}
+
         }
 
 
@@ -231,6 +250,11 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
             holder.halalSymbol = convertView.findViewById(R.id.halal_symbol);
             holder.veganSymbol = convertView.findViewById(R.id.vegan_symbol);
             holder.veggieSymbol = convertView.findViewById(R.id.veg_symbol);
+            holder.kosherLayout = (LinearLayout)convertView.findViewById(R.id.kosher_layout);
+            holder.veganLayout = (LinearLayout)convertView.findViewById(R.id.vegan_layout);
+            holder.veggieLayout = (LinearLayout)convertView.findViewById(R.id.veg_layout);
+            holder.halalLayout = (LinearLayout)convertView.findViewById(R.id.halal_layout);
+
             result = convertView;
 
             convertView.setTag(holder);

@@ -49,35 +49,63 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
  />
+            <LinearLayout
+                android:id="@+id/kosher_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20sp"
+                >
+
             <ImageView
                 android:id="@+id/kosher_symbol"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="20sp"
                 android:src="@drawable/kosher_color"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/veg_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/kosher_layout"
+                >
             <ImageView
                 android:id="@+id/veg_symbol"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
-                android:layout_toLeftOf="@id/kosher_symbol"
                 android:src="@drawable/vegetarian_color"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/vegan_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/veg_layout"
+                >
             <ImageView
                 android:id="@+id/vegan_symbol"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
-                android:layout_toLeftOf="@id/veg_symbol"
                 android:src="@drawable/vegan_color"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/halal_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/vegan_layout"
+                >
             <ImageView
                 android:id="@+id/halal_symbol"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
-                android:layout_toLeftOf="@id/vegan_symbol"
                 android:src="@drawable/halal_color"/>
+            </LinearLayout>
 
         </RelativeLayout>
             <TextView
