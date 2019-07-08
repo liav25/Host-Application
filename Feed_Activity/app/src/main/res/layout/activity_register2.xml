@@ -38,10 +38,10 @@
             android:layout_gravity="center_vertical"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="3dp"
-            android:text="E-MAIL"
-            android:fontFamily="@font/nunito_extralight"
+            android:text="E-Mail"
+            android:fontFamily="@font/cairo_light"
             android:textColor="@color/AccentRed"
-
+            android:textSize="16sp"
             android:textStyle="bold" />
 
             <EditText
@@ -50,6 +50,7 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:layout_marginTop="-15dp"
                 android:fontFamily="@font/open_sans"
                 android:hint="user@mail.com"
                 android:inputType="textEmailAddress"
@@ -66,10 +67,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="Name"
+                android:layout_marginTop="10dp"
                 android:paddingLeft="3dp"
-                android:fontFamily="@font/nunito_extralight"
+                android:fontFamily="@font/cairo_light"
                 android:textColor="@color/AccentRed"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
 
@@ -79,6 +81,7 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:layout_marginTop="-15dp"
                 android:hint="John Doe"
                 android:fontFamily="@font/open_sans"
                 android:inputType="textPassword"
@@ -91,13 +94,13 @@
             android:layout_below="@id/insertUserNameSU"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="3dp"
-            android:text="PASSWORD"
-            android:fontFamily="@font/nunito_extralight"
+            android:text="Password"
+            android:fontFamily="@font/cairo_light"
             android:textColor="@color/AccentRed"
-            android:textSize="12.5sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
 
@@ -108,7 +111,9 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Password"
+
                 android:inputType="textPassword"
+                android:layout_marginTop="-15dp"
                 android:fontFamily="@font/open_sans"
                 app:layout_constraintVertical_bias="0.6"
                 tools:layout_editor_absoluteX="16dp" />
