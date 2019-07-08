@@ -1,6 +1,7 @@
 package com.example.hoster;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -35,7 +36,7 @@ import java.util.Map;
 public class edit_meal extends AppCompatActivity {
 
     private ImageButton accept;
-    private ImageButton cancel;
+    private Button cancel;
     private StorageReference mSorageRef;
     EditText pickDate;
     String date;
@@ -66,6 +67,7 @@ public class edit_meal extends AppCompatActivity {
         final Meal meal = (Meal) b.getSerializable("meal");
         final String mealId = (String) b.getSerializable("mealId");
         foodRests = meal.getRestrictions();
+        cancel = findViewById(R.id.closePopUpButton_edit);
 
 
         title = (EditText) findViewById(R.id.mealTitleAdd_edit);
@@ -122,8 +124,6 @@ public class edit_meal extends AppCompatActivity {
                 b.putString("mealId", mealId);
                 mealIntent.putExtras(b);
 
-                System.out.println("++++++before");
-                System.out.println(meal.toString());
                 String titleEdit = title.getText().toString();
                 String descriptionEdit = description.getText().toString();
                 loc = location.getText().toString();
@@ -137,12 +137,26 @@ public class edit_meal extends AppCompatActivity {
 
 
                 MainActivity.adapter.notifyDataSetChanged();
-                System.out.println("++++++after");
 
                 finish();
             }
 
         });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle b = new Bundle();
+                b.putString("mealId", mealId);
+                b.putSerializable("meal", meal);
+                Intent mealIntent = new Intent(getApplicationContext(), MealActivity.class);
+                mealIntent.putExtras(b); //Put your id to your next Intent
+                startActivity(mealIntent);
+                overridePendingTransition(R.anim.slide_up , R.anim.slide_out_down);
+
+            }
+        });
+
 
 
 
@@ -222,5 +236,6 @@ public class edit_meal extends AppCompatActivity {
             "Bucharim", "Mahane Israel", "She'arey Hesed", "Ir Ganim Gimel", "Hameshulash", "Ramat Beit Hakerem",
             "Makor Hayim", "Kiryat haLeom", "Ramat Deniya", "Tel Arza"
     };
+
 
 }

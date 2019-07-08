@@ -800,14 +800,13 @@ public class Server {
             });
         }
 
-        if (!old.getRestrictions().equals(disRestrictions)) {
-            busRef.update("restrictions", disRestrictions).addOnSuccessListener(new OnSuccessListener<Void>() {
+        busRef.update("restrictions", disRestrictions).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
                     System.out.println("User edit : success!");
                 }
             });
-        }
+
 
 
 
