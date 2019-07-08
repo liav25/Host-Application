@@ -20,6 +20,7 @@ import com.travijuu.numberpicker.library.NumberPicker;
 
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.Map;
 
 public class edit_meal extends AppCompatActivity {
 
@@ -38,7 +39,7 @@ public class edit_meal extends AppCompatActivity {
     CheckBox Veggie;
     AutoCompleteTextView location;
     String loc;
-    HashMap<String, Boolean> foodRests;
+    Map<String, Boolean> foodRests;
     int maxGuests;
     private Activity mActivity;
 
@@ -53,18 +54,34 @@ public class edit_meal extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         final Meal meal = (Meal) b.getSerializable("meal");
         final String mealId = (String) b.getSerializable("mealId");
+        foodRests = meal.getRestrictions();
+
 
         title = (EditText) findViewById(R.id.mealTitleAdd_edit);
-        title.setHint(meal.getTitle());
+        title.setText(meal.getTitle());
         pickDate = (EditText) findViewById(R.id.mealDateAdd_edit);
-        pickDate.setHint(meal.getTime());
+        pickDate.setText(meal.getTime());
         description = (EditText) findViewById(R.id.mealDescriptionAdd_edit);
-        description.setHint(meal.getDescription());
+        description.setText(meal.getDescription());
         final NumberPicker numberPicker = (NumberPicker) findViewById(R.id.number_picker_edit);
         numberPicker.setValue(meal.getMaxGuests());
         numberPicker.setUnit(1);
         location = (AutoCompleteTextView) findViewById(R.id.location_edit);
-        location.setHint(meal.getLocation());
+        location.setText(meal.getLocation());
+
+        kosher = (CheckBox)findViewById(R.id.Kosher_edit);
+        Halal = (CheckBox)findViewById(R.id.Halal_edit);
+        Vegan = (CheckBox)findViewById(R.id.vegan_edit);
+        Veggie = (CheckBox)findViewById(R.id.Vegetarian_edit);
+
+        kosher.setChecked(foodRests.get("Kosher"));
+        Halal.setChecked(foodRests.get("Kosher"));
+        Vegan.setChecked(foodRests.get("Vegan"));
+        Veggie.setChecked(foodRests.get("Vegetarian"));
+        System.out.println(meal.getTags().toString());
+
+
+
 
 
 
