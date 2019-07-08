@@ -311,6 +311,11 @@ public class Meal implements Serializable {
     }
 
 
+    public String toString(){
+        return ("Title:"+title+" time:"+time+" Restrictions:"+restrictions.toString()
+                +" maxNumber:"+maxGuests);
+    }
+
 
 
 }

@@ -74,6 +74,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -108,6 +109,7 @@ public class Server {
     private static final String MEALS_STRING = "Meals Info";
     private static final String MEALS_Count_STRING = "Meals Count";
     private static final String USERS_DATA_STRING = "User info";
+    private static final String MEALS_DATA_STRING = "Meals Info";
     private static final String USER_PIC_PATH ="ProfilePics/";
 
     /**
@@ -730,6 +732,85 @@ public class Server {
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(cont);
         notificationManager.cancel(mealId);
+
+    }
+
+
+    /**
+     * Creates a new user and adds it to DB
+     * @param old - old user to compare to current changes
+     * @param disTitle - display name
+     */
+    public void editMeal(Meal old, String disTitle, String disDescription,
+                         String disLocation, String disDate, int disMaxGuests,
+                         Map disRestrictions)
+    {
+        DocumentReference busRef = db.collection(MEALS_DATA_STRING).document(old.getID());
+        if (!old.getTitle().equals(disTitle)) {
+            busRef.update("title", disTitle).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    System.out.println("User edit : success!");
+                }
+            });
+        }
+
+        if (!old.getDescription().equals(disDescription)) {
+            busRef.update("description", disDescription).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    System.out.println("User edit : success!");
+                }
+            });
+        }
+
+        if (!old.getLocation().equals(disLocation)) {
+            busRef.update("location", disLocation).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    System.out.println("User edit : success!");
+                }
+            });
+        }
+
+        if (!old.getTime().equals(disDate)) {
+            busRef.update("time", disDate).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    System.out.println("User edit : success!");
+                }
+            });
+        }
+
+        if (!old.getDescription().equals(disDescription)) {
+            busRef.update("description", disDescription).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    System.out.println("User edit : success!");
+                }
+            });
+        }
+
+        if (old.getMaxGuests()!=disMaxGuests) {
+            busRef.update("maxGuests", disMaxGuests).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    System.out.println("User edit : success!");
+                }
+            });
+        }
+
+        if (!old.getRestrictions().equals(disRestrictions)) {
+            busRef.update("restrictions", disRestrictions).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    System.out.println("User edit : success!");
+                }
+            });
+        }
+
+
+
 
     }
 
