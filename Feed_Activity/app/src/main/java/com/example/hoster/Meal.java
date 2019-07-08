@@ -19,6 +19,10 @@ public class Meal implements Serializable {
     private String location;
     private HashMap<String, Boolean> restrictions;
     private ArrayList<String> tags;
+    //key is what needed, value is user who brings
+    private HashMap<String, String> needed;
+
+    public final static String NEEDED = "NEEDED";
 
     /**
      * constructor
@@ -34,7 +38,7 @@ public class Meal implements Serializable {
      */
     public Meal(String id, String hostId, String title, ArrayList<String> tags,
                 HashMap<String, Boolean> restrictions, String descr,
-                int maxGuests, String loc, String time)
+                int maxGuests, String loc, String time, HashMap<String, String> mNeeded)
     {
         this.ID = id;
         this.hostId = hostId;
@@ -56,6 +60,8 @@ public class Meal implements Serializable {
 
         this.location = loc;
         this.time = time;
+
+        this.needed = mNeeded;
     }
 
     public Meal()
@@ -76,6 +82,12 @@ public class Meal implements Serializable {
 
         this.location = "location";
         this.time = "time";
+
+        this.needed = new HashMap<>();
+        needed.put("beer", null);
+        needed.put("drinks", null);
+        needed.put("dessert", null);
+        needed.put("flowers",null);
     }
 
     /**
@@ -316,6 +328,12 @@ public class Meal implements Serializable {
                 +" maxNumber:"+maxGuests);
     }
 
+    public HashMap<String, String> getNeeded() {
+        return needed;
+    }
 
+    public void setNeeded(HashMap<String, String> needed) {
+        this.needed = needed;
+    }
 
 }

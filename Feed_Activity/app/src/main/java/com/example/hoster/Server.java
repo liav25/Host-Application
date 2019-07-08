@@ -385,10 +385,11 @@ public class Server {
      * @param maxGuests - maximum number of guests for this meal
      * @param loc - location for this meal
      * @param time - time and date of meal
+     * @param needed - what needed
      */
     public int addMeal(final String hostId, final String title, final ArrayList<String> tags,
                        final HashMap<String, Boolean> restrictions, final String descr,
-                       final int maxGuests, final String loc, final String time)
+                       final int maxGuests, final String loc, final String time, final HashMap<String, String> mNeeded)
     {
 
 
@@ -409,7 +410,7 @@ public class Server {
                     mutableData.setValue(currentValue + 1);
                     DocumentReference docRef = db.collection(MEALS_STRING).document(String.valueOf(counter[0]));
                     Meal newMeal = new Meal(String.valueOf(counter[0]),  hostId,  title,tags,
-                            restrictions, descr, maxGuests,  loc,  time);
+                            restrictions, descr, maxGuests,  loc,  time, mNeeded);
                     docRef.set(newMeal);
                 }
                 getMeals(MainActivity.meals, MainActivity.adapter);
@@ -743,7 +744,7 @@ public class Server {
      */
     public void editMeal(Meal old, String disTitle, String disDescription,
                          String disLocation, String disDate, int disMaxGuests,
-                         Map disRestrictions)
+                         Map disRestrictions, Map mNeeded)
     {
         DocumentReference busRef = db.collection(MEALS_DATA_STRING).document(old.getID());
         if (!old.getTitle().equals(disTitle)) {
@@ -806,6 +807,15 @@ public class Server {
                     System.out.println("User edit : success!");
                 }
             });
+
+        busRef.update("needed", mNeeded).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                System.out.println("User edit : success!");
+            }
+        });
+
+
 
 
 

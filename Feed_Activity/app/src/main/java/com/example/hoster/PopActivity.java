@@ -43,6 +43,12 @@ public class PopActivity extends AppCompatActivity {
     int maxGuests;
     private Activity mActivity;
 
+    CheckBox beer;
+    CheckBox drinks;
+    CheckBox dessert;
+    CheckBox flowers;
+
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstance) {
@@ -90,6 +96,11 @@ public class PopActivity extends AppCompatActivity {
         Vegan = (CheckBox)findViewById(R.id.vegan);
         Veggie = (CheckBox)findViewById(R.id.Vegetarian);
 
+        beer = (CheckBox) findViewById(R.id.beer_box);
+        drinks = (CheckBox) findViewById(R.id.drink_box);
+        flowers = (CheckBox) findViewById(R.id.flowers_box);
+        dessert = (CheckBox) findViewById(R.id.dessert_box);
+
 
         /* set location autocomplete */
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
@@ -116,8 +127,35 @@ public class PopActivity extends AppCompatActivity {
                 setFoodRests();
                 maxGuests = numberPicker.getValue();
 
+                HashMap<String, String> neededInput = new HashMap<>();
+
+
+                if(beer.isChecked()){
+                    neededInput.put("beer", Meal.NEEDED);
+                }
+                else {neededInput.put("beer", null);}
+                if(drinks.isChecked()){
+                    neededInput.put("drinks", Meal.NEEDED);
+                }
+                else{
+                    neededInput.put("drinks", null);
+                }
+                if(flowers.isChecked()){
+                    neededInput.put("flowers", Meal.NEEDED);
+                }
+                else{
+                    neededInput.put("flowers", null);
+                }
+                if(dessert.isChecked()){
+                    neededInput.put("dessert",Meal.NEEDED);
+                }
+                else {
+                    neededInput.put("dessert",null);
+                }
+
+
                 int id = MainActivity.sev.addMeal(MainActivity.userId, title, new ArrayList<String>(),
-                        foodRests, description, maxGuests, loc, date);
+                        foodRests, description, maxGuests, loc, date, neededInput);
 
                 MainActivity.adapter.notifyDataSetChanged();
                 finish();

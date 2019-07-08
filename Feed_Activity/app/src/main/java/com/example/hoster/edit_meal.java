@@ -51,8 +51,13 @@ public class edit_meal extends AppCompatActivity {
     AutoCompleteTextView location;
     String loc;
     Map<String, Boolean> foodRests;
+    Map<String, String> needed;
     int maxGuests;
     private Activity mActivity;
+    CheckBox beer;
+    CheckBox drinks;
+    CheckBox dessert;
+    CheckBox flowers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +72,7 @@ public class edit_meal extends AppCompatActivity {
         final Meal meal = (Meal) b.getSerializable("meal");
         final String mealId = (String) b.getSerializable("mealId");
         foodRests = meal.getRestrictions();
+        needed = meal.getNeeded();
         cancel = findViewById(R.id.closePopUpButton_edit);
 
 
@@ -95,11 +101,28 @@ public class edit_meal extends AppCompatActivity {
         Vegan = (CheckBox)findViewById(R.id.vegan_edit);
         Veggie = (CheckBox)findViewById(R.id.Vegetarian_edit);
 
+        beer = (CheckBox) findViewById(R.id.beer_edit);
+        drinks = (CheckBox) findViewById(R.id.drink_edit);
+        flowers = (CheckBox) findViewById(R.id.flower_edit);
+        dessert = (CheckBox) findViewById(R.id.desert_edit);
+
         kosher.setChecked(foodRests.get("Kosher"));
         Halal.setChecked(foodRests.get("Kosher"));
         Vegan.setChecked(foodRests.get("Vegan"));
         Veggie.setChecked(foodRests.get("Vegetarian"));
-        System.out.println(meal.getTags().toString());
+
+        if(needed.get("beer")!=null){
+            beer.setChecked(true);
+        }
+        if(needed.get("drinks")!=null){
+            drinks.setChecked(true);
+        }
+        if(needed.get("dessert")!=null){
+            dessert.setChecked(true);
+        }
+        if(needed.get("flowers")!=null){
+            flowers.setChecked(true);
+        }
 
         mSimpleDateFormat = new SimpleDateFormat("dd/MM/yyyy h:mm a", Locale.getDefault());
 
@@ -131,10 +154,33 @@ public class edit_meal extends AppCompatActivity {
                 setFoodRests();
                 maxGuests = numberPicker.getValue();
 
+                if(beer.isChecked()){
+                    needed.put("beer", Meal.NEEDED);
+                }
+                else{
+                    needed.put("beer", null);
+                }
+                if(flowers.isChecked()){
+                    needed.put("flowers", Meal.NEEDED);
+                }
+                else{
+                    needed.put("flowers",null);
+                }
+                if(drinks.isChecked()){
+                    needed.put("drinks", Meal.NEEDED);
+                }
+                else{
+                    needed.put("drinks",null);
+                }
+                if(dessert.isChecked()){
+                    needed.put("dessert", Meal.NEEDED);
+                }
+                else{
+                    needed.put("dessert",null);
+                }
+
                 MainActivity.sev.editMeal(meal, titleEdit, descriptionEdit,
-                        loc, date, maxGuests, foodRests);
-
-
+                        loc, date, maxGuests, foodRests, needed);
 
                 MainActivity.adapter.notifyDataSetChanged();
 
@@ -153,7 +199,6 @@ public class edit_meal extends AppCompatActivity {
                 mealIntent.putExtras(b); //Put your id to your next Intent
                 startActivity(mealIntent);
                 overridePendingTransition(R.anim.fade_in, R.anim.to_bottom);
-
             }
         });
 

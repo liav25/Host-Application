@@ -197,28 +197,28 @@
         android:layout_height="58dp">
 
         <CheckBox
-            android:id="@+id/checkBox"
+            android:id="@+id/beer_box"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:drawableLeft="@drawable/beer" />
 
         <CheckBox
-            android:id="@+id/checkBox4"
+            android:id="@+id/drink_box"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:drawableLeft="@drawable/soda" />
 
         <CheckBox
-            android:id="@+id/checkBox3"
+            android:id="@+id/dessert_box"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:drawableLeft="@drawable/cupcake" />
 
         <CheckBox
-            android:id="@+id/checkBox2"
+            android:id="@+id/flowers_box"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
