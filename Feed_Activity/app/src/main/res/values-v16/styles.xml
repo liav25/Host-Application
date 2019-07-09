@@ -31,18 +31,12 @@
         <item name="android:windowIsFloating">true</item>
     </style>
 
-    <style name="AppTheme.PopMe2" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme.PopMe2">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowBackground">@color/semi</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowIsTranslucent">true</item>
-        <item name="android:inAnimation">@anim/fade_in</item>
-        <item name="android:windowEnterAnimation">@anim/fade_in</item>
-        <item name="android:activityOpenEnterAnimation">@anim/fade_in</item>
-        <item name="android:animation">@anim/fade_in</item>
-
-        <item name="android:windowShowAnimation">@anim/fade_in</item>
 
     </style>
 

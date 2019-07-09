@@ -328,10 +328,12 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
                 //TODO - needed pop
                 if (getItem(position).getNeeded().containsValue("NEEDED") &&
                         getItem(position).isMember(MainActivity.userId)){
+                    System.out.println("++++++++++++" + getItem(position).toString()+ "++++" + getItem(position).getNeeded().toString());
                     Intent neededPopup = new Intent(mContext, neededDialog.class);
                     Bundle b = new Bundle();
                     b.putSerializable("meal", getItem(position));
                     b.putString("mealId", getItem(position).getID()); //Your id
+                    neededPopup.putExtras(b);
                     mContext.startActivity(neededPopup);
 
                 }

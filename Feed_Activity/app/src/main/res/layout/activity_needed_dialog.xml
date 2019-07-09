@@ -57,13 +57,21 @@
 
             />
 
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="10dp"
+            android:layout_height="5dp"
+            android:layout_below="@+id/can_you_bring"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/sep_needed"
+            >
+        </LinearLayout>
         <Button
             android:id="@+id/dessert_button"
-            android:textColor="#242224"
-
             android:layout_width="250dp"
             android:layout_height="50dp"
-            android:layout_below="@id/can_you_bring"
+            android:textColor="#242224"
+            android:layout_below="@id/sep_needed"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="7dp"
             android:background="@drawable/dessert_button"
