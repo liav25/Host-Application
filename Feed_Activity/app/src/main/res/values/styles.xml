@@ -13,19 +13,22 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="AppTheme.PopMe" >
+    <style name="AppTheme.PopMe">
         <item name="android:windowCloseOnTouchOutside">true</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowIsFloating">true</item>
 
     </style>
+
     <style name="Divider">
-        <item name="android:background">?android:attr/listDivider</item> //you can give your color here. that will change all divider color in your app.
+        <item name="android:background">?android:attr/listDivider</item>
+        //you can give your color here. that will change all divider color in your app.
     </style>
 
     <style name="Divider.Horizontal" parent="Divider">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">1dp</item> // You can change thickness here.
+        <item name="android:layout_height">1dp</item>
+        // You can change thickness here.
 
     </style>
 
@@ -34,6 +37,10 @@
         <item name="android:layout_height">match_parent</item>
     </style>
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 
 
 </resources>

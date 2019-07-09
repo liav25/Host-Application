@@ -1,9 +1,11 @@
 package com.example.hoster;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.widget.AlertDialogLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -322,6 +324,16 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
                     getItem(position).addGuest(MainActivity.userId);
                 }
                 holder.setButCol(getItem(position));
+
+                //TODO - needed pop
+                if (getItem(position).getNeeded().containsValue("NEEDED")){
+                    Intent neededPopup = new Intent(mContext, neededDialog.class);
+                    Bundle b = new Bundle();
+                    b.putSerializable("meal", getItem(position));
+                    b.putString("mealId", getItem(position).getID()); //Your id
+                    mContext.startActivity(neededPopup);
+
+                }
 
                 Server.getInstance().getMeals(MainActivity.meals, MainActivity.adapter);
                 holder.setImages(getItem(position).getGuests(), mContext);

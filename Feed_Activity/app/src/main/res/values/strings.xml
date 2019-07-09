@@ -16,4 +16,5 @@
     <string name="title_activity_splash">Hoster</string>
     <string name="join_meal">Join Meal!</string>
     <string name="title_activity_edit_meal">edit_meal</string>
+    <string name="title_activity_needed_dialog">neededDialog</string>
 </resources>

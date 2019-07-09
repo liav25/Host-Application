@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="350dp"
+    android:layout_height="475dp"
+    tools:context=".neededDialog">
+
+    <RelativeLayout
+        android:layout_width="350dp"
+        android:layout_height="475dp"
+        android:background="@drawable/rounded_button_orange"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/open_sans"
+            android:text="Join The Party!"
+            android:textColor="@color/TextWhite"
+            android:textSize="30sp"
+
+            />
+
+        <View
+            android:id="@+id/sep_line"
+            style="@style/Divider.Vertical"
+            android:layout_width="270dp"
+            android:layout_height="1sp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="5dp"
+            android:alpha="0.5"
+            android:background="@color/transparent" />
+
+        <TextView
+            android:id="@+id/can_you_bring"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sep_line"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/open_sans"
+            android:padding="20dp"
+            android:text="Here are some extra things that your host mentioned that still needed...\nCan you bring something ?"
+            android:textColor="@color/TextWhite"
+            android:textSize="20sp"
+
+            />
+
+        <Button
+            android:id="@+id/dessert_button"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/can_you_bring"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="7dp"
+            android:background="@drawable/dessert_button"
+            android:padding="5dp"
+            android:text="Dessert" />
+
+        <Button
+            android:id="@+id/beer_button"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/dessert_button"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="7dp"
+            android:background="@drawable/beer_button"
+            android:padding="5dp"
+
+            android:text="beer" />
+
+        <Button
+            android:id="@+id/flowers_button"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/beer_button"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="7dp"
+            android:background="@drawable/flowers_button"
+
+            android:padding="5dp"
+            android:text="flowers" />
+
+        <Button
+            android:id="@+id/drinks_button"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/flowers_button"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="7dp"
+            android:background="@drawable/drinks_button"
+            android:padding="5dp"
+            android:text="drinks" />
+
+        <TextView
+            android:id="@+id/thats_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/drinks_button"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="7.5dp"
+            android:fontFamily="@string/google_api_key"
+            android:text="That's ok"
+            android:textColor="@color/TextWhite"
+            android:textSize="16sp"
+
+            />
+
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>
