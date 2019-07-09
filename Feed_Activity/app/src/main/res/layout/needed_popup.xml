@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="475dp"
+    android:layout_marginHorizontal="35dp"
+    android:layout_marginVertical="120dp"
+    android:padding="5dp"
+    android:background="@drawable/rounded_button_orange">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Join The Party!"
+        android:layout_centerHorizontal="true"
+       android:textColor="@color/TextWhite"
+        android:textSize="30sp"
+        android:fontFamily="@font/open_sans"
+
+        />
+    <View
+        android:id="@+id/sep_line"
+        style="@style/Divider.Vertical"
+        android:layout_width="270dp"
+        android:background="@color/TextWhite"
+        android:layout_height="1sp"
+        android:layout_marginTop="40dp"
+        android:alpha="0.5"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="40dp"/>
+
+    <TextView
+        android:id="@+id/can_you_bring"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Some extra things are still needed in our meal...\n\nCan you bring something ?"
+        android:layout_centerHorizontal="true"
+        android:padding="20dp"
+        android:layout_below="@id/sep_line"
+        android:textColor="@color/TextWhite"
+        android:textSize="20sp"
+        android:fontFamily="@font/open_sans"
+
+        />
+
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:background="@drawable/dessert_button"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/button1"
+        android:layout_marginBottom="7dp"
+        android:text="Dessert"
+        android:padding="5dp"
+        android:layout_below="@id/can_you_bring"
+        />
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:background="@drawable/beer_button"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/button2"
+        android:padding="5dp"
+        android:layout_marginBottom="7dp"
+        android:text="beer"
+
+        android:layout_below="@id/button1"
+        />
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:background="@drawable/flowers_button"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/button3"
+        android:padding="5dp"
+        android:text="flowers"
+
+        android:layout_marginBottom="7dp"
+        android:layout_below="@id/button2"
+        />
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:background="@drawable/drinks_button"
+        android:layout_centerHorizontal="true"
+        android:text="drinks"
+        android:id="@+id/button4"
+        android:padding="5dp"
+        android:layout_marginBottom="7dp"
+        android:layout_below="@id/button3"
+        />
+<TextView
+    android:id="@+id/thats_ok"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/button4"
+    android:layout_centerHorizontal="true"
+    android:text="That's Ok"
+    android:textSize="16sp"
+    android:textColor="@color/TextWhite"
+    android:fontFamily="@string/google_api_key"
+
+    />
+
+</RelativeLayout>
