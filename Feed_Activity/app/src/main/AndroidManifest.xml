@@ -20,7 +20,7 @@
         <activity
             android:name=".neededDialog"
             android:label="@string/title_activity_needed_dialog"
-            android:theme="@style/Theme.AppCompat.Dialog.Alert"></activity>
+            android:theme="@style/AppTheme.PopMe2"></activity>
         <activity
             android:name=".edit_meal"
             android:label="@string/title_activity_edit_meal"

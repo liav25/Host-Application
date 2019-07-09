@@ -22,6 +22,8 @@ public class neededDialog extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_needed_dialog);
 
+
+
         Bundle b = getIntent().getExtras();
         Intent popIntent = getIntent();
 
@@ -73,7 +75,6 @@ public class neededDialog extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-
             }
         });
     }

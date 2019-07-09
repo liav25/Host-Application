@@ -29,8 +29,19 @@
         <item name="android:windowCloseOnTouchOutside">true</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowIsFloating">true</item>
+    </style>
+
+    <style name="AppTheme.PopMe2" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@color/semi</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
 
     </style>
+
     <style name="Divider">
         <item name="android:background">#ffbb05</item> //you can give your color here. that will change all divider color in your app.
     </style>
