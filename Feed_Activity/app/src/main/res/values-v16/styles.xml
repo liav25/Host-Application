@@ -46,6 +46,12 @@
         <item name="android:layout_height">match_parent</item>
     </style>
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+
 
 
 </resources>
