@@ -78,15 +78,9 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         }
 
-
         cardlist = findViewById(R.id.mealCardList);
 
-
-
         cardlist.setAdapter(adapter);
-
-
-
 
         addMealBut = findViewById(R.id.addMealButton);
         fromBottom = AnimationUtils.loadAnimation(this, R.anim.frombottom);
