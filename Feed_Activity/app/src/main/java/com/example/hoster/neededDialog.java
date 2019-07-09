@@ -28,7 +28,7 @@ public class neededDialog extends AppCompatActivity {
 
 
 
-        Bundle b = getIntent().getExtras();
+        final Bundle b = getIntent().getExtras();
         Intent popIntent = getIntent();
 
         //** xml things **//
@@ -46,7 +46,7 @@ public class neededDialog extends AppCompatActivity {
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         thastOk.setText(content);
 
-        Meal meal = (Meal) b.getSerializable("meal");
+        final Meal meal = (Meal) b.getSerializable("meal");
 
         flowers.setVisibility(View.INVISIBLE);
         beer.setVisibility(View.INVISIBLE);
@@ -98,9 +98,7 @@ public class neededDialog extends AppCompatActivity {
 
         if(meal.getNeeded().get("dessert")==null){
             beerParams.addRule(RelativeLayout.BELOW, R.id.sep_needed);
-            System.out.println("++++++++++++ thats one");
             if(meal.getNeeded().get("beer")==null){
-                System.out.println("+++++++++++++++ thats two");
                 flowersParams.addRule(RelativeLayout.BELOW, R.id.sep_needed);
                 if(meal.getNeeded().get("flowers")==null){
                     drinksParams.addRule(RelativeLayout.BELOW, R.id.sep_needed);
@@ -123,6 +121,11 @@ public class neededDialog extends AppCompatActivity {
         flowers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String username = b.getString("userId");
+                Map<String,String> needed = meal.getNeeded();
+                needed.put("flowers", username);
+                MainActivity.sev.editMeal(meal, needed);
+                MainActivity.adapter.notifyDataSetChanged();
                 finish();
             }
         });
@@ -130,6 +133,12 @@ public class neededDialog extends AppCompatActivity {
         drinks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String username = b.getString("userId");
+                Map<String,String> needed = meal.getNeeded();
+                needed.put("drinks", username);
+                MainActivity.sev.editMeal(meal, needed);
+                MainActivity.adapter.notifyDataSetChanged();
+
                 finish();
             }
         });
@@ -137,6 +146,12 @@ public class neededDialog extends AppCompatActivity {
         beer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String username = b.getString("userId");
+                Map<String,String> needed = meal.getNeeded();
+                needed.put("beer", username);
+                MainActivity.sev.editMeal(meal, needed);
+                MainActivity.adapter.notifyDataSetChanged();
+
                 finish();
             }
         });
@@ -144,8 +159,13 @@ public class neededDialog extends AppCompatActivity {
         dessert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                String username = b.getString("userId");
+                Map<String,String> needed = meal.getNeeded();
+                needed.put("dessert", username);
+                MainActivity.sev.editMeal(meal, needed);
+                MainActivity.adapter.notifyDataSetChanged();
 
+                finish();
             }
         });
 

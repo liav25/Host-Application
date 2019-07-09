@@ -19,6 +19,8 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.rpc.Help;
+
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -40,6 +42,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         Button joinBU;
         ImageView img1;
         ImageView img2;
+        TextView textView;
         ImageView img3;
         ImageView img4;
         ImageView img5;
@@ -245,7 +248,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
     public View getView(final int position, View convertView, final ViewGroup parent) {
 
         String title = getItem(position).getTitle();
-        String date = getItem(position).getTime();
+        final String date = getItem(position).getTime();
         String description = getItem(position).getDescription();
         String host = getItem(position).getHostId();
         ArrayList<String> guests = getItem(position).getGuests();
@@ -282,6 +285,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
             holder.veggieLayout = (LinearLayout)convertView.findViewById(R.id.veg_layout);
             holder.halalLayout = (LinearLayout)convertView.findViewById(R.id.halal_layout);
             holder.seperator = (LinearLayout) convertView.findViewById(R.id.seperator);
+            holder.textView = (TextView) convertView.findViewById(R.id.helper);
 
             result = convertView;
 
@@ -297,7 +301,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         holder.description.setText(description);
         //Tomi why this isnt working ?????
         //shows only host and not arranged by + host
-        holder.host.setText("Arranged by "+host);
+        holder.host.setText("Arranged by "+ host);
 
         holder.setImages(guests, mContext);
         holder.setSymbols(restrictions, mContext);
@@ -328,11 +332,11 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
                 //TODO - needed pop
                 if (getItem(position).getNeeded().containsValue("NEEDED") &&
                         getItem(position).isMember(MainActivity.userId)){
-                    System.out.println("++++++++++++" + getItem(position).toString()+ "++++" + getItem(position).getNeeded().toString());
                     Intent neededPopup = new Intent(mContext, neededDialog.class);
                     Bundle b = new Bundle();
                     b.putSerializable("meal", getItem(position));
-                    b.putString("mealId", getItem(position).getID()); //Your id
+                    String uId = MainActivity.sev.mAuth.getCurrentUser().getUid();
+                    b.putString("userId", uId);
                     neededPopup.putExtras(b);
                     mContext.startActivity(neededPopup);
 

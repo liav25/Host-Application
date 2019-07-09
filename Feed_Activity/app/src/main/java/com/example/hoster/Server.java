@@ -60,6 +60,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.google.rpc.Help;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -78,6 +79,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static com.firebase.ui.auth.AuthUI.TAG;
 
@@ -385,7 +388,7 @@ public class Server {
      * @param maxGuests - maximum number of guests for this meal
      * @param loc - location for this meal
      * @param time - time and date of meal
-     * @param needed - what needed
+     * @param mNeeded - what needed
      */
     public int addMeal(final String hostId, final String title, final ArrayList<String> tags,
                        final HashMap<String, Boolean> restrictions, final String descr,
@@ -718,6 +721,7 @@ public class Server {
         });
     }
 
+
     /**
      * Ranks a given user
      * @param rank - int from 1 to 5 according to the tnaking
@@ -824,4 +828,18 @@ public class Server {
     }
 
 
+
+    public void editMeal(Meal old, Map mNeeded)
+    {
+        DocumentReference busRef = db.collection(MEALS_DATA_STRING).document(old.getID());
+
+
+        busRef.update("needed", mNeeded).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                System.out.println("User edit : success!");
+            }
+        });
+
+    }
 }
