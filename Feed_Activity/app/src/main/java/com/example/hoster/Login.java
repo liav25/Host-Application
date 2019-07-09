@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,7 +20,6 @@ import com.google.firebase.auth.FirebaseAuth;
 public class Login extends AppCompatActivity {
     EditText email;
     EditText pass;
-    TextView toRegister;
     final static int MIN_PASS_CHAR = 6;
     final static int MIN_EMAIL_CHAR = 1;
     Button login;
@@ -37,7 +35,7 @@ public class Login extends AppCompatActivity {
 
         email = findViewById(R.id.userNameInputField);
         pass = findViewById(R.id.editText3);
-        toRegister = findViewById(R.id.go_register);
+
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -51,15 +49,6 @@ public class Login extends AppCompatActivity {
                 }
 
 
-            }
-        });
-
-        toRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent register = new Intent(getApplicationContext(), Register.class);
-                startActivity(register);
-                finish();
             }
         });
     }

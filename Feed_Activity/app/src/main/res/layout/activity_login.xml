@@ -95,7 +95,7 @@
                 android:background="@drawable/rounded_button"
                 android:clickable="true"
                 android:focusable="true"
-                android:text="LOGIN"
+                android:text="Sign In"
                 android:textAllCaps="false"
                 android:textColor="@color/TextWhite"
                 android:textSize="18sp"
@@ -105,16 +105,6 @@
                 android:layout_marginTop="40dp"
                 android:layout_centerHorizontal="true"
                 />
-        <TextView
-            android:id="@+id/go_register"
-            android:layout_below="@id/loginButton"
-            android:layout_margin="30dp"
-            android:textStyle="bold"
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:text="Doesn't have an account yet?"/>
     </RelativeLayout>
 
 

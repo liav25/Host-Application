@@ -34,7 +34,6 @@ public class Register extends AppCompatActivity {
                 finish();
             }
         });
-        //Todo - remove sign out ?? not sure, Tom explain please
         mAtuh.signOut();
         if (mAtuh.getCurrentUser() != null){
 
