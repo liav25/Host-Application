@@ -182,7 +182,7 @@ public class edit_meal extends AppCompatActivity {
                 MainActivity.sev.editMeal(meal, titleEdit, descriptionEdit,
                         loc, date, maxGuests, foodRests, needed);
 
-                MainActivity.adapter.notifyDataSetChanged();
+                Server.getInstance().getMeals(MainActivity.meals, MainActivity.adapter);
 
                 finish();
             }

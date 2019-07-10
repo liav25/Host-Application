@@ -753,7 +753,9 @@ public class Server {
             "Bucharim", "Mahane Israel", "She'arey Hesed", "Ir Ganim Gimel", "Hameshulash", "Ramat Beit Hakerem",
             "Makor Hayim", "Kiryat haLeom", "Ramat Deniya", "Tel Arza"
     };
-    public Location getLoc(String neighborhood, Location curLoc){
+
+
+    public Location getLoc(String neighborhood, Location curLoc) {
         HashMap<String, Location> locations = new HashMap<>();
         Location rehavia = new Location("Rehavia");
         rehavia.setLatitude(31.7708234);
@@ -771,9 +773,10 @@ public class Server {
         System.out.println();
         return curLoc;
 
+    }
 
     /**
-     * Creates a new user and adds it to DB
+     * Edits a meal
      * @param old - old user to compare to current changes
      * @param disTitle - display name
      */
@@ -782,7 +785,7 @@ public class Server {
                          Map disRestrictions, Map mNeeded)
     {
         DocumentReference busRef = db.collection(MEALS_DATA_STRING).document(old.getID());
-        if (!old.getTitle().equals(disTitle)) {
+        if (old.getTitle() != disTitle) {
             busRef.update("title", disTitle).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
@@ -791,7 +794,7 @@ public class Server {
             });
         }
 
-        if (!old.getDescription().equals(disDescription)) {
+        if (old.getDescription() != disDescription) {
             busRef.update("description", disDescription).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
@@ -800,7 +803,7 @@ public class Server {
             });
         }
 
-        if (!old.getLocation().equals(disLocation)) {
+        if (old.getLocation() != disLocation) {
             busRef.update("location", disLocation).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
@@ -809,7 +812,7 @@ public class Server {
             });
         }
 
-        if (!old.getTime().equals(disDate)) {
+        if (old.getTime() != disDate) {
             busRef.update("time", disDate).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
@@ -818,7 +821,7 @@ public class Server {
             });
         }
 
-        if (!old.getDescription().equals(disDescription)) {
+        if (old.getDescription() != disDescription) {
             busRef.update("description", disDescription).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
@@ -827,7 +830,7 @@ public class Server {
             });
         }
 
-        if (old.getMaxGuests()!=disMaxGuests) {
+        if (old.getMaxGuests() != disMaxGuests) {
             busRef.update("maxGuests", disMaxGuests).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
@@ -849,11 +852,6 @@ public class Server {
                 System.out.println("User edit : success!");
             }
         });
-
-
-
-
-
 
 
     }
