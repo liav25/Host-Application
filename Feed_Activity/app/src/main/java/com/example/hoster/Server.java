@@ -722,6 +722,57 @@ public class Server {
         });
     }
 
+    /**
+     * This function is setting a field from user to a TextView
+     * @param uId - the user Id
+     * @param toShow - the field we put on
+     * @param field - the name of the field
+     */
+    public void getField(String uId, final TextView toShow, final String field) {
+        DocumentReference docRef = db.collection(USERS_DATA_STRING).document(uId);
+
+        /* gets object from server  */
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null && document.exists()) {
+                        String got = document.getString(field);
+                        toShow.setText(got);
+
+                    } else {
+                        System.out.println("no such user found");
+                    }
+                }
+            }
+        });
+    }
+
+    public void getFieldForHint(String uId, final TextView toShow, final String field) {
+        DocumentReference docRef = db.collection(USERS_DATA_STRING).document(uId);
+
+        /* gets object from server  */
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null && document.exists()) {
+                        String got = document.getString(field);
+                        if(got!=null) {
+                            toShow.setHint(got);
+                        }
+                        else{toShow.setHint(field);}
+                    } else {
+                        System.out.println("no such user found");
+                    }
+                }
+            }
+        });
+    }
+
+
 
     /**
      * Ranks a given user
