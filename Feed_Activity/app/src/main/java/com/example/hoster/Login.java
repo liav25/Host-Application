@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,6 +25,7 @@ public class Login extends AppCompatActivity {
     final static int MIN_EMAIL_CHAR = 1;
     Button login;
     public static FirebaseAuth mAuth;
+    TextView toRegister;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -35,6 +37,7 @@ public class Login extends AppCompatActivity {
 
         email = findViewById(R.id.userNameInputField);
         pass = findViewById(R.id.editText3);
+        toRegister = findViewById(R.id.to_register);
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -49,6 +52,15 @@ public class Login extends AppCompatActivity {
                 }
 
 
+            }
+        });
+
+        toRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent registerIntent = new Intent(getApplicationContext(), Register.class);
+                startActivity(registerIntent);
+                finish();
             }
         });
     }

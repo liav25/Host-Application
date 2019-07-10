@@ -4,68 +4,80 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_white"
+    android:background="#fafafa"
     tools:context=".MainActivity">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:background="@color/AccentRed"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        >
 
-    </android.support.v7.widget.Toolbar>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentStart="true"
+            style="@style/HeaderBar"
 
-    android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="4dp"
+            android:background="#dd4545"
+            android:elevation="4dp"
+            app:popupTheme="@style/Widget.AppCompat.ActionBar"
+            app:theme="@style/Widget.AppCompat.ActionBar">
+
+
+
+
+        </android.support.v7.widget.Toolbar>
 
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_picture"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_gravity="top"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="25dp"
+            android:layout_alignLeft="@+id/toolbar"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="316dp"
+
             android:background="@drawable/shadow"
-            android:elevation="3dp"
+            android:elevation="4dp"
             android:src="@drawable/profile_picture"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
         </de.hdodenhof.circleimageview.CircleImageView>
 
-        <Button
+        <ImageButton
 
             android:id="@+id/addMealButton"
-            android:layout_width="206dp"
-            android:layout_height="80dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="201dp"
-            android:layout_marginEnd="18dp"
-            android:background="@drawable/addmealnew"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignBottom="@+id/mealCardList"
+            android:layout_marginBottom="-10dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginRight="-10sp"
+            android:adjustViewBounds="true"
+            android:backgroundTint="@color/transparent"
             android:clickable="true"
-            android:elevation="3dp"
-            android:focusable="true" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ListView
-            android:divider="@null"
-            android:id="@+id/mealCardList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="90dp"
+            android:elevation="7dp"
+            android:cropToPadding="true"
+            android:focusable="true"
+            android:scaleType="fitCenter"
+            android:outlineProvider="none"
+            android:src="@drawable/addmeal4" />
 
-                        />
-        </LinearLayout>
+            <ListView
+                android:id="@+id/mealCardList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="65dp"
+                android:divider="@color/transparent"
+                android:dividerHeight="5dp"
+       />
 
     </RelativeLayout>
 

@@ -8,7 +8,7 @@
     <color name="ButtonBG">#FFFDE7</color>
     <color name="TextWhite">#FFFFFF</color>
     <color name="TextYellow">#F2D43D</color>
-    <color name="TextGrey">#B1B1B1</color>
+    <color name="TextGrey">#e3e3e3</color>
     <color name="Background">#F6f6f6</color>
     <color name="Peach">#FFECD2</color>
     <color name="Juicy">#FCB69F</color>
@@ -16,5 +16,7 @@
     <color name="transparent">#00FFAE32</color>
     <color name="orange">#FF8743</color>
     <color name="fcfc">#fcfcfc</color>
+    <color name="toolbarcolor">#b82f2f</color>
+    <color name="semi">#50676767</color>
 
 </resources>

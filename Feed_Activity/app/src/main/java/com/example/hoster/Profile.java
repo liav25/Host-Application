@@ -96,7 +96,7 @@ public class Profile extends AppCompatActivity {
         }
 
         pen.setOnClickListener(new View.OnClickListener() {
-            @Override
+                @Override
             public void onClick(View v) {
                 Bundle b = new Bundle();
                 Intent editProfileIntent = new Intent(getApplicationContext(), edit_profile.class);

@@ -4,8 +4,8 @@
     <solid android:color="@color/colorAccent"/>
     <!-- this one is ths color of the Rounded Button -->
     <corners
-        android:bottomRightRadius="5dp"
-        android:bottomLeftRadius="5dp"
-        android:topLeftRadius="0dp"
-        android:topRightRadius="0dp"/>
-</shape>
+        android:bottomRightRadius="30dp"
+        android:bottomLeftRadius="30dp"
+    android:topLeftRadius="30dp"
+    android:topRightRadius="30dp"/>
+    </shape>

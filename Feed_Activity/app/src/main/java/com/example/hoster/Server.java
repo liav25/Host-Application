@@ -61,6 +61,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.google.rpc.Help;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -79,6 +80,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static com.firebase.ui.auth.AuthUI.TAG;
 
@@ -110,6 +113,7 @@ public class Server {
     private static final String MEALS_STRING = "Meals Info";
     private static final String MEALS_Count_STRING = "Meals Count";
     private static final String USERS_DATA_STRING = "User info";
+    private static final String MEALS_DATA_STRING = "Meals Info";
     private static final String USER_PIC_PATH ="ProfilePics/";
 
     /**
@@ -385,10 +389,11 @@ public class Server {
      * @param maxGuests - maximum number of guests for this meal
      * @param loc - location for this meal
      * @param time - time and date of meal
+     * @param mNeeded - what needed
      */
     public int addMeal(final String hostId, final String title, final ArrayList<String> tags,
                        final HashMap<String, Boolean> restrictions, final String descr,
-                       final int maxGuests, final String loc, final String time)
+                       final int maxGuests, final String loc, final String time, final HashMap<String, String> mNeeded)
     {
 
 
@@ -409,7 +414,7 @@ public class Server {
                     mutableData.setValue(currentValue + 1);
                     DocumentReference docRef = db.collection(MEALS_STRING).document(String.valueOf(counter[0]));
                     Meal newMeal = new Meal(String.valueOf(counter[0]),  hostId,  title,tags,
-                            restrictions, descr, maxGuests,  loc,  time);
+                            restrictions, descr, maxGuests,  loc,  time, mNeeded);
                     docRef.set(newMeal);
                 }
                 getMeals(MainActivity.meals, MainActivity.adapter);
@@ -717,6 +722,7 @@ public class Server {
         });
     }
 
+
     /**
      * Ranks a given user
      * @param rank - int from 1 to 5 according to the tnaking
@@ -734,6 +740,7 @@ public class Server {
         notificationManager.cancel(mealId);
 
     }
+
 
     private static final String[] NEIGHBORHOODS_JLM = new String[] {
             "Musrara", "Ein Kerem", "Nachlaot", "Jewish Quarter", "Yemin Moshe",
@@ -763,5 +770,108 @@ public class Server {
         locations.put("Ein Kerem", EinKerem);
         System.out.println();
         return curLoc;
+
+
+    /**
+     * Creates a new user and adds it to DB
+     * @param old - old user to compare to current changes
+     * @param disTitle - display name
+     */
+    public void editMeal(Meal old, String disTitle, String disDescription,
+                         String disLocation, String disDate, int disMaxGuests,
+                         Map disRestrictions, Map mNeeded)
+    {
+        DocumentReference busRef = db.collection(MEALS_DATA_STRING).document(old.getID());
+        if (!old.getTitle().equals(disTitle)) {
+            busRef.update("title", disTitle).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    System.out.println("User edit : success!");
+                }
+            });
+        }
+
+        if (!old.getDescription().equals(disDescription)) {
+            busRef.update("description", disDescription).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    System.out.println("User edit : success!");
+                }
+            });
+        }
+
+        if (!old.getLocation().equals(disLocation)) {
+            busRef.update("location", disLocation).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    System.out.println("User edit : success!");
+                }
+            });
+        }
+
+        if (!old.getTime().equals(disDate)) {
+            busRef.update("time", disDate).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    System.out.println("User edit : success!");
+                }
+            });
+        }
+
+        if (!old.getDescription().equals(disDescription)) {
+            busRef.update("description", disDescription).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    System.out.println("User edit : success!");
+                }
+            });
+        }
+
+        if (old.getMaxGuests()!=disMaxGuests) {
+            busRef.update("maxGuests", disMaxGuests).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    System.out.println("User edit : success!");
+                }
+            });
+        }
+
+        busRef.update("restrictions", disRestrictions).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    System.out.println("User edit : success!");
+                }
+            });
+
+        busRef.update("needed", mNeeded).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                System.out.println("User edit : success!");
+            }
+        });
+
+
+
+
+
+
+
+    }
+
+
+
+    public void editMeal(Meal old, Map mNeeded)
+    {
+        DocumentReference busRef = db.collection(MEALS_DATA_STRING).document(old.getID());
+
+
+        busRef.update("needed", mNeeded).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                System.out.println("User edit : success!");
+            }
+        });
+
+
     }
 }

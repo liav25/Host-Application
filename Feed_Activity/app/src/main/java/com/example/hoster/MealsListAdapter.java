@@ -1,21 +1,28 @@
 package com.example.hoster;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.widget.AlertDialogLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.google.rpc.Help;
 
+import java.util.ArrayList;
+import java.util.Map;
 
 
 class MealsListAdapter extends ArrayAdapter<Meal> {
@@ -35,26 +42,98 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         Button joinBU;
         ImageView img1;
         ImageView img2;
+        TextView textView;
         ImageView img3;
         ImageView img4;
         ImageView img5;
         ImageView img6;
+        ImageView kosherSymbol;
+        ImageView halalSymbol;
+        ImageView veggieSymbol;
+        ImageView veganSymbol;
+        LinearLayout kosherLayout;
+        LinearLayout veggieLayout;
+        LinearLayout veganLayout;
+        LinearLayout halalLayout;
+        LinearLayout seperator;
+
+
 
 
         private void setButCol(Meal meal){
             if (meal.isMember(MainActivity.userId)){
                 joinBU.setText("Leave");
 
-                joinBU.setBackgroundColor(Color.GRAY);
+                joinBU.setBackgroundResource(R.drawable.rounded_button_gray);
             } else if (meal.isFull()){ // meal is full
                 joinBU.setText("Full");
-                joinBU.setBackgroundColor(Color.GRAY);
+                joinBU.setBackgroundResource(R.drawable.rounded_button_gray);
             } else {
                 joinBU.setText("Join Meal");
                 joinBU.setTextColor(Color.WHITE);
                 joinBU.setBackgroundResource(R.drawable.rounded_button);
             }
         }
+
+        private void setSymbols(final Map<String, Boolean> restrictions, final Context mContext){
+            RelativeLayout.LayoutParams kosherParams = (RelativeLayout.LayoutParams)kosherLayout.getLayoutParams();
+            RelativeLayout.LayoutParams vegParams = (RelativeLayout.LayoutParams)veggieLayout.getLayoutParams();
+            RelativeLayout.LayoutParams veganParams = (RelativeLayout.LayoutParams)veganLayout.getLayoutParams();
+            RelativeLayout.LayoutParams halalParams = (RelativeLayout.LayoutParams)halalLayout.getLayoutParams();
+            RelativeLayout.LayoutParams seperatorParams = (RelativeLayout.LayoutParams)seperator.getLayoutParams();
+            kosherParams.addRule(RelativeLayout.LEFT_OF, R.id.seperator);
+            vegParams.addRule(RelativeLayout.LEFT_OF, R.id.kosher_layout);
+            veganParams.addRule(RelativeLayout.LEFT_OF, R.id.veg_layout);
+            halalParams.addRule(RelativeLayout.LEFT_OF, R.id.vegan_layout);
+
+            try {
+                if (restrictions.get("Kosher")) {
+                    kosherSymbol.setVisibility(View.VISIBLE);}
+                else {
+                    kosherSymbol.setVisibility(View.INVISIBLE);
+                }
+
+                if (restrictions.get("Halal")) {
+                    halalSymbol.setVisibility(View.VISIBLE);
+                }
+                else {halalSymbol.setVisibility(View.INVISIBLE);}
+
+                if (restrictions.get("Vegetarian")) {
+                    veggieSymbol.setVisibility(View.VISIBLE);
+                }
+                else {veggieSymbol.setVisibility(View.INVISIBLE);}
+
+                if (restrictions.get("Vegan")) {
+                    veganSymbol.setVisibility(View.VISIBLE);
+                }
+                else {veganSymbol.setVisibility(View.INVISIBLE);}
+            }
+
+
+            catch (NullPointerException e){}
+
+            if(!restrictions.get("Vegan")){
+                halalParams.addRule(RelativeLayout.LEFT_OF, R.id.veg_layout);
+                if(!restrictions.get("Vegetarian")){
+                    halalParams.addRule(RelativeLayout.LEFT_OF, R.id.kosher_layout);
+                    if(!restrictions.get("Kosher")){
+                        halalParams.addRule(RelativeLayout.LEFT_OF, R.id.seperator);
+                    }
+                }
+            }
+            if(!restrictions.get("Vegetarian")){
+                veganParams.addRule(RelativeLayout.LEFT_OF, R.id.kosher_layout);
+                if(!restrictions.get("Kosher")){
+                    veganParams.addRule(RelativeLayout.LEFT_OF, R.id.seperator);
+                }
+            }
+            if(!restrictions.get("Kosher")){
+                vegParams.addRule(RelativeLayout.LEFT_OF, R.id.seperator);
+            }
+        }
+
+
+
 
 
 
@@ -169,10 +248,11 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
     public View getView(final int position, View convertView, final ViewGroup parent) {
 
         String title = getItem(position).getTitle();
-        String date = getItem(position).getTime();
+        final String date = getItem(position).getTime();
         String description = getItem(position).getDescription();
         String host = getItem(position).getHostId();
         ArrayList<String> guests = getItem(position).getGuests();
+        Map<String, Boolean> restrictions = getItem(position).getRestrictions();
 
 
         //create the view result for showing animation
@@ -196,6 +276,17 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
             holder.img4 = convertView.findViewById(R.id.student4);
             holder.img5 = convertView.findViewById(R.id.student5);
             holder.img6 = convertView.findViewById(R.id.see_more_in_card);
+            holder.kosherSymbol = convertView.findViewById(R.id.kosher_symbol);
+            holder.halalSymbol = convertView.findViewById(R.id.halal_symbol);
+            holder.veganSymbol = convertView.findViewById(R.id.vegan_symbol);
+            holder.veggieSymbol = convertView.findViewById(R.id.veg_symbol);
+            holder.kosherLayout = (LinearLayout)convertView.findViewById(R.id.kosher_layout);
+            holder.veganLayout = (LinearLayout)convertView.findViewById(R.id.vegan_layout);
+            holder.veggieLayout = (LinearLayout)convertView.findViewById(R.id.veg_layout);
+            holder.halalLayout = (LinearLayout)convertView.findViewById(R.id.halal_layout);
+            holder.seperator = (LinearLayout) convertView.findViewById(R.id.seperator);
+            holder.textView = (TextView) convertView.findViewById(R.id.helper);
+
             result = convertView;
 
             convertView.setTag(holder);
@@ -208,11 +299,15 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         holder.title.setText(title);
         holder.date.setText(date);
         holder.description.setText(description);
-        holder.host.setText(host);
+        //Tomi why this isnt working ?????
+        //shows only host and not arranged by + host
+        holder.host.setText("Arranged by "+ host);
 
         holder.setImages(guests, mContext);
+        holder.setSymbols(restrictions, mContext);
+
         if (getItem(position).getHostId().equals(MainActivity.userId)) {
-            holder.host.setText("You");
+            holder.host.setText("Arranged by You");
         } else {
             Server.getInstance().getUsername(getItem(position).getHostId(), holder.host);
         }
@@ -234,8 +329,22 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
                 }
                 holder.setButCol(getItem(position));
 
+                //TODO - needed pop
+                if (getItem(position).getNeeded().containsValue("NEEDED") &&
+                        getItem(position).isMember(MainActivity.userId)){
+                    Intent neededPopup = new Intent(mContext, neededDialog.class);
+                    Bundle b = new Bundle();
+                    b.putSerializable("meal", getItem(position));
+                    String uId = MainActivity.sev.mAuth.getCurrentUser().getUid();
+                    b.putString("userId", uId);
+                    neededPopup.putExtras(b);
+                    mContext.startActivity(neededPopup);
+
+                }
+
                 Server.getInstance().getMeals(MainActivity.meals, MainActivity.adapter);
                 holder.setImages(getItem(position).getGuests(), mContext);
+                holder.setSymbols(getItem(position).getRestrictions(), mContext);
             }
         });
 

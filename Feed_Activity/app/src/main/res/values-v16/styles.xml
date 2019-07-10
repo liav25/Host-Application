@@ -17,6 +17,10 @@
         <item name="android:fontFamily">sans-serif-light</item>
     </style>
 
+    <style name="HeaderBar">
+            <item name="android:background">#FFC822</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
@@ -25,8 +29,38 @@
         <item name="android:windowCloseOnTouchOutside">true</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowIsFloating">true</item>
+    </style>
+
+    <style name="AppTheme.PopMe2">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@color/semi</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
 
     </style>
+
+    <style name="Divider">
+        <item name="android:background">#ffbb05</item> //you can give your color here. that will change all divider color in your app.
+    </style>
+
+    <style name="Divider.Horizontal" parent="Divider">
+        <item name="android:layout_width">350dp</item>
+        <item name="android:layout_height">1dp</item> // You can change thickness here.
+
+    </style>
+
+    <style name="Divider.Vertical" parent="Divider">
+        <item name="android:layout_width">250dp</item>
+        <item name="android:background">@drawable/background_white</item>
+        <item name="android:layout_height">1dp</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
 
 
 
