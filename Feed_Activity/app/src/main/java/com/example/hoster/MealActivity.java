@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.util.Map;
 import java.util.Objects;
 
 public class MealActivity extends AppCompatActivity {
@@ -26,6 +27,10 @@ public class MealActivity extends AppCompatActivity {
     private TextView time;
     private TextView restrictions;
     private TextView neededString;
+    private TextView bringString1;
+    private TextView bringname1;
+    private TextView bringString2;
+    private TextView bringname2;
     private RecyclerView guestsRecycle;
     private TextView loc;
     private ImageButton pen;
@@ -138,6 +143,16 @@ public class MealActivity extends AppCompatActivity {
         neededString = (TextView) findViewById(R.id.still_needed);
         neededString.setText(getNeededString(meal));
 
+        bringString1 = (TextView) findViewById(R.id.bringing1);
+        bringString2 = (TextView) findViewById(R.id.bringing2);
+        bringname1 = (TextView) findViewById(R.id.namebring1);
+        bringname2 = (TextView) findViewById(R.id.namebring2);
+        bringname1.setVisibility(View.INVISIBLE);
+        bringname2.setVisibility(View.INVISIBLE);
+        bringString2.setVisibility(View.INVISIBLE);
+        bringString1.setVisibility(View.INVISIBLE);
+        setBringing(meal);
+
         joinmeal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,6 +160,147 @@ public class MealActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void setBringing(Meal meal) {
+        Map needed = meal.getNeeded();
+        if(needed.get("beer")!=null) {
+            if (!needed.get("beer").equals(Meal.NEEDED)) {
+                bringString1.setVisibility(View.VISIBLE);
+                bringString1.setText("Brings beer: ");
+                bringname1.setVisibility(View.VISIBLE);
+                MainActivity.sev.getUsername(needed.get("beer").toString(), bringname1);
+
+                if (needed.get("drinks") != null) {
+                    if (!needed.get("drinks").equals(Meal.NEEDED)) {
+                        bringString2.setVisibility(View.VISIBLE);
+                        bringString2.setText("Brings drinks: ");
+                        bringname2.setVisibility(View.VISIBLE);
+                        MainActivity.sev.getUsername(needed.get("drinks").toString(), bringname2);
+                    }
+                }
+                if (needed.get("flowers") != null) {
+                    if (!needed.get("flowers").equals(Meal.NEEDED)) {
+                        bringString2.setVisibility(View.VISIBLE);
+                        bringString2.setText("Brings flowers: ");
+                        bringname2.setVisibility(View.VISIBLE);
+                        MainActivity.sev.getUsername(needed.get("flowers").toString(), bringname2);
+                    }
+                }
+                if (needed.get("dessert") != null) {
+                    if (!needed.get("dessert").equals(Meal.NEEDED)) {
+                        bringString2.setVisibility(View.VISIBLE);
+                        bringString2.setText("Brings dessert: ");
+                        bringname2.setVisibility(View.VISIBLE);
+                        MainActivity.sev.getUsername(needed.get("dessert").toString(), bringname2);
+                    }
+                }
+            }
+        }
+
+        if(needed.get("drinks")!=null) {
+
+            if (!needed.get("drinks").equals(Meal.NEEDED)) {
+                bringString1.setVisibility(View.VISIBLE);
+                bringString1.setText("Brings drinks: ");
+                bringname1.setVisibility(View.VISIBLE);
+                MainActivity.sev.getUsername(needed.get("drinks").toString(), bringname1);
+
+                if (needed.get("beer") != null) {
+                    if (!needed.get("beer").equals(Meal.NEEDED)) {
+                        bringString2.setVisibility(View.VISIBLE);
+                        bringString2.setText("Brings beer: ");
+                        bringname2.setVisibility(View.VISIBLE);
+                        MainActivity.sev.getUsername(needed.get("beer").toString(), bringname2);
+                    }
+                }
+                if (needed.get("flowers") != null) {
+                    if (!needed.get("flowers").equals(Meal.NEEDED)) {
+                        bringString2.setVisibility(View.VISIBLE);
+                        bringString2.setText("Brings flowers: ");
+                        bringname2.setVisibility(View.VISIBLE);
+                        MainActivity.sev.getUsername(needed.get("flowers").toString(), bringname2);
+                    }
+                }
+                if (needed.get("dessert") != null) {
+                    if (!needed.get("dessert").equals(Meal.NEEDED)) {
+                        bringString2.setVisibility(View.VISIBLE);
+                        bringString2.setText("Brings dessert: ");
+                        bringname2.setVisibility(View.VISIBLE);
+                        MainActivity.sev.getUsername(needed.get("dessert").toString(), bringname2);
+                    }
+                }
+            }
+        }
+
+        if(needed.get("flowers")!=null) {
+
+            if (!needed.get("flowers").equals(Meal.NEEDED)) {
+                bringString1.setVisibility(View.VISIBLE);
+                bringString1.setText("Brings flowers: ");
+                bringname1.setVisibility(View.VISIBLE);
+                MainActivity.sev.getUsername(needed.get("flowers").toString(), bringname1);
+
+                if (needed.get("drinks") != null) {
+                    if (!needed.get("drinks").equals(Meal.NEEDED)) {
+                        bringString2.setVisibility(View.VISIBLE);
+                        bringString2.setText("Brings drinks: ");
+                        bringname2.setVisibility(View.VISIBLE);
+                        MainActivity.sev.getUsername(needed.get("drinks").toString(), bringname2);
+                    }
+                }
+                if (needed.get("beer") != null) {
+                    if (!needed.get("beer").equals(Meal.NEEDED)) {
+                        bringString2.setVisibility(View.VISIBLE);
+                        bringString2.setText("Brings beer: ");
+                        bringname2.setVisibility(View.VISIBLE);
+                        MainActivity.sev.getUsername(needed.get("beer").toString(), bringname2);
+                    }
+                }
+                if (needed.get("dessert") != null) {
+                    if (!needed.get("dessert").equals(Meal.NEEDED)) {
+                        bringString2.setVisibility(View.VISIBLE);
+                        bringString2.setText("Brings dessert: ");
+                        bringname2.setVisibility(View.VISIBLE);
+                        MainActivity.sev.getUsername(needed.get("dessert").toString(), bringname2);
+                    }
+                }
+            }
+        }
+
+        if(needed.get("dessert")!=null) {
+            if (!needed.get("dessert").equals(Meal.NEEDED)) {
+                bringString1.setVisibility(View.VISIBLE);
+                bringString1.setText("Brings dessert: ");
+                bringname1.setVisibility(View.VISIBLE);
+                MainActivity.sev.getUsername(needed.get("dessert").toString(), bringname1);
+
+                if (needed.get("drinks") != null) {
+                    if (!needed.get("drinks").equals(Meal.NEEDED)) {
+                        bringString2.setVisibility(View.VISIBLE);
+                        bringString2.setText("Brings drinks: ");
+                        bringname2.setVisibility(View.VISIBLE);
+                        MainActivity.sev.getUsername(needed.get("drinks").toString(), bringname2);
+                    }
+                }
+                if (needed.get("flowers") != null) {
+                    if (!needed.get("flowers").equals(Meal.NEEDED)) {
+                        bringString2.setVisibility(View.VISIBLE);
+                        bringString2.setText("Brings flowers: ");
+                        bringname2.setVisibility(View.VISIBLE);
+                        MainActivity.sev.getUsername(needed.get("flowers").toString(), bringname2);
+                    }
+                }
+                if (needed.get("beer") != null) {
+                    if (!needed.get("beer").equals(Meal.NEEDED)) {
+                        bringString2.setVisibility(View.VISIBLE);
+                        bringString2.setText("Brings beer: ");
+                        bringname2.setVisibility(View.VISIBLE);
+                        MainActivity.sev.getUsername(needed.get("beer").toString(), bringname2);
+                    }
+                }
+            }
+        }
     }
 
     private void onClickBut(String mealId, Meal meal){

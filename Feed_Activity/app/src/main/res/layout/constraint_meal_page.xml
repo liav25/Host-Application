@@ -82,6 +82,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="5dp"
                     android:ems="10"
+                    android:textStyle="bold"
                     android:gravity="center_horizontal"
                     android:text="11/1/2011 , 20:00"
                     android:textAlignment="center"
@@ -91,7 +92,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_marginTop="7dp"
                     android:layout_marginRight="20dp">
 
                     <ImageView
@@ -102,12 +102,12 @@
 
                     <TextView
                         android:id="@+id/mealFoodRestrictions2"
-                        android:layout_width="110dp"
-                        android:layout_height="54dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:paddingBottom="10dp"
+                        android:padding="5dp"
                         android:text="Nachla'aot"
-
+                        android:layout_marginTop="5dp"
                         android:textAlignment="center"
                         android:textSize="18sp" />
 
@@ -169,7 +169,51 @@
                 android:text="Still Needed: "
                 android:textStyle="bold"
                 android:textSize="14sp" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/bringing1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                android:text="Bringing: "
+                android:textStyle="bold"
+                android:textSize="14dp" />
 
+            <TextView
+                android:id="@+id/namebring1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                android:text="Bringing: "
+                android:textStyle="bold"
+                android:textSize="14dp" />
+
+    <TextView
+        android:id="@+id/bringing2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:gravity="center_vertical"
+        android:padding="5dp"
+        android:text="Bringing: "
+        android:textStyle="bold"
+        android:textSize="14dp" />
+
+    <TextView
+        android:id="@+id/namebring2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="5dp"
+        android:text="Bringing: "
+        android:textStyle="bold"
+        android:textSize="14dp" />
+</LinearLayout>
 
 
             <Button
