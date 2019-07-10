@@ -114,13 +114,12 @@ public class Server {
     private static final String MEALS_Count_STRING = "Meals Count";
     private static final String USERS_DATA_STRING = "User info";
     private static final String MEALS_DATA_STRING = "Meals Info";
-    private static final String USER_PIC_PATH ="ProfilePics/";
+    private static final String USER_PIC_PATH = "ProfilePics/";
 
     /**
      * Constructor
      */
-    private Server()
-    {
+    private Server() {
         mDb = FirebaseDatabase.getInstance();
         pics = new HashMap<>();
 
@@ -134,12 +133,10 @@ public class Server {
     }
 
 
-
     /*
     Sets a standard set of food restrictions
      */
-    private void setStandardRestrictions()
-    {
+    private void setStandardRestrictions() {
         standardRestrictions = new HashSet<String>();
 
         standardRestrictions.add("Halal");
@@ -158,11 +155,12 @@ public class Server {
 
     /**
      * Signs up a new user, with email and password, then creates an empty user in DB
+     *
      * @param email - email
-     * @param pass - password
-     * @param act - activity to use for moving on to MainActivity
+     * @param pass  - password
+     * @param act   - activity to use for moving on to MainActivity
      */
-    public void signUp(String email, String pass, final Activity act){
+    public void signUp(String email, String pass, final Activity act) {
         mAuth.createUserWithEmailAndPassword(email, pass)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -179,7 +177,7 @@ public class Server {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("AuthUI", "createUserWithEmail:failure", task.getException());
-                         Toast.makeText(act, "Registeration failed",
+                            Toast.makeText(act, "Registeration failed",
                                     Toast.LENGTH_SHORT).show();
                         }
 
@@ -191,14 +189,14 @@ public class Server {
 
     /**
      * Creates a new user and adds it to DB
-     * @param disName - display name
-     * @param image - his profile_image
+     *
+     * @param disName    - display name
+     * @param image      - his profile_image
      * @param university - his university
-     * @param langs - languages he's speaking
+     * @param langs      - languages he's speaking
      */
     public void addUser(String disName, String image, String university,
-                          ArrayList<String> langs)
-    {
+                        ArrayList<String> langs) {
 
         final String userId = MainActivity.userId;
 
@@ -216,14 +214,14 @@ public class Server {
 
     /**
      * Creates a new user and adds it to DB
-     * @param old - old user to compare to current changes
-     * @param disName - display name
+     *
+     * @param old        - old user to compare to current changes
+     * @param disName    - display name
      * @param university - his university
-     * @param langs - languages he's speaking
+     * @param langs      - languages he's speaking
      */
     public void editUser(User old, String disName, String university,
-                        ArrayList<String> langs)
-    {
+                         ArrayList<String> langs) {
 
         DocumentReference busRef = db.collection(USERS_DATA_STRING).document(MainActivity.userId);
         if (!old.getUsername().equals(disName)) {
@@ -235,7 +233,7 @@ public class Server {
             });
         }
 
-        if (university != old.getUniversity()){
+        if (university != old.getUniversity()) {
             busRef.update("university", university).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
@@ -243,7 +241,7 @@ public class Server {
                 }
             });
         }
-        if (langs != old.getLangs()){
+        if (langs != old.getLangs()) {
             busRef.update("langs", langs).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
@@ -256,9 +254,10 @@ public class Server {
 
     /**
      * Edit and change's the user's profile picture
+     *
      * @param image - profile picture uri to update
      */
-    public void editProfilePic(Uri image){
+    public void editProfilePic(Uri image) {
         DocumentReference busRef = db.collection(USERS_DATA_STRING).document(MainActivity.userId);
 
         if (image != null) {
@@ -274,16 +273,17 @@ public class Server {
 
     /**
      * Gets the user from the DB and downloads it to a User object
+     *
      * @param userId - user ID
-     * @param user - user reference to assign new user to
-     * @param name - view to display user name at
-     * @param uni - view to display user university at
-     * @param langs - view to display user languages at
-     * @param img - view to display user profile picture at
+     * @param user   - user reference to assign new user to
+     * @param name   - view to display user name at
+     * @param uni    - view to display user university at
+     * @param langs  - view to display user languages at
+     * @param img    - view to display user profile picture at
      */
     public void getUser(final String userId, final User[] user, final TextView name,
                         final TextView uni, final TextView langs, final ImageView img
-                        , final ArrayList<String> mutual, final Profile profile_act){
+            , final ArrayList<String> mutual, final Profile profile_act) {
 
         final DocumentReference docRef = db.collection(USERS_DATA_STRING).document(userId);
         DocumentReference self = db.collection(USERS_DATA_STRING).document(MainActivity.userId);
@@ -293,7 +293,7 @@ public class Server {
         self.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()) {
+                if (task.isSuccessful()) {
                     DocumentSnapshot myProfile = task.getResult();
                     if (myProfile != null && myProfile.exists()) {
                         User personal_prof = myProfile.toObject(User.class); // downloads personal interactions
@@ -318,14 +318,14 @@ public class Server {
 
                                         }
                                         for (String id : got.getMutual()) {
-                                            if (personal_interactions.contains(id) &&!id.equals(userId)
-                                            && !id.equals(MainActivity.userId)) {
+                                            if (personal_interactions.contains(id) && !id.equals(userId)
+                                                    && !id.equals(MainActivity.userId)) {
                                                 // we don't want to get these users
                                                 mutual.add(id);
                                             }
                                         }
 
-                                        if (profile_act!= null){
+                                        if (profile_act != null) {
                                             profile_act.setImages();
                                         }
 
@@ -346,11 +346,12 @@ public class Server {
 
     /**
      * Downloads a user's profile picture
-     * @param img - imgview to put downloaded pictrue at
-     * @param userId  - user's ID
+     *
+     * @param img    - imgview to put downloaded pictrue at
+     * @param userId - user's ID
      */
     public void downloadProfilePic(final ImageView img, final String userId) {
-        if (pics.containsKey(userId)){ // already downloaded
+        if (pics.containsKey(userId)) { // already downloaded
             img.setImageBitmap(pics.get(userId));
         } else { // download from server
             try {
@@ -381,20 +382,20 @@ public class Server {
 
     /**
      * adds new meal to DB
-     * @param hostId - the host's ID
-     * @param title - the title of this meal
-     * @param tags - additional taggs for this meal
+     *
+     * @param hostId       - the host's ID
+     * @param title        - the title of this meal
+     * @param tags         - additional taggs for this meal
      * @param restrictions - food restrictions for this meal
-     * @param descr - description
-     * @param maxGuests - maximum number of guests for this meal
-     * @param loc - location for this meal
-     * @param time - time and date of meal
-     * @param mNeeded - what needed
+     * @param descr        - description
+     * @param maxGuests    - maximum number of guests for this meal
+     * @param loc          - location for this meal
+     * @param time         - time and date of meal
+     * @param mNeeded      - what needed
      */
     public int addMeal(final String hostId, final String title, final ArrayList<String> tags,
                        final HashMap<String, Boolean> restrictions, final String descr,
-                       final int maxGuests, final String loc, final String time, final HashMap<String, String> mNeeded)
-    {
+                       final int maxGuests, final String loc, final String time, final HashMap<String, String> mNeeded) {
 
 
         final int[] counter = new int[1];
@@ -413,8 +414,8 @@ public class Server {
                     counter[0] = currentValue;
                     mutableData.setValue(currentValue + 1);
                     DocumentReference docRef = db.collection(MEALS_STRING).document(String.valueOf(counter[0]));
-                    Meal newMeal = new Meal(String.valueOf(counter[0]),  hostId,  title,tags,
-                            restrictions, descr, maxGuests,  loc,  time, mNeeded);
+                    Meal newMeal = new Meal(String.valueOf(counter[0]), hostId, title, tags,
+                            restrictions, descr, maxGuests, loc, time, mNeeded);
                     docRef.set(newMeal);
                 }
                 getMeals(MainActivity.meals, MainActivity.adapter);
@@ -432,10 +433,10 @@ public class Server {
 
     /**
      * removes a meal whose id is id
+     *
      * @param id - meal id to remove
      */
-    public void removeMeal(int id)
-    {
+    public void removeMeal(int id) {
         DocumentReference ref = db.collection(MEALS_STRING).document(String.valueOf(id));
 
         ref.delete()
@@ -455,15 +456,14 @@ public class Server {
     }
 
 
-
     /**
      * checks if user is a member of a meal
+     *
      * @param userId - user id to check
      * @param mealId - meal to check
      * @return true or false according to result
      */
-    public Boolean isUserInMeal(String userId, int mealId)
-    {
+    public Boolean isUserInMeal(String userId, int mealId) {
         DocumentReference docRef = db.collection(MEALS_STRING).document(String.valueOf(mealId));
         final Meal[] meal = new Meal[1];
         /* gets object from server  */
@@ -482,15 +482,14 @@ public class Server {
     }
 
 
-
-
     /**
      * adds a user to a meal
-     * @param userId   user's ID
-     * @param meal meal to add user to
+     *
+     * @param userId user's ID
+     * @param meal   meal to add user to
      * @return true upon success, false otherwise
      */
-    public Boolean addUserToMeal(final Context context, String userId, final Meal meal){
+    public Boolean addUserToMeal(final Context context, String userId, final Meal meal) {
 
         DocumentReference busRef = db.collection(MEALS_STRING).document(meal.getID());
         busRef.update("guests", FieldValue.arrayUnion(userId)).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -503,9 +502,9 @@ public class Server {
         return true;
     }
 
-    private void setMutuals(ArrayList<String> membersOfMeal){
+    private void setMutuals(ArrayList<String> membersOfMeal) {
         DocumentReference busRef = db.collection(USERS_DATA_STRING).document(MainActivity.userId);
-        try{
+        try {
             for (String id : membersOfMeal) {
                 busRef.update("mutual", FieldValue.arrayUnion(id));
             }
@@ -518,14 +517,13 @@ public class Server {
     }
 
 
-
-
     /**
      * Sets the "rating" notification after joining a meal
+     *
      * @param meal - meal just joined to
      * @param cont - context to use in order to create intent
      */
-    public void setNotification(Meal meal, Context cont){
+    public void setNotification(Meal meal, Context cont) {
         createNotificationChannel(cont);
         Intent intent = new Intent(cont, HowWasItPop.class);
         Bundle b = new Bundle();
@@ -553,6 +551,7 @@ public class Server {
 
     /**
      * Helper function to create notification channel
+     *
      * @param cont - context to use
      */
     private void createNotificationChannel(Context cont) {
@@ -573,14 +572,15 @@ public class Server {
 
     /**
      * removes a user from a meal
-     * @param userId   user's ID
+     *
+     * @param userId user's ID
      * @param mealId meal's ID
      * @return true upon success, false otherwise
      */
-    public Boolean removeUserToMeal(String userId, final String mealId, String hostId, final Context cont){
+    public Boolean removeUserToMeal(String userId, final String mealId, String hostId, final Context cont) {
         DocumentReference busRef = db.collection(MEALS_STRING).document(mealId);
 
-        if (userId.equals(hostId)){
+        if (userId.equals(hostId)) {
             busRef.delete()
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -613,7 +613,8 @@ public class Server {
                         public void onFailure(@NonNull Exception e) {
                             Log.w(TAG, "Error deleting document", e);
                         }
-                    });;
+                    });
+            ;
         }
 
 
@@ -631,14 +632,14 @@ public class Server {
     /**
      * Downloads a specific meal according to its ID
      * Does not work since its not asynchronous
+     *
      * @param mId - meal id
      * @return - Meal object
      */
-    public Meal getMeal(int mId)
-    {
+    public Meal getMeal(int mId) {
 
         DocumentReference docRef = db.collection(MEALS_STRING).document(String.valueOf(mId));
-        final Meal[] meal  = new Meal[1];
+        final Meal[] meal = new Meal[1];
         final AtomicBoolean done = new AtomicBoolean(false);
 
         docRef.get().
@@ -670,6 +671,7 @@ public class Server {
 
     /**
      * Gets the list of meals and puts it in the desired list and adapter
+     *
      * @param meals - list to insert meals from server to
      * @param adapt - adapter to refresh after changing the list
      */
@@ -699,8 +701,6 @@ public class Server {
     }
 
 
-
-
     public void getUsername(String uId, final TextView toShow) {
         DocumentReference docRef = db.collection(USERS_DATA_STRING).document(uId);
 
@@ -725,12 +725,13 @@ public class Server {
 
     /**
      * Ranks a given user
-     * @param rank - int from 1 to 5 according to the tnaking
+     *
+     * @param rank   - int from 1 to 5 according to the tnaking
      * @param userId - user id to rank
      * @param mealId - meal that userId was the host of
-     * @param cont - Context to use in order to move intents
+     * @param cont   - Context to use in order to move intents
      */
-    public void setRanking(final int rank, final String userId, int mealId, Context cont){
+    public void setRanking(final int rank, final String userId, int mealId, Context cont) {
         DocumentReference busRef = db.collection(USERS_DATA_STRING).document(userId);
 
         busRef.update("num_of_raters", FieldValue.increment(1));
@@ -742,7 +743,7 @@ public class Server {
     }
 
 
-    private static final String[] NEIGHBORHOODS_JLM = new String[] {
+    private static final String[] NEIGHBORHOODS_JLM = new String[]{
             "Musrara", "Ein Kerem", "Nachlaot", "Jewish Quarter", "Yemin Moshe",
             "Old City", "Machne Yehuda", "Emek Refaim", "Rehavia", "Rasko", "Talpiot",
             "Nayot", "Mamila", "Mea' She'arim", "Arnona", "Holyland", "Mishkanot She'ananim",
@@ -753,7 +754,8 @@ public class Server {
             "Bucharim", "Mahane Israel", "She'arey Hesed", "Ir Ganim Gimel", "Hameshulash", "Ramat Beit Hakerem",
             "Makor Hayim", "Kiryat haLeom", "Ramat Deniya", "Tel Arza"
     };
-    public Location getLoc(String neighborhood, Location curLoc){
+
+    public Location getLoc(String neighborhood, Location curLoc) {
         HashMap<String, Location> locations = new HashMap<>();
         Location rehavia = new Location("Rehavia");
         rehavia.setLatitude(31.7708234);
@@ -770,108 +772,104 @@ public class Server {
         locations.put("Ein Kerem", EinKerem);
         System.out.println();
         return curLoc;
+    }
 
-
-    /**
-     * Creates a new user and adds it to DB
-     * @param old - old user to compare to current changes
-     * @param disTitle - display name
-     */
-    public void editMeal(Meal old, String disTitle, String disDescription,
-                         String disLocation, String disDate, int disMaxGuests,
-                         Map disRestrictions, Map mNeeded)
-    {
-        DocumentReference busRef = db.collection(MEALS_DATA_STRING).document(old.getID());
-        if (!old.getTitle().equals(disTitle)) {
-            busRef.update("title", disTitle).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    System.out.println("User edit : success!");
-                }
-            });
-        }
-
-        if (!old.getDescription().equals(disDescription)) {
-            busRef.update("description", disDescription).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    System.out.println("User edit : success!");
-                }
-            });
-        }
-
-        if (!old.getLocation().equals(disLocation)) {
-            busRef.update("location", disLocation).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    System.out.println("User edit : success!");
-                }
-            });
-        }
-
-        if (!old.getTime().equals(disDate)) {
-            busRef.update("time", disDate).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    System.out.println("User edit : success!");
-                }
-            });
-        }
-
-        if (!old.getDescription().equals(disDescription)) {
-            busRef.update("description", disDescription).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    System.out.println("User edit : success!");
-                }
-            });
-        }
-
-        if (old.getMaxGuests()!=disMaxGuests) {
-            busRef.update("maxGuests", disMaxGuests).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    System.out.println("User edit : success!");
-                }
-            });
-        }
-
-        busRef.update("restrictions", disRestrictions).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    System.out.println("User edit : success!");
-                }
-            });
-
-        busRef.update("needed", mNeeded).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                System.out.println("User edit : success!");
+        /**
+         * Creates a new user and adds it to DB
+         * @param old - old user to compare to current changes
+         * @param disTitle - display name
+         */
+        public void editMeal (Meal old, String disTitle, String disDescription,
+                String disLocation, String disDate,int disMaxGuests,
+        Map disRestrictions, Map mNeeded)
+        {
+            DocumentReference busRef = db.collection(MEALS_DATA_STRING).document(old.getID());
+            if (!old.getTitle().equals(disTitle)) {
+                busRef.update("title", disTitle).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        System.out.println("User edit : success!");
+                    }
+                });
             }
-        });
+
+            if (!old.getDescription().equals(disDescription)) {
+                busRef.update("description", disDescription).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        System.out.println("User edit : success!");
+                    }
+                });
+            }
+
+            if (!old.getLocation().equals(disLocation)) {
+                busRef.update("location", disLocation).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        System.out.println("User edit : success!");
+                    }
+                });
+            }
+
+            if (!old.getTime().equals(disDate)) {
+                busRef.update("time", disDate).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        System.out.println("User edit : success!");
+                    }
+                });
+            }
+
+            if (!old.getDescription().equals(disDescription)) {
+                busRef.update("description", disDescription).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        System.out.println("User edit : success!");
+                    }
+                });
+            }
+
+            if (old.getMaxGuests() != disMaxGuests) {
+                busRef.update("maxGuests", disMaxGuests).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        System.out.println("User edit : success!");
+                    }
+                });
+            }
+
+            busRef.update("restrictions", disRestrictions).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    System.out.println("User edit : success!");
+                }
+            });
+
+            busRef.update("needed", mNeeded).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    System.out.println("User edit : success!");
+                }
+            });
 
 
+        }
 
 
+        public void editMeal (Meal old, Map mNeeded)
+        {
+            DocumentReference busRef = db.collection(MEALS_DATA_STRING).document(old.getID());
 
 
+            busRef.update("needed", mNeeded).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    System.out.println("User edit : success!");
+                }
+            });
 
+
+        }
     }
 
 
-
-    public void editMeal(Meal old, Map mNeeded)
-    {
-        DocumentReference busRef = db.collection(MEALS_DATA_STRING).document(old.getID());
-
-
-        busRef.update("needed", mNeeded).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                System.out.println("User edit : success!");
-            }
-        });
-
-
-    }
-}
