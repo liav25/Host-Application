@@ -115,6 +115,8 @@
         android:textStyle="bold"
         android:id="@+id/ChooseRests"
         android:layout_width="match_parent"
+        android:fontFamily="@font/cairo_light"
+        android:textSize="17sp"
         android:layout_height="wrap_content"
         android:text="Food restrictions:" />
 
@@ -188,8 +190,9 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:paddingLeft="10dp"
+        android:textSize="17sp"
         android:textStyle="bold"
-
+        android:fontFamily="@font/cairo_light"
         android:text="What should your guests bring?" />
 
     <LinearLayout
