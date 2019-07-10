@@ -18,6 +18,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.media.RingtoneManager;
 import android.net.Uri;
 
@@ -74,6 +75,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -733,5 +735,33 @@ public class Server {
 
     }
 
+    private static final String[] NEIGHBORHOODS_JLM = new String[] {
+            "Musrara", "Ein Kerem", "Nachlaot", "Jewish Quarter", "Yemin Moshe",
+            "Old City", "Machne Yehuda", "Emek Refaim", "Rehavia", "Rasko", "Talpiot",
+            "Nayot", "Mamila", "Mea' She'arim", "Arnona", "Holyland", "Mishkanot She'ananim",
+            "Motza", "Geula", "Katamon", "Kiryat haYovel", "Givat Ram", "Har Nof", "Migrash haRusim",
+            "Bait vaGan", "Givat Shaul", "Malha", "Talbiya", "Makor Baruch", "Nachalat Shiv'a",
+            "Geulim Bak'a", "Kerem Avraham", "Kiryat Menachem", "Givat Masuaa", "Givat Mordechai",
+            "Kiryat haMemshala", "Hutzot haYotzer", "Ramat Sharet", "Romema", "Pat", "Sanhedriya",
+            "Bucharim", "Mahane Israel", "She'arey Hesed", "Ir Ganim Gimel", "Hameshulash", "Ramat Beit Hakerem",
+            "Makor Hayim", "Kiryat haLeom", "Ramat Deniya", "Tel Arza"
+    };
+    public Location getLoc(String neighborhood, Location curLoc){
+        HashMap<String, Location> locations = new HashMap<>();
+        Location rehavia = new Location("Rehavia");
+        rehavia.setLatitude(31.7708234);
+        rehavia.setLatitude(35.2107216);
 
+        Location musrara = new Location("Musrara");
+        musrara.setLatitude(31.7824992);
+        musrara.setLatitude(35.2343108);
+        Location EinKerem = new Location("Ein Kerem");
+        EinKerem.setLatitude(31.7671309);
+        EinKerem.setLatitude(35.1707411);
+        locations.put("Musrara", musrara);
+        locations.put("Rehavia", rehavia);
+        locations.put("Ein Kerem", EinKerem);
+        System.out.println();
+        return curLoc;
+    }
 }
