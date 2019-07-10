@@ -216,7 +216,7 @@
             android:drawablePadding="20dp"
             android:layout_weight="1"
             android:layout_marginLeft="20dp"
-            android:drawableLeft="@drawable/SODAMUG1"
+            android:drawableLeft="@drawable/sodamug1"
 
              />
 

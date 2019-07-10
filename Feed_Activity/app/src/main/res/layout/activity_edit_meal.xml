@@ -231,7 +231,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:drawableLeft="@drawable/SODAMUG1" />
+            android:drawableLeft="@drawable/sodamug1" />
 
         <CheckBox
             android:id="@+id/desert_edit"
