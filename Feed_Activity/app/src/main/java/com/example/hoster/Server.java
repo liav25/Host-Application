@@ -8,6 +8,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 
@@ -175,6 +176,7 @@ public class Server {
                             Log.d("AuthUI", "createUserWithEmail:success");
                             MainActivity.user = mAuth.getCurrentUser();
                             MainActivity.userId = MainActivity.user.getUid();
+                            MainActivity.userMail = email;
                             addUser(disname, null, "", new ArrayList<String>(), email);
                             Intent main = new Intent(act.getApplicationContext(), MainActivity.class);
                             act.startActivity(main);
@@ -400,7 +402,8 @@ public class Server {
      */
     public int addMeal(final String hostId, final String title, final ArrayList<String> tags,
                        final HashMap<String, Boolean> restrictions, final String descr,
-                       final int maxGuests, final String loc, final String time, final HashMap<String, String> mNeeded) {
+                       final int maxGuests, final String loc, final String time,
+                       final HashMap<String, String> mNeeded, final String hostMail) {
 
 
         final int[] counter = new int[1];
@@ -419,8 +422,10 @@ public class Server {
                     counter[0] = currentValue;
                     mutableData.setValue(currentValue + 1);
                     DocumentReference docRef = db.collection(MEALS_STRING).document(String.valueOf(counter[0]));
+                    ArrayList<String> mails = new ArrayList<>();
+                    mails.add(hostMail);
                     Meal newMeal = new Meal(String.valueOf(counter[0]), hostId, title, tags,
-                            restrictions, descr, maxGuests, loc, time, mNeeded);
+                            restrictions, descr, maxGuests, loc, time, mNeeded, mails);
                     docRef.set(newMeal);
                 }
                 getMeals(MainActivity.meals, MainActivity.adapter);
@@ -494,7 +499,8 @@ public class Server {
      * @param meal   meal to add user to
      * @return true upon success, false otherwise
      */
-    public Boolean addUserToMeal(final Context context, String userId, final Meal meal) {
+    public Boolean addUserToMeal(final Context context, String userId, final Meal meal,
+                                 final String mail) {
 
         DocumentReference busRef = db.collection(MEALS_STRING).document(meal.getID());
         busRef.update("guests", FieldValue.arrayUnion(userId)).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -505,6 +511,7 @@ public class Server {
                 setMutuals(meal.getGuests());
             }
         });
+        busRef.update("guestsMails", FieldValue.arrayUnion(mail));
         return true;
     }
 
@@ -583,7 +590,8 @@ public class Server {
      * @param mealId meal's ID
      * @return true upon success, false otherwise
      */
-    public Boolean removeUserToMeal(String userId, final String mealId, String hostId, final Context cont) {
+    public Boolean removeUserToMeal(String userId, final String mealId, String hostId,
+                                    final Context cont, final String mail) {
         DocumentReference busRef = db.collection(MEALS_STRING).document(mealId);
 
         if (userId.equals(hostId)) {
@@ -606,6 +614,7 @@ public class Server {
                         }
                     });
         } else {
+            busRef.update("guestsMails", FieldValue.arrayRemove(mail));
             busRef.update("guests", FieldValue.arrayRemove(userId)).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
@@ -745,6 +754,7 @@ public class Server {
                     DocumentSnapshot document = task.getResult();
                     if (document != null && document.exists()) {
                         String got = document.getString(field);
+
                         toShow.setText(got);
 
                     } else {
@@ -958,6 +968,65 @@ public class Server {
         });
     }
 
+    /**
+     * adds emails to meals
+     */
+    public void patch2() {
+        CollectionReference ref = db.collection(MEALS_STRING);
+
+        ref.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                queryDocumentSnapshots.iterator();
+                Iterator<QueryDocumentSnapshot> it = queryDocumentSnapshots.iterator();
+
+                while (it.hasNext()) {
+                    DocumentSnapshot snp = it.next();
+                    final DocumentReference doc = snp.getReference();
+                    doc.update("guestsMails", new ArrayList<String>());
+                    Meal me = snp.toObject(Meal.class); // downloads personal interactions
+
+                    for (String id : me.getGuests()){
+                        final DocumentReference userref = db.collection(USERS_DATA_STRING).document(id);
+
+                        userref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                User usi = documentSnapshot.toObject(User.class);
+                                doc.update("guestsMails", FieldValue.arrayUnion(usi.getEmail()));
+                            }
+                        });
+
+                    }
+                }
+            }
+        });
+    }
+
+
+    /**
+     * Sends a mail to all of the meal's guests
+     * @param mails - mails list of all the guests' mails
+     * @param cont - context to use
+     */
+    public void sendAllMail(ArrayList<String> mails, Context cont, String title, String date){
+
+        final Intent emailLauncher = new Intent(Intent.ACTION_SEND_MULTIPLE);
+        String[] mail_list = new String[mails.size()];
+        int count = 0;
+        for (String m : mails){
+            mail_list[count] = m;
+            count++;
+        }
+        emailLauncher.setType("message/rfc822");
+        emailLauncher.putExtra(android.content.Intent.EXTRA_EMAIL, mail_list);
+        emailLauncher.putExtra(Intent.EXTRA_SUBJECT, title + " " + date);
+        try{
+            cont.startActivity(emailLauncher);
+        } catch (ActivityNotFoundException e){
+            System.out.println("Error sending a mail");
+        }
+    }
 
 }
 

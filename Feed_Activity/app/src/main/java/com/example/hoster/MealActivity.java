@@ -34,6 +34,7 @@ public class MealActivity extends AppCompatActivity {
     private RecyclerView guestsRecycle;
     private TextView loc;
     private ImageButton pen;
+    private ImageButton mail;
 
 
 //    private ArrayList<String> guests;
@@ -74,6 +75,7 @@ public class MealActivity extends AppCompatActivity {
         }
 
 
+        mail = findViewById(R.id.sendmail);
 
         host.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,14 +115,27 @@ public class MealActivity extends AppCompatActivity {
             if (!hostId.equals(MainActivity.userId)) {
                 pen.setEnabled(false);
                 pen.setVisibility(View.INVISIBLE);
+                mail.setEnabled(false);
+                mail.setVisibility(View.INVISIBLE);
             } else {
                 pen.setVisibility(View.VISIBLE);
                 pen.setEnabled(true);
+                mail.setEnabled(true);
+                mail.setVisibility(View.VISIBLE);
             }
         }
+
         catch (NullPointerException e){
             System.out.println("********** User Id"+MainActivity.userId);
         }
+
+        mail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Server.getInstance().sendAllMail(meal.getGuestsMails(), MealActivity.this,
+                        meal.getTitle(), meal.getTime());
+            }
+        });
 
         pen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -308,7 +323,8 @@ public class MealActivity extends AppCompatActivity {
 
             Boolean flag = meal.getHostId().equals(MainActivity.userId);
 
-            Server.getInstance().removeUserToMeal(MainActivity.userId, mealId, meal.getHostId(), this);
+            Server.getInstance().removeUserToMeal(MainActivity.userId, mealId, meal.getHostId(), this,
+                    MainActivity.userMail);
             meal.removeGuest(MainActivity.userId);
             if (flag) {
                 finish();
@@ -318,7 +334,8 @@ public class MealActivity extends AppCompatActivity {
 
 
         }  else if (!meal.isFull()) { // not in meal and meal not full
-            MainActivity.sev.addUserToMeal(getApplicationContext(), MainActivity.userId, meal);
+            MainActivity.sev.addUserToMeal(getApplicationContext(), MainActivity.userId, meal,
+                    MainActivity.userMail);
             meal.addGuest(MainActivity.userId);
         }
 

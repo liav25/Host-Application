@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<Meal> meals;
     public static FirebaseUser user;
     public static String userId;
-
+    public static String userMail;
 
 
     //**FOR POPUP**//

@@ -39,6 +39,7 @@ public class Register extends AppCompatActivity {
 
             Intent main = new Intent(getApplicationContext(), MainActivity.class);
             MainActivity.user = mAtuh.getCurrentUser();
+            MainActivity.userMail = mAtuh.getCurrentUser().getEmail();
             MainActivity.userId = mAtuh.getCurrentUser().getUid();
             startActivity(main);
             finish();

@@ -39,7 +39,6 @@ public class Login extends AppCompatActivity {
         pass = findViewById(R.id.editText3);
         toRegister = findViewById(R.id.to_register);
 
-
         mAuth = FirebaseAuth.getInstance();
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +72,7 @@ public class Login extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             MainActivity.userId = mAuth.getUid();
+                            MainActivity.userMail = email;
                             MainActivity.user = mAuth.getCurrentUser();
                             Intent feed_intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(feed_intent);

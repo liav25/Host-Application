@@ -12,6 +12,7 @@ public class Meal implements Serializable {
     private String ID;
 
     private ArrayList<String> guests;
+    private ArrayList<String> guestsMails;
     private String title;
     private String description;
     private int maxGuests;
@@ -38,7 +39,8 @@ public class Meal implements Serializable {
      */
     public Meal(String id, String hostId, String title, ArrayList<String> tags,
                 HashMap<String, Boolean> restrictions, String descr,
-                int maxGuests, String loc, String time, HashMap<String, String> mNeeded)
+                int maxGuests, String loc, String time, HashMap<String, String> mNeeded,
+                ArrayList<String> guestsMails)
     {
         this.ID = id;
         this.hostId = hostId;
@@ -62,6 +64,7 @@ public class Meal implements Serializable {
         this.time = time;
 
         this.needed = mNeeded;
+        this.guestsMails = guestsMails;
     }
 
     public Meal()
@@ -79,7 +82,7 @@ public class Meal implements Serializable {
         this.maxGuests = 10; // the +1 is because the host is already included
 
         this.guests = new ArrayList<String>(); // initialize empty set of guests, then add host
-
+        this.guestsMails = new ArrayList<>();
         this.location = "location";
         this.time = "time";
 
@@ -335,5 +338,11 @@ public class Meal implements Serializable {
     public void setNeeded(HashMap<String, String> needed) {
         this.needed = needed;
     }
+
+    public void setGuestsMails(ArrayList<String> mails){
+        this.guestsMails = mails;
+    }
+
+    public ArrayList<String> getGuestsMails(){return this.guestsMails; }
 
 }

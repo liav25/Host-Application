@@ -36,6 +36,7 @@ import java.util.Map;
 public class edit_meal extends AppCompatActivity {
 
     private ImageButton accept;
+
     private Button cancel;
     private StorageReference mSorageRef;
     EditText pickDate;

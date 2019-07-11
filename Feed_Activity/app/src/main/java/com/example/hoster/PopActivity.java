@@ -157,7 +157,7 @@ public class PopActivity extends AppCompatActivity {
 
 
                 int id = MainActivity.sev.addMeal(MainActivity.userId, title, new ArrayList<String>(),
-                        foodRests, description, maxGuests, loc, date, neededInput);
+                        foodRests, description, maxGuests, loc, date, neededInput, MainActivity.userMail);
 
                 MainActivity.adapter.notifyDataSetChanged();
                 finish();
