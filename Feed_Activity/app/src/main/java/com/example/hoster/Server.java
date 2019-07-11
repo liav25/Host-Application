@@ -936,10 +936,6 @@ public class Server {
 
     }
 
-    public void patch(){
-        CollectionReference ref = db.collection(USERS_DATA_STRING);
-        for (DocumentReference d : ref.)
-    }
 }
 
 

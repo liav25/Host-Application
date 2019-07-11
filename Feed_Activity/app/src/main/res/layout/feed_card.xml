@@ -18,6 +18,10 @@
         android:layout_marginBottom="3dp"
         android:elevation="6dp"
         app:cardCornerRadius="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:id="@+id/cardview"
+
         >
 
 
