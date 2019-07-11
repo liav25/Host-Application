@@ -79,7 +79,10 @@ public class edit_meal extends AppCompatActivity {
         title = (EditText) findViewById(R.id.mealTitleAdd_edit);
         title.setText(meal.getTitle());
         pickDate = (EditText) findViewById(R.id.mealDateAdd_edit);
+        pickDate.setKeyListener(null);
+        pickDate.setFocusable(false);
         pickDate.setText(meal.getTime());
+
         date = meal.getTime();
         description = (EditText) findViewById(R.id.mealDescriptionAdd_edit);
         description.setText(meal.getDescription());

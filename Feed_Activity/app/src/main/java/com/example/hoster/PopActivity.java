@@ -81,6 +81,8 @@ public class PopActivity extends AppCompatActivity {
 
         pickDate = (EditText) findViewById(R.id.mealDateAdd);
         pickDate.setEnabled(true);
+        pickDate.setKeyListener(null);
+        pickDate.setFocusable(false);
         pickDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
