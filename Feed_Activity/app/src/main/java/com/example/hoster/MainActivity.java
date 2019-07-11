@@ -21,6 +21,7 @@ import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -37,6 +38,9 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseUser;
 import com.google.rpc.Help;
+import com.orhanobut.dialogplus.DialogPlus;
+import com.orhanobut.dialogplus.GridHolder;
+import com.orhanobut.dialogplus.ViewHolder;
 
 import java.util.ArrayList;
 
@@ -148,11 +152,35 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        /**
+         *Look Here Tom
+         * http://www.androidhiro.com/source/android/example/dialogplus/1092
+         * This is dialog plus
+         * continue with this, that what you wanted
+         */
+
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_sort) {
-            Intent news = new Intent(getApplicationContext(), FilterDialog.class);
-            startActivity(news);
-        }
+
+            final DialogPlus dialog = DialogPlus.newDialog(this)
+                    .setGravity(Gravity.TOP)
+                    .setExpanded(true,300)
+                    .setContentHolder(new ViewHolder(R.layout.top_dialog)).
+                    setCancelable(true)
+                    .create();
+
+            Button action = (Button) dialog.getHolderView().findViewById(R.id.my_button);
+            action.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(), Splash.class);
+                    startActivity(intent);
+                }
+            });
+            dialog.show();
+            }
+
+
         return super.onOptionsItemSelected(item);
     }
 
