@@ -496,6 +496,7 @@ public class Server {
 
         DocumentReference busRef = db.collection(MEALS_STRING).document(meal.getID());
         busRef.update("guests", FieldValue.arrayUnion(userId)).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onSuccess(Void aVoid) {
                 setNotification(meal, context); // sets notification
@@ -832,7 +833,7 @@ public class Server {
     }
 
 
-    }
+
 
     /**
      * Edits a meal
