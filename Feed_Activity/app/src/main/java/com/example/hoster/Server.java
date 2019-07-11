@@ -937,6 +937,7 @@ public class Server {
 
     }
 
+
     /**
      * Iterates over users and adds field
      */
@@ -956,8 +957,6 @@ public class Server {
             }
         });
     }
-
-
 
 
 }

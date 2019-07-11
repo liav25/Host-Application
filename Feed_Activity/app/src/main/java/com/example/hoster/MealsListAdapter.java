@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.AlertDialogLayout;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +57,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         LinearLayout veganLayout;
         LinearLayout halalLayout;
         LinearLayout seperator;
+        CardView cardView;
 
 
 
@@ -286,6 +288,8 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
             holder.halalLayout = (LinearLayout)convertView.findViewById(R.id.halal_layout);
             holder.seperator = (LinearLayout) convertView.findViewById(R.id.seperator);
             holder.textView = (TextView) convertView.findViewById(R.id.helper);
+            holder.cardView = (CardView) convertView.findViewById(R.id.cardview);
+
 
             result = convertView;
 
@@ -313,6 +317,19 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         }
 
         holder.setButCol(getItem(position));
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, MealActivity.class);
+                Bundle b = new Bundle();
+                b.putSerializable("meal", getItem(position));
+                b.putString("mealId", getItem(position).getID()); //Your id
+                intent.putExtras(b); //Put your id to your next Intent
+
+                mContext.startActivity(intent);
+            }
+        });
 
         holder.joinBU.setOnClickListener(new View.OnClickListener() {
             @Override
