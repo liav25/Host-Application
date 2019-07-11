@@ -115,6 +115,8 @@
         android:textStyle="bold"
         android:id="@+id/ChooseRests"
         android:layout_width="match_parent"
+        android:fontFamily="@font/cairo_light"
+        android:textSize="17sp"
         android:layout_height="wrap_content"
         android:text="Food restrictions:" />
 
@@ -186,45 +188,62 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:paddingLeft="10dp"
+        android:textSize="17sp"
         android:textStyle="bold"
-
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/cairo_light"
         android:text="What should your guests bring?" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="58dp">
+        android:layout_height="50dp">
 
         <CheckBox
             android:id="@+id/beer_box"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:drawableLeft="@drawable/beer" />
+            android:layout_marginHorizontal="10dp"
+            android:drawableRight="@drawable/beermug1" />
 
         <CheckBox
             android:id="@+id/drink_box"
+            android:layout_toRightOf="@id/beer_box"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:drawablePadding="20dp"
             android:layout_weight="1"
-            android:drawableLeft="@drawable/soda" />
+            android:layout_marginLeft="20dp"
+            android:drawableLeft="@drawable/sodamug1"
+
+             />
 
         <CheckBox
             android:id="@+id/dessert_box"
+            android:layout_toRightOf="@id/drink_box"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:drawablePadding="20dp"
             android:layout_weight="1"
-            android:drawableLeft="@drawable/cupcake" />
+            android:layout_marginHorizontal="10dp"
+            android:drawableLeft="@drawable/cakemug1" />
 
         <CheckBox
             android:id="@+id/flowers_box"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="17dp"
+            android:layout_marginRight="17dp"
+            android:layout_toRightOf="@id/dessert_box"
             android:layout_weight="1"
-            android:drawableLeft="@drawable/bouquet" />
+            android:drawableLeft="@drawable/flowersmug1"
+            android:drawablePadding="20dp" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <EditText
         android:id="@+id/mealDescriptionAdd"

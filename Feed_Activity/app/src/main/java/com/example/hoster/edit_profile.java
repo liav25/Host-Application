@@ -72,7 +72,7 @@ public class edit_profile extends AppCompatActivity {
         name = findViewById(R.id.editable_name_of_profile);
         name.setHint(MainActivity.user.getDisplayName());
         uni = findViewById(R.id.editable_uni_name);
-        uni.setHint(MainActivity.user.getEmail());
+        MainActivity.sev.getFieldForHint(uId,uni,"university");
         edit_profile_pic = (CircleImageView) findViewById(R.id.edit_profilepic);
         accept = findViewById(R.id.accept);
         cancel = findViewById(R.id.cancel);
