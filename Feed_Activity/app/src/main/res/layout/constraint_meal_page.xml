@@ -42,17 +42,17 @@
     android:orientation="horizontal"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="207dp"
-        android:layout_height="64dp"
-        android:fontFamily="@font/open_sans"
-        android:gravity="center"
-        android:text="Italian Dinner"
-        android:textAlignment="center"
-        android:textColor="@color/colorAccent"
-        android:textSize="22sp"
-        android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="207dp"
+                    android:layout_height="64dp"
+                    android:fontFamily="@font/open_sans"
+                    android:gravity="center"
+                    android:text="Italian Dinner"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
 
 
                 <ImageButton
@@ -60,11 +60,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
                     android:layout_marginRight="10dp"
                     android:background="#00FFFFFF"
                     app:srcCompat="@drawable/edit_pen_grey" />
-</RelativeLayout>
+
+                <ImageButton
+                    android:id="@+id/sendmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:backgroundTint="#242224"
+                    android:layout_toLeftOf="@id/pencil_meal"
+                    android:background="@drawable/ic_email_black_24dp" />
+            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
