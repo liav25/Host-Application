@@ -72,7 +72,7 @@ public class Register extends AppCompatActivity {
     }
 
     /**
-     * receives data from user by i"d
+     * receives data from user by id
      *
      * @param id - textbox ID
      * @return String representing that data

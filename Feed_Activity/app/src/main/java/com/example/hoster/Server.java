@@ -51,6 +51,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
@@ -920,21 +921,25 @@ public class Server {
 
 
 
-        public void editMeal (Meal old, Map mNeeded)
-        {
-            DocumentReference busRef = db.collection(MEALS_DATA_STRING).document(old.getID());
+    public void editMeal (Meal old, Map mNeeded)
+    {
+        DocumentReference busRef = db.collection(MEALS_DATA_STRING).document(old.getID());
 
 
-            busRef.update("needed", mNeeded).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    System.out.println("User edit : success!");
-                }
-            });
+        busRef.update("needed", mNeeded).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                System.out.println("User edit : success!");
+            }
+        });
 
-
-        }
 
     }
+
+    public void patch(){
+        CollectionReference ref = db.collection(USERS_DATA_STRING);
+        for (DocumentReference d : ref.)
+    }
+}
 
 
