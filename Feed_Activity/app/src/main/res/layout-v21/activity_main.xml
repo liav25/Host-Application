@@ -26,8 +26,6 @@
             app:theme="@style/Widget.AppCompat.ActionBar">
 
 
-
-
         </android.support.v7.widget.Toolbar>
 
 
@@ -73,6 +71,8 @@
                 android:divider="@color/transparent"
                 android:dividerHeight="5dp"
        />
+
+
 
     </RelativeLayout>
 

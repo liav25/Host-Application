@@ -6,6 +6,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,10 +17,12 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -49,8 +52,6 @@ public class MainActivity extends AppCompatActivity {
     public static FirebaseUser user;
     public static String userId;
     public static String userMail;
-
-
     //**FOR POPUP**//
 
 
@@ -83,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
 
         cardlist.setAdapter(adapter);
 
+
+
         addMealBut = findViewById(R.id.addMealButton);
         fromBottom = AnimationUtils.loadAnimation(this, R.anim.frombottom);
         Animation fromtop = AnimationUtils.loadAnimation(this, R.anim.fromtop);
@@ -93,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
         profilePicture.setAnimation(fromtop);
         addMealBut.setAnimation(fromBottom);
         Bundle bun = new Bundle();
+
 
 
         addMealBut.setOnClickListener(new View.OnClickListener() {
@@ -133,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
         return true;  //for visible 3 dots change to true, hiding false
     }
 
@@ -145,9 +150,12 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_sort) {
-            return true;
+            Intent news = new Intent(getApplicationContext(), FilterDialog.class);
+            startActivity(news);
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 
 }

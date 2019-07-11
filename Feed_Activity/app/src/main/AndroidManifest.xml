@@ -17,10 +17,12 @@
         android:roundIcon="@mipmap/ic_launcher_foreground"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
+        <activity android:name=".FilterDialog"
+            android:theme="@style/AppTheme.PopMe2" />
         <activity
             android:name=".neededDialog"
             android:label="@string/title_activity_needed_dialog"
-            android:theme="@style/AppTheme.PopMe2"></activity>
+            android:theme="@style/AppTheme.PopMe2" />
         <activity
             android:name=".edit_meal"
             android:label="@string/title_activity_edit_meal"
@@ -32,7 +34,7 @@
         <activity
             android:name=".Splash"
             android:label="@string/title_activity_splash"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Login"
             android:label="@string/title_activity_login"
