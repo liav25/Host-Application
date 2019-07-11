@@ -17,8 +17,6 @@
         android:roundIcon="@mipmap/ic_launcher_foreground"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
-        <activity android:name=".FilterDialog"
-            android:theme="@style/AppTheme.PopMe2" />
         <activity
             android:name=".neededDialog"
             android:label="@string/title_activity_needed_dialog"
