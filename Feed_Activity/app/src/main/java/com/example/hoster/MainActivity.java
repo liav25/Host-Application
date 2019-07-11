@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         addMealBut = findViewById(R.id.addMealButton);
-        fromBottom = AnimationUtils.loadAnimation(this, R.anim.frombottom);
+        fromBottom = AnimationUtils.loadAnimation(this, R.anim.frombottom2);
         Animation fromtop = AnimationUtils.loadAnimation(this, R.anim.fromtop);
         toolbar.setAnimation(fromtop);
         profilePicture = findViewById(R.id.profile_picture);
