@@ -29,6 +29,7 @@ import android.os.SystemClock;
 
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
@@ -161,12 +162,7 @@ public class Server {
      * @param act - activity to use for moving on to MainActivity
      * @param disname - display name for user
      */
-    public void signUp(final String email, String pass, final Activity act, final String disname){
-
-     * @param pass  - password
-     * @param act   - activity to use for moving on to MainActivity
-     */
-    public void signUp(String email, String pass, final Activity act) {
+    public void signUp(final String email, String pass, final Activity act, final String disname) {
 
         mAuth.createUserWithEmailAndPassword(email, pass)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -203,13 +199,8 @@ public class Server {
      * @param langs      - languages he's speaking
      */
     public void addUser(String disName, String image, String university,
-
                           ArrayList<String> langs, String email)
     {
-
-                        ArrayList<String> langs) {
-
-
         final String userId = MainActivity.userId;
 
         DocumentReference busRef = db.collection(USERS_DATA_STRING).document(userId);
@@ -531,10 +522,10 @@ public class Server {
 
     /**
      * Sets the "rating" notification after joining a meal
-     *
      * @param meal - meal just joined to
      * @param cont - context to use in order to create intent
      */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public void setNotification(Meal meal, Context cont) {
         createNotificationChannel(cont);
         Intent intent = new Intent(cont, HowWasItPop.class);
