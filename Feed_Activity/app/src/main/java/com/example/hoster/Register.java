@@ -53,11 +53,11 @@ public class Register extends AppCompatActivity {
                 password = getInfoFromTextbox(R.id.insertPasswordSU);
 
                 emailAddress = getInfoFromTextbox(R.id.insertEmailSU);
-
+                userName = getInfoFromTextbox(R.id.insertUserNameSU);
 
                 if (password.length() >= Login.MIN_PASS_CHAR &&
                             emailAddress.length() > Login.MIN_EMAIL_CHAR) {
-                    MainActivity.sev.signUp(emailAddress, password, Register.this);
+                    MainActivity.sev.signUp(emailAddress, password, Register.this, userName);
                    
                 } else {
                     Toast.makeText(Register.this, "Invalid email or password",

@@ -1,7 +1,5 @@
 package com.example.hoster;
 
-import android.net.Uri;
-
 import java.util.ArrayList;
 
 /**
@@ -14,7 +12,7 @@ public class User {
     private String university;
     private ArrayList<String> langs;
     private ArrayList<String> mutual;
-
+    private String email;
     private int num_of_raters;
     private int rating_sum;
 
@@ -25,9 +23,10 @@ public class User {
      * @param image      - profile_image for user
      * @param university - university studying in
      * @param langs      - languages speaking
+     * @param email - user's email
      */
     public User(String username, String image, String university,
-                ArrayList<String> langs, String userId) {
+                ArrayList<String> langs, String userId, String email) {
         this.username = username;
 
         this.image = image;
@@ -40,7 +39,7 @@ public class User {
         this.userId = userId;
         this.rating_sum = 0;
         this.num_of_raters = 0;
-
+        this.email = email;
     }
 
     public User(){
@@ -51,7 +50,7 @@ public class User {
         this.num_of_raters = 0;
         this.rating_sum = 0;
         this.mutual = new ArrayList<String>();
-
+        this.email = "";
     }
 
     /**
@@ -169,5 +168,17 @@ public class User {
      * @return - mutual friends list
      */
     public ArrayList<String> getMutual(){return this.mutual;}
+
+    /**
+     * @return - this user's email
+     */
+    public String getEmail(){ return this.email; }
+
+    /**
+     * @param email - set this email to be the user's email
+     */
+    public void setEmail(String email){
+        this.email = email;
+    }
 
 }

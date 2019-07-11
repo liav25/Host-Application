@@ -161,8 +161,9 @@ public class Server {
      * @param email - email
      * @param pass - password
      * @param act - activity to use for moving on to MainActivity
+     * @param disname - display name for user
      */
-    public void signUp(String email, String pass, final Activity act){
+    public void signUp(final String email, String pass, final Activity act, final String disname){
         mAuth.createUserWithEmailAndPassword(email, pass)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -172,7 +173,7 @@ public class Server {
                             Log.d("AuthUI", "createUserWithEmail:success");
                             MainActivity.user = mAuth.getCurrentUser();
                             MainActivity.userId = MainActivity.user.getUid();
-                            addUser("", null, "", new ArrayList<String>());
+                            addUser(disname, null, "", new ArrayList<String>(), email);
                             Intent main = new Intent(act.getApplicationContext(), MainActivity.class);
                             act.startActivity(main);
                             act.finish();
@@ -197,13 +198,13 @@ public class Server {
      * @param langs - languages he's speaking
      */
     public void addUser(String disName, String image, String university,
-                          ArrayList<String> langs)
+                          ArrayList<String> langs, String email)
     {
 
         final String userId = MainActivity.userId;
 
         DocumentReference busRef = db.collection(USERS_DATA_STRING).document(userId);
-        User userObj = new User(disName, image, university, langs, userId);
+        User userObj = new User(disName, image, university, langs, userId, email);
         busRef.set(userObj).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
