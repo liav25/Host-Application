@@ -30,7 +30,8 @@
         <ImageButton
             android:id="@+id/pencil"
             android:layout_width="wrap_content"
-            android:layout_gravity="end"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
             android:layout_height="wrap_content"
             android:background="#00FFFFFF"
             app:srcCompat="@drawable/edit_pen_grey"
@@ -116,7 +117,7 @@
         android:layout_marginTop="5dp"
         android:orientation="horizontal"
         android:paddingLeft="25dp"
-        android:paddingStart="25dp">
+>
 
         <ImageView
             android:layout_width="36dp"
