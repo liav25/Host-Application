@@ -15,7 +15,7 @@
         android:icon="@mipmap/ic_launcher_foreground"
         android:label="Hoster"
         android:roundIcon="@mipmap/ic_launcher_foreground"
-        android:supportsRtl="true"
+        android:supportsRtl="false"
         android:theme="@style/AppTheme">
         <activity
             android:name=".neededDialog"
