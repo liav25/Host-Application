@@ -78,6 +78,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -936,10 +937,29 @@ public class Server {
 
     }
 
-    public void patch(){
+    /**
+     * Iterates over users and adds field
+     */
+    public void patch() {
         CollectionReference ref = db.collection(USERS_DATA_STRING);
-        for (DocumentReference d : ref.)
+        ref.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                queryDocumentSnapshots.iterator();
+                Iterator<QueryDocumentSnapshot> it = queryDocumentSnapshots.iterator();
+                int count = 0;
+                while (it.hasNext()) {
+                    DocumentReference doc = it.next().getReference();
+                    doc.update("email", "email" + count + "@gm.com");
+                    count++;
+                }
+            }
+        });
     }
+
+
+
+
 }
 
 
