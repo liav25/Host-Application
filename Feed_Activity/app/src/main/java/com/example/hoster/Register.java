@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Register extends AppCompatActivity {
 
@@ -25,6 +26,7 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register2);
         FirebaseAuth mAtuh = FirebaseAuth.getInstance();
         loginbut = findViewById(R.id.loginButtonInSignup);
+
 
         loginbut.setOnClickListener(new View.OnClickListener() {
             @Override

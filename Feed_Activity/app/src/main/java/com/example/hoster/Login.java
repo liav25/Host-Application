@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity {
     EditText email;
@@ -34,6 +35,18 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         getWindow().setStatusBarColor(this.getResources().getColor(R.color.TextYellow));
         login = (Button) findViewById(R.id.loginButton);
+
+
+        //TODO - this part is for staying logged in
+        /**
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user!=null){
+            Intent feed_intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(feed_intent);
+            Log.d("win", "signInWithEmail:success");
+            finish();
+        }
+         **/
 
         email = findViewById(R.id.userNameInputField);
         pass = findViewById(R.id.editText3);
