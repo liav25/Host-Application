@@ -38,7 +38,7 @@ public class Login extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         //TODO - this part is for staying logged in
-        /**
+
         FirebaseUser user = mAuth.getCurrentUser();
         if(user!=null){
             MainActivity.userId = user.getUid();
@@ -51,7 +51,7 @@ public class Login extends AppCompatActivity {
             finish();
 
         }
-**/
+
         email = findViewById(R.id.userNameInputField);
         pass = findViewById(R.id.editText3);
         toRegister = findViewById(R.id.to_register);
