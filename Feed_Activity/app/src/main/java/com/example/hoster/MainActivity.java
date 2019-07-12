@@ -71,6 +71,9 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(this.getResources().getColor(R.color.toolbarcolor));
         setContentView(R.layout.activity_main);
 
+        Bundle b = getIntent().getExtras();
+        userId = b.getString("userId");
+
 
         meals = new ArrayList<>();
         adapter = new MealsListAdapter(this,  R.layout.feed_card

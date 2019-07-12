@@ -36,23 +36,27 @@ public class Login extends AppCompatActivity {
         getWindow().setStatusBarColor(this.getResources().getColor(R.color.TextYellow));
         login = (Button) findViewById(R.id.loginButton);
 
-
+        mAuth = FirebaseAuth.getInstance();
         //TODO - this part is for staying logged in
         /**
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser user = mAuth.getCurrentUser();
         if(user!=null){
+            MainActivity.userId = user.getUid();
+            MainActivity.userMail = user.getEmail();
+            MainActivity.user = user;
             Intent feed_intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(feed_intent);
+
             Log.d("win", "signInWithEmail:success");
             finish();
-        }
-         **/
 
+        }
+**/
         email = findViewById(R.id.userNameInputField);
         pass = findViewById(R.id.editText3);
         toRegister = findViewById(R.id.to_register);
 
-        mAuth = FirebaseAuth.getInstance();
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
