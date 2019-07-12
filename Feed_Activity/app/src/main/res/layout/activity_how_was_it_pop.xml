@@ -9,22 +9,11 @@
     android:background="@color/BackgroundPink"
     android:orientation="vertical"
     android:padding="5dp"
+    android:theme="@style/AppTheme.PopMe2"
     tools:context=".HowWasItPop">
 
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <!--android:layout_height="300dp"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:layout_marginLeft="20dp"-->
-        <!--android:layout_marginTop="50dp"-->
-        <!--android:layout_marginRight="20dp"-->
-        <!--android:background="@color/BackgroundPink"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:paddingLeft="15dp"-->
-        <!--android:paddingRight="15dp">-->
 
         <Button
             android:id="@+id/closeRevPopUpButton"
@@ -39,35 +28,25 @@
 
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/show_love"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="70dp"
             android:text="Show USERNAME some love!"
             android:textSize="20dp" />
 
-    </LinearLayout>
 
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginTop="180dp"-->
-    <!--android:gravity="center"-->
-    <!--android:orientation="vertical"/>-->
-    <!---->
-
+<LinearLayout
+    android:layout_centerHorizontal="true"
+    android:layout_below="@id/show_love"
+    android:layout_width="300dp"
+    android:layout_height="100dp">
     <ImageButton
         android:id="@+id/pepper1"
         android:layout_width="60dp"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="70dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="40dp"
+        android:layout_height="45dp"
+        android:layout_toRightOf="@id/pepper2"
         android:background="@drawable/pepper1"
         android:clickable="true"
         android:focusable="true" />
@@ -76,48 +55,16 @@
         android:id="@+id/pepper2"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="110dp"
-        android:layout_marginLeft="140dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="40dp"
+        android:layout_toRightOf="@id/pepper3"
         android:background="@drawable/pepper2"
         android:clickable="true"
         android:focusable="true" />
 
-    <ImageButton
-        android:id="@+id/pepper5"
-        android:layout_width="60dp"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="260dp"
-        android:layout_marginLeft="71dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="40dp"
-        android:background="@drawable/pepper5"
-        android:clickable="true"
-        android:focusable="true" />
 
     <ImageButton
         android:id="@+id/pepper3"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="165dp"
-        android:layout_marginLeft="71dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
         android:background="@drawable/pepper3"
         android:clickable="true"
         android:focusable="true" />
@@ -126,31 +73,20 @@
         android:id="@+id/pepper4"
         android:layout_width="30dp"
         android:layout_height="40dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="212dp"
-        android:layout_marginLeft="71dp"
-        android:layout_marginTop="127dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="40dp"
         android:background="@drawable/pepper4"
         android:clickable="true"
         android:focusable="true" />
 
-    <!--tools:context="com.travijuu.numberpicker.sample.MainActivity">-->
+    <ImageButton
+        android:id="@+id/pepper5"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_toRightOf="@id/pepper4"
+        android:background="@drawable/pepper5"
+        android:clickable="true"
+        android:focusable="true" />
 
-    <!--<com.travijuu.numberpicker.library.NumberPicker-->
-    <!--android:id="@+id/reviewNumber_picker"-->
-    <!--android:layout_width="130dp"-->
-    <!--android:layout_height="40dp"-->
-    <!--numberpicker:focusable="false"-->
-    <!--numberpicker:min="1"-->
-    <!--numberpicker:unit="1"-->
-    <!--numberpicker:value="-5" />-->
-
-    <!--</LinearLayout>-->
+</LinearLayout>
 
     <Button
         android:id="@+id/submitRankButton"
