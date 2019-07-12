@@ -5,11 +5,10 @@
     xmlns:numberpicker="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="300dp"
     android:background="@color/BackgroundPink"
     android:orientation="vertical"
     android:padding="5dp"
-    android:theme="@style/AppTheme.PopMe2"
     tools:context=".HowWasItPop">
 
 
@@ -40,49 +39,59 @@
 <LinearLayout
     android:layout_centerHorizontal="true"
     android:layout_below="@id/show_love"
-    android:layout_width="300dp"
+    android:layout_width="290dp"
     android:layout_height="100dp">
+
+
     <ImageButton
-        android:id="@+id/pepper1"
-        android:layout_width="60dp"
-        android:layout_height="45dp"
-        android:layout_toRightOf="@id/pepper2"
-        android:background="@drawable/pepper1"
+        android:id="@+id/pepper5"
+        android:layout_width="40dp"
+        android:layout_height="60dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/pepper5"
         android:clickable="true"
         android:focusable="true" />
 
+
+    <ImageButton
+        android:id="@+id/pepper4"
+        android:layout_width="40dp"
+        android:layout_margin="10dp"
+        android:layout_height="60dp"
+        android:background="@drawable/pepper4"
+        android:clickable="true"
+        android:focusable="true" />
+
+
+
+
+    <ImageButton
+        android:id="@+id/pepper3"
+        android:layout_width="40dp"
+        android:layout_height="60dp"
+        android:layout_margin="10dp"
+
+        android:background="@drawable/pepper3"
+        android:clickable="true"
+        android:focusable="true" />
+
+
     <ImageButton
         android:id="@+id/pepper2"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_toRightOf="@id/pepper3"
+        android:layout_width="40dp"
+        android:layout_height="60dp"
+        android:layout_margin="10dp"
         android:background="@drawable/pepper2"
         android:clickable="true"
         android:focusable="true" />
 
 
     <ImageButton
-        android:id="@+id/pepper3"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@drawable/pepper3"
-        android:clickable="true"
-        android:focusable="true" />
-
-    <ImageButton
-        android:id="@+id/pepper4"
-        android:layout_width="30dp"
-        android:layout_height="40dp"
-        android:background="@drawable/pepper4"
-        android:clickable="true"
-        android:focusable="true" />
-
-    <ImageButton
-        android:id="@+id/pepper5"
-        android:layout_width="60dp"
-        android:layout_height="50dp"
-        android:layout_toRightOf="@id/pepper4"
-        android:background="@drawable/pepper5"
+        android:id="@+id/pepper1"
+        android:layout_width="40dp"
+        android:layout_height="60dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/pepper1"
         android:clickable="true"
         android:focusable="true" />
 
@@ -97,7 +106,7 @@
         android:background="@color/TextYellow"
         android:clickable="true"
         android:focusable="true"
-        android:gravity="center"
+        android:layout_centerHorizontal="true"
         android:text="Submit your feedback"
         android:textColor="@color/TextWhite"
         android:layout_marginStart="30dp" />
