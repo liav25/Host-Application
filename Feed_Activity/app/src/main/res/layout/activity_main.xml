@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fdf7ec"
+    android:background="#fafafa"
     tools:context=".MainActivity">
 
 
@@ -16,7 +16,6 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:layout_alignParentStart="true"
             style="@style/HeaderBar"
 
             android:layout_alignParentTop="true"
@@ -25,8 +24,6 @@
             android:elevation="4dp"
             app:popupTheme="@style/Widget.AppCompat.ActionBar"
             app:theme="@style/Widget.AppCompat.ActionBar">
-
-
 
 
         </android.support.v7.widget.Toolbar>
@@ -38,15 +35,11 @@
             android:layout_height="80dp"
             android:layout_alignLeft="@+id/toolbar"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="12dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="9dp"
-            android:layout_marginEnd="316dp"
-
-            android:background="@drawable/shadow"
             android:elevation="4dp"
             android:src="@drawable/profile_picture"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            >
 
         </de.hdodenhof.circleimageview.CircleImageView>
 
@@ -63,7 +56,7 @@
             android:adjustViewBounds="true"
             android:backgroundTint="@color/transparent"
             android:clickable="true"
-            android:elevation="7dp"
+            android:elevation="5dp"
             android:cropToPadding="true"
             android:focusable="true"
             android:scaleType="fitCenter"
@@ -78,6 +71,8 @@
             android:divider="@color/transparent"
             android:dividerHeight="5dp"
             />
+
+
 
     </RelativeLayout>
 

@@ -48,7 +48,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
     ImageButton addMealBut;
-    Animation fromBottom;
     static Server sev = Server.getInstance();
 
     public static CircleImageView profilePicture;
@@ -71,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(this.getResources().getColor(R.color.toolbarcolor));
         setContentView(R.layout.activity_main);
 
-
         meals = new ArrayList<>();
         adapter = new MealsListAdapter(this,  R.layout.feed_card
                 , meals);
@@ -88,17 +86,14 @@ public class MainActivity extends AppCompatActivity {
 
         cardlist.setAdapter(adapter);
 
-
-
         addMealBut = findViewById(R.id.addMealButton);
-        fromBottom = AnimationUtils.loadAnimation(this, R.anim.frombottom2);
+        Animation fromBottom2 = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         Animation fromtop = AnimationUtils.loadAnimation(this, R.anim.fromtop);
         toolbar.setAnimation(fromtop);
         profilePicture = findViewById(R.id.profile_picture);
         sev.downloadProfilePic(profilePicture, userId);
-
         profilePicture.setAnimation(fromtop);
-        addMealBut.setAnimation(fromBottom);
+//        addMealBut.setAnimation(fromBottom2);
         Bundle bun = new Bundle();
 
 
