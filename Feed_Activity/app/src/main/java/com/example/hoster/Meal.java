@@ -345,4 +345,5 @@ public class Meal implements Serializable {
 
     public ArrayList<String> getGuestsMails(){return this.guestsMails; }
 
+
 }

@@ -8,19 +8,56 @@
     android:background="@color/toolbarcolor"
 
     >
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:text="Sort by:"
+        android:textColor="@color/TextWhite"
+        android:textStyle="bold"
+        android:textSize="20dp"/>
 
-    <Button
-        android:id="@+id/my_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="156dp"
-        android:layout_marginLeft="156dp"
-        android:layout_marginTop="36dp"
-        android:background="@drawable/background_white"
-        android:text="Splash"
-        android:textColor="@color/AccentRed"
-        app:layout_constraintTop_toTopOf="parent"
-/>
+    <Spinner
+        android:id="@+id/sortby"
+        android:layout_marginLeft="20dp"
+        android:layout_width="150dp"
+        android:layout_marginTop="40dp"
+        android:layout_height="50dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown" />
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="240dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:text="Filter by:"
+        android:textColor="@color/TextWhite"
+        android:textStyle="bold"
+        android:textSize="20dp"/>
+
+    <Spinner
+        android:id="@+id/filterby"
+        android:layout_marginLeft="230dp"
+        android:layout_width="150dp"
+        android:layout_marginTop="40dp"
+        android:layout_height="50dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown" />
+
+    <!--<Button-->
+        <!--android:id="@+id/my_button"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_marginStart="156dp"-->
+        <!--android:layout_marginLeft="156dp"-->
+        <!--android:layout_marginTop="36dp"-->
+        <!--android:background="@drawable/background_white"-->
+        <!--android:text="Splash"-->
+        <!--android:textColor="@color/AccentRed"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+<!--/>-->
 </RelativeLayout>

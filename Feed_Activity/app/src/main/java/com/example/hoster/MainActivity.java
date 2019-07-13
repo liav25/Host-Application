@@ -1,48 +1,35 @@
 package com.example.hoster;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
-import android.content.ClipData;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.Toolbar;
-import android.text.SpannableString;
-import android.text.style.UnderlineSpan;
 import android.view.Gravity;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseUser;
-import com.google.rpc.Help;
 import com.orhanobut.dialogplus.DialogPlus;
-import com.orhanobut.dialogplus.GridHolder;
 import com.orhanobut.dialogplus.ViewHolder;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -57,7 +44,9 @@ public class MainActivity extends AppCompatActivity {
     public static String userId;
     public static String userMail;
     //**FOR POPUP**//
-
+    private String[] sortby = {"None", "Date", "Location", "Alphabetically"};
+    private String[] filterby = {"None", "My Meals", "I'm Hosting", "Neighborhood",
+    "Time: No more than"};
 
     private ListView cardlist;
 
@@ -169,12 +158,43 @@ public class MainActivity extends AppCompatActivity {
                     setCancelable(true)
                     .create();
 
-            Button action = (Button) dialog.getHolderView().findViewById(R.id.my_button);
-            action.setOnClickListener(new View.OnClickListener() {
+//            Button action = (Button) dialog.getHolderView().findViewById(R.id.my_button);
+//            action.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(getApplicationContext(), Splash.class);
+//                    startActivity(intent);
+//                }
+//            });
+
+            Spinner sort = (Spinner)dialog.findViewById(R.id.sortby);
+            Spinner filter = (Spinner)dialog.findViewById(R.id.filterby);
+
+            ArrayAdapter<String> sortAd =
+                    new ArrayAdapter<>(MainActivity.this,
+                            android.R.layout.simple_spinner_dropdown_item, sortby);
+
+            ArrayAdapter<String> filtAd =
+                    new ArrayAdapter<>(MainActivity.this,
+                            android.R.layout.simple_spinner_dropdown_item, filterby);
+
+            sortAd.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            filtAd.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            sort.setAdapter(sortAd);
+            filter.setAdapter(filtAd);
+
+            sort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getApplicationContext(), Splash.class);
-                    startActivity(intent);
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    switch (position){
+                        case 1: sortByDate();
+
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
                 }
             });
             dialog.show();
@@ -184,6 +204,59 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void sortByDate(){
+        Collections.sort(meals, new Comparator<Meal>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public int compare(Meal o1, Meal o2) {
+                return compareByDate(o1, o2);
+            }
+        });
+
+        adapter.notifyDataSetChanged();
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private int compareByDate(Meal m1, Meal m2){
+
+
+        if (m1.getTime() != null && m2.getTime() != null) { // time is not a mandatory info, hence
+
+            String date1 = m1.getTime().replace("אחה״צ", "PM")
+                    .replace("לפנה״צ", "AM");
+
+            String date2 = m2.getTime().replace("אחה״צ", "PM")
+                    .replace("לפנה״צ", "AM"); // adjust to hebrew strings
+
+            System.out.println("in " + date1);
+            Date d1 = StringToDate(date1);
+            System.out.println("out " + d1);
+            Date d2 = StringToDate(date2);
+
+            if (d1 != null && d2 != null) {
+
+                return d1.compareTo(d2);
+            }
+        } else if (m1.getTime() == null){
+            return 1;
+        } else {
+            return -1;
+        }
+
+        return 0;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private Date StringToDate(String d){
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy h:mm a");
+        try {
+            return format.parse(d);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 
 }
