@@ -25,7 +25,8 @@
             android:name=".edit_meal"
             android:label="@string/title_activity_edit_meal"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".see_all_people_activity" />
+        <activity android:name=".see_all_people_activity"
+            android:theme="@style/AppTheme.PopMe2"/>
         <activity android:name=".HowWasItPop" />
         <activity android:name=".Register" />
         <activity android:name=".edit_profile" />
