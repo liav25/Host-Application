@@ -104,13 +104,10 @@ public class Server {
 
     private Set<String> standardRestrictions;
 
-    private AlarmManager alarmMgr;
-    private PendingIntent alarmIntent;
-    private Context main;
     FirebaseStorage storage;
     StorageReference storageReference;
     HashMap<String, Bitmap> pics;
-
+    HashMap<String, Location> locations;
     FirebaseFirestore db;
     FirebaseDatabase mDb;
     FirebaseAuth mAuth;
@@ -132,7 +129,7 @@ public class Server {
 
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
-
+        setupLocations();
 
     }
 
@@ -823,25 +820,144 @@ public class Server {
     };
 
 
-
-
-    public Location getLoc(String neighborhood, Location curLoc) {
-        HashMap<String, Location> locations = new HashMap<>();
+    /**
+     * returns location of neighborhoods in jerusalem. used the following python
+     * script to get these locations:
+     * >>> from geopy.geocoders import Nominatim
+     * >>> needed = []
+     * >>> for neigh in neighlist:
+     * >>> try:
+     * 		location = geolocator.geocode(neigh + ", Jerusalem Israel")
+     * 		print ("Location " + neigh + " = new Location (\"" + neigh + "\");")
+     * 		print(neigh  + ".setLatitude(" + str(location.latitude) + ");")
+     * 		print(neigh  + ".setLongitude(" + str(location.longitude) + ");")
+     * 		print("locations.put(\"" + neigh + "\", " + neigh + ");")
+     * 	>>> except Exception as e:
+     */
+    private void setupLocations() {
+        locations = new HashMap<>();
         Location rehavia = new Location("Rehavia");
         rehavia.setLatitude(31.7708234);
-        rehavia.setLatitude(35.2107216);
+        rehavia.setLongitude(35.2107216);
 
-        Location musrara = new Location("Musrara");
-        musrara.setLatitude(31.7824992);
-        musrara.setLatitude(35.2343108);
-        Location EinKerem = new Location("Ein Kerem");
-        EinKerem.setLatitude(31.7671309);
-        EinKerem.setLatitude(35.1707411);
-        locations.put("Musrara", musrara);
         locations.put("Rehavia", rehavia);
+
+        Location Musrara = new Location ("Musrara");
+        Musrara.setLatitude(31.7820246);
+        Musrara.setLongitude(35.2260718);
+        locations.put("Musrara", Musrara);
+        Location EinKerem = new Location ("Ein Kerem");
+        EinKerem.setLatitude(31.7676367);
+        EinKerem.setLongitude(35.1639025);
         locations.put("Ein Kerem", EinKerem);
-        System.out.println();
-        return curLoc;
+        Location Nachlaot = new Location ("Nachlaot");
+        Nachlaot.setLatitude(31.7831454);
+        Nachlaot.setLongitude(35.2123968);
+        locations.put("Nachlaot", Nachlaot);
+        Location JewishQuarter = new Location ("Jewish Quarter");
+        JewishQuarter.setLatitude(31.7753539);
+        JewishQuarter.setLongitude(35.2317629);
+        locations.put("Jewish Quarter", JewishQuarter);
+        Location YeminMoshe = new Location ("Yemin Moshe");
+        YeminMoshe.setLatitude(31.7721407);
+        YeminMoshe.setLongitude(35.2249574);
+        locations.put("Yemin Moshe", YeminMoshe);
+        Location OldCity = new Location ("Old City");
+        OldCity.setLatitude(31.7782872);
+        OldCity.setLongitude(35.2319526);
+        locations.put("Old City", OldCity);
+        Location Rehavia = new Location ("Rehavia");
+        Rehavia.setLatitude(31.7748);
+        Rehavia.setLongitude(35.2120777);
+        locations.put("Rehavia", Rehavia);
+        Location Talpiot = new Location ("Talpiot");
+        Talpiot.setLatitude(31.7496635);
+        Talpiot.setLongitude(35.2337721);
+        locations.put("Talpiot", Talpiot);
+        Location Nayot = new Location ("Nayot");
+        Nayot.setLatitude(31.7693712);
+        Nayot.setLongitude(35.2024424);
+        locations.put("Nayot", Nayot);
+        Location Mamila = new Location ("Mamila");
+        Mamila.setLatitude(31.77795945);
+        Mamila.setLongitude(35.22092505);
+        locations.put("Mamila", Mamila);
+        Location MeaShearim = new Location ("Mea' She'arim");
+        MeaShearim.setLatitude(31.7875129);
+        MeaShearim.setLongitude(35.2222372);
+        locations.put("Mea' She'arim", MeaShearim);
+        Location Arnona = new Location ("Arnona");
+        Arnona.setLatitude(31.750559);
+        Arnona.setLongitude(35.2197245);
+        locations.put("Arnona", Arnona);
+        Location Holyland = new Location ("Holyland");
+        Holyland.setLatitude(31.756516);
+        Holyland.setLongitude(35.1887956);
+        locations.put("Holyland", Holyland);
+        Location Motza = new Location ("Motza");
+        Motza.setLatitude(31.79279);
+        Motza.setLongitude(35.168506);
+        locations.put("Motza", Motza);
+        Location Geula = new Location ("Geula");
+        Geula.setLatitude(31.7883192);
+        Geula.setLongitude(35.216052);
+        locations.put("Geula", Geula);
+        Location Katamon = new Location ("Katamon");
+        Katamon.setLatitude(31.7660228);
+        Katamon.setLongitude(35.2093317);
+        locations.put("Katamon", Katamon);
+        Location KiryathaYovel = new Location ("Kiryat haYovel");
+        KiryathaYovel.setLatitude(31.7643601);
+        KiryathaYovel.setLongitude(35.1750449);
+        locations.put("Kiryat haYovel", KiryathaYovel);
+        Location HarNof = new Location ("Har Nof");
+        HarNof.setLatitude(31.7858115);
+        HarNof.setLongitude(35.1741509);
+        locations.put("Har Nof", HarNof);
+        Location BaitvaGan = new Location ("Bait vaGan");
+        BaitvaGan.setLatitude(31.7653824);
+        BaitvaGan.setLongitude(35.1867841);
+        locations.put("Bait vaGan", BaitvaGan);
+        Location GivatShaul = new Location ("Givat Shaul");
+        GivatShaul.setLatitude(31.7911185);
+        GivatShaul.setLongitude(35.1931023);
+        locations.put("Givat Shaul", GivatShaul);
+        Location Malha = new Location ("Malha");
+        Malha.setLatitude(31.7514658);
+        Malha.setLongitude(35.1829753);
+        locations.put("Malha", Malha);
+
+        Location GeulimBaka = new Location ("Geulim Bak'a");
+        GeulimBaka.setLatitude(31.7595534);
+        GeulimBaka.setLongitude(35.2196723);
+        locations.put("Geulim Bak'a", GeulimBaka);
+        Location KiryatMenachem = new Location ("Kiryat Menachem");
+        KiryatMenachem.setLatitude(31.7886126);
+        KiryatMenachem.setLongitude(35.2176848);
+        locations.put("Kiryat Menachem", KiryatMenachem);
+
+        Location Romema = new Location ("Romema");
+        Romema.setLatitude(31.7916556);
+        Romema.setLongitude(35.2036799);
+        locations.put("Romema", Romema);
+        Location Pat = new Location ("Pat");
+        Pat.setLatitude(31.7507047);
+        Pat.setLongitude(35.2046175);
+        locations.put("Pat", Pat);
+        Location Sanhedriya = new Location ("Sanhedriya");
+        Sanhedriya.setLatitude(31.79697265);
+        Sanhedriya.setLongitude(35.2213482113587);
+        locations.put("Sanhedriya", Sanhedriya);
+
+        Location RamatBeitHakerem = new Location ("Ramat Beit Hakerem");
+        RamatBeitHakerem.setLatitude(31.771929);
+        RamatBeitHakerem.setLongitude(35.190955);
+        locations.put("Ramat Beit Hakerem", RamatBeitHakerem);
+        Location MakorHayim = new Location ("Makor Hayim");
+        MakorHayim.setLatitude(31.7552876);
+        MakorHayim.setLongitude(35.2119379);
+        locations.put("Makor Hayim", MakorHayim);
+
     }
 
 
@@ -1028,6 +1144,22 @@ public class Server {
         }
     }
 
+
+    /**
+     * @param neighname - neighborhood's name
+     * @return neighborhood location if found. JLM's if not
+     */
+    public Location getLoc(String neighname){
+        if (locations.containsKey(neighname)){
+            return locations.get(neighname);
+        }
+        else{
+            Location res = new Location("JLM");
+            res.setLongitude(35.2250786);
+            res.setLatitude(31.778345);
+            return res;
+        }
+    }
 }
 
 

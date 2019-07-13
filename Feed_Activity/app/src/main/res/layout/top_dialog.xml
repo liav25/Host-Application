@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="115dp"
+    android:layout_height="350dp"
     android:background="@color/toolbarcolor"
 
     >
@@ -27,24 +27,9 @@
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dropdown" />
 
-    <TextView
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="240dp"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:text="Filter by:"
-        android:textColor="@color/TextWhite"
-        android:textStyle="bold"
-        android:textSize="20dp"/>
+    
 
-    <Spinner
-        android:id="@+id/filterby"
-        android:layout_marginLeft="230dp"
-        android:layout_width="150dp"
-        android:layout_marginTop="40dp"
-        android:layout_height="50dp"
-        android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown" />
+
 
     <!--<Button-->
         <!--android:id="@+id/my_button"-->
