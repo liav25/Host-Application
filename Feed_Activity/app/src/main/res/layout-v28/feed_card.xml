@@ -160,10 +160,13 @@
                 android:text="This is meal description bla bla bla..."
                 android:textColor="#777777"
                 android:textSize="16sp" />
-
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
 
             <TextView
-                android:id="@+id/author"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -173,10 +176,29 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:fontFamily="@font/open_sans"
+                android:text="Arranged by"
+                android:textColor="#42A5F5"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/open_sans"
                 android:text="Host"
                 android:textColor="#42A5F5"
                 android:textSize="15sp"
                 android:textStyle="bold" />
+
+</LinearLayout>
+
             <TextView
                 android:id="@+id/helper"
                 android:layout_width="wrap_content"
