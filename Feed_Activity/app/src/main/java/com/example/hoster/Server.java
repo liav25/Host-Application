@@ -86,6 +86,7 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.locks.Lock;
 
 import static com.firebase.ui.auth.AuthUI.TAG;
 
@@ -106,10 +107,10 @@ public class Server {
 
     FirebaseStorage storage;
     StorageReference storageReference;
-    HashMap<String, Bitmap> pics;
-    HashMap<String, Location> locations;
-    FirebaseFirestore db;
-    FirebaseDatabase mDb;
+    private HashMap<String, String> pics;
+    private HashMap<String, Location> locations;
+    private FirebaseFirestore db;
+    private FirebaseDatabase mDb;
     FirebaseAuth mAuth;
     private static final String MEALS_STRING = "Meals Info";
     private static final String MEALS_Count_STRING = "Meals Count";
@@ -354,11 +355,15 @@ public class Server {
      * @param img    - imgview to put downloaded pictrue at
      * @param userId - user's ID
      */
-    public void downloadProfilePic(final ImageView img, final String userId) {
+    public synchronized void downloadProfilePic(final ImageView img, final String userId) {
         if (pics.containsKey(userId)) { // already downloaded
-            img.setImageBitmap(pics.get(userId));
+            if(pics.get(userId) != null) {
+                Bitmap my_image = BitmapFactory.decodeFile(pics.get(userId));
+                img.setImageBitmap(my_image);
+            }
         } else { // download from server
             try {
+
                 StorageReference ref = storageReference.child(USER_PIC_PATH + userId);
 
                 final File localFile = File.createTempFile("Images", "bmp");
@@ -367,7 +372,7 @@ public class Server {
                     @Override
                     public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                         Bitmap my_image = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                        pics.put(userId, my_image);
+                        pics.put(userId, localFile.getAbsolutePath());
 
                         img.setImageBitmap(my_image);
 
@@ -376,8 +381,11 @@ public class Server {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.d(TAG, "Error downloading Image");
+                        pics.put(userId, null);
                     }
                 });
+
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -714,24 +722,26 @@ public class Server {
 
 
     public void getUsername(String uId, final TextView toShow) {
-        DocumentReference docRef = db.collection(USERS_DATA_STRING).document(uId);
+        if (uId != null) {
+            DocumentReference docRef = db.collection(USERS_DATA_STRING).document(uId);
 
-        /* gets object from server  */
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document != null && document.exists()) {
-                        User got = document.toObject(User.class);
-                        toShow.setText(got.getUsername());
+            /* gets object from server  */
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document != null && document.exists()) {
+                            User got = document.toObject(User.class);
+                            toShow.setText(got.getUsername());
 
-                    } else {
-                        System.out.println("no such user found");
+                        } else {
+                            System.out.println("no such user found");
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
     }
 
     /**
