@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -33,6 +34,8 @@ public class Profile extends AppCompatActivity {
     private TextView langs;
     private TextView loc;
     private ImageButton pen;
+    private TextView ranktext;
+    private ImageView pepperank;
     private CircleImageView img1;
     private CircleImageView img2;
     private CircleImageView img3;
@@ -73,6 +76,8 @@ public class Profile extends AppCompatActivity {
         more_profiles = findViewById(R.id.see_more_mutual);
         mutual_title = findViewById(R.id.mutual_title);
         mutual_frame = findViewById(R.id.mutual_frame);
+        ranktext = findViewById(R.id.rank_text);
+        pepperank = findViewById(R.id.rank_image);
         mutuals = new ArrayList<>();
 
 
@@ -81,7 +86,8 @@ public class Profile extends AppCompatActivity {
         // TODO - ADD location to student, currently not in object
 
         langs = (TextView) findViewById(R.id.profile_langs);
-        Server.getInstance().getUser(uId, user, name, uni, langs, profile_image, mutuals, this);
+        Server.getInstance().getUser(uId, user, name, uni, langs, profile_image, mutuals,
+                this, pepperank, ranktext);
         Server.getInstance().downloadProfilePic(profile_image, uId);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -161,6 +167,7 @@ public class Profile extends AppCompatActivity {
 
 
     }
+
     private void onClickImage(String uId, Context mContext){
 
         Bundle b = new Bundle();
@@ -269,5 +276,34 @@ public class Profile extends AppCompatActivity {
             mutual_title.setVisibility(View.INVISIBLE);
             mutual_frame.setVisibility(View.INVISIBLE);
         }
+    }
+
+
+    /**
+     * Shows and sets the ranking of the profile page
+     * @param num_rankers - number of rankers
+     * @param sum_ranks - sum of rankers
+     * @param pepper - pepper rank imageview
+     * @param title - rank title textview
+     */
+    public static void show_rank(int num_rankers, int sum_ranks, ImageView pepper, TextView title){
+        int rank = 1;
+        if (num_rankers > 0){
+            rank = sum_ranks / num_rankers ;
+            if (rank <= 0 ){
+                rank = 1;
+            }
+        }
+
+
+
+        switch (rank){
+            case 1: pepper.setImageResource(R.drawable.pepper1); title.setText("Mild Hoster");break;
+            case 2: pepper.setImageResource(R.drawable.pepper2); title.setText("Chili Hoster");break;
+            case 3: pepper.setImageResource(R.drawable.pepper3); title.setText("Jalapeño Hoster ");break;
+            case 4: pepper.setImageResource(R.drawable.pepper4); title.setText("Spicy Hoster");break;
+            case 5: pepper.setImageResource(R.drawable.pepper5); title.setText("Super Hot Hoster");break;
+        }
+
     }
 }

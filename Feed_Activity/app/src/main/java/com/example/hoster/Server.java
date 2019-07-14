@@ -288,7 +288,8 @@ public class Server {
      */
     public void getUser(final String userId, final User[] user, final TextView name,
                         final TextView uni, final TextView langs, final ImageView img
-            , final ArrayList<String> mutual, final Profile profile_act) {
+            , final ArrayList<String> mutual, final Profile profile_act, final ImageView pepper,
+                        final TextView ranktext) {
 
         final DocumentReference docRef = db.collection(USERS_DATA_STRING).document(userId);
         DocumentReference self = db.collection(USERS_DATA_STRING).document(MainActivity.userId);
@@ -334,6 +335,10 @@ public class Server {
                                             profile_act.setImages();
                                         }
 
+                                        if (pepper != null && ranktext != null) {
+                                            Profile.show_rank(got.getnum_of_raters(), got.getrating_sum(),
+                                                    pepper, ranktext);
+                                        }
 
                                     } else {
                                         System.out.println("no user found");

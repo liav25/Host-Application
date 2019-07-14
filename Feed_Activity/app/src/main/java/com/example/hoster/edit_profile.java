@@ -82,7 +82,7 @@ public class edit_profile extends AppCompatActivity {
 
 
         Server.getInstance().getUser(uId, user, name, uni, langs, edit_profile_pic, new ArrayList<String>(),
-                null);
+                null, null, null);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);

@@ -531,7 +531,8 @@ public class MainActivity extends AppCompatActivity {
         if (timeFilter > 0){
             for (Meal meal : temp){
                 if (meal.getTime() != null){
-                    Date mDate = StringToDate(meal.getTime());
+                    Date mDate = StringToDate(meal.getTime().replace("אחה״צ", "PM")
+                            .replace("לפנה״צ", "AM"));
                     Date cur = Calendar.getInstance().getTime();
                     if (mDate != null) {
                         if (TimeUnit.MILLISECONDS.toDays(Math.abs(mDate.getTime() - cur.getTime())) <= timeFilter) {
