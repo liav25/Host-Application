@@ -20,8 +20,8 @@
             android:id="@+id/closeRevPopUpButton"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginLeft="5dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/sharp_close_24px"
             android:clickable="true"
@@ -77,25 +77,23 @@
 
 
     <ImageButton
-        android:id="@+id/pepper5"
+        android:id="@+id/pepper1"
         android:layout_width="40dp"
         android:layout_height="60dp"
         android:layout_margin="10dp"
-        android:background="@drawable/pepper5"
         android:alpha="0.3"
-
+        android:background="@drawable/pepper1"
         android:clickable="true"
         android:focusable="true" />
 
 
     <ImageButton
-        android:id="@+id/pepper4"
+        android:id="@+id/pepper2"
         android:layout_width="40dp"
-        android:layout_margin="10dp"
         android:alpha="0.3"
-
         android:layout_height="60dp"
-        android:background="@drawable/pepper4"
+        android:layout_margin="10dp"
+        android:background="@drawable/pepper2"
         android:clickable="true"
         android:focusable="true" />
 
@@ -113,25 +111,28 @@
         android:clickable="true"
         android:focusable="true" />
 
-
     <ImageButton
-        android:id="@+id/pepper2"
+        android:id="@+id/pepper4"
         android:layout_width="40dp"
-        android:alpha="0.3"
-        android:layout_height="60dp"
         android:layout_margin="10dp"
-        android:background="@drawable/pepper2"
+        android:alpha="0.3"
+
+        android:layout_height="60dp"
+        android:background="@drawable/pepper4"
         android:clickable="true"
         android:focusable="true" />
 
 
+
+
     <ImageButton
-        android:id="@+id/pepper1"
+        android:id="@+id/pepper5"
         android:layout_width="40dp"
         android:layout_height="60dp"
         android:layout_margin="10dp"
+        android:background="@drawable/pepper5"
         android:alpha="0.3"
-        android:background="@drawable/pepper1"
+
         android:clickable="true"
         android:focusable="true" />
 
@@ -140,8 +141,9 @@
     <Button
         android:id="@+id/submitRankButton"
         android:layout_width="280dp"
+        android:layout_marginTop="20dp"
         android:layout_height="wrap_content"
-        android:background="@color/TextYellow"
+        android:background="@drawable/rounded_button_orange"
         android:clickable="true"
         android:layout_below="@+id/peppers_layout"
         android:focusable="true"
