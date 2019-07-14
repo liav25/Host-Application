@@ -365,6 +365,8 @@ public class Server {
             if(pics.get(userId) != null) {
                 Bitmap my_image = BitmapFactory.decodeFile(pics.get(userId));
                 img.setImageBitmap(my_image);
+            } else {
+                img.setImageResource(R.drawable.profile_picture);
             }
         } else { // download from server
             try {
@@ -387,6 +389,7 @@ public class Server {
                     public void onFailure(@NonNull Exception e) {
                         Log.d(TAG, "Error downloading Image");
                         pics.put(userId, null);
+                        img.setImageResource(R.drawable.profile_picture);
                     }
                 });
 

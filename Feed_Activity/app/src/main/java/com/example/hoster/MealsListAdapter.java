@@ -305,7 +305,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
         holder.description.setText(description);
         //Tomi why this isnt working ?????
         //shows only host and not arranged by + host
-        holder.host.setText("Arranged by "+ host);
+
 
         holder.setImages(guests, mContext);
         holder.setSymbols(restrictions, mContext);
