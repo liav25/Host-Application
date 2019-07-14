@@ -23,14 +23,20 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseUser;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.ViewHolder;
+import com.travijuu.numberpicker.library.Enums.ActionEnum;
+import com.travijuu.numberpicker.library.NumberPicker;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -40,6 +46,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -60,12 +67,10 @@ public class MainActivity extends AppCompatActivity {
     private Location curLoc;
     //**FOR POPUP**//
     private String[] sortby = {"None", "Date", "Distance", "Alphabetically"};
-    private String[] filterby = {"None", "My Meals", "I'm Hosting", "Distance: no more than",
-    "Time: No more than", "Restrictions"};
+    private String[] filterby = {"None", "All", "My Meals", "I'm Hosting"};
     private int distanceFilter = 0;
     private int timeFilter = 0;
-    private boolean myMealsFilter = false;
-    private boolean imHostingFilter = false;
+
     private boolean Halal = false;
     private boolean Kosher = false;
     private boolean vegan = false;
@@ -150,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
             public void onLocationChanged(Location location) {
                 curLoc = location;
                 sortByDistance();
+                locationManager.removeUpdates(this);
             }
 
             @Override
@@ -174,6 +180,7 @@ public class MainActivity extends AppCompatActivity {
             public void onLocationChanged(Location location) {
                 curLoc = location;
                 filterByDistance();
+                locationManager.removeUpdates(this);
             }
 
             @Override
@@ -220,6 +227,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             // permission has been granted
             locationManager.requestLocationUpdates("gps", 5000, 0, sortLocListener);
+
         }
     }
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -261,22 +269,57 @@ public class MainActivity extends AppCompatActivity {
 
             final DialogPlus dialog = DialogPlus.newDialog(this)
                     .setGravity(Gravity.TOP)
-                    .setExpanded(true,300)
                     .setContentHolder(new ViewHolder(R.layout.top_dialog)).
                     setCancelable(true)
                     .create();
 
-//            Button action = (Button) dialog.getHolderView().findViewById(R.id.my_button);
-//            action.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Intent intent = new Intent(getApplicationContext(), Splash.class);
-//                    startActivity(intent);
-//                }
-//            });
 
             Spinner sort = (Spinner)dialog.findViewById(R.id.sortby);
-            Spinner filter = (Spinner)dialog.findViewById(R.id.filterby);
+            Spinner seeOnly = (Spinner)dialog.findViewById(R.id.seeOnly);
+            final SeekBar maxdays = (SeekBar)dialog.findViewById(R.id.maxdays);
+            final SeekBar maxdist = (SeekBar) dialog.findViewById(R.id.maxdistance);
+            final TextView maxDaysCount = (TextView)dialog.findViewById(R.id.max_days_text);
+            final TextView maxDistShow = (TextView)dialog.findViewById(R.id.max_dist_show);
+            maxdist.setProgress(distanceFilter);
+            maxdays.setProgress(timeFilter);
+            maxDaysCount.setText(String.valueOf(timeFilter));
+            maxDistShow.setText(String.valueOf(distanceFilter));
+
+            maxdays.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    maxDaysCount.setText(String.valueOf(progress));
+                    timeFilter = progress;
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+
+                }
+            });
+
+            maxdist.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    maxDistShow.setText(String.valueOf(progress));
+                    distanceFilter = progress;
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+
+                }
+            });
 
             ArrayAdapter<String> sortAd =
                     new ArrayAdapter<>(MainActivity.this,
@@ -289,15 +332,14 @@ public class MainActivity extends AppCompatActivity {
             sortAd.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             filtAd.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             sort.setAdapter(sortAd);
-            filter.setAdapter(filtAd);
 
             sort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     switch (position){
-                        case 1: sortByDate();
-                        case 2: getLocationForSort();
-                        case 3: sortAlphabetically();
+                        case 1: sortByDate(); break;
+                        case 2: getLocationForSort(); break;
+                        case 3: sortAlphabetically(); break;
 
                     }
                 }
@@ -307,6 +349,50 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             });
+
+            seeOnly.setAdapter(filtAd);
+            seeOnly.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @RequiresApi(api = Build.VERSION_CODES.N)
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    switch (position){
+                        case 1: sev.getMeals(meals, adapter); setBackVals(); break;
+                        case 2: filterByMyMeals(); break;
+                        case 3: filterByHosting(); break;
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+
+            final CheckBox halal = (CheckBox)dialog.findViewById(R.id.halal_filter);
+            final CheckBox kosher = (CheckBox)dialog.findViewById(R.id.kosher_filter);
+            final CheckBox vega = (CheckBox)dialog.findViewById(R.id.vegan_filter);
+            final CheckBox veggi = (CheckBox)dialog.findViewById(R.id.vegetarian_filter);
+            halal.setChecked(Halal);
+            kosher.setChecked(Kosher);
+            vega.setChecked(vegan);
+            veggi.setChecked(veggie);
+
+
+            Button filterBut = (Button)dialog.findViewById(R.id.filter_button);
+            filterBut.setOnClickListener(new View.OnClickListener() {
+                @RequiresApi(api = Build.VERSION_CODES.N)
+                @Override
+                public void onClick(View v) {
+                    Halal = halal.isChecked();
+                    Kosher = kosher.isChecked();
+                    vegan = vega.isChecked();
+                    veggie = veggi.isChecked();
+                    filter();
+                }
+            });
+
+
             dialog.show();
             }
 
@@ -448,7 +534,7 @@ public class MainActivity extends AppCompatActivity {
                     Date mDate = StringToDate(meal.getTime());
                     Date cur = Calendar.getInstance().getTime();
                     if (mDate != null) {
-                        if (Math.abs(mDate.getTime() - cur.getTime()) / (60*60*24*1000) <= timeFilter) {
+                        if (TimeUnit.MILLISECONDS.toDays(Math.abs(mDate.getTime() - cur.getTime())) <= timeFilter) {
                             newmeals.add(meal);
                         }
                     }
@@ -460,31 +546,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    private void filterByHosting(ArrayList<Meal> temp){
+    private void filterByHosting(){
         ArrayList<Meal> newmeals = new ArrayList<>();
-        if (imHostingFilter){
-            for (Meal meal : temp){
-                if (meal.getHostId().equals(userId)){
-                    newmeals.add(meal);
-                }
+
+        for (Meal meal : meals){
+            if (meal.getHostId().equals(userId)){
+                newmeals.add(meal);
             }
-            temp.clear();
-            temp.addAll(newmeals);
         }
+        meals.clear();
+        meals.addAll(newmeals);
+        adapter.notifyDataSetChanged();
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    private void filterByMyMeals(ArrayList<Meal> temp){
+    private void filterByMyMeals(){
         ArrayList<Meal> newmeals = new ArrayList<>();
-        if (myMealsFilter){
-            for (Meal meal : temp){
-                if (meal.getGuests().contains(userId)){
-                    newmeals.add(meal);
+        for (Meal meal : meals){
+            for (String guest : meal.getGuests()){
+                if (guest != null) {
+                    if (guest.equals(userId)) {
+                        newmeals.add(meal);
+                    }
                 }
             }
-            temp.clear();
-            temp.addAll(newmeals);
         }
+
+        meals.clear();
+        meals.addAll(newmeals);
+
+        adapter.notifyDataSetChanged();
+
     }
 
 
@@ -543,20 +636,25 @@ public class MainActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void filter(){
-        ArrayList<Meal> newmeals = new ArrayList<>();
-        sev.getMeals(newmeals, adapter); // downloads all meals to newmeals
+        ArrayList<Meal> newmeals = new ArrayList<>(meals);
 
         filterByRestrictions(newmeals);
-        filterByMyMeals(newmeals);
-        filterByHosting(newmeals);
         filterByDate(newmeals);
+
+        meals.clear();
+        meals.addAll(newmeals);
         if(distanceFilter > 0) {
             getLocationForFilter();
         }
-        meals.clear();
-        meals.addAll(newmeals);
-        adapter.notifyDataSetChanged();
+
     }
 
-
+    private void setBackVals(){
+        Kosher = false;
+        Halal = false;
+        veggie = false;
+        vegan = false;
+        distanceFilter = 0;
+        timeFilter = 0;
+    }
 }

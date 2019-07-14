@@ -4,45 +4,232 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="350dp"
+    android:layout_height="450dp"
     android:background="@color/toolbarcolor"
+    xmlns:numberpicker="http://schemas.android.com/apk/res-auto"
 
     >
-    <TextView
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="30dp"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:text="Sort by:"
-        android:textColor="@color/TextWhite"
-        android:textStyle="bold"
-        android:textSize="20dp"/>
 
-    <Spinner
-        android:id="@+id/sortby"
-        android:layout_marginLeft="20dp"
-        android:layout_width="150dp"
-        android:layout_marginTop="40dp"
-        android:layout_height="50dp"
-        android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="30dp"
+        android:paddingTop="20dp"
+        >
 
-    
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/sortby"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+
+            android:text="Sort by:"
+            android:textColor="@color/TextWhite"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
 
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_above="@+id/sortby"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
 
-    <!--<Button-->
-        <!--android:id="@+id/my_button"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentStart="true"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_marginStart="156dp"-->
-        <!--android:layout_marginLeft="156dp"-->
-        <!--android:layout_marginTop="36dp"-->
-        <!--android:background="@drawable/background_white"-->
-        <!--android:text="Splash"-->
-        <!--android:textColor="@color/AccentRed"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-<!--/>-->
+            android:paddingLeft="30dp"
+            android:text="See Only:"
+            android:textColor="@color/TextWhite"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="33dp"
+        android:layout_marginBottom="322dp">
+
+        <Spinner
+            android:id="@+id/sortby"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:layout_above="@+id/MaxDist"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="26dp"
+            android:layout_marginLeft="26dp"
+            android:layout_marginEnd="62dp"
+            android:layout_marginRight="62dp"
+            android:layout_marginBottom="20dp"
+            android:layout_toStartOf="@+id/seeOnly"
+            android:layout_toLeftOf="@+id/seeOnly"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown" />
+
+        <Spinner
+            android:id="@+id/seeOnly"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+
+            android:layout_alignParentRight="true"
+
+            android:layout_alignParentBottom="true"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/filter_button"
+        android:layout_marginBottom="252dp"
+        android:paddingLeft="30dp">
+
+        <TextView
+            android:id="@+id/MaxDist"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+
+            android:layout_toStartOf="@+id/maxdistance"
+            android:layout_toLeftOf="@+id/maxdistance"
+            android:text="Max Distance"
+            android:textColor="@color/TextWhite"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <SeekBar
+            android:id="@+id/maxdistance"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:max="20"
+            android:background="@color/AccentRed"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/max_dist_show"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="0"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="15dp"
+            android:textColor="@color/TextWhite"
+            android:textSize="20dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/filter_button"
+        android:layout_marginBottom="155dp"
+        android:paddingLeft="30dp">
+
+        <TextView
+            android:id="@+id/maxDays"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+
+            android:layout_toStartOf="@+id/maxdistance"
+            android:layout_toLeftOf="@+id/maxdistance"
+            android:text="Max Days"
+            android:textColor="@color/TextWhite"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <SeekBar
+            android:id="@+id/maxdays"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:max="20"
+            android:background="@color/AccentRed"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/max_days_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="0"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="15dp"
+            android:textColor="@color/TextWhite"
+            android:textSize="20dp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="86dp"
+        android:orientation="horizontal"
+        android:paddingLeft="40dp"
+        android:paddingBottom="10dp">
+
+        <CheckBox
+            android:id="@+id/vegetarian_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/vegetarian_checkbox"
+            android:paddingRight="40dp" />
+
+        <CheckBox
+            android:id="@+id/vegan_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:button="@drawable/vegan_checkbox"
+            android:paddingRight="40dp" />
+
+        <CheckBox
+            android:id="@+id/halal_filter"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/halal_checkbox"
+
+            android:includeFontPadding="true"
+            android:paddingRight="40dp" />
+
+        <CheckBox
+            android:id="@+id/kosher_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:button="@drawable/kosher_checkbox" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/filter_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="161dp"
+        android:layout_marginLeft="161dp"
+        android:layout_marginTop="41dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/background_white"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="Filter"
+        android:textColor="@color/AccentRed"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 </RelativeLayout>
