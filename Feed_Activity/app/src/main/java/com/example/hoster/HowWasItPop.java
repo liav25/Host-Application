@@ -37,7 +37,7 @@ public class HowWasItPop extends AppCompatActivity {
         int height = dm.heightPixels;
 
         // percentage on screen the popup will take
-        getWindow().setLayout((int) (width * .85), (int) (height * .4));
+        getWindow().setLayout((int) (width * .85), (int) (height * .5));
 
         Bundle b = getIntent().getExtras();
         final String userId = b.getString("userToRate");
