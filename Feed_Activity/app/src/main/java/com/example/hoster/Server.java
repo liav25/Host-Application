@@ -107,7 +107,7 @@ public class Server {
 
     FirebaseStorage storage;
     StorageReference storageReference;
-    private HashMap<String, String> pics;
+    volatile private HashMap<String, String> pics;
     private HashMap<String, Location> locations;
     private FirebaseFirestore db;
     private FirebaseDatabase mDb;
@@ -734,24 +734,28 @@ public class Server {
 
     public void getUsername(String uId, final TextView toShow) {
         if (uId != null) {
-            DocumentReference docRef = db.collection(USERS_DATA_STRING).document(uId);
+            try {
+                DocumentReference docRef = db.collection(USERS_DATA_STRING).document(uId);
 
-            /* gets object from server  */
-            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document != null && document.exists()) {
-                            User got = document.toObject(User.class);
-                            toShow.setText(got.getUsername());
+                /* gets object from server  */
+                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document != null && document.exists()) {
+                                User got = document.toObject(User.class);
+                                toShow.setText(got.getUsername());
 
-                        } else {
-                            System.out.println("no such user found");
+                            } else {
+                                System.out.println("no such user found");
+                            }
                         }
                     }
-                }
-            });
+                });
+            } catch (RuntimeException e){
+                System.out.println(e.toString());
+            }
         }
     }
 
