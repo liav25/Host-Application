@@ -30,7 +30,7 @@
             android:theme="@style/AppTheme.PopMe2"/>
         <activity android:name=".HowWasItPop"
             android:label="HowWasItPop"
-            android:theme="@style/AppTheme.PopMe2"
+            android:theme="@style/AppTheme.PopMe3"
             />
         <activity android:name=".Register" />
         <activity android:name=".edit_profile" />
