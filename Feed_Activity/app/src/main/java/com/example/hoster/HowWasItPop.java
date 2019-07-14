@@ -11,6 +11,8 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.hoster.R;
 import com.travijuu.numberpicker.library.NumberPicker;
@@ -18,6 +20,8 @@ import com.travijuu.numberpicker.library.NumberPicker;
 public class HowWasItPop extends AppCompatActivity {
     // set default to 4 if the user didn't click but submitted
     final int[] curRank = new int[4];
+    private ImageView profile;
+    private TextView name;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -44,6 +48,11 @@ public class HowWasItPop extends AppCompatActivity {
         final ImageButton pepper3 = findViewById(R.id.pepper3);
         final ImageButton pepper4 = findViewById(R.id.pepper4);
         final ImageButton pepper5 = findViewById(R.id.pepper5);
+        profile = findViewById(R.id.profile_pic_how_was);
+        name = findViewById(R.id.username_text_how_was);
+
+        Server.getInstance().getUsername(userId, name);
+        Server.getInstance().downloadProfilePic(profile, userId);
 
         pepper1.setOnClickListener(new View.OnClickListener() {
             @Override
