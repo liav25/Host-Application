@@ -270,6 +270,9 @@ public class Server {
                 @Override
                 public void onSuccess(Void aVoid) {
                     System.out.println("ProfilePic edit : success!");
+                    pics.remove(MainActivity.userId);
+                    downloadProfilePic(MainActivity.profilePicture,
+                            MainActivity.userId);
                 }
             });
         }
