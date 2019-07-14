@@ -65,7 +65,7 @@
         <!--android:layout_centerHorizontal="true"-->
         <!--android:layout_marginTop="275dp">-->
         <!--</android.support.v7.widget.CardView>-->
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -74,18 +74,26 @@
         android:paddingLeft="25dp"
         android:paddingRight="25dp">
 
-        <TextView
+        <ImageView
+            android:id="@+id/rank_image"
             android:padding="20dp"
+            android:layout_width="50dp"
+            android:layout_height="75dp"
+            android:textSize="16sp"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/pepper1"
+            android:paddingBottom="20dp"/>
+        <TextView
+            android:id="@+id/rank_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:paddingLeft="20dp"
-            android:textSize="16sp"
-            android:layout_marginLeft="20dp"
-            android:text="@string/textualDescriptionProfile"
-            android:paddingBottom="20dp"/>
+            android:text="pepper rank"
+            android:layout_centerVertical="true"
+            android:textSize="20sp"
+            android:layout_toLeftOf="@id/rank_image"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
