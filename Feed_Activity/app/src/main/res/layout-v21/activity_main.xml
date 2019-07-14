@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#eeeeee"
+    android:background="#dddddd"
     tools:context=".MainActivity">
 
 
@@ -48,17 +48,12 @@
             android:id="@+id/addMealButton"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_alignTop="@+id/toolbar"
-            android:layout_alignBottom="@+id/mealCardList"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="591dp"
             android:layout_marginRight="-10sp"
             android:layout_marginBottom="-10dp"
-            android:adjustViewBounds="true"
             android:backgroundTint="@color/transparent"
             android:clickable="true"
-            android:cropToPadding="true"
             android:elevation="7dp"
             android:focusable="true"
             android:outlineProvider="none"

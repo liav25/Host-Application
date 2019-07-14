@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -26,6 +27,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
@@ -53,7 +55,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 
 public class MainActivity extends AppCompatActivity {
-    ImageButton addMealBut;
+    ImageView addMealBut;
     static Server sev = Server.getInstance();
 
     public static CircleImageView profilePicture;
@@ -106,9 +108,10 @@ public class MainActivity extends AppCompatActivity {
         cardlist.setAdapter(adapter);
 
         addMealBut = findViewById(R.id.addMealButton);
-        Animation fromBottom2 = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        Animation fromBottom2 = AnimationUtils.loadAnimation(this, R.anim.frombottom);
         Animation fromtop = AnimationUtils.loadAnimation(this, R.anim.fromtop);
         toolbar.setAnimation(fromtop);
+        addMealBut.setAnimation(fromBottom2);
         profilePicture = findViewById(R.id.profile_picture);
         sev.downloadProfilePic(profilePicture, userId);
         profilePicture.setAnimation(fromtop);
@@ -389,6 +392,7 @@ public class MainActivity extends AppCompatActivity {
                     vegan = vega.isChecked();
                     veggie = veggi.isChecked();
                     filter();
+                    dialog.dismiss();
                 }
             });
 
