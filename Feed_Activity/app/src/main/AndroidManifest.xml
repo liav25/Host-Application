@@ -28,7 +28,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".see_all_people_activity"
             android:theme="@style/AppTheme.PopMe2"/>
-        <activity android:name=".HowWasItPop" />
+        <activity android:name=".HowWasItPop"
+            android:label="HowWasItPop"
+            android:theme="@style/AppTheme.PopMe2"
+            />
         <activity android:name=".Register" />
         <activity android:name=".edit_profile" />
         <activity
