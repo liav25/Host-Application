@@ -48,6 +48,11 @@ public class HowWasItPop extends AppCompatActivity {
         final ImageButton pepper3 = findViewById(R.id.pepper3);
         final ImageButton pepper4 = findViewById(R.id.pepper4);
         final ImageButton pepper5 = findViewById(R.id.pepper5);
+        profile = findViewById(R.id.profile_pic_how_was);
+        name = findViewById(R.id.username_text_how_was);
+
+        Server.getInstance().getUsername(userId, name);
+        Server.getInstance().downloadProfilePic(profile, userId);
 
         pepper1.setOnClickListener(new View.OnClickListener() {
             @Override
