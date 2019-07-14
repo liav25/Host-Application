@@ -39,16 +39,21 @@ public class HowWasItPop extends AppCompatActivity {
         final String userId = b.getString("userToRate");
         final int mealId = b.getInt("mealIdToRate");
 
-        ImageButton pepper1 = findViewById(R.id.pepper1);
-        ImageButton pepper2 = findViewById(R.id.pepper2);
-        ImageButton pepper3 = findViewById(R.id.pepper3);
-        ImageButton pepper4 = findViewById(R.id.pepper4);
-        ImageButton pepper5 = findViewById(R.id.pepper5);
+        final ImageButton pepper1 = findViewById(R.id.pepper1);
+        final ImageButton pepper2 = findViewById(R.id.pepper2);
+        final ImageButton pepper3 = findViewById(R.id.pepper3);
+        final ImageButton pepper4 = findViewById(R.id.pepper4);
+        final ImageButton pepper5 = findViewById(R.id.pepper5);
 
         pepper1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 curRank[0] = 1;
+                pepper1.setAlpha((float)1);
+                pepper2.setAlpha((float)0.3);
+                pepper3.setAlpha((float)0.3);
+                pepper4.setAlpha((float)0.3);
+                pepper5.setAlpha((float)0.3);
             }
         });
 
@@ -56,6 +61,11 @@ public class HowWasItPop extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 curRank[0] = 2;
+                pepper1.setAlpha((float)1);
+                pepper2.setAlpha((float)1);
+                pepper3.setAlpha((float)0.3);
+                pepper4.setAlpha((float)0.3);
+                pepper5.setAlpha((float)0.3);
             }
         });
 
@@ -63,6 +73,11 @@ public class HowWasItPop extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 curRank[0] = 3;
+                pepper1.setAlpha((float)1);
+                pepper2.setAlpha((float)1);
+                pepper3.setAlpha((float)1);
+                pepper4.setAlpha((float)0.3);
+                pepper5.setAlpha((float)0.3);
             }
         });
 
@@ -70,6 +85,11 @@ public class HowWasItPop extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 curRank[0] = 4;
+                pepper1.setAlpha((float)1);
+                pepper2.setAlpha((float)1);
+                pepper3.setAlpha((float)1);
+                pepper4.setAlpha((float)1);
+                pepper5.setAlpha((float)0.3);
             }
         });
 
@@ -77,6 +97,11 @@ public class HowWasItPop extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 curRank[0] = 5;
+                pepper1.setAlpha((float)1);
+                pepper2.setAlpha((float)1);
+                pepper3.setAlpha((float)1);
+                pepper4.setAlpha((float)1);
+                pepper5.setAlpha((float)1);
             }
         });
 
@@ -116,4 +141,5 @@ public class HowWasItPop extends AppCompatActivity {
         });
 
     }
+
 }
