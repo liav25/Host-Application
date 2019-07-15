@@ -364,12 +364,12 @@ public class Server {
      * @param userId - user's ID
      */
     public synchronized void downloadProfilePic(final ImageView img, final String userId) {
-        if (pics.containsKey(userId) && img != null) { // already downloaded
+        if (pics.containsKey(userId)) { // already downloaded
             if(pics.get(userId) != null) {
                 Bitmap my_image = BitmapFactory.decodeFile(pics.get(userId));
-                img.setImageBitmap(my_image);
+                if (img != null ) img.setImageBitmap(my_image);
             } else {
-                img.setImageResource(R.drawable.profile_picture);
+                if (img != null) img.setImageResource(R.drawable.profile_picture);
             }
         } else { // download from server
             try {
