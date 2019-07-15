@@ -71,7 +71,8 @@
                     android:layout_marginRight="10dp"
                     android:backgroundTint="#242224"
                     android:layout_toLeftOf="@id/pencil_meal"
-                    android:background="@drawable/ic_email_black_24dp" />
+                    android:background="@drawable/ic_email_black_24dp"
+                    />
             </RelativeLayout>
 
             <RelativeLayout

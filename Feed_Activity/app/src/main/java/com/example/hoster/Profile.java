@@ -289,7 +289,8 @@ public class Profile extends AppCompatActivity {
     public static void show_rank(int num_rankers, int sum_ranks, ImageView pepper, TextView title){
         int rank = 1;
         if (num_rankers > 0){
-            rank = sum_ranks / num_rankers ;
+            rank = Math.round((float)sum_ranks / (float)num_rankers );
+            System.out.println("************rank is" + rank);
             if (rank <= 0 ){
                 rank = 1;
             }
