@@ -364,7 +364,7 @@ public class Server {
      * @param userId - user's ID
      */
     public synchronized void downloadProfilePic(final ImageView img, final String userId) {
-        if (pics.containsKey(userId)) { // already downloaded
+        if (pics.containsKey(userId) && img != null) { // already downloaded
             if(pics.get(userId) != null) {
                 Bitmap my_image = BitmapFactory.decodeFile(pics.get(userId));
                 img.setImageBitmap(my_image);
@@ -384,7 +384,10 @@ public class Server {
                         Bitmap my_image = BitmapFactory.decodeFile(localFile.getAbsolutePath());
                         pics.put(userId, localFile.getAbsolutePath());
 
-                        img.setImageBitmap(my_image);
+                        if (img != null){
+                            img.setImageBitmap(my_image);
+                        }
+
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -392,7 +395,7 @@ public class Server {
                     public void onFailure(@NonNull Exception e) {
                         Log.d(TAG, "Error downloading Image");
                         pics.put(userId, null);
-                        img.setImageResource(R.drawable.profile_picture);
+                        if (img != null) img.setImageResource(R.drawable.profile_picture);
                     }
                 });
 
@@ -718,6 +721,10 @@ public class Server {
                             MainActivity.meals.clear();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Meal me = document.toObject(Meal.class);
+                                for (String uid : me.getGuests()){
+                                    downloadProfilePic(null, uid);
+                                }
+
                                 meals.add(me);
                                 Log.d("getMeals", document.getId() + " => " + document.getData());
                             }
@@ -1154,8 +1161,10 @@ public class Server {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 queryDocumentSnapshots.iterator();
+                Iterator<QueryDocumentSnapshot> it = queryDocumentSnapshots.iterator();
 
-                for (DocumentSnapshot snp : queryDocumentSnapshots) {
+                while (it.hasNext()) {
+                    DocumentSnapshot snp = it.next();
                     final DocumentReference doc = snp.getReference();
                     HashMap<String, String> empty = new HashMap<>();
                     empty.put("beer", "NEEDED");
