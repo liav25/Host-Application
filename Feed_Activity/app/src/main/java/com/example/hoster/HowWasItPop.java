@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.hoster.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.travijuu.numberpicker.library.NumberPicker;
 
 public class HowWasItPop extends AppCompatActivity {
@@ -113,7 +115,9 @@ public class HowWasItPop extends AppCompatActivity {
                 pepper5.setAlpha((float)1);
             }
         });
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
+        final FirebaseUser user = mAuth.getCurrentUser();
         Button submitRank = findViewById(R.id.submitRankButton);
         submitRank.setOnClickListener(new View.OnClickListener() {
             /**
@@ -125,7 +129,9 @@ public class HowWasItPop extends AppCompatActivity {
             public void onClick(View v) {
                 Intent ranking = new Intent(getApplicationContext(), MainActivity.class);
                 // find out how to send the user id
-
+                MainActivity.userId = user.getUid();
+                MainActivity.userMail = user.getEmail();
+                MainActivity.user = user;
                 Server.getInstance().setRanking(curRank[0], userId, mealId, HowWasItPop.this);
                 startActivity(ranking);
                 finish();
@@ -143,6 +149,9 @@ public class HowWasItPop extends AppCompatActivity {
              */
             @Override
             public void onClick(View view) {
+                MainActivity.userId = user.getUid();
+                MainActivity.userMail = user.getEmail();
+                MainActivity.user = user;
                 Intent ranking = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(ranking);
                 finish();
