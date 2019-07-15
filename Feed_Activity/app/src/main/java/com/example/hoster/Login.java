@@ -37,18 +37,18 @@ public class Login extends AppCompatActivity {
         login = (Button) findViewById(R.id.loginButton);
         mAuth = FirebaseAuth.getInstance();
 
-//        FirebaseUser user = mAuth.getCurrentUser();
-//        if(user!=null){
-//            MainActivity.userId = user.getUid();
-//            MainActivity.userMail = user.getEmail();
-//            MainActivity.user = user;
-//            Intent feed_intent = new Intent(getApplicationContext(), MainActivity.class);
-//            startActivity(feed_intent);
-//
-//            Log.d("win", "signInWithEmail:success");
-//            finish();
-//
-//        }
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user != null){
+            MainActivity.userId = user.getUid();
+            MainActivity.userMail = user.getEmail();
+            MainActivity.user = user;
+            Intent feed_intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(feed_intent);
+
+            Log.d("win", "signInWithEmail:success");
+            finish();
+
+        }
 
         email = findViewById(R.id.userNameInputField);
         pass = findViewById(R.id.editText3);

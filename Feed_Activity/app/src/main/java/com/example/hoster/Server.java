@@ -383,11 +383,7 @@ public class Server {
                     public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                         Bitmap my_image = BitmapFactory.decodeFile(localFile.getAbsolutePath());
                         pics.put(userId, localFile.getAbsolutePath());
-
-                        if (img != null){
-                            img.setImageBitmap(my_image);
-                        }
-
+                        downloadProfilePic(img, userId);
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -395,7 +391,7 @@ public class Server {
                     public void onFailure(@NonNull Exception e) {
                         Log.d(TAG, "Error downloading Image");
                         pics.put(userId, null);
-                        if (img != null) img.setImageResource(R.drawable.profile_picture);
+
                     }
                 });
 
