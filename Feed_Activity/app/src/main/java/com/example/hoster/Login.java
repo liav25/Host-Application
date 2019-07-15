@@ -35,7 +35,6 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         getWindow().setStatusBarColor(this.getResources().getColor(R.color.TextYellow));
         login = (Button) findViewById(R.id.loginButton);
-
         mAuth = FirebaseAuth.getInstance();
 
 //        FirebaseUser user = mAuth.getCurrentUser();

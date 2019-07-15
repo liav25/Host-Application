@@ -1144,6 +1144,32 @@ public class Server {
         });
     }
 
+    /**
+     * adds emails to meals
+     */
+    public void patch3() {
+        CollectionReference ref = db.collection(MEALS_STRING);
+
+        ref.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                queryDocumentSnapshots.iterator();
+
+                for (DocumentSnapshot snp : queryDocumentSnapshots) {
+                    final DocumentReference doc = snp.getReference();
+                    HashMap<String, String> empty = new HashMap<>();
+                    empty.put("beer", "NEEDED");
+                    empty.put("flowers", "NEEDED");
+                    empty.put("dessert", "NEEDED");
+                    empty.put("drinks", "NEEDED");
+
+
+                    doc.update("needed", empty);
+
+                }
+            }
+        });
+    }
 
     /**
      * Sends a mail to all of the meal's guests
