@@ -171,7 +171,7 @@ public class Server {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d("AuthUI", "createUserWithEmail:success");
+//                            Log.d("AuthUI", "createUserWithEmail:success");
                             MainActivity.user = mAuth.getCurrentUser();
                             MainActivity.userId = MainActivity.user.getUid();
                             MainActivity.userMail = email;
@@ -181,7 +181,7 @@ public class Server {
                             act.finish();
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w("AuthUI", "createUserWithEmail:failure", task.getException());
+//                            Log.w("AuthUI", "createUserWithEmail:failure", task.getException());
                             Toast.makeText(act, "Registeration failed",
                                     Toast.LENGTH_SHORT).show();
                         }
@@ -389,7 +389,7 @@ public class Server {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.d(TAG, "Error downloading Image");
+//                        Log.d(TAG, "Error downloading Image");
                         pics.put(userId, null);
 
                     }
@@ -468,13 +468,13 @@ public class Server {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.d("removeMeal", "DocumentSnapshot successfully deleted!");
+//                        Log.d("removeMeal", "DocumentSnapshot successfully deleted!");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w("removeMeal", "Error deleting document", e);
+//                        Log.w("removeMeal", "Error deleting document", e);
                     }
                 });
 
@@ -614,7 +614,7 @@ public class Server {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Log.d(TAG, "DocumentSnapshot successfully deleted!");
+//                            Log.d(TAG, "DocumentSnapshot successfully deleted!");
                             NotificationManagerCompat notificationManager = NotificationManagerCompat.from(cont);
                             notificationManager.cancel(Integer.parseInt(mealId));
                             getMeals(MainActivity.meals, MainActivity.adapter);
@@ -624,7 +624,7 @@ public class Server {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.w(TAG, "Error deleting document", e);
+//                            Log.w(TAG, "Error deleting document", e);
 
                         }
                     });
@@ -633,7 +633,7 @@ public class Server {
             busRef.update("guests", FieldValue.arrayRemove(userId)).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
-                    Log.d(TAG, "DocumentSnapshot successfully deleted!");
+//                    Log.d(TAG, "DocumentSnapshot successfully deleted!");
                     getMeals(MainActivity.meals, MainActivity.adapter);
 
                 }
@@ -641,7 +641,8 @@ public class Server {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.w(TAG, "Error deleting document", e);
+//
+//                           Log.w(TAG, "Error deleting document", e);
                         }
                     });
             ;
@@ -682,13 +683,13 @@ public class Server {
                             if (document.exists()) {
                                 meal[0] = document.toObject(Meal.class);
 
-                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+//                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
 
                             } else {
-                                Log.d(TAG, "No such document");
+//                                Log.d(TAG, "No such document");
                             }
                         } else {
-                            Log.d(TAG, "get failed with ", task.getException());
+//                            Log.d(TAG, "get failed with ", task.getException());
                         }
                         done.set(true);
                     }
@@ -722,12 +723,12 @@ public class Server {
                                 }
 
                                 meals.add(me);
-                                Log.d("getMeals", document.getId() + " => " + document.getData());
+//                                Log.d("getMeals", document.getId() + " => " + document.getData());
                             }
 
                             adapt.notifyDataSetChanged();
                         } else {
-                            Log.d("getMeals", "Error getting documents: ", task.getException());
+//                            Log.d("getMeals", "Error getting documents: ", task.getException());
                         }
                     }
                 });
