@@ -33,6 +33,9 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * Editing meal activity
+ */
 public class edit_meal extends AppCompatActivity {
 
     private ImageButton accept;
@@ -110,11 +113,13 @@ public class edit_meal extends AppCompatActivity {
         flowers = (CheckBox) findViewById(R.id.flower_edit);
         dessert = (CheckBox) findViewById(R.id.desert_edit);
 
+        /* sets the food restrictions according to the checkboxes */
         kosher.setChecked(foodRests.get("Kosher"));
         Halal.setChecked(foodRests.get("Kosher"));
         Vegan.setChecked(foodRests.get("Vegan"));
         Veggie.setChecked(foodRests.get("Vegetarian"));
 
+        /* sets the hosts's requests */
         if(needed.get("beer")!=null){
             beer.setChecked(true);
         }
@@ -210,7 +215,9 @@ public class edit_meal extends AppCompatActivity {
 
 
     }
-
+    /*
+    gets the information from the textbox whos id is id
+     */
     private String getInfoFromTextbox(int id) {
         EditText name = (EditText) findViewById(id);
         return name.getText().toString();
@@ -228,6 +235,7 @@ public class edit_meal extends AppCompatActivity {
         }
     };
 
+
     private final TimePickerDialog.OnTimeSetListener mTimeDataSet = new TimePickerDialog.OnTimeSetListener() {
         @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
@@ -240,6 +248,9 @@ public class edit_meal extends AppCompatActivity {
         }
     };
 
+    /*
+    Sets food restrictions
+     */
     private void setFoodRests(){
 
         if (kosher.isChecked()) {

@@ -19,6 +19,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.travijuu.numberpicker.library.NumberPicker;
 
+/**
+ * Activity of the 'how was your meal' popup
+ */
 public class HowWasItPop extends AppCompatActivity {
     // set default to 4 if the user didn't click but submitted
     final int[] curRank = new int[4];
@@ -56,6 +59,7 @@ public class HowWasItPop extends AppCompatActivity {
         Server.getInstance().getUsername(userId, name);
         Server.getInstance().downloadProfilePic(profile, userId);
 
+        /* colors the peppers according to the rank provided by the user */
         pepper1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -27,6 +27,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
+/**
+ * creates a meal and writes it to the server
+ */
 public class PopActivity extends AppCompatActivity {
     Button createMeal;
     EditText pickDate;
@@ -72,8 +75,7 @@ public class PopActivity extends AppCompatActivity {
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.gravity = Gravity.TOP;
 
-//        params.x = 0;
-//        params.y = -20;
+
         getWindow().setAttributes(params);
 
 
@@ -93,6 +95,7 @@ public class PopActivity extends AppCompatActivity {
             }
         });
 
+        /* finds elements within the activity */
         kosher = (CheckBox)findViewById(R.id.Kosher);
         Halal = (CheckBox)findViewById(R.id.Halal);
         Vegan = (CheckBox)findViewById(R.id.vegan);
@@ -245,7 +248,7 @@ public class PopActivity extends AppCompatActivity {
         }
     };
 
-    /**
+    /*
      * receives data from user by i"d
      *
      * @param id - textbox ID

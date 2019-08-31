@@ -17,8 +17,10 @@ import android.widget.TextView;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Viewing a meal activity
+ */
 public class MealActivity extends AppCompatActivity {
-    public static DataAdapter guestsAdapter;
 
     private Button joinmeal;
     private TextView title;
@@ -94,17 +96,6 @@ public class MealActivity extends AppCompatActivity {
         time = (TextView)findViewById(R.id.mealPageDateTime);
         time.setText(meal.getTime());
 
-//        guests = MainActivity.sev.getMeal(mealId).getGuestsPictures(); // todo
-//
-//        guestsAdapter = new DataAdapter(this, guests_pics);
-//
-//        guestsRecycle = (RecyclerView)findViewById(R.id.mealFoodRestrictions6);
-//        guestsRecycle.setLayoutManager(new LinearLayoutManager(this,
-//                LinearLayoutManager.HORIZONTAL,false));
-//        guestsRecycle.addItemDecoration(new OverlapDecoration());
-//        guestsRecycle.setHasFixedSize(true);
-//        guestsRecycle.setAdapter(guestsAdapter);
-
         loc = (TextView)findViewById(R.id.mealFoodRestrictions2);
         loc.setText(meal.getLocation());
 
@@ -177,6 +168,9 @@ public class MealActivity extends AppCompatActivity {
 
     }
 
+    /*
+    sets the requests for guest's participation
+     */
     private void setBringing(Meal meal) {
         Map needed = meal.getNeeded();
         if(needed.get("beer")!=null) {
@@ -343,6 +337,9 @@ public class MealActivity extends AppCompatActivity {
         setColorOfButton(meal);
     }
 
+    /*
+    sets the join meal button's color according to the guests' status
+     */
     private void setColorOfButton(Meal meal){
         if (meal.isMember(MainActivity.userId)){
             joinmeal.setText("Leave");

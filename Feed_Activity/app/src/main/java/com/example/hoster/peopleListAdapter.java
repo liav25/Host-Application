@@ -16,6 +16,9 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+/**
+ * Adapter of users
+ */
 public class peopleListAdapter  extends ArrayAdapter<String>{
 
     private Context mContext;

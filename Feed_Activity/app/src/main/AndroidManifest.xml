@@ -34,10 +34,7 @@
             />
         <activity android:name=".Register" />
         <activity android:name=".edit_profile" />
-        <activity
-            android:name=".Splash"
-            android:label="@string/title_activity_splash"
-            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".Login"
             android:label="@string/title_activity_login"

@@ -96,7 +96,7 @@ import static java.lang.Math.ulp;
 
 
 /**
- * Simulates a server for POC
+ * Aמ API class for all server-based operations. Built as a singleton
  */
 public class Server {
 
@@ -194,7 +194,6 @@ public class Server {
 
     /**
      * Creates a new user and adds it to DB
-     *
      * @param disName    - display name
      * @param image      - his profile_image
      * @param university - his university
@@ -530,6 +529,10 @@ public class Server {
         return true;
     }
 
+    /*
+     * makes intersection between userId's friends and the members of meal in order to set the
+     * mutual section
+     */
     private void setMutuals(ArrayList<String> membersOfMeal) {
         DocumentReference busRef = db.collection(USERS_DATA_STRING).document(MainActivity.userId);
         try {
@@ -577,9 +580,8 @@ public class Server {
 
     }
 
-    /**
+    /*
      * Helper function to create notification channel
-     *
      * @param cont - context to use
      */
     private void createNotificationChannel(Context cont) {

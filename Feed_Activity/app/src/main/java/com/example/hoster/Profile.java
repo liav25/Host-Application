@@ -28,6 +28,9 @@ import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+/**
+ * An activity for seeing a user's details
+ */
 public class Profile extends AppCompatActivity {
     private TextView name;
     private TextView uni;
@@ -113,6 +116,11 @@ public class Profile extends AppCompatActivity {
         });
     }
 
+    /**
+     * Creates a the string representing the languages this user speaks
+     * @param langs - array list of languages
+     * @return the desired string
+     */
     public static String getLangsString(ArrayList<String> langs) {
         String lang = "";
 
@@ -133,6 +141,9 @@ public class Profile extends AppCompatActivity {
         return true;
     }
 
+    /*
+    uploads an image to this profile
+     */
     private void uploadImage() {
         StorageReference storageReference = Server.getInstance().storageReference;
         if(imageUri != null)
@@ -168,6 +179,9 @@ public class Profile extends AppCompatActivity {
 
     }
 
+    /*
+    when clicking a profile picture of someone - this is the action being done
+     */
     private void onClickImage(String uId, Context mContext){
 
         Bundle b = new Bundle();

@@ -54,6 +54,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 
+/**
+ * Main activity of this app. contains the feed
+ */
 public class MainActivity extends AppCompatActivity {
     ImageView addMealBut;
     static Server sev = Server.getInstance();
@@ -95,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         adapter = new MealsListAdapter(this,  R.layout.feed_card
                 , meals);
 
-        sev.getMeals(meals, adapter);
+        sev.getMeals(meals, adapter); // loads meals from server
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -112,6 +115,8 @@ public class MainActivity extends AppCompatActivity {
         Animation fromtop = AnimationUtils.loadAnimation(this, R.anim.fromtop);
         toolbar.setAnimation(fromtop);
         addMealBut.setAnimation(fromBottom2);
+
+        /* handles the profile pictures on the left side of this feed*/
         profilePicture = findViewById(R.id.profile_picture);
         sev.downloadProfilePic(profilePicture, userId);
         profilePicture.setAnimation(fromtop);
@@ -151,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /* handles location for soriting and filtering */
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
         sortLocListener = new LocationListener() {
@@ -217,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
-
+    /* gets the geo location for sorting */
     void getLocationForSort() {
         // first check for permissions
         if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -606,7 +612,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
+    /* filters meals by distance */
     private void filterByDistance(){
         ArrayList<Meal> newmeals = new ArrayList<>();
         if (distanceFilter > 0){
@@ -623,7 +629,7 @@ public class MainActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
         }
     }
-
+    /* gets the devices location for filtering */
     void getLocationForFilter() {
         // first check for permissions
         if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -639,6 +645,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /* filters results */
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void filter(){
         ArrayList<Meal> newmeals = new ArrayList<>(meals);
@@ -653,7 +660,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
+    /* sets all filtering values back to default */
     private void setBackVals(){
         Kosher = false;
         Halal = false;

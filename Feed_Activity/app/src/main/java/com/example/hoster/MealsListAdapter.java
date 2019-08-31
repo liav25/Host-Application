@@ -25,7 +25,9 @@ import com.google.rpc.Help;
 import java.util.ArrayList;
 import java.util.Map;
 
-
+/**
+ * Adapter for the meals list (in the feed)
+ */
 class MealsListAdapter extends ArrayAdapter<Meal> {
 
     private Context mContext;
@@ -61,7 +63,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
 
 
 
-
+        /* sets the join button's color according to eh user's status*/
         private void setButCol(Meal meal){
             if (meal.isMember(MainActivity.userId)){
                 joinBU.setText("Leave");
@@ -76,7 +78,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
                 joinBU.setBackgroundResource(R.drawable.rounded_button);
             }
         }
-
+        /* sets the symbols of the resrtictions */
         private void setSymbols(final Map<String, Boolean> restrictions, final Context mContext){
             RelativeLayout.LayoutParams kosherParams = (RelativeLayout.LayoutParams)kosherLayout.getLayoutParams();
             RelativeLayout.LayoutParams vegParams = (RelativeLayout.LayoutParams)veggieLayout.getLayoutParams();
@@ -138,7 +140,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
 
 
 
-
+        /* sets the profile pictures within the meal cards*/
         private void setImages(final ArrayList<String> guests, final Context mContext){
             if (guests.size() >= 6){
                 img6.setVisibility(View.VISIBLE);
@@ -236,6 +238,7 @@ class MealsListAdapter extends ArrayAdapter<Meal> {
     }
 
     /**
+     * cosntructor
      * @param context
      * @param resource
      * @param objects

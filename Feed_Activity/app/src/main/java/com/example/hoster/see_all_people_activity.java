@@ -6,6 +6,9 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+/**
+ * An activity for seeing all the meals' members
+ */
 public class see_all_people_activity extends AppCompatActivity {
     ArrayList<String> userIds;
     private ListView cardlist;

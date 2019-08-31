@@ -12,6 +12,9 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/**
+ * Registration activity
+ */
 public class Register extends AppCompatActivity {
 
     String password;
@@ -37,6 +40,7 @@ public class Register extends AppCompatActivity {
             }
         });
         mAtuh.signOut();
+        /* checks if user is not logged in */
         if (mAtuh.getCurrentUser() != null){
 
             Intent main = new Intent(getApplicationContext(), MainActivity.class);

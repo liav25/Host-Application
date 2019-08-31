@@ -19,6 +19,9 @@ import android.widget.TextView;
 
 import java.util.Map;
 
+/**
+ * the needed dialog for the guest who joins a meal
+ */
 public class neededDialog extends AppCompatActivity {
 
     @Override

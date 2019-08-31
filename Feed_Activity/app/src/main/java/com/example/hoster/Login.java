@@ -19,6 +19,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/**
+ * Login activity
+ */
 public class Login extends AppCompatActivity {
     EditText email;
     EditText pass;
@@ -37,7 +40,7 @@ public class Login extends AppCompatActivity {
         login = (Button) findViewById(R.id.loginButton);
         mAuth = FirebaseAuth.getInstance();
 
-        FirebaseUser user = mAuth.getCurrentUser();
+        FirebaseUser user = mAuth.getCurrentUser(); // checks if already logged in in this machine
         if(user != null){
             MainActivity.userId = user.getUid();
             MainActivity.userMail = user.getEmail();
@@ -45,11 +48,12 @@ public class Login extends AppCompatActivity {
             Intent feed_intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(feed_intent);
 
-            Log.d("win", "signInWithEmail:success");
+            Log.d("Already logged in", "signInWithEmail:success");
             finish();
 
         }
 
+        /* if not logged in, get information from user in order to perform signup*/
         email = findViewById(R.id.userNameInputField);
         pass = findViewById(R.id.editText3);
         toRegister = findViewById(R.id.to_register);
@@ -78,7 +82,11 @@ public class Login extends AppCompatActivity {
         });
     }
 
-
+    /**
+     * Sign in with the following information provided. will show toast message upon failure
+     * @param email - user email
+     * @param password - user password
+     */
     public void signIn(final String email, final String password){
         mAuth.signInWithEmailAndPassword( email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {

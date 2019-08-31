@@ -34,6 +34,9 @@ import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+/**
+ * Edits a user's profile
+ */
 public class edit_profile extends AppCompatActivity {
     private TextView name;
     private TextView uni;
@@ -186,6 +189,9 @@ public class edit_profile extends AppCompatActivity {
 
     }
 
+    /*
+    gets files extensions for the given uri
+     */
     private String getFileExtension(Uri uri){
         ContentResolver cR = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
